@@ -1,18 +1,16 @@
 import {
-  BrowserRouter as Router,
-  Routes,
-  Route} from 'react-router-dom';
+  Switch,
+  Route
+} from 'react-router-dom';
 import Home from './pages/Home.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.scss';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route exact path='/' element={< Home />}></Route>
-      </Routes>
-    </Router>
+    <Switch>
+      <Route exact path='/' component={Home}></Route>
+    </Switch>
   );
 }
 

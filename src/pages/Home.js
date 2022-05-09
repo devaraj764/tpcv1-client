@@ -3,13 +3,38 @@ import { Col, Row, Image, InputGroup, FormControl, Button } from 'react-bootstra
 import CareerImg from '../assets/career.svg';
 import TPCLogo from '../assets/tpc-logo.svg';
 import { MdPermIdentity, MdPassword } from 'react-icons/md';
+import { withRouter } from 'react-router-dom';
+import axios from 'axios';
 
-function Home() {
-    // const [form, setForm] = useState('login');
+function Home(props) {
+    const [idNo, setidNo] = useState('');
+    const [password, setpassword] = useState('');
+    const [error, seterror] = useState('');
 
-    // const setFormType = (input) => {
-    //     setForm(input)
-    // }
+    function submit(e) {
+        e.preventDefault();
+        if (idNo === '' || password === '') {
+            seterror('Fill all empty fields')
+        } else {
+            seterror('')
+            login();
+        }
+    }
+
+    function login() {
+        axios.post('http://localhost:3000/login', {
+            "idNo": idNo,
+            "password": password,
+        }).then(res => {
+            console.log(res.data)
+            props.history.push({
+                pathname: '/Dashboard',
+                state: res.data.token
+            })
+        }).catch(err => {
+            console.log(err.response)
+        })
+    }
 
     return (
         <>
@@ -28,6 +53,7 @@ function Home() {
                     <InputGroup className="mb-3 inputField">
                         <InputGroup.Text id="basic-addon1"><MdPermIdentity /></InputGroup.Text>
                         <FormControl
+                            onChange={(e) => setidNo(e.target.value)}
                             placeholder="Student Id"
                             aria-label="Student Id"
                             aria-describedby="basic-addon1"
@@ -36,6 +62,8 @@ function Home() {
                     <InputGroup className="mb-3 inputField">
                         <InputGroup.Text id="basic-addon2"><MdPassword /></InputGroup.Text>
                         <FormControl
+                            type="password"
+                            onChange={(e) => setpassword(e.target.value)}
                             placeholder="Password"
                             aria-label="Password"
                             aria-describedby="basic-addon1"
@@ -45,7 +73,7 @@ function Home() {
                         <p style={{ float: 'right', fontSize: '14px' }}>Forgot Password?</p>
                     </div>
                     <br />
-                    <Button style={{ maxWidth: '400px', width: '100%', backgroundColor: '#071a84' }} size="md">Login</Button>
+                    <Button style={{ maxWidth: '400px', width: '100%', backgroundColor: '#071a84' }} size="md" onClick={(e) => submit(e)}>Login</Button>
                     <br />
                     <p>Don't have account? <span style={{ color: '#071a84', cursor: 'pointer', fontSize: '16px', fontWeight: '600' }}>SignUp</span></p>
                 </Col>
@@ -53,4 +81,4 @@ function Home() {
         </>
     )
 }
-export default Home
+export default withRouter(Home);
