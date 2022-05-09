@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Poppins&display=swap');
+
+$primary-color: #071a84;
+
+.Login {
+  font-family: "Poppins", sans-serif;
+  .left-side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $primary-color;
+    min-height: 100vh;
+  }
+
+  .right-side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    .title {
+      text-transform: uppercase;
+      font-size: 30px;
+      font-weight: bold;
+      color: $primary-color;
+    }
+    .inputField {
+      max-width: 400px;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 768px) {
+    &{
+      padding:10px;
+    }
+    .left-side {
+      display: none;
+    }
+    .right-side {
+      justify-content: flex-start;
+      margin-top:50px;
+    }
+  }
+}
