@@ -1,9 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Poppins&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Poppins&display=swap");
 
 $primary-color: #071a84;
-
-.Login {
+body {
   font-family: "Poppins", sans-serif;
+}
+
+.Home {
   .left-side {
     display: flex;
     justify-content: center;
@@ -28,18 +30,45 @@ $primary-color: #071a84;
       max-width: 400px;
       text-align: center;
     }
+    button{
+      min-width: 200px;
+      margin: 0 10px;
+    }
   }
 
   @media (max-width: 768px) {
-    &{
-      padding:10px;
+    & {
+      padding: 10px;
     }
     .left-side {
       display: none;
     }
     .right-side {
       justify-content: flex-start;
-      margin-top:50px;
+      margin-top: 50px;
+    }
+  }
+}
+
+.Register {
+  min-height: 100vh;
+  background-image: linear-gradient(90deg, #071a84, #314dea);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .card {
+    min-height: 50vh;
+    max-width: 756px;
+    width:100%;
+    padding: 10px;
+    border-radius: 10px;
+    .title {
+      font-size: 30px;
+      font-weight: 700;
+      color: $primary-color;
+    }
+    .input-group {
+      margin:15px 0;
     }
   }
 }
