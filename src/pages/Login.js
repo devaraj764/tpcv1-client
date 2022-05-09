@@ -1,15 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Col, Row, Image, InputGroup, FormControl, Button } from 'react-bootstrap';
 import CareerImg from '../assets/career.svg';
 import TPCLogo from '../assets/tpc-logo.svg';
 import { MdPermIdentity, MdPassword } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 
-function Home() {
-    // const [form, setForm] = useState('login');
-
-    // const setFormType = (input) => {
-    //     setForm(input)
-    // }
+function Login() {
 
     return (
         <>
@@ -47,10 +43,10 @@ function Home() {
                     <br />
                     <Button style={{ maxWidth: '400px', width: '100%', backgroundColor: '#071a84' }} size="md">Login</Button>
                     <br />
-                    <p>Don't have account? <span style={{ color: '#071a84', cursor: 'pointer', fontSize: '16px', fontWeight: '600' }}>SignUp</span></p>
+                    <p>Don't have account? <Link style={{ color: '#071a84', cursor: 'pointer', fontSize: '16px', fontWeight: '600' }} to="/register">SignUp</Link></p>
                 </Col>
             </Row>
         </>
     )
 }
-export default Home
+export default Login
