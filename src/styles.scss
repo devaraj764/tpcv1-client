@@ -5,7 +5,7 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
-.Login {
+.Home {
   .left-side {
     display: flex;
     justify-content: center;
@@ -29,6 +29,10 @@ body {
     .inputField {
       max-width: 400px;
       text-align: center;
+    }
+    button{
+      min-width: 200px;
+      margin: 0 10px;
     }
   }
 
