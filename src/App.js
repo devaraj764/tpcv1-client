@@ -10,7 +10,7 @@ import './styles.scss';
 function App() {
   return (
     <Switch>
-      <Route exact path='/Dashboard' component={Dashboard}></Route>
+      <Route path='/dashboard' component={Dashboard}></Route>
       <Route exact path='/Login' component={Home}></Route>
       <Route exact path='/register' component={Home}></Route>
     </Switch>

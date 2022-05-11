@@ -30,7 +30,7 @@ function Home(props) {
                 <Col className="left-side" lg={6} md={6}>
                     <div style={{ textAlign: 'center', color: 'white' }}>
                         <Image src={CareerImg} fluid={true} style={{ maxHeight: '300px', marginBottom: '50px' }} />
-                        <p style={{ fontSize: '20px' }}>“Find out what you like doing best, <br />and get someone to pay you for doing it.”</p>
+                        <p style={{ fontSize: '20px' }}>“Luck is what happens<br/> when preparation meets opportunity.”</p>
                     </div>
                 </Col>
                 <Col className="right-side" sm={12} lg={6} md={6}>
@@ -67,7 +67,7 @@ function Login(props) {
             props.callBack(res);
         }).catch(err => {
             if(err) {
-                // seterror(err.response.data.error)
+                seterror(err.response.data.error)
             }
         })
     }
