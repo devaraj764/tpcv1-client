@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { TiWarningOutline } from 'react-icons/ti';
 import { VscInfo } from 'react-icons/vsc';
@@ -19,12 +19,21 @@ const success = {
   backgroundColor: '#DFFFD9',
   color: '#207A0C'
 }
-const Notifications = () => {
+const Notifications = (props) => {
+  useEffect(() => {
+    const token = localStorage.getItem('auth-token');
+    if (!token) {
+      props.history.push('/login')
+    }
+  }, []);
+
+
   const notifications = [
     { type: 'info' },
     { type: 'success' },
     { type: 'warning' }
   ];
+  
   return (
     <div className="Notifications">
       <Row className="justify-content-md-center">

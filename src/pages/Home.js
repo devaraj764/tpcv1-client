@@ -19,9 +19,9 @@ function Home(props) {
 
     const routeToDashBoard = (res) => {
         props.history.push({
-            pathname: '/Dashboard',
-            state: res.data.token
+            pathname: '/dashboard',
         })
+        localStorage.setItem('auth-token', res.data.token);
     }
 
     return (
@@ -30,12 +30,12 @@ function Home(props) {
                 <Col className="left-side" lg={6} md={6}>
                     <div style={{ textAlign: 'center', color: 'white' }}>
                         <Image src={CareerImg} fluid={true} style={{ maxHeight: '300px', marginBottom: '50px' }} />
-                        <p style={{ fontSize: '20px' }}>“Luck is what happens<br/> when preparation meets opportunity.”</p>
+                        <p style={{ fontSize: '20px' }}>“Luck is what happens<br /> when preparation meets opportunity.”</p>
                     </div>
                 </Col>
                 <Col className="right-side" sm={12} lg={6} md={6}>
                     <Image src={TPCLogo} fluid={true} style={{ maxHeight: '300px', marginBottom: '30px' }} />
-                    {path === '/login' ? <Login callBack={routeToDashBoard} /> : <Register callBack={routeToDashBoard} />}
+                    {path === '/login' ? <Login callBack={routeToDashBoard} api={props.api} /> : <Register callBack={routeToDashBoard} api={props.api} />}
 
                 </Col>
             </Row>
@@ -59,14 +59,15 @@ function Login(props) {
     }
 
     function loginUser() {
-        axios.post('http://localhost:3000/login', {
+        const url = props.api + 'login'
+        axios.post(url, {
             "idNo": idNo,
             "password": password,
         }).then(res => {
             console.log(res.data)
             props.callBack(res);
         }).catch(err => {
-            if(err) {
+            if (err) {
                 seterror(err.response.data.error)
             }
         })
@@ -100,7 +101,7 @@ function Login(props) {
             <div style={{ maxWidth: '400px', width: '100%' }}>
                 <p style={{ float: 'right', fontSize: '14px' }}>Forgot Password?</p>
             </div>
-            {error ===''? null : <p style={{color:'red', fontSize:'14px'}}>{error}</p>}
+            {error === '' ? null : <p style={{ color: 'red', fontSize: '14px' }}>{error}</p>}
             <Button style={{ maxWidth: '400px', width: '100%', backgroundColor: '#071a84' }} size="md" onClick={(e) => submit(e)}>Login</Button>
             <br />
             <p>Don't have account? <Link style={{ color: '#071a84', cursor: 'pointer', fontSize: '16px', fontWeight: '600' }} to="/register">SignUp</Link></p>
@@ -147,23 +148,44 @@ function Register(props) {
     }
 
     function registerUser() {
-        axios.post('http://localhost:3000/register', {
+        const url = props.api + 'register'
+        axios.post(url, {
             "name": name,
             "idNo": id,
             "email": email,
-            "class": section,
+            "section": section,
             "batch": batch,
             "dob": dob,
             "yearofStudy": yearofStudy,
             "address": address,
             "contactNumber": contactNum,
-            "password": password
+            "password": password,
+            "schooling": {
+                "name": "",
+                "cgpa": "",
+                "loc": "",
+                "passout":""
+            },
+            "preGraduation": {
+                "name": "",
+                "cgpa": "",
+                "loc": "",
+                "passout":""
+            },
+            "graduation": {
+                "name": "",
+                "cgpa": "",
+                "loc": "",
+                "passout":"",
+            },
+            "softSkills": [],
+            "hardSkills": [],
         }).then(res => {
             console.log(res.data);
             props.callBack(res)
         }).catch(err => {
             if (err) {
-                // seterror(err.response.data.error)
+                seterror(err.response.data.error)
             }
         });
     }
@@ -226,7 +248,7 @@ function Register(props) {
                         <InputGroup.Text id="basic-addon3"><FaBirthdayCake /></InputGroup.Text>
                         <FormControl
                             onChange={(e) => setdob(e.target.value)}
-                            type='text'
+                            type='date'
                             placeholder="Date of Birth"
                             aria-label="ddob"
                             aria-describedby="basic-addon1"
@@ -307,7 +329,7 @@ function Register(props) {
                 </Col>
             </Row>
             <br />
-            {error ===''? null : <p style={{color:'red', fontSize:'14px'}}>{error}</p>}
+            {error === '' ? null : <p style={{ color: 'red', fontSize: '14px' }}>{error}</p>}
             <Button style={{ maxWidth: '400px', width: '100%', backgroundColor: '#071a84' }} size="md" onClick={(e) => submit(e)}>Proceed</Button>
             <br />
             <p>Already had account? <Link style={{ color: '#071a84', cursor: 'pointer', fontSize: '16px', fontWeight: '600' }} to="/login">SignIn</Link></p>

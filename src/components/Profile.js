@@ -1,34 +1,72 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Row, Col, Card, Form, InputGroup, FormControl, Accordion, Image, Button } from 'react-bootstrap';
 import { MdPermIdentity, MdEmail, MdBatchPrediction, MdPhone } from 'react-icons/md';
 import { BiRename } from 'react-icons/bi'
 import { FaBirthdayCake, FaBook } from 'react-icons/fa';
 import { SiGoogleclassroom } from 'react-icons/si';
+import axios from 'axios';
 
-const Profile = () => {
+const Profile = (props) => {
+    const [Token, setToken] = useState(null);
     const [edit, setEdit] = useState(false);
+    const [profileData, setprofileData] = useState({});
+    const [updatedProfile, setupdatedProfile] = useState({});
+
+    useEffect(() => {
+        const token = localStorage.getItem('auth-token');
+        setToken(token)
+        if (!token) {
+            props.history.push('/login')
+        }
+    }, [Token]);
+
+    useEffect(() => {
+        const url = props.api + 'students/mydata'
+        axios.get(url, {
+            headers: {
+                "auth-token": localStorage.getItem('auth-token')
+            }
+        }).then((res) => {
+            setprofileData(res.data)
+        }).catch((err) => console.log(err))
+    }, []);
+
 
     const handleChanges = () => {
-        console.log("Saved changes");
+        const url = props.api + 'students/'
+        axios.patch(url, updatedProfile, {
+            headers: {
+                "auth-token": localStorage.getItem('auth-token')
+            }
+        }).then((res) => {
+            console.log(res)
+        }).catch((err) => console.log(err))
         setEdit(false);
     }
+
+    const Logout = () => {
+        setToken('')
+        localStorage.removeItem('auth-token')
+    }
+
+
 
     return (
         <div className="profile">
             <Row className="justify-content-md-center">
                 <Col xs={12} lg="8">
-                    <ProfileBanner handleChanges={handleChanges} edit={edit} setEdit={setEdit} />
+                    <ProfileBanner handleChanges={handleChanges} edit={edit} setEdit={setEdit} logout={Logout} />
                     <hr />
-                    <PersonalProfile edit={edit} />
+                    <PersonalProfile edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
                     <Skills edit={edit} />
-                    <EducationDetails edit={edit} />
+                    <EducationDetails edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
                 </Col>
             </Row>
         </div>
     )
 }
 
-const ProfileBanner = ({ setEdit, edit, handleChanges }) => {
+const ProfileBanner = ({ setEdit, edit, handleChanges, logout }) => {
 
     return (
         <div className='profile-banner'>
@@ -44,7 +82,7 @@ const ProfileBanner = ({ setEdit, edit, handleChanges }) => {
                         :
                         <>
                             <Button variant="primary" onClick={() => setEdit(true)} size='sm'>Edit</Button>
-                            <Button variant="danger" size='sm'>Logout</Button>
+                            <Button variant="danger" size='sm' onClick={logout}>Logout</Button>
                         </>
                     }
                 </div>
@@ -53,7 +91,7 @@ const ProfileBanner = ({ setEdit, edit, handleChanges }) => {
     )
 }
 
-const PersonalProfile = ({ edit }) => {
+const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
     return (
         <div className="personal-details">
             <p className="heading">Personal Details<br />
@@ -66,8 +104,9 @@ const PersonalProfile = ({ edit }) => {
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1"><BiRename /></InputGroup.Text>
                             <FormControl
+                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, name: e.target.value }) }}
                                 type='text'
-                                defaultValue="Mamali Santra"
+                                defaultValue={profileData.name}
                                 placeholder="Full Name"
                                 aria-label="idnumber"
                                 aria-describedby="basic-addon1"
@@ -81,11 +120,11 @@ const PersonalProfile = ({ edit }) => {
                             <InputGroup.Text id="basic-addon1"><MdPermIdentity /></InputGroup.Text>
                             <FormControl
                                 type='text'
-                                defaultValue="S170725"
+                                defaultValue={profileData.idNo}
                                 placeholder="Id Number"
                                 aria-label="studentid"
                                 aria-describedby="basic-addon1"
-                                disabled={!edit}
+                                disabled
                             />
                         </InputGroup>
                     </Col>
@@ -94,8 +133,9 @@ const PersonalProfile = ({ edit }) => {
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1"><MdEmail /></InputGroup.Text>
                             <FormControl
+                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, email: e.target.value }) }}
                                 type='text'
-                                defaultValue="s170752@rguktsklm.ac.in"
+                                defaultValue={profileData.email}
                                 placeholder="collage email address"
                                 aria-label="collageemail"
                                 aria-describedby="basic-addon1"
@@ -108,8 +148,9 @@ const PersonalProfile = ({ edit }) => {
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1"><SiGoogleclassroom /></InputGroup.Text>
                             <FormControl
+                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, section: e.target.value }) }}
                                 type='text'
-                                defaultValue="CSE-3D"
+                                defaultValue={profileData.section}
                                 placeholder="section code"
                                 aria-label="sectioncode"
                                 aria-describedby="basic-addon1"
@@ -122,8 +163,9 @@ const PersonalProfile = ({ edit }) => {
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1"><FaBirthdayCake /></InputGroup.Text>
                             <FormControl
-                                type='text'
-                                defaultValue="19-07-2001"
+                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, dob: e.target.value }) }}
+                                type='date'
+                                defaultValue={profileData.dob}
                                 placeholder="Enter your date of birth"
                                 aria-label="dob"
                                 aria-describedby="basic-addon1"
@@ -136,8 +178,9 @@ const PersonalProfile = ({ edit }) => {
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1"><MdBatchPrediction /></InputGroup.Text>
                             <FormControl
+                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, batch: e.target.value }) }}
                                 type='text'
-                                defaultValue="2017"
+                                defaultValue={profileData.batch}
                                 placeholder="Enter your bacth"
                                 aria-label="batch"
                                 aria-describedby="basic-addon1"
@@ -150,8 +193,9 @@ const PersonalProfile = ({ edit }) => {
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1"><FaBook /></InputGroup.Text>
                             <FormControl
+                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, yearofStudy: e.target.value }) }}
                                 type='text'
-                                defaultValue="3rd"
+                                defaultValue={profileData.yearofStudy}
                                 placeholder="Enter your year of study"
                                 aria-label="yearofstudy"
                                 aria-describedby="basic-addon1"
@@ -164,8 +208,9 @@ const PersonalProfile = ({ edit }) => {
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1"><MdPhone /></InputGroup.Text>
                             <FormControl
+                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, contactNumber: e.target.value }) }}
                                 type='text'
-                                defaultValue="701324XXXX"
+                                defaultValue={profileData.contactNumber}
                                 placeholder="Enter your contact number"
                                 aria-label="contactNumber"
                                 aria-describedby="basic-addon1"
@@ -177,9 +222,10 @@ const PersonalProfile = ({ edit }) => {
                         <Form.Label htmlFor="contactNumber" className="label">Address</Form.Label>
                         <InputGroup className="mb-3">
                             <FormControl
+                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, address: e.target.value }) }}
                                 as='textarea'
                                 type='text'
-                                defaultValue="Fhatimapuram 6trh lane, Guntur"
+                                defaultValue={profileData.address}
                                 placeholder="Address"
                                 aria-label="Address"
                                 aria-describedby="basic-addon1"
@@ -312,7 +358,25 @@ const Skills = ({ edit }) => {
     )
 }
 
-const EducationDetails = ({ edit }) => {
+const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
+    const [schoolDetails, setSchoolDetails] = useState(null);
+    const [name, setname] = useState('');
+    const [loc, setloc] = useState('');
+    const [cgpa, setcgpa] = useState('');
+    const [passout, setpassout] = useState('');
+
+    useEffect(() => {
+        setname(profileData.schooling ? profileData.schooling.name : '');
+        setloc(profileData.schooling ? profileData.schooling.loc : '');
+        setcgpa(profileData.schooling ? profileData.schooling.cgpa : '');
+        setpassout(profileData.schooling ? profileData.schooling.passout : '');
+    }, [profileData]);
+
+    useEffect(() => {
+        setSchoolDetails({ name, cgpa, loc, passout });
+        setupdatedProfile({ ...updatedProfile, schooling: schoolDetails });
+    }, [name, loc, cgpa, passout, schoolDetails, setupdatedProfile, updatedProfile]);
+
     return (
         <div className="educational-details">
             <p className="heading">Educational Details<br />
@@ -326,10 +390,12 @@ const EducationDetails = ({ edit }) => {
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1">at</InputGroup.Text>
                             <FormControl
-                                defaultValue=""
+                                onChange={(e) => setname(e.target.value)}
+                                value={name}
                                 placeholder="School Name"
                                 aria-label="SchoolName"
                                 aria-describedby="basic-addon1"
+                                id="schoolName"
                                 disabled={!edit}
                             />
                         </InputGroup>
@@ -337,7 +403,7 @@ const EducationDetails = ({ edit }) => {
                     <Col md={6} sm={12}>
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1">Passed Out</InputGroup.Text>
-                            <Form.Select defaultValue="Year" aria-label="Default select example" disabled={!edit}>
+                            <Form.Select value={passout} id="passout" aria-label="Default select example" disabled={!edit} onChange={(e) => setpassout(e.target.value)}>
                                 <option disabled={!edit}>Year</option>
                                 <option value="2016">2016</option>
                                 <option value="2017">2017</option>
@@ -352,7 +418,9 @@ const EducationDetails = ({ edit }) => {
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1">CGPA</InputGroup.Text>
                             <FormControl
-                                defaultValue=""
+                                id="cgpa"
+                                onChange={(e) => setcgpa(e.target.value)}
+                                value={cgpa}
                                 placeholder="Your 10th CGPA"
                                 aria-label="SchoolName"
                                 aria-describedby="basic-addon1"
@@ -363,8 +431,10 @@ const EducationDetails = ({ edit }) => {
                     <Col sm={12}>
                         <InputGroup className="mb-3">
                             <FormControl
+                                id="location"
+                                onChange={(e) => setloc(e.target.value)}
                                 as='textarea'
-                                defaultValue=""
+                                value={loc}
                                 placeholder="Your school address"
                                 aria-label="address"
                                 aria-describedby="basic-addon1"

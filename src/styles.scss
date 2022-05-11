@@ -6,6 +6,7 @@
 $primary-color: #071a84;
 $secondary-color: #eaecf6;
 body {
+  overflow-x: hidden;
   font-family: "Poppins", sans-serif;
   font-size: 14px !important;
   input[disabled],

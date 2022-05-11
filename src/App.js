@@ -8,11 +8,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.scss';
 
 function App() {
+  const api = 'http://localhost:3000/';
   return (
     <Switch>
-      <Route path='/dashboard' component={Dashboard}></Route>
-      <Route exact path='/Login' component={Home}></Route>
-      <Route exact path='/register' component={Home}></Route>
+      <Route path='/dashboard' render={() => <Dashboard api={api}/>}></Route>
+      <Route exact path='/Login' render={() => <Home api={api}/>}></Route>
+      <Route exact path='/register' render={() => <Home api={api}/>}></Route>
     </Switch>
   );
 }
