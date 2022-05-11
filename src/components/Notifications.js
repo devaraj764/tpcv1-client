@@ -3,6 +3,7 @@ import { Row, Col } from 'react-bootstrap';
 import { TiWarningOutline } from 'react-icons/ti';
 import { VscInfo } from 'react-icons/vsc';
 import { IoMdCheckmarkCircleOutline } from 'react-icons/io'
+import { HiOutlineClipboardList } from 'react-icons/hi'
 
 
 const warning = {
@@ -19,6 +20,12 @@ const success = {
   backgroundColor: '#DFFFD9',
   color: '#207A0C'
 }
+
+const test = {
+  backgroundColor: '#ffebfe',
+  color: '#FF00FF',
+}
+
 const Notifications = (props) => {
   useEffect(() => {
     const token = localStorage.getItem('auth-token');
@@ -31,9 +38,10 @@ const Notifications = (props) => {
   const notifications = [
     { type: 'info' },
     { type: 'success' },
-    { type: 'warning' }
+    { type: 'warning' },
+    { type: 'test' }
   ];
-  
+
   return (
     <div className="Notifications">
       <Row className="justify-content-md-center">
@@ -47,7 +55,8 @@ const Notifications = (props) => {
                     info :
                     notifier.type === 'success' ?
                       success
-                      : null
+                      : notifier.type === 'test' ?
+                        test : null
               }>
                 {
                   notifier.type === 'warning' ?
@@ -56,12 +65,14 @@ const Notifications = (props) => {
                       <VscInfo size={24} /> :
                       notifier.type === 'success' ?
                         <IoMdCheckmarkCircleOutline size={24} />
-                        : null
+                        : notifier.type === 'test' ?
+                          <HiOutlineClipboardList size={24} /> : null
+
                 }
 
               </div>
               <div className="notifier-body">
-                <span className="title">info</span>
+                <span className="title">{notifier.type.toUpperCase()}</span>
                 <span className="description">We have successfully created</span>
               </div>
             </div>

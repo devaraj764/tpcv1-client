@@ -23,7 +23,7 @@ const NavbarNav = () => {
                             <Nav className="justify-content-end flex-grow-1 pe-3">
                                 <Nav.Link as={Link} to="/dashboard"><MdHome size={18} />&nbsp;&nbsp;Home</Nav.Link>
                                 <Nav.Link as={Link} to="/dashboard/notifications"><IoMdNotifications size={18}/>&nbsp;&nbsp;Notifications</Nav.Link>
-                                <Nav.Link as={Link} to="/dashboard/profile"><HiUserCircle size={18}/>&nbsp;&nbsp;Profile</Nav.Link>
+                                <Nav.Link as={Link} to="/dashboard/profile" style={{paddingRight:'0'}}><HiUserCircle size={18}/>&nbsp;&nbsp;Profile</Nav.Link>
                             </Nav>
                         </Offcanvas.Body>
                     </Navbar.Offcanvas>

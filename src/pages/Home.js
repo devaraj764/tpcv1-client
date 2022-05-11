@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Col, Row, Image, InputGroup, FormControl, Button } from 'react-bootstrap';
+import { Col, Row, Image, InputGroup, FormControl, Button, Form } from 'react-bootstrap';
 import CareerImg from '../assets/career.svg';
 import TPCLogo from '../assets/tpc-logo.svg';
 import { MdPermIdentity, MdEmail, MdPassword, MdBatchPrediction, MdPhone } from 'react-icons/md';
@@ -234,13 +234,18 @@ function Register(props) {
                 <Col md={6} sm={12}>
                     <InputGroup className="mb-3">
                         <InputGroup.Text id="basic-addon3"><SiGoogleclassroom /></InputGroup.Text>
-                        <FormControl
+                        <Form.Select
                             onChange={(e) => setsection(e.target.value)}
-                            type='text'
-                            placeholder="Enter your section Code"
-                            aria-label="class"
-                            aria-describedby="basic-addon1"
-                        />
+                            defaultValue="-- select --"
+                        >
+                            <option disabled>-- select --</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                        </Form.Select>
                     </InputGroup>
                 </Col>
                 <Col md={6} sm={12}>
@@ -258,25 +263,31 @@ function Register(props) {
                 <Col md={6} sm={12}>
                     <InputGroup className="mb-3">
                         <InputGroup.Text id="basic-addon3"><MdBatchPrediction /></InputGroup.Text>
-                        <FormControl
+                        <Form.Select
                             onChange={(e) => setbatch(e.target.value)}
-                            type='text'
-                            placeholder="Batch"
-                            aria-label="class"
-                            aria-describedby="basic-addon1"
-                        />
+                            defaultValue="-- select --"
+                        >
+                            <option disabled>-- select --</option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                        </Form.Select>
                     </InputGroup>
                 </Col>
                 <Col md={6} sm={12}>
                     <InputGroup className="mb-3">
                         <InputGroup.Text id="basic-addon3"><FaBook /></InputGroup.Text>
-                        <FormControl
+                        <Form.Select
                             onChange={(e) => setyearofStudy(e.target.value)}
-                            type='text'
-                            placeholder="Year of study"
-                            aria-label="Yaer of study  "
-                            aria-describedby="basic-addon1"
-                        />
+                            defaultValue="-- select --"
+                        >
+                            <option disabled>-- select --</option>
+                            <option value="E3">E3</option>
+                            <option value="E4">E4</option>
+                        </Form.Select>
                     </InputGroup>
                 </Col>
                 <Col md={6} sm={12}>
