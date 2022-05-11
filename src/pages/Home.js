@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Col, Row, Image, InputGroup, FormControl, Button } from 'react-bootstrap';
+import { Col, Row, Image, InputGroup, FormControl, Button, Form } from 'react-bootstrap';
 import CareerImg from '../assets/career.svg';
 import TPCLogo from '../assets/tpc-logo.svg';
 import { MdPermIdentity, MdEmail, MdPassword, MdBatchPrediction, MdPhone } from 'react-icons/md';
@@ -30,7 +30,7 @@ function Home(props) {
                 <Col className="left-side" lg={6} md={6}>
                     <div style={{ textAlign: 'center', color: 'white' }}>
                         <Image src={CareerImg} fluid={true} style={{ maxHeight: '300px', marginBottom: '50px' }} />
-                        <p style={{ fontSize: '20px' }}>“Luck is what happens<br/> when preparation meets opportunity.”</p>
+                        <p style={{ fontSize: '20px' }}>“Luck is what happens<br /> when preparation meets opportunity.”</p>
                     </div>
                 </Col>
                 <Col className="right-side" sm={12} lg={6} md={6}>
@@ -66,7 +66,7 @@ function Login(props) {
             console.log(res.data)
             props.callBack(res);
         }).catch(err => {
-            if(err) {
+            if (err) {
                 seterror(err.response.data.error)
             }
         })
@@ -100,7 +100,7 @@ function Login(props) {
             <div style={{ maxWidth: '400px', width: '100%' }}>
                 <p style={{ float: 'right', fontSize: '14px' }}>Forgot Password?</p>
             </div>
-            {error ===''? null : <p style={{color:'red', fontSize:'14px'}}>{error}</p>}
+            {error === '' ? null : <p style={{ color: 'red', fontSize: '14px' }}>{error}</p>}
             <Button style={{ maxWidth: '400px', width: '100%', backgroundColor: '#071a84' }} size="md" onClick={(e) => submit(e)}>Login</Button>
             <br />
             <p>Don't have account? <Link style={{ color: '#071a84', cursor: 'pointer', fontSize: '16px', fontWeight: '600' }} to="/register">SignUp</Link></p>
@@ -212,13 +212,18 @@ function Register(props) {
                 <Col md={6} sm={12}>
                     <InputGroup className="mb-3">
                         <InputGroup.Text id="basic-addon3"><SiGoogleclassroom /></InputGroup.Text>
-                        <FormControl
+                        <Form.Select
                             onChange={(e) => setsection(e.target.value)}
-                            type='text'
-                            placeholder="Enter your section Code"
-                            aria-label="class"
-                            aria-describedby="basic-addon1"
-                        />
+                            defaultValue="-- select --"
+                        >
+                            <option disabled>-- select --</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                        </Form.Select>
                     </InputGroup>
                 </Col>
                 <Col md={6} sm={12}>
@@ -226,7 +231,7 @@ function Register(props) {
                         <InputGroup.Text id="basic-addon3"><FaBirthdayCake /></InputGroup.Text>
                         <FormControl
                             onChange={(e) => setdob(e.target.value)}
-                            type='text'
+                            type='date'
                             placeholder="Date of Birth"
                             aria-label="ddob"
                             aria-describedby="basic-addon1"
@@ -236,25 +241,31 @@ function Register(props) {
                 <Col md={6} sm={12}>
                     <InputGroup className="mb-3">
                         <InputGroup.Text id="basic-addon3"><MdBatchPrediction /></InputGroup.Text>
-                        <FormControl
+                        <Form.Select
                             onChange={(e) => setbatch(e.target.value)}
-                            type='text'
-                            placeholder="Batch"
-                            aria-label="class"
-                            aria-describedby="basic-addon1"
-                        />
+                            defaultValue="-- select --"
+                        >
+                            <option disabled>-- select --</option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                        </Form.Select>
                     </InputGroup>
                 </Col>
                 <Col md={6} sm={12}>
                     <InputGroup className="mb-3">
                         <InputGroup.Text id="basic-addon3"><FaBook /></InputGroup.Text>
-                        <FormControl
+                        <Form.Select
                             onChange={(e) => setyearofStudy(e.target.value)}
-                            type='text'
-                            placeholder="Year of study"
-                            aria-label="Yaer of study  "
-                            aria-describedby="basic-addon1"
-                        />
+                            defaultValue="-- select --"
+                        >
+                            <option disabled>-- select --</option>
+                            <option value="E3">E3</option>
+                            <option value="E4">E4</option>
+                        </Form.Select>
                     </InputGroup>
                 </Col>
                 <Col md={6} sm={12}>
@@ -307,7 +318,7 @@ function Register(props) {
                 </Col>
             </Row>
             <br />
-            {error ===''? null : <p style={{color:'red', fontSize:'14px'}}>{error}</p>}
+            {error === '' ? null : <p style={{ color: 'red', fontSize: '14px' }}>{error}</p>}
             <Button style={{ maxWidth: '400px', width: '100%', backgroundColor: '#071a84' }} size="md" onClick={(e) => submit(e)}>Proceed</Button>
             <br />
             <p>Already had account? <Link style={{ color: '#071a84', cursor: 'pointer', fontSize: '16px', fontWeight: '600' }} to="/login">SignIn</Link></p>

@@ -88,6 +88,18 @@ body {
     background-color: $secondary-color;
     min-height: 100vh;
     padding-top: 50px;
+    .card {
+      border-radius: 10px;
+    }
+    .heading {
+      font-size: 16px !important;
+      font-weight: bold !important;
+      margin-left: 10px !important;
+      .message {
+        font-size: 12px !important;
+        color: rgba(3, 11, 71, 0.47);
+      }
+    }
     .navbar {
       background-color: $primary-color;
       .title {
@@ -102,16 +114,6 @@ body {
     // profile page
     .profile {
       margin-top: 50px;
-
-      .heading {
-        font-size: 16px;
-        font-weight: bold;
-        margin-left: 10px;
-        .message {
-          font-size: 12px !important;
-          color: rgba(3, 11, 71, 0.47);
-        }
-      }
       .sub-heading {
         font-size: 16px;
         font-weight: bold;
@@ -181,13 +183,44 @@ body {
           justify-content: center;
           margin: 0 20px;
           .title {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 600;
           }
           .description {
             font-family: "Nunito Sans", sans-serif;
           }
         }
+      }
+    }
+
+    .Home {
+      padding-top: 50px;
+      .header {
+        padding:0 10px;
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .title {
+          color: gray;
+          margin:0;
+        }
+        .name {
+          font-size: 18px;
+          color: $primary-color;
+          margin:0 auto;
+        }
+        button {
+          border-radius: 25px;
+          font-size: 14px;
+          padding: 5px 10px;
+          min-width:130px;
+          background-color: $primary-color;
+          font-family: "Nunito Sans", sans-serif;
+        }
+      }
+      ul {
+        padding-left: 10px;
       }
     }
   }
