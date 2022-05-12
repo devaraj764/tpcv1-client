@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col} from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import ProfileBanner from './ProfileBanner.js';
 import PersonalProfile from './PersonalProfile.js';
@@ -59,9 +59,9 @@ const Profile = (props) => {
                     <ProfileBanner handleChanges={handleChanges} edit={edit} setEdit={setEdit} logout={Logout} />
                     <hr />
                     <PersonalProfile edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
-                    <Skills edit={edit} />
+                    <Skills edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
                     <EducationDetails edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
-                    <SocialMedia />
+                    <SocialMedia edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
                 </Col>
             </Row>
         </div>
