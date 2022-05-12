@@ -79,12 +79,8 @@ const Profile = (props) => {
                             ?
                             <>
                                 <PersonalProfile edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
-<<<<<<< HEAD
                                 <Hobbies/>
                                 <SocialMedia />
-=======
-                                <SocialMedia edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
->>>>>>> cf17f6fb5b94302dfe59b274efdc4ca78e94d42b
                             </>
                             :
                             tab === 1 ?
