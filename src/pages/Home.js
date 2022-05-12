@@ -124,7 +124,7 @@ function Register(props) {
     const [confirmPassword, setconfirmPassword] = useState('');
 
     function validateEmail() {
-        var re = /^[a-z0-9](\.?[a-z0-9]){5,}@g(oogle)?mail\.com$/;
+        var re = /^[a-z0-9](\.?[a-z0-9]){5,}@r(oogle)?guktsklm\.ac.in$/;
         return re.test(String(email).toLowerCase());
     }
 
@@ -160,26 +160,6 @@ function Register(props) {
             "address": address,
             "contactNumber": contactNum,
             "password": password,
-            "schooling": {
-                "name": "",
-                "cgpa": "",
-                "loc": "",
-                "passout":""
-            },
-            "preGraduation": {
-                "name": "",
-                "cgpa": "",
-                "loc": "",
-                "passout":""
-            },
-            "graduation": {
-                "name": "",
-                "cgpa": "",
-                "loc": "",
-                "passout":"",
-            },
-            "softSkills": [],
-            "hardSkills": [],
         }).then(res => {
             console.log(res.data);
             props.callBack(res)
@@ -254,6 +234,7 @@ function Register(props) {
                         <FormControl
                             onChange={(e) => setdob(e.target.value)}
                             type='date'
+                            name="date"
                             placeholder="Date of Birth"
                             aria-label="ddob"
                             aria-describedby="basic-addon1"

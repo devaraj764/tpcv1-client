@@ -1,21 +1,29 @@
 import {
   Switch,
-  Route
+  Route,
+  withRouter
 } from 'react-router-dom';
+import React, {useEffect} from 'react'
 import Home from './pages/Home.js'
-import Dashboard from './pages/Dashboard'
+import Dashboard from './pages/Dashboard';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.scss';
 
 function App() {
   const api = 'http://localhost:3000/';
+
+  useEffect(() => {
+    if(window.location.pathname === '/'){
+      window.location.replace('/login')
+    }
+  }, []);
   return (
     <Switch>
-      <Route path='/dashboard' render={() => <Dashboard api={api}/>}></Route>
-      <Route exact path='/Login' render={() => <Home api={api}/>}></Route>
-      <Route exact path='/register' render={() => <Home api={api}/>}></Route>
+      <Route path='/dashboard' render={() => <Dashboard api={api} />}></Route>
+      <Route exact path='/Login' render={() => <Home api={api} />}></Route>
+      <Route exact path='/register' render={() => <Home api={api} />}></Route>
     </Switch>
   );
 }
 
-export default App;
+export default withRouter(App);

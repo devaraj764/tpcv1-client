@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { Row, Col, Card, Form, InputGroup, FormControl, Accordion, Image, Button } from 'react-bootstrap';
 import { MdPermIdentity, MdEmail, MdBatchPrediction, MdPhone } from 'react-icons/md';
 import { BiRename } from 'react-icons/bi'
@@ -18,7 +18,7 @@ const Profile = (props) => {
         if (!token) {
             props.history.push('/login')
         }
-    }, [Token]);
+    }, [Token, props.history]);
 
     useEffect(() => {
         const url = props.api + 'students/mydata'
@@ -29,7 +29,7 @@ const Profile = (props) => {
         }).then((res) => {
             setprofileData(res.data)
         }).catch((err) => console.log(err))
-    }, []);
+    }, [props.api]);
 
 
     const handleChanges = () => {
@@ -60,6 +60,7 @@ const Profile = (props) => {
                     <PersonalProfile edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
                     <Skills edit={edit} />
                     <EducationDetails edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
+                    <SocialMedia />
                 </Col>
             </Row>
         </div>
@@ -106,7 +107,7 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile 
                             <FormControl
                                 onChange={(e) => { setupdatedProfile({ ...updatedProfile, name: e.target.value }) }}
                                 type='text'
-                                defaultValue={profileData.name}
+                                value={profileData.name}
                                 placeholder="Full Name"
                                 aria-label="idnumber"
                                 aria-describedby="basic-addon1"
@@ -120,7 +121,7 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile 
                             <InputGroup.Text id="basic-addon1"><MdPermIdentity /></InputGroup.Text>
                             <FormControl
                                 type='text'
-                                defaultValue={profileData.idNo}
+                                value={profileData.idNo}
                                 placeholder="Id Number"
                                 aria-label="studentid"
                                 aria-describedby="basic-addon1"
@@ -135,7 +136,7 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile 
                             <FormControl
                                 onChange={(e) => { setupdatedProfile({ ...updatedProfile, email: e.target.value }) }}
                                 type='text'
-                                defaultValue={profileData.email}
+                                value={profileData.email}
                                 placeholder="collage email address"
                                 aria-label="collageemail"
                                 aria-describedby="basic-addon1"
@@ -147,15 +148,23 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile 
                         <Form.Label htmlFor="classcode" className="label">Section Code</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1"><SiGoogleclassroom /></InputGroup.Text>
-                            <FormControl
+                            <Form.Select
                                 onChange={(e) => { setupdatedProfile({ ...updatedProfile, section: e.target.value }) }}
                                 type='text'
-                                defaultValue={profileData.section}
+                                value={profileData.section ? profileData.section : '-- select --'}
                                 placeholder="section code"
                                 aria-label="sectioncode"
                                 aria-describedby="basic-addon1"
                                 disabled={!edit}
-                            />
+                            >
+                                <option disabled>-- select --</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                                <option value="F">F</option>
+                            </Form.Select>
                         </InputGroup>
                     </Col>
                     <Col md={6} sm={12}>
@@ -165,7 +174,7 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile 
                             <FormControl
                                 onChange={(e) => { setupdatedProfile({ ...updatedProfile, dob: e.target.value }) }}
                                 type='date'
-                                defaultValue={profileData.dob}
+                                value={profileData.dob}
                                 placeholder="Enter your date of birth"
                                 aria-label="dob"
                                 aria-describedby="basic-addon1"
@@ -177,30 +186,42 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile 
                         <Form.Label htmlFor="batch" className="label">Batch</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1"><MdBatchPrediction /></InputGroup.Text>
-                            <FormControl
+                            <Form.Select
                                 onChange={(e) => { setupdatedProfile({ ...updatedProfile, batch: e.target.value }) }}
                                 type='text'
-                                defaultValue={profileData.batch}
+                                value={profileData.batch ? profileData.batch : '-- select --'}
                                 placeholder="Enter your bacth"
                                 aria-label="batch"
                                 aria-describedby="basic-addon1"
                                 disabled={!edit}
-                            />
+                            >
+                                <option disabled>-- select --</option>
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                            </Form.Select>
                         </InputGroup>
                     </Col>
                     <Col md={6} sm={12}>
                         <Form.Label htmlFor="yearofstudy" className="label">Year of Study</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1"><FaBook /></InputGroup.Text>
-                            <FormControl
+                            <Form.Select
                                 onChange={(e) => { setupdatedProfile({ ...updatedProfile, yearofStudy: e.target.value }) }}
                                 type='text'
-                                defaultValue={profileData.yearofStudy}
+                                value={profileData.yearofStudy ? profileData.yearofStudy : '-- select --'}
                                 placeholder="Enter your year of study"
                                 aria-label="yearofstudy"
                                 aria-describedby="basic-addon1"
                                 disabled={!edit}
-                            />
+                            >
+                                <option disabled>-- select --</option>
+                                <option value="E3">E3</option>
+                                <option value="E4">E4</option>
+                            </Form.Select>
                         </InputGroup>
                     </Col>
                     <Col md={6} sm={12}>
@@ -210,7 +231,7 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile 
                             <FormControl
                                 onChange={(e) => { setupdatedProfile({ ...updatedProfile, contactNumber: e.target.value }) }}
                                 type='text'
-                                defaultValue={profileData.contactNumber}
+                                value={profileData.contactNumber}
                                 placeholder="Enter your contact number"
                                 aria-label="contactNumber"
                                 aria-describedby="basic-addon1"
@@ -225,7 +246,7 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile 
                                 onChange={(e) => { setupdatedProfile({ ...updatedProfile, address: e.target.value }) }}
                                 as='textarea'
                                 type='text'
-                                defaultValue={profileData.address}
+                                value={profileData.address}
                                 placeholder="Address"
                                 aria-label="Address"
                                 aria-describedby="basic-addon1"
@@ -245,7 +266,7 @@ const Skills = ({ edit }) => {
             <p className="heading">Skills<br />
                 <span className="message">Rate your skills according to your capability</span>
             </p>
-            {/* School Details  */}
+            {/* Hard Skills  */}
             <Card body style={{ padding: '10px' }}>
                 <p className="sub-heading">Hard Skills</p>
                 <Row>
@@ -255,7 +276,7 @@ const Skills = ({ edit }) => {
                             <Accordion.Body>
                                 <div className="skill">
                                     <p>Skill #1</p>
-                                    <Form.Select className="skillVal" size='sm' defaultValue="NILL" aria-label="Default select example" disabled={!edit}>
+                                    <Form.Select className="skillVal" size='sm' value="NILL" aria-label="Default select example" disabled={!edit}>
                                         <option value="NILL">NILL</option>
                                         <option value="Basic">Basic</option>
                                         <option value="Medium">Medium</option>
@@ -264,7 +285,7 @@ const Skills = ({ edit }) => {
                                 </div>
                                 <div className="skill">
                                     <p>Skill #2</p>
-                                    <Form.Select className="skillVal" size='sm' defaultValue="NILL" aria-label="Default select example" disabled={!edit}>
+                                    <Form.Select className="skillVal" size='sm' value="NILL" aria-label="Default select example" disabled={!edit}>
                                         <option value="NILL">NILL</option>
                                         <option value="Basic">Basic</option>
                                         <option value="Medium">Medium</option>
@@ -278,7 +299,7 @@ const Skills = ({ edit }) => {
                             <Accordion.Body>
                                 <div className="skill">
                                     <p>Skill #1</p>
-                                    <Form.Select className="skillVal" size='sm' defaultValue="NILL" aria-label="Default select example" disabled={!edit}>
+                                    <Form.Select className="skillVal" size='sm' value="NILL" aria-label="Default select example" disabled={!edit}>
                                         <option value="NILL">NILL</option>
                                         <option value="Basic">Basic</option>
                                         <option value="Medium">Medium</option>
@@ -287,7 +308,7 @@ const Skills = ({ edit }) => {
                                 </div>
                                 <div className="skill">
                                     <p>Skill #2</p>
-                                    <Form.Select className="skillVal" size='sm' defaultValue="NILL" aria-label="Default select example" disabled={!edit}>
+                                    <Form.Select className="skillVal" size='sm' value="NILL" aria-label="Default select example" disabled={!edit}>
                                         <option value="NILL">NILL</option>
                                         <option value="Basic">Basic</option>
                                         <option value="Medium">Medium</option>
@@ -300,7 +321,7 @@ const Skills = ({ edit }) => {
                 </Row>
             </Card>
 
-            {/* collage details  */}
+            {/* Soft Skills  */}
             <Card body style={{ padding: '10px' }}>
                 <p className="sub-heading">Soft Skills</p>
                 <Row>
@@ -310,7 +331,7 @@ const Skills = ({ edit }) => {
                             <Accordion.Body>
                                 <div className="skill">
                                     <p>Skill #1</p>
-                                    <Form.Select className="skillVal" size='sm' defaultValue="NILL" aria-label="Default select example" disabled={!edit}>
+                                    <Form.Select className="skillVal" size='sm' value="NILL" aria-label="Default select example" disabled={!edit}>
                                         <option value="NILL">NILL</option>
                                         <option value="Basic">Basic</option>
                                         <option value="Medium">Medium</option>
@@ -319,7 +340,7 @@ const Skills = ({ edit }) => {
                                 </div>
                                 <div className="skill">
                                     <p>Skill #2</p>
-                                    <Form.Select className="skillVal" size='sm' defaultValue="NILL" aria-label="Default select example" disabled={!edit}>
+                                    <Form.Select className="skillVal" size='sm' value="NILL" aria-label="Default select example" disabled={!edit}>
                                         <option value="NILL">NILL</option>
                                         <option value="Basic">Basic</option>
                                         <option value="Medium">Medium</option>
@@ -333,7 +354,7 @@ const Skills = ({ edit }) => {
                             <Accordion.Body>
                                 <div className="skill">
                                     <p>Skill #1</p>
-                                    <Form.Select className="skillVal" size='sm' defaultValue="NILL" aria-label="Default select example" disabled={!edit}>
+                                    <Form.Select className="skillVal" size='sm' value="NILL" aria-label="Default select example" disabled={!edit}>
                                         <option value="NILL">NILL</option>
                                         <option value="Basic">Basic</option>
                                         <option value="Medium">Medium</option>
@@ -342,7 +363,7 @@ const Skills = ({ edit }) => {
                                 </div>
                                 <div className="skill">
                                     <p>Skill #2</p>
-                                    <Form.Select className="skillVal" size='sm' defaultValue="NILL" aria-label="Default select example" disabled={!edit}>
+                                    <Form.Select className="skillVal" size='sm' value="NILL" aria-label="Default select example" disabled={!edit}>
                                         <option value="NILL">NILL</option>
                                         <option value="Basic">Basic</option>
                                         <option value="Medium">Medium</option>
@@ -453,7 +474,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1">at</InputGroup.Text>
                             <FormControl
-                                defaultValue=""
+                                value=""
                                 placeholder="University Name"
                                 aria-label="University name"
                                 aria-describedby="basic-addon1"
@@ -464,7 +485,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                     <Col md={6} sm={12}>
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1">Passed Out</InputGroup.Text>
-                            <Form.Select defaultValue="Year" aria-label="Default select example" disabled={!edit}>
+                            <Form.Select value="Year" aria-label="Default select example" disabled={!edit}>
                                 <option disabled>Year</option>
                                 <option value="2016">2016</option>
                                 <option value="2017">2017</option>
@@ -479,7 +500,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1">CGPA</InputGroup.Text>
                             <FormControl
-                                defaultValue=""
+                                value=""
                                 placeholder="Overall CGPA"
                                 aria-label="SchoolName"
                                 aria-describedby="basic-addon1"
@@ -491,7 +512,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                         <InputGroup className="mb-3">
                             <FormControl
                                 as='textarea'
-                                defaultValue=""
+                                value=""
                                 placeholder="Address of University"
                                 aria-label="address"
                                 aria-describedby="basic-addon1"
@@ -505,4 +526,47 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
     );
 }
 
+
+const SocialMedia = () => {
+    const [addNew, setAddNew] = useState(false)
+    return (
+        <div className="SocialMedia">
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
+                <p className="heading">Externel Links<br />
+                    <span className="message">Add your links here</span>
+                </p>
+                {addNew ?
+                    <Button variant="light" onClick={() => setAddNew(false)} style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px' }} size='sm'>cancel</Button>
+
+                    :
+                    <Button onClick={() => setAddNew(true)} style={{ backgroundColor: '#071a84', fontSize: '14px !important', minWidth: '100px', borderRadius: '25px' }} size='sm'>+ Add New</Button>
+                }
+            </div>
+            <Card body style={{ padding: '10px' }}>
+                <Row>
+                    {addNew ? null :
+                        <p style={{ textAlign: 'center', width: '100%', color: 'gray' }}> No Links Available!<br /> Try to add new links...</p>
+                    }
+                    {/* for every links */}
+                    <Col md={6} sm={12}>
+
+                    </Col>
+                    {addNew ?
+                        <Col lg={12}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Place your link here.."
+                                />
+
+                                <Button style={{ backgroundColor: '#071a84', fontSize: '14px !important', minWidth: '100px' }}>Add</Button>
+                            </div>
+                        </Col>
+                        : null}
+                </Row>
+
+            </Card>
+        </div>
+    )
+}
 export default Profile

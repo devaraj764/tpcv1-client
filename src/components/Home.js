@@ -23,7 +23,7 @@ const Home = () => {
             <ListGroup as="ol" variant="flush" numbered>
               <ListGroup.Item as="li">Complete your profile by clicking on profile nav button (on top-right corner)</ListGroup.Item>
               <ListGroup.Item as="li">Upload your profile image and educational details = update profile</ListGroup.Item>
-              <ListGroup.Item as="li">Rate your skills in the skills section = Update Profile</ListGroup.Item>
+              <ListGroup.Item as="li">Rate your skills in the skills section = update Profile</ListGroup.Item>
               <ListGroup.Item as="li">Create your LinkedIn profiles to add in social media section</ListGroup.Item>
             </ListGroup>
           </Card>

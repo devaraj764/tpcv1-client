@@ -13,7 +13,7 @@ const Dashboard = (props) => {
         if (!token) {
             props.history.push('/login')
         }
-    }, []);
+    }, [props.history]);
 
     return (
         <>
