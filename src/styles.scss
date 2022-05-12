@@ -14,6 +14,31 @@ body {
   textarea[disabled] {
     background-color: rgba(231, 238, 247, 0.384) !important;
   }
+  .LandingPage {
+    padding: 50px;
+    min-height: 100vh;
+    // background-image: linear-gradient(175deg,#071a84, #3854f4)
+    // background-color: $secondary-color;
+    .title {
+      font-size: 30px;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-family: "Nunito Sans", sans-serif;
+      color: $primary-color;
+    }
+    .sub-div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        max-width: 400px;
+        margin: 10px;
+        box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+        border-top-left-radius: 50px;
+        border-bottom-right-radius: 50px;
+      }
+    }
+  }
   .Home {
     .left-side {
       display: flex;
@@ -155,6 +180,9 @@ body {
           }
         }
       }
+      .SocialMedia{
+        margin-top: 50px;
+      }
     }
 
     // updates
@@ -197,25 +225,25 @@ body {
     .Home {
       padding-top: 50px;
       .header {
-        padding:0 10px;
+        padding: 0 10px;
         margin-bottom: 30px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         .title {
           color: gray;
-          margin:0;
+          margin: 0;
         }
         .name {
           font-size: 18px;
           color: $primary-color;
-          margin:0 auto;
+          margin: 0 auto;
         }
         button {
           border-radius: 25px;
           font-size: 14px;
           padding: 5px 10px;
-          min-width:130px;
+          min-width: 130px;
           background-color: $primary-color;
           font-family: "Nunito Sans", sans-serif;
         }

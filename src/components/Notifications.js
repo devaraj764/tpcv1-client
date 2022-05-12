@@ -32,7 +32,7 @@ const Notifications = (props) => {
     if (!token) {
       props.history.push('/login')
     }
-  }, []);
+  }, [props.history]);
 
 
   const notifications = [
