@@ -168,6 +168,15 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile 
                     </Col>
                 </Row>
             </Card>
+            <Card body style={{ padding: '10px', fontSize: '14px' }}>
+                <Form.Label htmlFor="bio" className="label">Bio</Form.Label>
+                <FormControl
+                    as='textarea'
+                    rows='5'
+                    id="bio"
+                    placeholder="Briefly describe yourself..."
+                />
+            </Card>
         </div>
     )
 }

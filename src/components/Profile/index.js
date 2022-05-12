@@ -5,7 +5,8 @@ import ProfileBanner from './ProfileBanner.js';
 import PersonalProfile from './PersonalProfile.js';
 import EducationDetails from './EducationDetails.js';
 import Skills from './Skills.js';
-import SocialMedia from './SocialMedia'
+import SocialMedia from './SocialMedia';
+import Hobbies from './Hobbies.js'
 
 const Profile = (props) => {
     const [Token, setToken] = useState(null);
@@ -78,7 +79,8 @@ const Profile = (props) => {
                             ?
                             <>
                                 <PersonalProfile edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
-                                <SocialMedia edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
+                                <Hobbies/>
+                                <SocialMedia />
                             </>
                             :
                             tab === 1 ?
