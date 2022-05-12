@@ -3,7 +3,7 @@ import { Container, Navbar, Nav, Offcanvas } from 'react-bootstrap';
 import { IoMdNotifications } from 'react-icons/io';
 import { HiUserCircle } from 'react-icons/hi';
 import { MdHome } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import {RiMenu4Line} from 'react-icons/ri'
 
 const NavbarNav = () => {
     return (
@@ -11,7 +11,7 @@ const NavbarNav = () => {
             <Navbar expand='md' className="navbar" variant="dark" fixed="top">
                 <Container>
                     <Navbar.Brand className="title">Dashboard</Navbar.Brand>
-                    <Navbar.Toggle aria-controls='offcanvasNavbar-expand-md' />
+                    <Navbar.Toggle style={{border:'none'}} aria-controls='offcanvasNavbar-expand-md'><RiMenu4Line size={28}/></Navbar.Toggle>
                     <Navbar.Offcanvas
                         id='offcanvasNavbar-expand-md'
                         aria-labelledby='offcanvasNavbarLabel-expand-md'
@@ -21,9 +21,9 @@ const NavbarNav = () => {
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3">
-                                <Nav.Link as={Link} to="/dashboard"><MdHome size={18} />&nbsp;&nbsp;Home</Nav.Link>
-                                <Nav.Link as={Link} to="/dashboard/notifications"><IoMdNotifications size={18}/>&nbsp;&nbsp;Notifications</Nav.Link>
-                                <Nav.Link as={Link} to="/dashboard/profile" style={{paddingRight:'0'}}><HiUserCircle size={18}/>&nbsp;&nbsp;Profile</Nav.Link>
+                                <Nav.Link href="/dashboard" ><MdHome size={18} />&nbsp;&nbsp;Home</Nav.Link>
+                                <Nav.Link href="/dashboard/notifications"><IoMdNotifications size={18}/>&nbsp;&nbsp;Notifications</Nav.Link>
+                                <Nav.Link href="/dashboard/profile" style={{paddingRight:'0'}}><HiUserCircle size={18}/>&nbsp;&nbsp;Profile</Nav.Link>
                             </Nav>
                         </Offcanvas.Body>
                     </Navbar.Offcanvas>
