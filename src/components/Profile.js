@@ -18,7 +18,7 @@ const Profile = (props) => {
         if (!token) {
             props.history.push('/login')
         }
-    }, [Token]);
+    }, [Token, props.history]);
 
     useEffect(() => {
         const url = props.api + 'students/mydata'
@@ -29,7 +29,7 @@ const Profile = (props) => {
         }).then((res) => {
             setprofileData(res.data)
         }).catch((err) => console.log(err))
-    }, []);
+    }, [props.api]);
 
 
     const handleChanges = () => {
@@ -375,7 +375,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
     useEffect(() => {
         setSchoolDetails({ name, cgpa, loc, passout });
         setupdatedProfile({ ...updatedProfile, schooling: schoolDetails });
-    }, [name, loc, cgpa, passout, schoolDetails, setupdatedProfile, updatedProfile]);
+    }, [name, loc, cgpa, passout, updatedProfile]);
 
     return (
         <div className="educational-details">
