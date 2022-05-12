@@ -15,7 +15,11 @@ function Home(props) {
 
     useEffect(() => {
         setPath(props.location.pathname)
-    }, [props.location.pathname]);
+        let token = localStorage.getItem('auth-token');
+        if (token) {
+            props.history.push('/dashboard');
+        }
+    }, [props.location.pathname, props.history]);
 
     const routeToDashBoard = (res) => {
         props.history.push({
@@ -47,6 +51,7 @@ function Login(props) {
     const [idNo, setidNo] = useState('');
     const [password, setpassword] = useState('');
     const [error, seterror] = useState('');
+    const [success, setsuccess] = useState('');
 
     function submit(e) {
         e.preventDefault();
@@ -59,6 +64,7 @@ function Login(props) {
     }
 
     function loginUser() {
+        setsuccess('')
         const url = props.api + 'login'
         axios.post(url, {
             "idNo": idNo,
@@ -71,6 +77,22 @@ function Login(props) {
                 seterror(err.response.data.error)
             }
         })
+    }
+
+    const forgotPassword = () => {
+        if (idNo === '') {
+            seterror('Enter your idNo')
+        } else {
+            axios.post(props.api + 'forgot-password', {
+                "idNo": idNo,
+            }).then(res => {
+                console.log(res.data.message)
+                seterror('')
+                setsuccess(res.data.message)
+            }).catch(err => { 
+                console.log(err)
+            });
+        }
     }
 
     return (
@@ -99,9 +121,10 @@ function Login(props) {
                 />
             </InputGroup>
             <div style={{ maxWidth: '400px', width: '100%' }}>
-                <p style={{ float: 'right', fontSize: '14px' }}>Forgot Password?</p>
+                <p style={{ float: 'right', fontSize: '14px', cursor: 'pointer' }} onClick={forgotPassword}>Forgot Password?</p>
             </div>
-            {error === '' ? null : <p style={{ color: 'red', fontSize: '14px' }}>{error}</p>}
+            {error === '' ? null : <p style={{ color: 'red', fontSize: '14px', marginBottom: '10px' }}>{error}</p>}
+            {success === '' ? null : <p style={{ color: 'green', fontSize: '14px' }}>{success}</p>}
             <Button style={{ maxWidth: '400px', width: '100%', backgroundColor: '#071a84' }} size="md" onClick={(e) => submit(e)}>Login</Button>
             <br />
             <p>Don't have account? <Link style={{ color: '#071a84', cursor: 'pointer', fontSize: '16px', fontWeight: '600' }} to="/register">SignUp</Link></p>

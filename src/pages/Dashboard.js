@@ -22,7 +22,7 @@ const Dashboard = (props) => {
                 <Container>
                     {props.location.pathname === '/dashboard'
                         ?
-                        <Home />
+                        <Home api={props.api}/>
                         :
                         props.location.pathname === '/dashboard/notifications' ?
                             <Notifications history={props.history}/>
