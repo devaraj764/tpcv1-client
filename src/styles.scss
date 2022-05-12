@@ -180,7 +180,7 @@ body {
           }
         }
       }
-      .SocialMedia{
+      .SocialMedia {
         margin-top: 50px;
       }
     }
@@ -224,6 +224,9 @@ body {
 
     .Home {
       padding-top: 50px;
+      a {
+        text-decoration: none;
+      }
       .header {
         padding: 0 10px;
         margin-bottom: 30px;
@@ -247,9 +250,6 @@ body {
           background-color: $primary-color;
           font-family: "Nunito Sans", sans-serif;
         }
-      }
-      ul {
-        padding-left: 10px;
       }
     }
   }

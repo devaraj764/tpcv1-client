@@ -3,17 +3,18 @@ import {
   Route,
   withRouter
 } from 'react-router-dom';
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import Home from './pages/Home.js'
 import Dashboard from './pages/Dashboard';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.scss';
 
 function App() {
-  const api = 'http://localhost:3000/';
+  const api = 'https://tpcapi.herokuapp.com/';
+  // const api = 'http://localhost:3000/'
 
   useEffect(() => {
-    if(window.location.pathname === '/'){
+    if (window.location.pathname === '/') {
       window.location.replace('/login')
     }
   }, []);

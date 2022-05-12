@@ -1,0 +1,175 @@
+import { Row, Col, Card, Form, InputGroup, FormControl } from 'react-bootstrap';
+import { MdPermIdentity, MdEmail, MdBatchPrediction, MdPhone } from 'react-icons/md';
+import { BiRename } from 'react-icons/bi'
+import { FaBirthdayCake, FaBook } from 'react-icons/fa';
+import { SiGoogleclassroom } from 'react-icons/si';
+
+const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
+    return (
+        <div className="personal-details">
+            <p className="heading">Personal Details<br />
+                <span className="message">Update your photo and personal details here</span>
+            </p>
+            <Card body style={{ padding: '10px', fontSize: '14px' }}>
+                <Row>
+                    <Col md={6} sm={12}>
+                        <Form.Label htmlFor="fullname" className="label">Full Name</Form.Label>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Text id="basic-addon1"><BiRename /></InputGroup.Text>
+                            <FormControl
+                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, name: e.target.value }) }}
+                                type='text'
+                                value={profileData.name}
+                                placeholder="Full Name"
+                                aria-label="idnumber"
+                                aria-describedby="basic-addon1"
+                                disabled={!edit}
+                            />
+                        </InputGroup>
+                    </Col>
+                    <Col md={6} sm={12}>
+                        <Form.Label htmlFor="studentid" className="label">Student ID</Form.Label>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Text id="basic-addon1"><MdPermIdentity /></InputGroup.Text>
+                            <FormControl
+                                type='text'
+                                value={profileData.idNo}
+                                placeholder="Id Number"
+                                aria-label="studentid"
+                                aria-describedby="basic-addon1"
+                                disabled
+                            />
+                        </InputGroup>
+                    </Col>
+                    <Col md={6} sm={12}>
+                        <Form.Label htmlFor="email" className="label">Email</Form.Label>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Text id="basic-addon1"><MdEmail /></InputGroup.Text>
+                            <FormControl
+                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, email: e.target.value }) }}
+                                type='text'
+                                value={profileData.email}
+                                placeholder="collage email address"
+                                aria-label="collageemail"
+                                aria-describedby="basic-addon1"
+                                disabled={!edit}
+                            />
+                        </InputGroup>
+                    </Col>
+                    <Col md={6} sm={12}>
+                        <Form.Label htmlFor="classcode" className="label">Section Code</Form.Label>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Text id="basic-addon1"><SiGoogleclassroom /></InputGroup.Text>
+                            <Form.Select
+                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, section: e.target.value }) }}
+                                type='text'
+                                value={profileData.section ? profileData.section : '-- select --'}
+                                placeholder="section code"
+                                aria-label="sectioncode"
+                                aria-describedby="basic-addon1"
+                                disabled={!edit}
+                            >
+                                <option disabled>-- select --</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                                <option value="F">F</option>
+                            </Form.Select>
+                        </InputGroup>
+                    </Col>
+                    <Col md={6} sm={12}>
+                        <Form.Label htmlFor="dob" className="label">Date of Birth</Form.Label>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Text id="basic-addon1"><FaBirthdayCake /></InputGroup.Text>
+                            <FormControl
+                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, dob: e.target.value }) }}
+                                type='date'
+                                value={profileData.dob}
+                                placeholder="Enter your date of birth"
+                                aria-label="dob"
+                                aria-describedby="basic-addon1"
+                                disabled={!edit}
+                            />
+                        </InputGroup>
+                    </Col>
+                    <Col md={6} sm={12}>
+                        <Form.Label htmlFor="batch" className="label">Batch</Form.Label>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Text id="basic-addon1"><MdBatchPrediction /></InputGroup.Text>
+                            <Form.Select
+                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, batch: e.target.value }) }}
+                                type='text'
+                                value={profileData.batch ? profileData.batch : '-- select --'}
+                                placeholder="Enter your bacth"
+                                aria-label="batch"
+                                aria-describedby="basic-addon1"
+                                disabled={!edit}
+                            >
+                                <option disabled>-- select --</option>
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                            </Form.Select>
+                        </InputGroup>
+                    </Col>
+                    <Col md={6} sm={12}>
+                        <Form.Label htmlFor="yearofstudy" className="label">Year of Study</Form.Label>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Text id="basic-addon1"><FaBook /></InputGroup.Text>
+                            <Form.Select
+                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, yearofStudy: e.target.value }) }}
+                                type='text'
+                                value={profileData.yearofStudy ? profileData.yearofStudy : '-- select --'}
+                                placeholder="Enter your year of study"
+                                aria-label="yearofstudy"
+                                aria-describedby="basic-addon1"
+                                disabled={!edit}
+                            >
+                                <option disabled>-- select --</option>
+                                <option value="E3">E3</option>
+                                <option value="E4">E4</option>
+                            </Form.Select>
+                        </InputGroup>
+                    </Col>
+                    <Col md={6} sm={12}>
+                        <Form.Label htmlFor="contactNumber" className="label">Contact Number</Form.Label>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Text id="basic-addon1"><MdPhone /></InputGroup.Text>
+                            <FormControl
+                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, contactNumber: e.target.value }) }}
+                                type='text'
+                                value={profileData.contactNumber}
+                                placeholder="Enter your contact number"
+                                aria-label="contactNumber"
+                                aria-describedby="basic-addon1"
+                                disabled={!edit}
+                            />
+                        </InputGroup>
+                    </Col>
+                    <Col sm={12}>
+                        <Form.Label htmlFor="contactNumber" className="label">Address</Form.Label>
+                        <InputGroup className="mb-3">
+                            <FormControl
+                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, address: e.target.value }) }}
+                                as='textarea'
+                                type='text'
+                                value={profileData.address}
+                                placeholder="Address"
+                                aria-label="Address"
+                                aria-describedby="basic-addon1"
+                                disabled={!edit}
+                            />
+                        </InputGroup>
+                    </Col>
+                </Row>
+            </Card>
+        </div>
+    )
+}
+
+export default PersonalProfile;
