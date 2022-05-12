@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.scss';
 
 function App() {
-  const api = 'http://localhost:3000/';
+  const api = 'https://tpcv1.herokuapp.com/';
 
   useEffect(() => {
     if(window.location.pathname === '/'){

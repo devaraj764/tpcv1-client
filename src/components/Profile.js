@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Card, Form, InputGroup, FormControl, Accordion, Image, Button } from 'react-bootstrap';
-import { MdPermIdentity, MdEmail, MdBatchPrediction, MdPhone } from 'react-icons/md';
+import { MdPermIdentity, MdEmail, MdBatchPrediction, MdPhone, MdOutlineCancel } from 'react-icons/md';
 import { BiRename } from 'react-icons/bi'
-import { FaBirthdayCake, FaBook } from 'react-icons/fa';
+import { SiLeetcode } from 'react-icons/si'
+import { BsLink } from 'react-icons/bs';
+import { FaBirthdayCake, FaBook, FaGithub, FaLinkedin, FaHackerrank, FaYoutube, } from 'react-icons/fa';
 import { SiGoogleclassroom } from 'react-icons/si';
 import axios from 'axios';
 
@@ -60,7 +62,7 @@ const Profile = (props) => {
                     <PersonalProfile edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
                     <Skills edit={edit} />
                     <EducationDetails edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
-                    <SocialMedia />
+                    <SocialMedia profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} edit={edit} />
                 </Col>
             </Row>
         </div>
@@ -380,23 +382,45 @@ const Skills = ({ edit }) => {
 }
 
 const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
+    // Schooling
     const [schoolDetails, setSchoolDetails] = useState(null);
     const [name, setname] = useState('');
     const [loc, setloc] = useState('');
     const [cgpa, setcgpa] = useState('');
     const [passout, setpassout] = useState('');
 
+    // Pre-Graduation
+    const [preGraduationDetails, setpreGraduationDetails] = useState(null);
+    const [clgName, setclgName] = useState('');
+    const [clgLoc, setclgLoc] = useState('');
+    const [clgCpgpa, setclgCpgpa] = useState('');
+    const [clgPassout, setclgPassout] = useState('');
+
     useEffect(() => {
         setname(profileData.schooling ? profileData.schooling.name : '');
         setloc(profileData.schooling ? profileData.schooling.loc : '');
         setcgpa(profileData.schooling ? profileData.schooling.cgpa : '');
         setpassout(profileData.schooling ? profileData.schooling.passout : '');
+        setclgName(profileData.preGraduation ? profileData.preGraduation.name : '');
+        setclgLoc(profileData.preGraduation ? profileData.preGraduation.loc : '');
+        setclgCpgpa(profileData.preGraduation ? profileData.preGraduation.cgpa : '');
+        setclgPassout(profileData.preGraduation ? profileData.preGraduation.passout : '');
     }, [profileData]);
 
     useEffect(() => {
         setSchoolDetails({ name, cgpa, loc, passout });
         setupdatedProfile({ ...updatedProfile, schooling: schoolDetails });
     }, [name, loc, cgpa, passout, updatedProfile]);
+
+    useEffect(() => {
+        setpreGraduationDetails({
+            "name": clgName,
+            "loc": clgLoc,
+            "cgpa": clgCpgpa,
+            "passout": clgPassout
+        });
+        setupdatedProfile({ ...updatedProfile, preGraduation: preGraduationDetails });
+    }, [clgName, clgLoc, clgCpgpa, clgPassout, updatedProfile]);
 
     return (
         <div className="educational-details">
@@ -474,7 +498,8 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1">at</InputGroup.Text>
                             <FormControl
-                                value=""
+                                value={clgName}
+                                onChange={(e) => setclgName(e.target.value)}
                                 placeholder="University Name"
                                 aria-label="University name"
                                 aria-describedby="basic-addon1"
@@ -485,7 +510,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                     <Col md={6} sm={12}>
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1">Passed Out</InputGroup.Text>
-                            <Form.Select value="Year" aria-label="Default select example" disabled={!edit}>
+                            <Form.Select aria-label="Default select example" disabled={!edit} value={clgPassout} onChange={(e) => setclgPassout(e.target.value)}>
                                 <option disabled>Year</option>
                                 <option value="2016">2016</option>
                                 <option value="2017">2017</option>
@@ -500,7 +525,8 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1">CGPA</InputGroup.Text>
                             <FormControl
-                                value=""
+                                value={clgCpgpa}
+                                onChange={(e) => setclgCpgpa(e.target.value)}
                                 placeholder="Overall CGPA"
                                 aria-label="SchoolName"
                                 aria-describedby="basic-addon1"
@@ -512,7 +538,8 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                         <InputGroup className="mb-3">
                             <FormControl
                                 as='textarea'
-                                value=""
+                                value={clgLoc}
+                                onChange={(e) => setclgLoc(e.target.value)}
                                 placeholder="Address of University"
                                 aria-label="address"
                                 aria-describedby="basic-addon1"
@@ -527,8 +554,27 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
 }
 
 
-const SocialMedia = () => {
+const SocialMedia = ({ profileData, edit, updatedProfile, setupdatedProfile }) => {
     const [addNew, setAddNew] = useState(false)
+    const [newLinks, setnewLinks] = useState([]);
+    const [link, setlink] = useState('');
+
+    useEffect(() => {
+        setnewLinks(profileData.links ? profileData.links : [])
+    }, [profileData]);
+
+    const addLink = () => {
+        setnewLinks([...newLinks, link]);
+        setupdatedProfile({ ...updatedProfile, links: [...newLinks, link] });
+        setAddNew(false);
+        setlink('')
+    }
+
+    const removeLink = (link) => {
+        setnewLinks(newLinks.filter(l => l !== link))
+        setupdatedProfile({ ...updatedProfile, links: newLinks.filter(l => l !== link) });
+    }
+
     return (
         <div className="SocialMedia">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
@@ -538,31 +584,42 @@ const SocialMedia = () => {
                 {addNew ?
                     <Button variant="light" onClick={() => setAddNew(false)} style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px' }} size='sm'>cancel</Button>
 
-                    :
-                    <Button onClick={() => setAddNew(true)} style={{ backgroundColor: '#071a84', fontSize: '14px !important', minWidth: '100px', borderRadius: '25px' }} size='sm'>+ Add New</Button>
-                }
+                    : edit ?
+                        <Button onClick={() => setAddNew(true)} style={{ backgroundColor: '#071a84', fontSize: '14px !important', minWidth: '100px', borderRadius: '25px' }} size='sm'>+ Add New</Button>
+                        : null}
             </div>
             <Card body style={{ padding: '10px' }}>
                 <Row>
-                    {addNew ? null :
+                    {addNew ? null : newLinks?.length === 0 ?
                         <p style={{ textAlign: 'center', width: '100%', color: 'gray' }}> No Links Available!<br /> Try to add new links...</p>
+                        :
+                        newLinks.map((link, index) => {
+                            return (
+                                <Col key={index} md={6} sm={12}>
+                                    <Card body className='linkField'>
+                                        <i> {link.includes('github') ? <FaGithub size={20} /> : link.includes('linkedin') ? <FaLinkedin size={20} /> : link.includes('hackerrank') ? <FaHackerrank size={20} /> : link.includes('leetcode') ? <SiLeetcode size={20} /> : link.includes('youtube') ? <FaYoutube size={20} /> : <BsLink size={20} />}</i>
+                                        <a href={link} target="_blank">{link}</a>
+                                        {edit ? <MdOutlineCancel size={16} style={{ color: 'tomato', float: 'right', cursor: 'pointer' }} onClick={() => removeLink(link)} /> : null}
+                                    </Card>
+                                </Col>
+                            );
+                        })
                     }
-                    {/* for every links */}
-                    <Col md={6} sm={12}>
-
-                    </Col>
                     {addNew ?
                         <Col lg={12}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
                                 <Form.Control
+                                    onChange={(e) => setlink(e.target.value)}
+                                    value={link}
                                     type="text"
                                     placeholder="Place your link here.."
                                 />
 
-                                <Button style={{ backgroundColor: '#071a84', fontSize: '14px !important', minWidth: '100px' }}>Add</Button>
+                                <Button style={{ backgroundColor: '#071a84', fontSize: '14px !important', minWidth: '100px' }} onClick={() => addLink()}>Add</Button>
                             </div>
                         </Col>
-                        : null}
+                        : null
+                    }
                 </Row>
 
             </Card>
