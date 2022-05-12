@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Col, Row, Image, InputGroup, FormControl, Button, Form } from 'react-bootstrap';
+import { Col, Row, Image, InputGroup, FormControl, Spinner, Button, Form } from 'react-bootstrap';
 import CareerImg from '../assets/career.svg';
 import TPCLogo from '../assets/tpc-logo.svg';
 import { MdPermIdentity, MdEmail, MdPassword, MdBatchPrediction, MdPhone } from 'react-icons/md';
@@ -12,7 +12,8 @@ import axios from 'axios';
 function Home(props) {
 
     const [path, setPath] = useState(props.location.pathname);
-
+    const [loader, setLoader] = useState(false);
+    
     useEffect(() => {
         setPath(props.location.pathname)
         let token = localStorage.getItem('auth-token');
@@ -39,7 +40,7 @@ function Home(props) {
                 </Col>
                 <Col className="right-side" sm={12} lg={6} md={6}>
                     <Image src={TPCLogo} fluid={true} style={{ maxHeight: '300px', marginBottom: '30px' }} />
-                    {path === '/login' ? <Login callBack={routeToDashBoard} api={props.api} /> : <Register callBack={routeToDashBoard} api={props.api} />}
+                    {path === '/login' ? <Login loader={loader} setLoader={setLoader} callBack={routeToDashBoard} api={props.api} /> : <Register loader={loader} setLoader={setLoader} callBack={routeToDashBoard} api={props.api} />}
 
                 </Col>
             </Row>
@@ -55,6 +56,7 @@ function Login(props) {
 
     function submit(e) {
         e.preventDefault();
+        console.log(props.loader)
         if (idNo === '' || password === '') {
             seterror('Fill all empty fields')
         } else {
@@ -64,17 +66,19 @@ function Login(props) {
     }
 
     function loginUser() {
+        props.setLoader(true);
         setsuccess('')
         const url = props.api + 'login'
         axios.post(url, {
             "idNo": idNo,
             "password": password,
         }).then(res => {
-            console.log(res.data)
             props.callBack(res);
+            props.setLoader(false);
         }).catch(err => {
             if (err) {
-                seterror(err.response.data.error)
+                seterror(err.response.data.error);
+                props.setLoader(false);
             }
         })
     }
@@ -125,7 +129,12 @@ function Login(props) {
             </div>
             {error === '' ? null : <p style={{ color: 'red', fontSize: '14px', marginBottom: '10px' }}>{error}</p>}
             {success === '' ? null : <p style={{ color: 'green', fontSize: '14px' }}>{success}</p>}
-            <Button style={{ maxWidth: '400px', width: '100%', backgroundColor: '#071a84' }} size="md" onClick={(e) => submit(e)}>Login</Button>
+            <Button style={{ maxWidth: '400px', width: '100%', backgroundColor: '#071a84' }} size="md" onClick={(e) => submit(e)}>
+                {
+                    props.loader ?
+                        <Spinner animation="border" size='sm' /> : "Login"
+                }
+            </Button>
             <br />
             <p>Don't have account? <Link style={{ color: '#071a84', cursor: 'pointer', fontSize: '16px', fontWeight: '600' }} to="/register">SignUp</Link></p>
         </>
@@ -152,7 +161,7 @@ function Register(props) {
     }
 
     function submit(e) {
-        e.preventDefault()
+        e.preventDefault();
         if (name === '' || id === '' || email === '' || section === '' || dob === '' || batch === '' || yearofStudy === '' || address === '' || contactNum === '' || password === '' || confirmPassword === '') {
             seterror('Fill all empty fields!!!')
         } else if (name.length < 3) {
@@ -169,8 +178,9 @@ function Register(props) {
             registerUser();
         }
     }
-
+    
     function registerUser() {
+        props.setLoader(true);
         const url = props.api + 'register'
         axios.post(url, {
             "name": name,
@@ -182,120 +192,15 @@ function Register(props) {
             "yearofStudy": yearofStudy,
             "address": address,
             "contactNumber": contactNum,
-            "password": password,
-            "hardSkills": [
-                {
-                    "title": "programmingLanguages",
-                    "data": [
-                        {
-                            "name": "java",
-                            "level": "beginner"
-                        },
-                        {
-                            "name": "python",
-                            "level": "beginner",
-                        },
-                        {
-                            "name": "c++",
-                            "level": "beginner",
-                        },
-                        {
-                            "name": "c",
-                            "level": "beginner",
-                        }
-                    ]
-                },
-                {
-                    "title": "technologies",
-                    "data": [
-                        {
-                            "name": "webDevelopment",
-                            "tools": [],
-                            "level": "beginner"
-                        },
-                        {
-                            "name": "mobileDevelopment",
-                            "tools": [],
-                            "level": "beginner"
-                        },
-                        {
-                            "name": "dataScience",
-                            "tools": [],
-                            "level": "beginner"
-                        }
-                    ]
-                },
-                {
-                    "title": "subjects",
-                    "data": [
-                        {
-                            "name": "Operating System",
-                            "description": ""
-                        },
-                        {
-                            "name": "Design and analysis of algorithms",
-                            "description": "",
-                        },
-                        {
-                            "name": "Compiler Design",
-                            "description": "",
-                        },
-                        {
-                            "name": "Data Structures",
-                            "description": " "
-                        }
-                    ]
-                }
-            ],
-            "softSkills": [
-                {
-                    "name": "decisionMaking",
-                    "data": {
-                        "level": "beginner"
-                    }
-                },
-                {
-                    "name": "problemSolving",
-                    "data": {
-                        "level": "beginner"
-                    }
-                },
-                {
-                    "name": "leadershipSkills",
-                    "data": {
-                        "level": "beginner"
-                    }
-                },
-                {
-                    "name": "languages",
-                    "data": [
-                        {
-                            "name": "english",
-                            "reading": "beginner",
-                            "writing": "beginner",
-                            "speaking": "beginner"
-                        },
-                        {
-                            "name": "hindi",
-                            "reading": "beginner",
-                            "writing": "beginner",
-                            "speaking": "beginner"
-                        },
-                        {
-                            "name": "telugu",
-                            "reading": "beginner",
-                            "writing": "beginner",
-                            "speaking": "beginner"
-                        }
-                    ]
-                }
-            ]
+            "password": password
         }).then(res => {
             console.log(res.data);
             props.callBack(res)
+            props.setLoader(false);
         }).catch(err => {
             if (err) {
                 seterror(err.response.data.error)
+                props.setLoader(false);
             }
         });
     }
@@ -452,7 +357,7 @@ function Register(props) {
             </Row>
             <br />
             {error === '' ? null : <p style={{ color: 'red', fontSize: '14px' }}>{error}</p>}
-            <Button style={{ maxWidth: '400px', width: '100%', backgroundColor: '#071a84' }} size="md" onClick={(e) => submit(e)}>Proceed</Button>
+            <Button type="submit" style={{ maxWidth: '400px', width: '100%', backgroundColor: '#071a84' }} size="md" onClick={(e) => submit(e)}>{props.loader ? <Spinner animation="border" /> : "Proceed"}</Button>
             <br />
             <p>Already had account? <Link style={{ color: '#071a84', cursor: 'pointer', fontSize: '16px', fontWeight: '600' }} to="/login">SignIn</Link></p>
         </>
