@@ -8,6 +8,8 @@ import { FaBirthdayCake, FaBook } from 'react-icons/fa';
 import { SiGoogleclassroom } from 'react-icons/si';
 import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
+import hardSkills from '../defaults/hardskills.json';
+import softSkills from '../defaults/softskills.json';
 
 function Home(props) {
 
@@ -192,7 +194,9 @@ function Register(props) {
             "yearofStudy": yearofStudy,
             "address": address,
             "contactNumber": contactNum,
-            "password": password
+            "password": password,
+            "hardSkills": hardSkills,
+            "softSkills": softSkills,
         }).then(res => {
             console.log(res.data);
             props.callBack(res)

@@ -1,24 +1,46 @@
-import React, {useState, useEffect} from 'react'
-import { Row, Col, Card, Form, InputGroup, FormControl} from 'react-bootstrap';
+import React, { useState, useEffect } from 'react'
+import { Row, Col, Card, Form, InputGroup, FormControl } from 'react-bootstrap';
 
 const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
+    // Schooling Details
     const [schoolDetails, setSchoolDetails] = useState(null);
     const [name, setname] = useState('');
     const [loc, setloc] = useState('');
     const [cgpa, setcgpa] = useState('');
     const [passout, setpassout] = useState('');
 
+    // preGraduation Details
+    const [preGraduationDetails, setpreGraduationDetails] = useState(null);
+    const [clgName, setclgName] = useState('');
+    const [clgLoc, setclgLoc] = useState('');
+    const [clgCpga, setclgCpga] = useState('');
+    const [clgPassout, setclgPassout] = useState('');
+
     useEffect(() => {
         setname(profileData.schooling ? profileData.schooling.name : '');
         setloc(profileData.schooling ? profileData.schooling.loc : '');
         setcgpa(profileData.schooling ? profileData.schooling.cgpa : '');
         setpassout(profileData.schooling ? profileData.schooling.passout : '');
+        setclgName(profileData.preGraduation ? profileData.preGraduation.name : '');
+        setclgLoc(profileData.preGraduation ? profileData.preGraduation.loc : '');
+        setclgCpga(profileData.preGraduation ? profileData.preGraduation.cgpa : '');
+        setclgPassout(profileData.preGraduation ? profileData.preGraduation.passout : '');
     }, [profileData]);
 
     useEffect(() => {
         setSchoolDetails({ name, cgpa, loc, passout });
         setupdatedProfile({ ...updatedProfile, schooling: schoolDetails });
     }, [name, loc, cgpa, passout, schoolDetails, setupdatedProfile, updatedProfile]);
+
+    useEffect(() => {
+        setpreGraduationDetails({
+            name: clgName,
+            cgpa: clgCpga,
+            loc: clgLoc,
+            passout: clgPassout
+        });
+        setupdatedProfile({ ...updatedProfile, preGraduation: preGraduationDetails });
+    }, [clgName, clgLoc, clgCpga, clgPassout, setupdatedProfile, updatedProfile]);
 
     return (
         <div className="educational-details">
@@ -96,7 +118,8 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1">at</InputGroup.Text>
                             <FormControl
-                                value=""
+                                value={clgName}
+                                onChange={(e) => setclgName(e.target.value)}
                                 placeholder="University Name"
                                 aria-label="University name"
                                 aria-describedby="basic-addon1"
@@ -107,7 +130,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                     <Col md={6} sm={12}>
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1">Passed Out</InputGroup.Text>
-                            <Form.Select value="Year" aria-label="Default select example" disabled={!edit}>
+                            <Form.Select aria-label="Default select example" disabled={!edit} value={clgPassout} onChange={(e) => setclgPassout(e.target.value)}>
                                 <option disabled>Year</option>
                                 <option value="2016">2016</option>
                                 <option value="2017">2017</option>
@@ -122,7 +145,8 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1">CGPA</InputGroup.Text>
                             <FormControl
-                                value=""
+                                value={clgCpga}
+                                onChange={(e) => setclgCpga(e.target.value)}
                                 placeholder="Overall CGPA"
                                 aria-label="SchoolName"
                                 aria-describedby="basic-addon1"
@@ -134,7 +158,8 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                         <InputGroup className="mb-3">
                             <FormControl
                                 as='textarea'
-                                value=""
+                                value={clgLoc}
+                                onChange={(e) => setclgLoc(e.target.value)}
                                 placeholder="Address of University"
                                 aria-label="address"
                                 aria-describedby="basic-addon1"
