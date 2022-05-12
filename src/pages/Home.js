@@ -89,7 +89,7 @@ function Login(props) {
                 console.log(res.data.message)
                 seterror('')
                 setsuccess(res.data.message)
-            }).catch(err => { 
+            }).catch(err => {
                 console.log(err)
             });
         }
@@ -183,6 +183,113 @@ function Register(props) {
             "address": address,
             "contactNumber": contactNum,
             "password": password,
+            "hardSkills": [
+                {
+                    "title": "programmingLanguages",
+                    "data": [
+                        {
+                            "name": "java",
+                            "level": "beginner"
+                        },
+                        {
+                            "name": "python",
+                            "level": "beginner",
+                        },
+                        {
+                            "name": "c++",
+                            "level": "beginner",
+                        },
+                        {
+                            "name": "c",
+                            "level": "beginner",
+                        }
+                    ]
+                },
+                {
+                    "title": "technologies",
+                    "data": [
+                        {
+                            "name": "webDevelopment",
+                            "tools": [],
+                            "level": "beginner"
+                        },
+                        {
+                            "name": "mobileDevelopment",
+                            "tools": [],
+                            "level": "beginner"
+                        },
+                        {
+                            "name": "dataScience",
+                            "tools": [],
+                            "level": "beginner"
+                        }
+                    ]
+                },
+                {
+                    "title": "subjects",
+                    "data": [
+                        {
+                            "name": "Operating System",
+                            "description": ""
+                        },
+                        {
+                            "name": "Design and analysis of algorithms",
+                            "description": "",
+                        },
+                        {
+                            "name": "Compiler Design",
+                            "description": "",
+                        },
+                        {
+                            "name": "Data Structures",
+                            "description": " "
+                        }
+                    ]
+                }
+            ],
+            "softSkills": [
+                {
+                    "name": "decisionMaking",
+                    "data": {
+                        "level": "beginner"
+                    }
+                },
+                {
+                    "name": "problemSolving",
+                    "data": {
+                        "level": "beginner"
+                    }
+                },
+                {
+                    "name": "leadershipSkills",
+                    "data": {
+                        "level": "beginner"
+                    }
+                },
+                {
+                    "name": "languages",
+                    "data": [
+                        {
+                            "name": "english",
+                            "reading": "beginner",
+                            "writing": "beginner",
+                            "speaking": "beginner"
+                        },
+                        {
+                            "name": "hindi",
+                            "reading": "beginner",
+                            "writing": "beginner",
+                            "speaking": "beginner"
+                        },
+                        {
+                            "name": "telugu",
+                            "reading": "beginner",
+                            "writing": "beginner",
+                            "speaking": "beginner"
+                        }
+                    ]
+                }
+            ]
         }).then(res => {
             console.log(res.data);
             props.callBack(res)

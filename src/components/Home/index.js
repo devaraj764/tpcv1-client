@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Row, Col, Card, ListGroup, Button, Form } from 'react-bootstrap';
 
 const Home = () => {
-
-  const [show, setShow] = useState(false);
-
   return (
     <div className="Home">
       <Row className="justify-content-md-center">
@@ -35,7 +32,7 @@ const Home = () => {
               placeholder="Enter your valuable suggestions to improve our site..."
               style={{ fontSize: '14px' }}
             />
-            <Button variant="primary" size="sm" style={{ fontSize: '14px', borderRadius: '25px', padding: '5px 20px', marginTop: '10px', float: 'right' }} onClick={() => setShow(false)}>
+            <Button variant="primary" size="sm" style={{ fontSize: '14px', borderRadius: '25px', padding: '5px 20px', marginTop: '10px', float: 'right' }}>
               Submit
             </Button>
           </Card>
