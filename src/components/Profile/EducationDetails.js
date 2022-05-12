@@ -40,7 +40,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
             passout: clgPassout
         });
         setupdatedProfile({ ...updatedProfile, preGraduation: preGraduationDetails });
-    }, [clgName, clgLoc, clgCpga, clgPassout, setupdatedProfile, updatedProfile]);
+    }, [clgName, clgLoc, clgCpga, clgPassout, setupdatedProfile, updatedProfile, preGraduationDetails]);
 
     return (
         <div className="educational-details">

@@ -1,63 +1,36 @@
 [
     {
-        "title": "programmingLanguages",
-        "data": [
-            {
-                "name": "java",
-                "level": "beginner"
-            },
-            {
-                "name": "python",
-                "level": "beginner"
-            },
-            {
-                "name": "c++",
-                "level": "beginner"
-            },
-            {
-                "name": "c",
-                "level": "beginner"
-            }
-        ]
+        "title": "Problem Solving Skills",
+        "data": {
+            "level": "beginner"
+        }
     },
     {
-        "title": "technologies",
-        "data": [
-            {
-                "name": "webDevelopment",
-                "tools": [],
-                "level": "beginner"
-            },
-            {
-                "name": "mobileDevelopment",
-                "tools": [],
-                "level": "beginner"
-            },
-            {
-                "name": "dataScience",
-                "tools": [],
-                "level": "beginner"
-            }
-        ]
+        "title": "Decision Making Skills",
+        "data": {
+            "level": "beginner"
+        }
     },
     {
-        "title": "subjects",
+        "title": "Leadership Skills",
+        "data": {
+            "level": "beginner"
+        }
+    },
+    {
+        "title": "Language Proficiency",
         "data": [
             {
-                "name": "Operating System",
-                "description": ""
+                "name": "English",
+                "level": "beginner"
             },
             {
-                "name": "Design and analysis of algorithms",
-                "description": ""
+                "name": "Hindi",
+                "level": "beginner"
             },
             {
-                "name": "Compiler Design",
-                "description": ""
-            },
-            {
-                "name": "Data Structures",
-                "description": " "
+                "name": "Telugu",
+                "level": "beginner"
             }
         ]
     }

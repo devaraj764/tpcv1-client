@@ -50,7 +50,7 @@ const SocialMedia = ({ edit, profileData, updatedProfile, setupdatedProfile }) =
                                 <Col key={index} md={6} sm={12}>
                                     <Card body className='linkField'>
                                         <i> {link.includes('github') ? <FaGithub size={20} /> : link.includes('linkedin') ? <FaLinkedin size={20} /> : link.includes('hackerrank') ? <FaHackerrank size={20} /> : link.includes('leetcode') ? <SiLeetcode size={20} /> : link.includes('youtube') ? <FaYoutube size={20} /> : <BsLink size={20} />}</i>
-                                        <a href={link} target="_blank">{link}</a>
+                                        <a href={link} target="_blank" rel="noreferrer">{link}</a>
                                         {edit ? <MdOutlineCancel size={16} style={{ color: 'tomato', float: 'right', cursor: 'pointer' }} onClick={() => removeLink(link)} /> : null}
                                     </Card>
                                 </Col>
