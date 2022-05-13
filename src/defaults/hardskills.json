@@ -1,47 +1,47 @@
 [
     {
-        "title": "programmingLanguages",
+        "title": "Programming Languages",
         "data": [
             {
-                "name": "java",
+                "name": "Java",
                 "level": "beginner"
             },
             {
-                "name": "python",
+                "name": "Python",
                 "level": "beginner"
             },
             {
-                "name": "c++",
+                "name": "C++",
                 "level": "beginner"
             },
             {
-                "name": "c",
+                "name": "C",
                 "level": "beginner"
             }
         ]
     },
     {
-        "title": "technologies",
+        "title": "Technologies",
         "data": [
             {
-                "name": "webDevelopment",
+                "name": "Web Development",
                 "tools": [],
                 "level": "beginner"
             },
             {
-                "name": "mobileDevelopment",
+                "name": "Mobile App Development",
                 "tools": [],
                 "level": "beginner"
             },
             {
-                "name": "dataScience",
+                "name": "Data Science",
                 "tools": [],
                 "level": "beginner"
             }
         ]
     },
     {
-        "title": "subjects",
+        "title": "Subjects",
         "data": [
             {
                 "name": "Operating System",

@@ -79,8 +79,8 @@ const Profile = (props) => {
                             ?
                             <>
                                 <PersonalProfile edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
-                                <Hobbies/>
-                                {/* <SocialMedia /> */}
+                                <Hobbies edit={edit} />
+                                <SocialMedia edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
                             </>
                             :
                             tab === 1 ?
