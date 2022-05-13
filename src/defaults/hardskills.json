@@ -25,17 +25,17 @@
         "data": [
             {
                 "name": "Web Development",
-                "tools": [],
+                "tools": "",
                 "level": "beginner"
             },
             {
                 "name": "Mobile App Development",
-                "tools": [],
+                "tools": "",
                 "level": "beginner"
             },
             {
                 "name": "Data Science",
-                "tools": [],
+                "tools": "",
                 "level": "beginner"
             }
         ]
