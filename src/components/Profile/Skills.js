@@ -91,16 +91,26 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
                                 <Accordion.Header>{skill.title}</Accordion.Header>
                                 <Accordion.Body>
                                     {skill?.data?.map((item, index) => {
-                                        return <><div className="skill" key={index}>
-                                            <p>{item.name}</p>
-                                            {item.description !== undefined ? <span>{item.description}</span> : <Form.Select onChange={(e) => changeSkillLevel(e.target.value, item.name, skill.title)} className="skillVal" size='sm' value={item.level} aria-label="Default select example" disabled={!edit}>
-                                                <option value="Basic">Beginner</option>
-                                                <option value="Moderate">Moderate</option>
-                                                <option value="Advanced">Advanced</option>
-                                            </Form.Select>}
-                                        </div>
-                                            {item.tools !== undefined ? item.tools === '' ? null : <div style={{ display: 'block', alignItems: 'center', textAlign: 'center' }}>Specialized in {item.tools}</div> : null}
-                                        </>
+                                        return (<>
+                                            <div key={index} style={{ marginBottom: "30px" }}>
+                                                <div className="skill">
+                                                    <p>{item.name}</p>
+                                                    {item.description !== undefined ? <span>{item.description}</span> :
+                                                        <Form.Select onChange={(e) => changeSkillLevel(e.target.value, item.name, skill.title)} className="skillVal" size='sm' value={item.level} aria-label="Default select example" disabled={!edit}>
+                                                            <option value="Basic">Beginner</option>
+                                                            <option value="Moderate">Moderate</option>
+                                                            <option value="Advanced">Advanced</option>
+                                                        </Form.Select>}
+                                                </div>
+                                                <Form.Control
+                                                    size={'sm'}
+                                                    type='text'
+                                                    defaultValue={item.tools === undefined || item.tools === '' ? '' : item.tools}
+                                                    placeholder="Frameworks you are specialized in.."
+                                                    disabled={!edit}
+                                                />
+                                            </div>
+                                        </>)
                                     })}
                                     {edit ? addNew ? <Button variant="light" onClick={() => setaddNew(false)} style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px', marginBottom: '20px' }} size='sm'>cancel</Button> : <Badge pill style={{ width: '80px', padding: '6px', fontSize: '14px', cursor: 'pointer' }} onClick={() => setaddNew(true)}>+ Add</Badge> : null}
                                     {addNew ? <Col lg={12}>
