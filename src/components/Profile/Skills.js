@@ -132,7 +132,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
                                             /> : null}
                                             <Form.Select value={newskill.level} onChange={(e) => setnewskill({ ...newskill, level: e.target.value })} aria-label="Default select example">
                                                 <option value="Basic">Beginner</option>
-                                                <option value="Medium">Moderate</option>
+                                                <option value="Moderate">Moderate</option>
                                                 <option value="Advanced">Advanced</option>
                                             </Form.Select>
                                             <Button style={{ backgroundColor: '#071a84', fontSize: '14px !important', minWidth: '100px' }} onClick={() => addSkill(skill.title)}>Add</Button>
