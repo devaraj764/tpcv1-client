@@ -159,8 +159,8 @@ body {
           margin: 10px;
         }
       }
-      .personal-details {
-        margin-top: 30px;
+      .personal-details, .Projects {
+        margin-top: 50px;
         .label {
           color: $primary-color;
         }
@@ -257,6 +257,16 @@ body {
           font-family: "Nunito Sans", sans-serif;
         }
       }
+    }
+
+    .Internships{
+      margin-top:50px;
+    }
+    .Certifications{
+      margin-top:50px;
+    }
+    .Achievements{
+      margin-top:50px;
     }
   }
 }

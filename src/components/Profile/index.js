@@ -6,7 +6,11 @@ import PersonalProfile from './PersonalProfile.js';
 import EducationDetails from './EducationDetails.js';
 import Skills from './Skills.js';
 import SocialMedia from './SocialMedia';
-import Hobbies from './Hobbies.js'
+import Hobbies from './Hobbies.js';
+import Projects from './Projects.js';
+import Internships from './Internships.js';
+import Certifications from './Certifications.js';
+import Achievements from './Achievements.js';
 
 const Profile = (props) => {
     const [Token, setToken] = useState(null);
@@ -95,7 +99,10 @@ const Profile = (props) => {
                                     :
                                     tab === 3 ?
                                         <>
-                                            <p style={{ textAlign: 'center', marginTop: '10px' }}>Achievements</p>
+                                            <Projects />
+                                            <Internships />
+                                            <Certifications />
+                                            <Achievements />
                                         </> : null
 
                     }
