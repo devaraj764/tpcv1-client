@@ -1,5 +1,5 @@
 import React from 'react'
-import {  Card, Form, Accordion, Button } from 'react-bootstrap';
+import { Card, Form, Accordion, Button } from 'react-bootstrap';
 import { FiLink } from 'react-icons/fi'
 
 const Projects = (props) => {
@@ -67,15 +67,17 @@ const Projects = (props) => {
                         </Accordion>
                 }
                 {/* </Col> */}
-                <br />
                 {
-                    addNew ?
-                        <div>
-                            <Button size="sm" style={{ float: 'right', width: '100px', borderRadius: '25px' }} onClick={() => setaddNew(false)}>push</Button>
-                            <Button variant="light" size="sm" style={{ float: 'right', width: '100px', borderRadius: '25px' }} onClick={() => setaddNew(false)}>cancel</Button>
-                        </div>
-                        :
-                        <Button size="sm" style={{ float: 'right', width: '100px', borderRadius: '25px' }} onClick={() => setaddNew(true)}>+ Add</Button>
+                    props.edit ?
+                        addNew ?
+                            <div style={{ marginTop: '20px' }}>
+                                <Button size="sm" style={{ float: 'right', width: '100px', borderRadius: '25px' }} onClick={() => setaddNew(false)}>push</Button>
+                                <Button variant="light" size="sm" style={{ float: 'right', width: '100px', borderRadius: '25px',marginRight:'10px' }} onClick={() => setaddNew(false)}>cancel</Button>
+                            </div>
+                            :
+                            <Button size="sm" style={{ float: 'right', width: '100px', borderRadius: '25px', marginTop: '20px' }} onClick={() => setaddNew(true)}>+ Add</Button>
+
+                        : null
                 }
             </Card>
         </div>
