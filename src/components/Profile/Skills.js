@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Card, Accordion, Form,  Col, Button } from 'react-bootstrap';
+import { Row, Card, Accordion, Form, Col, Button } from 'react-bootstrap';
 
 const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
     const [addNew, setaddNew] = useState(false);
     const [hardSkills, sethardSkills] = useState([]);
+    const [softSkills, setsoftSkills] = useState([]);
     const [newskill, setnewskill] = useState({
         name: '',
         level: 'beginner'
@@ -13,12 +14,21 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
         level: 'beginner',
         tools: ""
     });
+    const [newSubject, setnewSubject] = useState({
+        name: '',
+        description: '',
+    });
+    const [newLanguage, setnewLanguage] = useState({
+        name: '',
+        level: 'beginner',
+    });
 
     useEffect(() => {
         sethardSkills(profileData.hardSkills ? profileData.hardSkills : []);
+        setsoftSkills(profileData.softSkills ? profileData.softSkills : []);
     }, [profileData]);
 
-    const addSkill = (title) => {
+    const addHardSkill = (title) => {
         if (title === 'Programming Languages') {
             let newhardSkills = hardSkills;
             newhardSkills[0] = {
@@ -43,13 +53,25 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
             }
             sethardSkills(newhardSkills);
             setupdatedProfie({ ...updatedProfile, hardSkills: newhardSkills });
-            console.log(updatedProfile)
+            setaddNew(false)
+        }
+        if (title === 'Subjects') {
+            let newhardSkills = hardSkills;
+            newhardSkills[2] = {
+                "title": "Subjects",
+                "data": [
+                    ...newhardSkills[2].data,
+                    newSubject
+                ]
+            }
+            sethardSkills(newhardSkills);
+            setupdatedProfie({ ...updatedProfile, hardSkills: newhardSkills });
+            setaddNew(false)
         }
     }
 
     const changeSkillLevel = (level, name, title) => {
         if (title === 'Programming Languages') {
-            console.log(level);
             let newhardSkills = hardSkills;
             const index = newhardSkills[0].data.findIndex(x => x.name === name);
             newhardSkills[0].data[index] = {
@@ -58,22 +80,67 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
             }
             sethardSkills(newhardSkills);
             setupdatedProfie({ ...updatedProfile, hardSkills: newhardSkills });
-            console.log(updatedProfile)
-            setaddNew(false)
         }
         if (title === 'Technologies') {
-            console.log(level);
             let newhardSkills = hardSkills;
             const index = newhardSkills[1].data.findIndex(x => x.name === name);
             newhardSkills[1].data[index] = {
-                "name": name,
+                ...newhardSkills[1].data[index],
                 "level": level
             }
             sethardSkills(newhardSkills);
             setupdatedProfie({ ...updatedProfile, hardSkills: newhardSkills });
-            console.log(updatedProfile)
+        }
+    }
+
+    const changeTools = (tools, name) => {
+        let newhardSkills = hardSkills;
+        const index = newhardSkills[1].data.findIndex(x => x.name === name);
+        newhardSkills[1].data[index] = {
+            ...newhardSkills[1].data[index],
+            "tools": tools
+        }
+        sethardSkills(newhardSkills);
+        setupdatedProfie({ ...updatedProfile, hardSkills: newhardSkills });
+    }
+
+    const changeDescription = (description, name) => {
+        let newhardSkills = hardSkills;
+        const index = newhardSkills[2].data.findIndex(x => x.name === name);
+        newhardSkills[2].data[index] = {
+            ...newhardSkills[2].data[index],
+            "description": description
+        }
+        sethardSkills(newhardSkills);
+        setupdatedProfie({ ...updatedProfile, hardSkills: newhardSkills });
+    }
+
+    const addSoftSkill = (title) => {
+        if (title === 'Language Proficiency') {
+            let newsoftSkills = softSkills;
+            newsoftSkills[0] = {
+                "title": "Language Proficiency",
+                "data": [
+                    ...newsoftSkills[0].data,
+                    newLanguage
+                ]
+            }
+            setsoftSkills(newsoftSkills);
+            console.log(newsoftSkills);
+            setupdatedProfie({ ...updatedProfile, softSkills: newsoftSkills });
             setaddNew(false)
         }
+    }
+
+    const changeLanguageLevel = (level, name) => {
+        let newsoftSkills = softSkills;
+        const index = newsoftSkills[0].data.findIndex(x => x.name === name);
+        newsoftSkills[0].data[index] = {
+            "name": name,
+            "level": level
+        }
+        setsoftSkills(newsoftSkills);
+        setupdatedProfie({ ...updatedProfile, softSkills: newsoftSkills });
     }
 
     return (
@@ -95,23 +162,24 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
                                             <div key={index}>
                                                 <div className="skill">
                                                     <p>{item.name}</p>
-                                                    {item.description !== undefined ? <span>{item.description}</span> :
-                                                        <Form.Select onChange={(e) => changeSkillLevel(e.target.value, item.name, skill.title)} className="skillVal" size='sm' value={item.level} aria-label="Default select example" disabled={!edit}>
-                                                            <option value="Basic">Beginner</option>
-                                                            <option value="Moderate">Moderate</option>
-                                                            <option value="Advanced">Advanced</option>
-                                                        </Form.Select>}
+                                                    <div>
+                                                        {item.description !== undefined ? <Form.Control defaultValue={item.description} placeholder="Describe topics you know" onChange={(e) => changeDescription(e.target.value, item.name)} type='text' className='skillVal' style={{ maxWidth: '300px' }} size='sm' aria-label="Default select example" disabled={!edit} /> :
+                                                            <Form.Select onChange={(e) => changeSkillLevel(e.target.value, item.name, skill.title)} className="skillVal" size='sm' value={item.level} aria-label="Default select example" disabled={!edit}>
+                                                                <option value="Basic">Beginner</option>
+                                                                <option value="Moderate">Moderate</option>
+                                                                <option value="Advanced">Advanced</option>
+                                                            </Form.Select>}
+                                                    </div>
                                                 </div>
-                                                {skill.title ===  'Technologies' ?
-                                                    <Form.Control
-                                                        size={'sm'}
-                                                        type='text'
-                                                        defaultValue={item.tools === undefined || item.tools === '' ? '' : item.tools}
-                                                        placeholder="Frameworks you are specialized in.."
-                                                        disabled={!edit}
-                                                        style={{ marginBottom: "30px" }}
-                                                    /> : null
-                                                }
+                                                {item.tools !== undefined ? <Form.Control
+                                                    size={'sm'}
+                                                    type='text'
+                                                    onChange={(e) => changeTools(e.target.value, item.name)}
+                                                    defaultValue={item.tools === undefined || item.tools === '' ? '' : item.tools}
+                                                    placeholder="Frameworks you are specialized in.."
+                                                    style={{ marginBottom: '30px' }}
+                                                    disabled={!edit}
+                                                /> : null}
                                             </div>
                                         </>)
                                     })}
@@ -119,10 +187,10 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
                                     {addNew ? <Col lg={12}>
                                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
                                             <Form.Control
-                                                onChange={(e) => skill.title === 'Programming Languages' ? setnewskill({ ...newskill, name: e.target.value }) : setnewTech({ ...newTech, name: e.target.value })}
-                                                value={skill.title === 'Programming Languages' ? newskill.name : newTech.name}
+                                                onChange={(e) => skill.title === 'Programming Languages' ? setnewskill({ ...newskill, name: e.target.value }) : skill.title === 'Subjects' ? setnewSubject({ ...newSubject, name: e.target.value }) : setnewTech({ ...newTech, name: e.target.value })}
+                                                value={skill.title === 'Programming Languages' ? newskill.name : skill.title === 'Subjects' ? newSubject.name : newTech.name}
                                                 type="text"
-                                                placeholder={skill.title === 'Programming Languages' ? 'Language' : 'technology'}
+                                                placeholder={skill.title === 'Programming Languages' ? 'Language' : skill.title === 'Subjects' ? 'Subject' : 'technology'}
                                             />
                                             {skill.title === 'Technologies' ? <Form.Control
                                                 onChange={(e) => setnewTech({ ...newTech, tools: e.target.value })}
@@ -130,12 +198,12 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
                                                 type="text"
                                                 placeholder='specialization'
                                             /> : null}
-                                            <Form.Select value={newskill.level} onChange={(e) => setnewskill({ ...newskill, level: e.target.value })} aria-label="Default select example">
+                                            {skill.title === 'Subjects' ? <Form.Control value={newSubject.description} type='text' placeholder='Describe topics you know' onChange={(e) => setnewSubject({ ...newSubject, description: e.target.value })} /> : <Form.Select value={newskill.level} onChange={(e) => setnewskill({ ...newskill, level: e.target.value })} aria-label="Default select example">
                                                 <option value="Basic">Beginner</option>
                                                 <option value="Moderate">Moderate</option>
                                                 <option value="Advanced">Advanced</option>
-                                            </Form.Select>
-                                            <Button style={{ backgroundColor: '#071a84', fontSize: '14px !important', minWidth: '100px' }} onClick={() => addSkill(skill.title)}>Add</Button>
+                                            </Form.Select>}
+                                            <Button style={{ backgroundColor: '#071a84', fontSize: '14px !important', minWidth: '100px' }} onClick={() => addHardSkill(skill.title)}>Add</Button>
                                         </div>
                                     </Col> : null}
                                 </Accordion.Body>
@@ -146,24 +214,41 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
             </Card>
 
             {/* Soft Skills  */}
-            <Card body style={{ padding: '10px' }}>
+            <Card body style={{ padding: '10px', marginTop: '5px' }}>
                 <p className="sub-heading">Soft Skills</p>
                 <Row>
                     <Accordion>
-                        {profileData?.softSkills?.map((skill, index) => {
+                        {softSkills?.map((skill, index) => {
                             return skill.title === 'Language Proficiency' ? <Accordion.Item eventKey={index} key={index}>
                                 <Accordion.Header>{skill.title}</Accordion.Header>
                                 <Accordion.Body>
                                     {skill?.data?.map((item, index) => {
                                         return <div className="skill" key={index}>
                                             <p>{item.name}</p>
-                                            <Form.Select className="skillVal" size='sm' value={item.level} aria-label="Default select example" disabled={!edit}>
+                                            <Form.Select className="skillVal" size='sm' onChange={(e) => changeLanguageLevel(e.target.value, item.name)} value={item.level} aria-label="Default select example" disabled={!edit}>
                                                 <option value="Basic">Beginner</option>
                                                 <option value="Medium">Moderate</option>
                                                 <option value="Advanced">Advanced</option>
                                             </Form.Select>
                                         </div>
                                     })}
+                                    {edit ? addNew ? <Button variant="light" onClick={() => setaddNew(false)} style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px', marginBottom: '20px' }} size='sm'>cancel</Button> : <Badge pill style={{ width: '80px', padding: '6px', fontSize: '14px', cursor: 'pointer' }} onClick={() => setaddNew(true)}>+ Add</Badge> : null}
+                                    {addNew ? <Col lg={12}>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
+                                            <Form.Control
+                                                onChange={(e) => setnewLanguage({ ...newLanguage, name: e.target.value })}
+                                                value={newLanguage.name}
+                                                type="text"
+                                                placeholder='Language'
+                                            />
+                                            <Form.Select value={newskill.level} onChange={(e) => setnewLanguage({ ...newLanguage, level: e.target.value })} aria-label="Default select example">
+                                                <option value="Basic">Beginner</option>
+                                                <option value="Moderate">Moderate</option>
+                                                <option value="Advanced">Advanced</option>
+                                            </Form.Select>
+                                            <Button style={{ backgroundColor: '#071a84', fontSize: '14px !important', minWidth: '100px' }} onClick={() => addSoftSkill(skill.title)}>Add</Button>
+                                        </div>
+                                    </Col> : null}
                                 </Accordion.Body>
                             </Accordion.Item> : null
                         })}
