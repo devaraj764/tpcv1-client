@@ -80,7 +80,6 @@ const Projects = (props) => {
                             </Accordion.Item>
                         </Accordion>
                 }
-                {/* </Col> */}
                 {
                     props.edit ?
                         addNew ?
