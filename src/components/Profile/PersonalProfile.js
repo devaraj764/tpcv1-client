@@ -168,7 +168,7 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile 
                     </Col>
                 </Row>
             </Card>
-            <Card body style={{ padding: '10px', fontSize: '14px' }}>
+            <Card body style={{ padding: '10px', fontSize: '14px', marginTop: '5px' }}>
                 <Form.Label htmlFor="bio" className="label">Bio</Form.Label>
                 <FormControl
                     as='textarea'

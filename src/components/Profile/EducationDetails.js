@@ -111,7 +111,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
             </Card>
 
             {/* collage details  */}
-            <Card body style={{ padding: '10px' }}>
+            <Card body style={{ padding: '10px', marginTop:'5px' }}>
                 <p className="sub-heading">Pre University</p>
                 <Row>
                     <Col sm={12}>

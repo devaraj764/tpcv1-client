@@ -4,7 +4,7 @@
 // font-family: 'Poppins', sans-serif;
 
 $primary-color: #071a84;
-$secondary-color: #eaecf6;
+$secondary-color: #f8fafe;
 body {
   overflow-x: hidden;
   font-family: "Poppins", sans-serif;
@@ -13,31 +13,6 @@ body {
   select[disabled],
   textarea[disabled] {
     background-color: rgba(231, 238, 247, 0.384) !important;
-  }
-  .LandingPage {
-    padding: 50px;
-    min-height: 100vh;
-    // background-image: linear-gradient(175deg,#071a84, #3854f4)
-    // background-color: $secondary-color;
-    .title {
-      font-size: 30px;
-      text-transform: uppercase;
-      font-weight: 700;
-      font-family: "Nunito Sans", sans-serif;
-      color: $primary-color;
-    }
-    .sub-div {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      img {
-        max-width: 400px;
-        margin: 10px;
-        box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-        border-top-left-radius: 50px;
-        border-bottom-right-radius: 50px;
-      }
-    }
   }
   .Home {
     .left-side {
@@ -116,6 +91,8 @@ body {
     padding-top: 50px;
     .card {
       border-radius: 10px;
+      border: none;
+      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     }
     .heading {
       font-size: 16px !important;
@@ -127,13 +104,23 @@ body {
       }
     }
     .navbar {
-      background-color: $primary-color;
+      background-color: #fff;
+      border-bottom: 0.5px solid #d8d8d8;
       .title {
         font-size: 22px !important;
+        color: $primary-color !important;
+        font-weight: 600;
       }
       .nav-link {
         font-size: 14px;
         padding: 10px 20px;
+        color: rgb(184, 183, 183);
+        &:active, &:focus{
+          color: $primary-color !important;
+        }
+        &:hover{
+          color: gray !important;
+        }
       }
     }
 
@@ -159,7 +146,8 @@ body {
           margin: 10px;
         }
       }
-      .personal-details, .Projects {
+      .personal-details,
+      .Projects {
         margin-top: 50px;
         .label {
           color: $primary-color;
@@ -176,16 +164,16 @@ body {
           align-items: baseline;
           .skillVal {
             max-width: 120px;
-            
           }
         }
       }
-      .SocialMedia, .Hobbies {
+      .SocialMedia,
+      .Hobbies {
         margin-top: 50px;
-        .linkField{
-          margin:10px 0;
-          i{
-            margin-right:10px
+        .linkField {
+          margin: 10px 0;
+          i {
+            margin-right: 10px;
           }
         }
       }
@@ -259,14 +247,14 @@ body {
       }
     }
 
-    .Internships{
-      margin-top:50px;
+    .Internships {
+      margin-top: 50px;
     }
-    .Certifications{
-      margin-top:50px;
+    .Certifications {
+      margin-top: 50px;
     }
-    .Achievements{
-      margin-top:50px;
+    .Achievements {
+      margin-top: 50px;
     }
   }
 }

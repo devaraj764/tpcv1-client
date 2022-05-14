@@ -1,5 +1,22 @@
 [
     {
+        "title": "Language Proficiency",
+        "data": [
+            {
+                "name": "English",
+                "level": "beginner"
+            },
+            {
+                "name": "Hindi",
+                "level": "beginner"
+            },
+            {
+                "name": "Telugu",
+                "level": "beginner"
+            }
+        ]
+    },
+    {
         "title": "Problem Solving Skills",
         "data": {
             "level": "beginner"
@@ -16,22 +33,5 @@
         "data": {
             "level": "beginner"
         }
-    },
-    {
-        "title": "Language Proficiency",
-        "data": [
-            {
-                "name": "English",
-                "level": "beginner"
-            },
-            {
-                "name": "Hindi",
-                "level": "beginner"
-            },
-            {
-                "name": "Telugu",
-                "level": "beginner"
-            }
-        ]
     }
 ]
