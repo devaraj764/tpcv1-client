@@ -1,3 +1,4 @@
+import React from 'react'
 import { Row, Col, Card, Form, InputGroup, FormControl } from 'react-bootstrap';
 import { MdPermIdentity, MdEmail, MdBatchPrediction, MdPhone } from 'react-icons/md';
 import { BiRename } from 'react-icons/bi'
@@ -19,7 +20,7 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile 
                             <FormControl
                                 onChange={(e) => { setupdatedProfile({ ...updatedProfile, name: e.target.value }) }}
                                 type='text'
-                                value={profileData.name}
+                                defaultValue={profileData.name}
                                 placeholder="Full Name"
                                 aria-label="idnumber"
                                 aria-describedby="basic-addon1"
@@ -33,7 +34,7 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile 
                             <InputGroup.Text id="basic-addon1"><MdPermIdentity /></InputGroup.Text>
                             <FormControl
                                 type='text'
-                                value={profileData.idNo}
+                                defaultValue={profileData.idNo}
                                 placeholder="Id Number"
                                 aria-label="studentid"
                                 aria-describedby="basic-addon1"
@@ -48,11 +49,11 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile 
                             <FormControl
                                 onChange={(e) => { setupdatedProfile({ ...updatedProfile, email: e.target.value }) }}
                                 type='text'
-                                value={profileData.email}
+                                defaultValue={profileData.email}
                                 placeholder="collage email address"
                                 aria-label="collageemail"
                                 aria-describedby="basic-addon1"
-                                disabled={!edit}
+                                disabled
                             />
                         </InputGroup>
                     </Col>
@@ -63,7 +64,7 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile 
                             <Form.Select
                                 onChange={(e) => { setupdatedProfile({ ...updatedProfile, section: e.target.value }) }}
                                 type='text'
-                                value={profileData.section ? profileData.section : '-- select --'}
+                                defaultValue={profileData.section ? profileData.section : '-- select --'}
                                 placeholder="section code"
                                 aria-label="sectioncode"
                                 aria-describedby="basic-addon1"
@@ -86,7 +87,7 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile 
                             <FormControl
                                 onChange={(e) => { setupdatedProfile({ ...updatedProfile, dob: e.target.value }) }}
                                 type='date'
-                                value={profileData.dob}
+                                defaultValue={profileData.dob}
                                 placeholder="Enter your date of birth"
                                 aria-label="dob"
                                 aria-describedby="basic-addon1"
@@ -101,7 +102,7 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile 
                             <Form.Select
                                 onChange={(e) => { setupdatedProfile({ ...updatedProfile, batch: e.target.value }) }}
                                 type='text'
-                                value={profileData.batch ? profileData.batch : '-- select --'}
+                                defaultValue={profileData.batch ? profileData.batch : '-- select --'}
                                 placeholder="Enter your bacth"
                                 aria-label="batch"
                                 aria-describedby="basic-addon1"
@@ -124,7 +125,7 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile 
                             <Form.Select
                                 onChange={(e) => { setupdatedProfile({ ...updatedProfile, yearofStudy: e.target.value }) }}
                                 type='text'
-                                value={profileData.yearofStudy ? profileData.yearofStudy : '-- select --'}
+                                defaultValue={profileData.yearofStudy ? profileData.yearofStudy : '-- select --'}
                                 placeholder="Enter your year of study"
                                 aria-label="yearofstudy"
                                 aria-describedby="basic-addon1"
@@ -143,7 +144,7 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile 
                             <FormControl
                                 onChange={(e) => { setupdatedProfile({ ...updatedProfile, contactNumber: e.target.value }) }}
                                 type='text'
-                                value={profileData.contactNumber}
+                                defaultValue={profileData.contactNumber}
                                 placeholder="Enter your contact number"
                                 aria-label="contactNumber"
                                 aria-describedby="basic-addon1"
@@ -158,7 +159,7 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile 
                                 onChange={(e) => { setupdatedProfile({ ...updatedProfile, address: e.target.value }) }}
                                 as='textarea'
                                 type='text'
-                                value={profileData.address}
+                                defaultValue={profileData.address}
                                 placeholder="Address"
                                 aria-label="Address"
                                 aria-describedby="basic-addon1"
@@ -171,10 +172,13 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile 
             <Card body style={{ padding: '10px', fontSize: '14px', marginTop: '5px' }}>
                 <Form.Label htmlFor="bio" className="label">Bio</Form.Label>
                 <FormControl
+                    defaultValue={profileData.bio}
+                    onChange={(e) => { setupdatedProfile({ ...updatedProfile, bio: e.target.value }) }}
                     as='textarea'
                     rows='5'
                     id="bio"
                     placeholder="Briefly describe yourself..."
+                    disabled={!edit}
                 />
             </Card>
         </div>
