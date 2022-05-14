@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Switch, Route } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import Navbar from '../components/Navbar';
 import Profile from '../components/Profile';
@@ -20,16 +20,11 @@ const Dashboard = (props) => {
             <div className="Dashboard">
                 <Navbar />
                 <Container>
-                    {props.location.pathname === '/dashboard'
-                        ?
-                        <Home api={props.api}/>
-                        :
-                        props.location.pathname === '/dashboard/notifications' ?
-                            <Notifications history={props.history}/>
-                            :
-                            props.location.pathname === '/dashboard/profile' ?
-                                <Profile history={props.history} api={props.api}/> : "No page found"
-                    }
+                    <Switch>
+                        <Route exact path='/dashboard' render={() => <Home api={props.api} />}></Route>
+                        <Route exact path='/dashboard/notifications' render={() => <Notifications history={props.history} />}></Route>
+                        <Route path='/dashboard/profile' render={() => <Profile history={props.history} api={props.api} />}></Route>
+                    </Switch>
                 </Container>
             </div>
             <Footer />
