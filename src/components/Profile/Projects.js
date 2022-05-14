@@ -13,7 +13,7 @@ const Projects = (props) => {
                 {
                     addNew ?
                         <>
-                            <Form.Label htmlFor="title">Project Title</Form.Label>
+                            <Form.Label htmlFor="title">Project Title :</Form.Label>
                             <Form.Control
                                 as='input'
                                 type='text'
@@ -21,15 +21,23 @@ const Projects = (props) => {
                                 placeholder="Your project title"
                             />
                             <br />
-                            <Form.Label htmlFor="description">Describe your project</Form.Label>
+                            <Form.Label htmlFor="description">Describe your project :</Form.Label>
                             <Form.Control
                                 as='textarea'
                                 roes={3}
                                 id='description'
-                                placeholder="Your project title"
+                                placeholder="Describe your project...."
                             />
                             <br />
-                            <Form.Label htmlFor="links">External link</Form.Label>
+                            <Form.Label htmlFor="links">Technologies used :</Form.Label>
+                            <Form.Control
+                                as='input'
+                                type='text'
+                                id='links'
+                                placeholder="Technologies used in this project"
+                            />
+                            <br />
+                            <Form.Label htmlFor="links">External link :</Form.Label>
                             <Form.Control
                                 as='input'
                                 type='text'
@@ -51,16 +59,22 @@ const Projects = (props) => {
                                                 type="text"
                                                 size='sm'
                                                 placeholder="paste video or document link here"
-                                                style={{ float: 'right', marginBottom: "10px", textDecoration: 'none' }}
+                                                style={{marginBottom: "10px" }}
                                             />
                                     }
                                     <Form.Control
                                         as='textarea'
                                         rows={3}
                                         placeholder="Enter your project description...."
-                                        style={{ fontSize: '14px' }}
+                                        style={{ fontSize: '14px', marginBottom: '10px' }}
                                         disabled={!props.edit}
 
+                                    />
+                                    <Form.Control
+                                        type="text"
+                                        size='sm'
+                                        placeholder="Technologies used in this project"
+                                        disabled={!props.edit}
                                     />
                                 </Accordion.Body>
                             </Accordion.Item>
@@ -72,7 +86,7 @@ const Projects = (props) => {
                         addNew ?
                             <div style={{ marginTop: '20px' }}>
                                 <Button size="sm" style={{ float: 'right', width: '100px', borderRadius: '25px' }} onClick={() => setaddNew(false)}>push</Button>
-                                <Button variant="light" size="sm" style={{ float: 'right', width: '100px', borderRadius: '25px',marginRight:'10px' }} onClick={() => setaddNew(false)}>cancel</Button>
+                                <Button variant="light" size="sm" style={{ float: 'right', width: '100px', borderRadius: '25px', marginRight: '10px' }} onClick={() => setaddNew(false)}>cancel</Button>
                             </div>
                             :
                             <Button size="sm" style={{ float: 'right', width: '100px', borderRadius: '25px', marginTop: '20px' }} onClick={() => setaddNew(true)}>+ Add</Button>
