@@ -18,20 +18,14 @@
     },
     {
         "title": "Problem Solving Skills",
-        "data": {
-            "level": "beginner"
-        }
+        "level": "beginner"
     },
     {
         "title": "Decision Making Skills",
-        "data": {
-            "level": "beginner"
-        }
+        "level": "beginner"
     },
     {
         "title": "Leadership Skills",
-        "data": {
-            "level": "beginner"
-        }
+        "level": "beginner"
     }
 ]

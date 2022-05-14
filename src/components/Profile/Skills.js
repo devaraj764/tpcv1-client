@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Card, Accordion, Form, Col, Button, Badge } from 'react-bootstrap';
+import { Row, Card, Accordion, Form, Col, Button } from 'react-bootstrap';
 
 const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
     const [addNew, setaddNew] = useState(false);
@@ -143,6 +143,18 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
         setupdatedProfie({ ...updatedProfile, softSkills: newsoftSkills });
     }
 
+    const changeSoftSkill = (level, title) => {
+        let newsoftSkills = softSkills;
+        const index = newsoftSkills.findIndex(x => x.title === title);
+        newsoftSkills[index] = {
+            "title": title,
+            "level": level
+        }
+        setsoftSkills(newsoftSkills);
+        setupdatedProfie({ ...updatedProfile, softSkills: newsoftSkills });
+    }
+
+
     return (
         <div className="Skills">
             <p className="heading">Skills<br />
@@ -199,7 +211,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
                                                 placeholder='specialization'
                                             /> : null}
                                             {skill.title === 'Subjects' ? <Form.Control value={newSubject.description} type='text' placeholder='Describe topics you know' onChange={(e) => setnewSubject({ ...newSubject, description: e.target.value })} /> : <Form.Select value={newskill.level} onChange={(e) => setnewskill({ ...newskill, level: e.target.value })} aria-label="Default select example">
-                                                <option value="Basic">Beginner</option>
+                                                <option value="Beginner">Beginner</option>
                                                 <option value="Moderate">Moderate</option>
                                                 <option value="Advanced">Advanced</option>
                                             </Form.Select>}
@@ -226,7 +238,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
                                         return <div className="skill" key={index}>
                                             <p>{item.name}</p>
                                             <Form.Select className="skillVal" size='sm' onChange={(e) => changeLanguageLevel(e.target.value, item.name)} value={item.level} aria-label="Default select example" disabled={!edit}>
-                                                <option value="Basic">Beginner</option>
+                                                <option value="Beginner">Beginner</option>
                                                 <option value="Medium">Moderate</option>
                                                 <option value="Advanced">Advanced</option>
                                             </Form.Select>
@@ -241,8 +253,8 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
                                                 type="text"
                                                 placeholder='Language'
                                             />
-                                            <Form.Select value={newskill.level} onChange={(e) => setnewLanguage({ ...newLanguage, level: e.target.value })} aria-label="Default select example">
-                                                <option value="Basic">Beginner</option>
+                                            <Form.Select defaultValue={newskill.level} onChange={(e) => setnewLanguage({ ...newLanguage, level: e.target.value })} aria-label="Default select example">
+                                                <option value="Beginner">Beginner</option>
                                                 <option value="Moderate">Moderate</option>
                                                 <option value="Advanced">Advanced</option>
                                             </Form.Select>
@@ -250,7 +262,16 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
                                         </div>
                                     </Col> : null}
                                 </Accordion.Body>
-                            </Accordion.Item> : null
+                            </Accordion.Item> : <div className='softSkill' key={index}>
+                                <p>{skill.title}</p>
+                                <center>
+                                    <Form.Select className="skillVal" size='sm' onChange={(e) => changeSoftSkill(e.target.value, skill.title)} value={skill.level} style={{ maxWidth: '120px', height: '35px', alignItems: 'center', marginTop: '10px' }} aria-label="Default select example" disabled={!edit}>
+                                        <option value="Beginner">Beginner</option>
+                                        <option value="Moderate">Moderate</option>
+                                        <option value="Advanced">Advanced</option>
+                                    </Form.Select>
+                                </center>
+                            </div>
                         })}
                     </Accordion>
                 </Row>

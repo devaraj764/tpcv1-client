@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Nav } from 'react-bootstrap';
+import { Row, Col, Nav, Spinner, Card } from 'react-bootstrap';
 import axios from 'axios';
 import ProfileBanner from './ProfileBanner.js';
 import PersonalProfile from './PersonalProfile.js';
@@ -15,7 +15,7 @@ import Achievements from './Achievements.js';
 const Profile = (props) => {
     const [Token, setToken] = useState(null);
     const [edit, setEdit] = useState(false);
-    const [profileData, setprofileData] = useState({});
+    const [profileData, setprofileData] = useState(null);
     const [updatedProfile, setupdatedProfile] = useState({});
 
     useEffect(() => {
@@ -64,7 +64,7 @@ const Profile = (props) => {
         <div className="profile">
             <Row className="justify-content-md-center">
                 <Col xs={12} lg="8">
-                    <ProfileBanner handleChanges={handleChanges} edit={edit} setEdit={setEdit} logout={Logout} />
+                    <ProfileBanner handleChanges={handleChanges} edit={edit} setEdit={setEdit} logout={Logout} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
                     <hr />
                     <Nav fill variant="pills" defaultActiveKey={tab}>
                         <Nav.Item>
@@ -85,9 +85,19 @@ const Profile = (props) => {
                         tab === 0
                             ?
                             <>
-                                <PersonalProfile edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
-                                <Hobbies edit={edit} />
-                                <SocialMedia edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
+                                {profileData ?
+                                    <>
+                                        <PersonalProfile edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
+                                        <Hobbies edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
+                                        <SocialMedia edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
+                                    </>
+                                    : <Card style={{ minHeight: '20vh', textAlign: 'center' }}>
+                                        <center style={{ marginTop: '80px' }}>
+                                            Retrieving data...<br />
+                                            <Spinner size='xl' animation='border' />
+                                        </center>
+                                    </Card>
+                                }
                             </>
                             :
                             tab === 1 ?
@@ -102,10 +112,10 @@ const Profile = (props) => {
                                     :
                                     tab === 3 ?
                                         <>
-                                            <Projects edit= {edit} profileData={profileData} updatedProfile={updatedProfile}/>
-                                            <Internships  edit={edit} profileData={profileData} updatedProfile={updatedProfile}/>
-                                            <Certifications edit={edit} profileData={profileData} updatedProfile={updatedProfile}/>
-                                            <Achievements  edit={edit} profileData={profileData} updatedProfile={updatedProfile}/>
+                                            <Projects edit={edit} profileData={profileData} updatedProfile={updatedProfile} />
+                                            <Internships edit={edit} profileData={profileData} updatedProfile={updatedProfile} />
+                                            <Certifications edit={edit} profileData={profileData} updatedProfile={updatedProfile} />
+                                            <Achievements edit={edit} profileData={profileData} updatedProfile={updatedProfile} />
                                         </> : null
 
                     }

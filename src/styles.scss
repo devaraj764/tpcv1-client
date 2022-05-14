@@ -173,6 +173,18 @@ body {
       }
       .Skills {
         margin-top: 50px;
+        .softSkill {
+          border: 1px solid #DFDFDF;
+          padding: 5px;
+          display: flex;
+          p {
+            width: 85%;
+            font-size: 1rem;
+            align-items: center;
+            margin-left: 10px;
+            margin-top: 15px;
+          }
+        }
         .skill {
           display: flex;
           justify-content: space-between;
