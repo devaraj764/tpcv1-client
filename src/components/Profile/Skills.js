@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Card, Accordion, Form, Badge, Col, Button } from 'react-bootstrap';
+import { Row, Card, Accordion, Form, Col, Button } from 'react-bootstrap';
 
 const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
     const [addNew, setaddNew] = useState(false);
@@ -159,7 +159,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
                                 <Accordion.Body>
                                     {skill?.data?.map((item, index) => {
                                         return (<>
-                                            <div key={index} style={{ marginBottom: "30px" }}>
+                                            <div key={index}>
                                                 <div className="skill">
                                                     <p>{item.name}</p>
                                                     <div>
@@ -177,12 +177,13 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
                                                     onChange={(e) => changeTools(e.target.value, item.name)}
                                                     defaultValue={item.tools === undefined || item.tools === '' ? '' : item.tools}
                                                     placeholder="Frameworks you are specialized in.."
+                                                    style={{ marginBottom: '30px' }}
                                                     disabled={!edit}
                                                 /> : null}
                                             </div>
                                         </>)
                                     })}
-                                    {edit ? addNew ? <Button variant="light" onClick={() => setaddNew(false)} style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px', marginBottom: '20px' }} size='sm'>cancel</Button> : <Badge pill style={{ width: '80px', padding: '6px', fontSize: '14px', cursor: 'pointer' }} onClick={() => setaddNew(true)}>+ Add</Badge> : null}
+                                    {edit ? addNew ? <Button variant="light" onClick={() => setaddNew(false)} style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px', marginBottom: '20px' }} size='sm'>cancel</Button> : <Button style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px', marginBottom: '20px' }} size='sm' onClick={() => setaddNew(true)}>+ Add</Button> : null}
                                     {addNew ? <Col lg={12}>
                                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
                                             <Form.Control
