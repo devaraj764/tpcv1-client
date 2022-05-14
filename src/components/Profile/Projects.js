@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Card, Form, Accordion, Button } from 'react-bootstrap';
 import { FiLink } from 'react-icons/fi'
 
 const Projects = (props) => {
-    const [addNew, setaddNew] = React.useState(false)
+    const [addNew, setaddNew] = useState(false);
     return (
         <div className="Projects">
             <p className="heading">Projects<br />
@@ -59,7 +59,7 @@ const Projects = (props) => {
                                                 type="text"
                                                 size='sm'
                                                 placeholder="paste video or document link here"
-                                                style={{marginBottom: "10px" }}
+                                                style={{ marginBottom: "10px" }}
                                             />
                                     }
                                     <Form.Control

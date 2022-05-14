@@ -112,7 +112,7 @@ const Profile = (props) => {
                                     :
                                     tab === 3 ?
                                         <>
-                                            <Projects edit={edit} profileData={profileData} updatedProfile={updatedProfile} />
+                                            <Projects edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile}/>
                                             <Internships edit={edit} profileData={profileData} updatedProfile={updatedProfile} />
                                             <Certifications edit={edit} profileData={profileData} updatedProfile={updatedProfile} />
                                             <Achievements edit={edit} profileData={profileData} updatedProfile={updatedProfile} />
