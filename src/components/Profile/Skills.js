@@ -232,7 +232,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
                                             </Form.Select>
                                         </div>
                                     })}
-                                    {edit ? addNew ? <Button variant="light" onClick={() => setaddNew(false)} style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px', marginBottom: '20px' }} size='sm'>cancel</Button> : <Badge pill style={{ width: '80px', padding: '6px', fontSize: '14px', cursor: 'pointer' }} onClick={() => setaddNew(true)}>+ Add</Badge> : null}
+                                    {edit ? addNew ? <Button variant="light" onClick={() => setaddNew(false)} style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px', marginBottom: '20px' }} size='sm'>cancel</Button> : <Button variant="primary" size='sm' style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px', marginBottom: '20px' }} onClick={() => setaddNew(true)}>+ Add</Button> : null}
                                     {addNew ? <Col lg={12}>
                                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
                                             <Form.Control
