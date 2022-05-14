@@ -58,7 +58,6 @@ function Login(props) {
 
     function submit(e) {
         e.preventDefault();
-        console.log(props.loader)
         if (idNo === '' || password === '') {
             seterror('Fill all empty fields')
         } else {

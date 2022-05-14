@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Card, Accordion, Form, Col, Button } from 'react-bootstrap';
+import { Row, Card, Accordion, Form, Col, Button, Badge } from 'react-bootstrap';
 
 const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
     const [addNew, setaddNew] = useState(false);
