@@ -34,7 +34,10 @@ const Profile = (props) => {
             }
         }).then((res) => {
             setprofileData(res.data)
-        }).catch((err) => console.log(err))
+        }).catch((err) => {
+            if (!err.request.data) Logout();
+            console.log(err.request.data)
+        });
     }, [props.api]);
 
 

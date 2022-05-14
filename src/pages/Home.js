@@ -58,7 +58,6 @@ function Login(props) {
 
     function submit(e) {
         e.preventDefault();
-        console.log(props.loader)
         if (idNo === '' || password === '') {
             seterror('Fill all empty fields')
         } else {
@@ -198,7 +197,6 @@ function Register(props) {
             "hardSkills": hardSkills,
             "softSkills": softSkills,
         }).then(res => {
-            console.log(res.data);
             props.callBack(res)
             props.setLoader(false);
         }).catch(err => {
