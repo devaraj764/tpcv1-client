@@ -359,7 +359,7 @@ function Register(props) {
             </Row>
             <br />
             {error === '' ? null : <p style={{ color: 'red', fontSize: '14px' }}>{error}</p>}
-            <Button type="submit" style={{ maxWidth: '400px', width: '100%', backgroundColor: '#071a84' }} size="md" onClick={(e) => submit(e)}>{props.loader ? <Spinner animation="border" /> : "Proceed"}</Button>
+            <Button type="submit" style={{ maxWidth: '400px', width: '100%', backgroundColor: '#071a84' }} size="md" onClick={(e) => submit(e)}>{props.loader ? <Spinner animation="border" size='sm'/> : "Proceed"}</Button>
             <br />
             <p>Already had account? <Link style={{ color: '#071a84', cursor: 'pointer', fontSize: '16px', fontWeight: '600' }} to="/login">SignIn</Link></p>
         </>
