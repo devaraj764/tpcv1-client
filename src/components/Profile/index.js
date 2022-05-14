@@ -34,7 +34,10 @@ const Profile = (props) => {
             }
         }).then((res) => {
             setprofileData(res.data)
-        }).catch((err) => console.log(err))
+        }).catch((err) => {
+            if (!err.request.data) Logout();
+            console.log(err.request.data)
+        });
     }, [props.api]);
 
 
@@ -99,10 +102,10 @@ const Profile = (props) => {
                                     :
                                     tab === 3 ?
                                         <>
-                                            <Projects />
-                                            <Internships />
-                                            <Certifications />
-                                            <Achievements />
+                                            <Projects edit= {edit} profileData={profileData} updatedProfile={updatedProfile}/>
+                                            <Internships  edit={edit} profileData={profileData} updatedProfile={updatedProfile}/>
+                                            <Certifications edit={edit} profileData={profileData} updatedProfile={updatedProfile}/>
+                                            <Achievements  edit={edit} profileData={profileData} updatedProfile={updatedProfile}/>
                                         </> : null
 
                     }

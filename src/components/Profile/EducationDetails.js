@@ -68,8 +68,8 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                     <Col md={6} sm={12}>
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1">Passed Out</InputGroup.Text>
-                            <Form.Select value={passout} id="passout" aria-label="Default select example" disabled={!edit} onChange={(e) => setpassout(e.target.value)}>
-                                <option disabled={!edit}>Year</option>
+                            <Form.Select value={passout || passout !== ''? passout : 'Year'} id="passout" aria-label="Default select example" disabled={!edit} onChange={(e) => setpassout(e.target.value)}>
+                                <option disabled>Year</option>
                                 <option value="2016">2016</option>
                                 <option value="2017">2017</option>
                                 <option value="2018">2018</option>
@@ -130,7 +130,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                     <Col md={6} sm={12}>
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1">Passed Out</InputGroup.Text>
-                            <Form.Select aria-label="Default select example" disabled={!edit} value={clgPassout} onChange={(e) => setclgPassout(e.target.value)}>
+                            <Form.Select aria-label="Default select example" disabled={!edit} value={clgPassout || clgPassout !== ''? clgPassout : 'Year'} onChange={(e) => setclgPassout(e.target.value)}>
                                 <option disabled>Year</option>
                                 <option value="2016">2016</option>
                                 <option value="2017">2017</option>

@@ -197,7 +197,6 @@ function Register(props) {
             "hardSkills": hardSkills,
             "softSkills": softSkills,
         }).then(res => {
-            console.log(res.data);
             props.callBack(res)
             props.setLoader(false);
         }).catch(err => {

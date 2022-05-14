@@ -1,10 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Poppins&display=swap");
-
 // font-family: 'Nunito Sans', sans-serif;
 // font-family: 'Poppins', sans-serif;
 
 $primary-color: #071a84;
 $secondary-color: #f8fafe;
+
+/* make the customizations */
 body {
   overflow-x: hidden;
   font-family: "Poppins", sans-serif;
@@ -13,6 +13,20 @@ body {
   select[disabled],
   textarea[disabled] {
     background-color: rgba(231, 238, 247, 0.384) !important;
+  }
+  .btn {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  }
+  .btn-primary {
+    background-color: $primary-color;
+    color: white;
+    &:hover {
+      background-color: #0921a9df;
+    }
+  }
+  .btn-light {
+    background-color: #fff;
+    color: #000;
   }
   .Home {
     .left-side {
@@ -115,10 +129,11 @@ body {
         font-size: 14px;
         padding: 10px 20px;
         color: rgb(184, 183, 183);
-        &:active, &:focus{
+        &:active,
+        &:focus {
           color: $primary-color !important;
         }
-        &:hover{
+        &:hover {
           color: gray !important;
         }
       }
@@ -162,7 +177,7 @@ body {
           display: flex;
           justify-content: space-between;
           align-items: baseline;
-          margin-top:10px;
+          margin-top: 10px;
           .skillVal {
             max-width: 120px;
           }
@@ -259,3 +274,5 @@ body {
     }
   }
 }
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Poppins&display=swap");
