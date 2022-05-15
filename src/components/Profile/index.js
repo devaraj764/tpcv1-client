@@ -115,8 +115,8 @@ const Profile = (props) => {
                                         <>
                                             <Projects edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
                                             <Internships edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
-                                            <Certifications edit={edit} profileData={profileData} updatedProfile={updatedProfile} />
-                                            <Achievements edit={edit} profileData={profileData} updatedProfile={updatedProfile} />
+                                            <Certifications edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile}/>
+                                            <Achievements edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile}/>
                                         </> : null
 
                     }

@@ -10,7 +10,7 @@ const Internships = (props) => {
         'organization': '',
         'startDate': '',
         'endDate': '',
-        'status': '',
+        'status': 'working',
     });
 
     useEffect(() => {
@@ -34,8 +34,8 @@ const Internships = (props) => {
     }
 
     const deleteInternship = (index) => {
-        setinternships(internships.filter((internship, i) => i !== index));
-        props.setupdatedProfile({ ...props.updatedProfile, internships: internships.filter((internship, i) => i !== index) });
+        setinternships(internships.filter((_blank, i) => i !== index));
+        props.setupdatedProfile({ ...props.updatedProfile, internships: internships.filter((_, i) => i !== index) });
     }
 
     return (
