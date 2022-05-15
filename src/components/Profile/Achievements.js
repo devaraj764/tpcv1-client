@@ -1,10 +1,40 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Card, Form, Accordion, Button } from 'react-bootstrap';
 import { MdDelete } from 'react-icons/md'
 
 const Achievements = (props) => {
-    const [status, setStatus] = React.useState('working');
     const [addNew, setaddNew] = React.useState(false)
+    const [achievements, setAchievements] = useState([])
+    const [newAchievement, setnewAchievement] = useState({
+        title: '',
+        description: '',
+    });
+
+    useEffect(() => {
+        setAchievements(props.profileData?.achievements ? props.profileData?.achievements : [])
+    }, [props.profileData]);
+
+    const addAchievement = () => {
+        setAchievements([...achievements, newAchievement]);
+        props.setupdatedProfile({ ...props.profileData, achievements: [...achievements, newAchievement] });
+        setaddNew(false);
+    }
+
+    const updateAchivement = (index, value) => {
+        let newAchievements = [...achievements];
+        newAchievements[index] = {
+            ...newAchievements[index],
+            description: value
+        }
+        setAchievements(newAchievements);
+        props.setupdatedProfile({ ...props.profileData, achievements: newAchievements });
+    }
+
+    const deleteAchivement = (index) => {
+        setAchievements(achievements.filter((_, i) => i !== index));
+        props.setupdatedProfile({ ...props.profileData, achievements: achievements.filter((_, i) => i !== index) });
+    }
+
     return (
         <div className="Achievements">
             <p className="heading">Achievements<br />
@@ -16,6 +46,8 @@ const Achievements = (props) => {
                         <>
                             <Form.Label htmlFor="name">Achievement name :</Form.Label>
                             <Form.Control
+                                defaultValue={newAchievement.title}
+                                onChange={(e) => setnewAchievement({ ...newAchievement, title: e.target.value })}
                                 as='input'
                                 type='text'
                                 id='name'
@@ -24,6 +56,8 @@ const Achievements = (props) => {
                             <br />
                             <Form.Label htmlFor="description">Describe your achievement :</Form.Label>
                             <Form.Control
+                                defaultValue={newAchievement.description}
+                                onChange={(e) => setnewAchievement({ ...newAchievement, description: e.target.value })}
                                 as='textarea'
                                 roes={3}
                                 id='description'
@@ -32,33 +66,38 @@ const Achievements = (props) => {
                         </>
                         :
                         <Accordion>
-                            {/* for every Achievement */}
-                            <Accordion.Item eventKey={'0'}>
-                                <Accordion.Header>
+                            {achievements.map((achievement, index) => {
+                                return <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} key={index}>
                                     {
                                         props.edit ?
-                                            <span style={{ marginRight: '20px', color: 'tomato' }}><MdDelete size={24} /></span> : null
+                                            <span onClick={() => deleteAchivement(index)} style={{ marginRight: '10px', color: 'tomato', cursor: 'pointer' }}><MdDelete size={24} /></span> : null
                                     }
-                                    {'Achievement Name'}
-                                </Accordion.Header>
-                                <Accordion.Body>
-                                    <Form.Control
-                                        as='textarea'
-                                        rows={3}
-                                        placeholder="Describe about your achievement...."
-                                        style={{ fontSize: '14px', marginBottom: '10px' }}
-                                        disabled={!props.edit}
+                                    <Accordion.Item eventKey={index} style={{ width: '100%' }}>
+                                        <Accordion.Header>
+                                            {achievement.title}
+                                        </Accordion.Header>
+                                        <Accordion.Body>
+                                            <Form.Control
+                                                as='textarea'
+                                                rows={3}
+                                                defaultValue={achievement.description}
+                                                onChange={(e) => updateAchivement(index, e.target.value)}
+                                                placeholder="Describe about your achievement...."
+                                                style={{ fontSize: '14px', marginBottom: '10px' }}
+                                                disabled={!props.edit}
 
-                                    />
-                                </Accordion.Body>
-                            </Accordion.Item>
+                                            />
+                                        </Accordion.Body>
+                                    </Accordion.Item>
+                                </div>
+                            })}
                         </Accordion>
                 }
                 {
                     props.edit ?
                         addNew ?
                             <div style={{ marginTop: '20px' }}>
-                                <Button size="sm" style={{ float: 'right', width: '100px', borderRadius: '25px' }} onClick={() => setaddNew(false)}>push</Button>
+                                <Button size="sm" style={{ float: 'right', width: '100px', borderRadius: '25px' }} onClick={addAchievement}>push</Button>
                                 <Button variant="light" size="sm" style={{ float: 'right', width: '100px', borderRadius: '25px', marginRight: '10px' }} onClick={() => setaddNew(false)}>cancel</Button>
                             </div>
                             :
