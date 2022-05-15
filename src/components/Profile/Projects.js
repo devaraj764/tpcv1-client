@@ -30,6 +30,7 @@ const Projects = (props) => {
             ...newProjects[index],
             [key]: value
         }
+        setprojects(newProjects);
         props.setupdatedProfile({ ...props.updatedProfile, projects: newProjects });
     }
 
@@ -97,14 +98,14 @@ const Projects = (props) => {
                                             props.edit ?
                                                 <span onClick={() => deleteProject(project.title)} style={{ marginRight: '10px', color: 'tomato', cursor: 'pointer' }}><MdDelete size={24} /></span> : null
                                         }
-                                        <Accordion.Item style={{ width: '100%' }} eventKey={'0'}>
+                                        <Accordion.Item style={{ width: '100%' }} eventKey={index}>
                                             <Accordion.Header>
                                                 {project.title}
                                             </Accordion.Header>
                                             <Accordion.Body>
                                                 {
                                                     !props.edit ?
-                                                        <a href={project.link} rel="noreferrer" target="_blank" style={{ float: 'right', marginBottom: "10px", textDecoration: 'none' }}><FiLink size={14} />&nbsp;know more</a>
+                                                        project.link !== '' ? <a href={project.link} rel="noreferrer" target="_blank" style={{ float: 'right', marginBottom: "10px", textDecoration: 'none' }}><FiLink size={14} />&nbsp;know more</a> : null
                                                         :
                                                         <Form.Control
                                                             type="text"
