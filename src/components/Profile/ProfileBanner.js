@@ -19,7 +19,7 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, upda
     }
 
     async function handleProfile(uploader) {
-        console.log(uploader.target.files[0]);
+        console.log(uploader.target.files[0].size);
         if (uploader.target.files[0].size > 2000000) {
             alert('Profile Image size should be less than 2mb');
             return;
@@ -30,7 +30,6 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, upda
         })
         setprofileUrl(url);
         setupdatedProfile({ ...updatedProfile, profilePicture: url })
-        console.log(updatedProfile);
     }
 
 

@@ -170,8 +170,8 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
                                 <Accordion.Header>{skill.title}</Accordion.Header>
                                 <Accordion.Body>
                                     {skill?.data?.map((item, index) => {
-                                        return (<>
-                                            <div key={index}>
+                                        return (<div key={index}>
+                                            <div>
                                                 <div className="skill">
                                                     <p>{item.name}</p>
                                                     <div>
@@ -193,7 +193,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
                                                     disabled={!edit}
                                                 /> : null}
                                             </div>
-                                        </>)
+                                        </div>)
                                     })}
                                     {edit ? addNew ? <Button variant="light" onClick={() => setaddNew(false)} style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px', marginBottom: '20px' }} size='sm'>cancel</Button> : <Button style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px', marginBottom: '20px' }} size='sm' onClick={() => setaddNew(true)}>+ Add</Button> : null}
                                     {addNew ? <Col lg={12}>

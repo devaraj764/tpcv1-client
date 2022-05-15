@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card, Form, Accordion, Button } from 'react-bootstrap';
+import { MdDelete } from 'react-icons/md'
 
 const Achievements = (props) => {
     const [status, setStatus] = React.useState('working');
@@ -33,7 +34,13 @@ const Achievements = (props) => {
                         <Accordion>
                             {/* for every Achievement */}
                             <Accordion.Item eventKey={'0'}>
-                                <Accordion.Header>{'Achievement Name'}</Accordion.Header>
+                                <Accordion.Header>
+                                    {
+                                        props.edit ?
+                                            <span style={{ marginRight: '20px', color: 'tomato' }}><MdDelete size={24} /></span> : null
+                                    }
+                                    {'Achievement Name'}
+                                </Accordion.Header>
                                 <Accordion.Body>
                                     <Form.Control
                                         as='textarea'

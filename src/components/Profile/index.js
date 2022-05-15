@@ -91,12 +91,13 @@ const Profile = (props) => {
                                         <Hobbies edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
                                         <SocialMedia edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
                                     </>
-                                    : <Card style={{ minHeight: '20vh', textAlign: 'center' }}>
+                                    : <div style={{ minHeight: '20vh', textAlign: 'center' }}>
                                         <center style={{ marginTop: '80px' }}>
-                                            Retrieving data...<br />
                                             <Spinner size='xl' animation='border' />
+                                            <br /><br />
+                                            Retrieving data...
                                         </center>
-                                    </Card>
+                                    </div>
                                 }
                             </>
                             :
@@ -112,7 +113,7 @@ const Profile = (props) => {
                                     :
                                     tab === 3 ?
                                         <>
-                                            <Projects edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile}/>
+                                            <Projects edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
                                             <Internships edit={edit} profileData={profileData} updatedProfile={updatedProfile} />
                                             <Certifications edit={edit} profileData={profileData} updatedProfile={updatedProfile} />
                                             <Achievements edit={edit} profileData={profileData} updatedProfile={updatedProfile} />
