@@ -253,9 +253,9 @@ function Register(props) {
                         <InputGroup.Text id="basic-addon3"><SiGoogleclassroom /></InputGroup.Text>
                         <Form.Select
                             onChange={(e) => setsection(e.target.value)}
-                            defaultValue="-- select --"
+                            defaultValue="section"
                         >
-                            <option disabled>-- select --</option>
+                            <option disabled>section</option>
                             <option value="A">A</option>
                             <option value="B">B</option>
                             <option value="C">C</option>
@@ -283,9 +283,9 @@ function Register(props) {
                         <InputGroup.Text id="basic-addon3"><MdBatchPrediction /></InputGroup.Text>
                         <Form.Select
                             onChange={(e) => setbatch(e.target.value)}
-                            defaultValue="-- select --"
+                            defaultValue="batch"
                         >
-                            <option disabled>-- select --</option>
+                            <option disabled>batch</option>
                             <option value="2017">2017</option>
                             <option value="2018">2018</option>
                             <option value="2019">2019</option>
@@ -300,9 +300,9 @@ function Register(props) {
                         <InputGroup.Text id="basic-addon3"><FaBook /></InputGroup.Text>
                         <Form.Select
                             onChange={(e) => setyearofStudy(e.target.value)}
-                            defaultValue="-- select --"
+                            defaultValue="year of study"
                         >
-                            <option disabled>-- select --</option>
+                            <option disabled> year of study</option>
                             <option value="E3">E3</option>
                             <option value="E4">E4</option>
                         </Form.Select>
