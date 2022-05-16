@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Row, Col, Spinner } from 'react-bootstrap';
 import { TiWarningOutline } from 'react-icons/ti';
 import { VscInfo } from 'react-icons/vsc';
 import { IoMdCheckmarkCircleOutline } from 'react-icons/io'
-import { HiOutlineClipboardList } from 'react-icons/hi'
+import { HiOutlineClipboardList } from 'react-icons/hi';
+import axios from 'axios';
 
 
 const warning = {
@@ -27,6 +28,9 @@ const test = {
 }
 
 const Notifications = (props) => {
+
+  const [notifications, setNotifications] = useState(null);
+
   useEffect(() => {
     const token = localStorage.getItem('auth-token');
     if (!token) {
@@ -34,49 +38,66 @@ const Notifications = (props) => {
     }
   }, [props.history]);
 
-
-  const notifications = [
-    { type: 'info' },
-    { type: 'success' },
-    { type: 'warning' },
-    { type: 'test' }
-  ];
+  useEffect(() => {
+    const url = props.api + 'students/notifications'
+    axios.get(url, {
+      headers: {
+        "auth-token": localStorage.getItem('auth-token')
+      }
+    }).then((res) => {
+      setNotifications(res.data.message);
+      console.log(res.data.message);
+    }).catch((err) => {
+      setNotifications('error')
+      console.log(err);
+    });
+  }, [props.api]);
 
   return (
     <div className="Notifications">
       <Row className="justify-content-md-center">
         <Col xs lg="8">
-          {notifications.map((notifier, index) => (
-            <div className="notifier" key={index}>
-              <div className="notifier-typo" style={
-                notifier.type === 'warning' ?
-                  warning :
-                  notifier.type === 'info' ?
-                    info :
-                    notifier.type === 'success' ?
-                      success
-                      : notifier.type === 'test' ?
-                        test : null
-              }>
-                {
+          {notifications ? notifications === 'error' ?
+            <p style={{ textAlign: 'center' }}>Error loading data</p>
+            :
+            notifications.map((notifier, index) => (
+              <div className="notifier" key={index}>
+                <div className="notifier-typo" style={
                   notifier.type === 'warning' ?
-                    <TiWarningOutline size={24} /> :
+                    warning :
                     notifier.type === 'info' ?
-                      <VscInfo size={24} /> :
+                      info :
                       notifier.type === 'success' ?
-                        <IoMdCheckmarkCircleOutline size={24} />
+                        success
                         : notifier.type === 'test' ?
-                          <HiOutlineClipboardList size={24} /> : null
+                          test : null
+                }>
+                  {
+                    notifier.type === 'warning' ?
+                      <TiWarningOutline size={24} /> :
+                      notifier.type === 'info' ?
+                        <VscInfo size={24} /> :
+                        notifier.type === 'success' ?
+                          <IoMdCheckmarkCircleOutline size={24} />
+                          : notifier.type === 'test' ?
+                            <HiOutlineClipboardList size={24} /> : null
 
-                }
+                  }
 
+                </div>
+                <div className="notifier-body">
+                  <span className="title">{notifier.type.toUpperCase()}</span>
+                  <span className="description">We have successfully created</span>
+                </div>
               </div>
-              <div className="notifier-body">
-                <span className="title">{notifier.type.toUpperCase()}</span>
-                <span className="description">We have successfully created</span>
-              </div>
-            </div>
-          ))}
+            )) : 
+            <div style={{ minHeight: '20vh', textAlign: 'center' }}>
+            <center style={{ marginTop: '80px' }}>
+              <Spinner size='xl' animation='grow' /><br /><br />
+              Retrieving data...
+            </center>
+          </div>
+          }
         </Col>
       </Row>
     </div>

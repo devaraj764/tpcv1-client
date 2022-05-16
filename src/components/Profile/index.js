@@ -91,12 +91,12 @@ const Profile = (props) => {
                                         <Hobbies edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
                                         <SocialMedia edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
                                     </>
-                                    : <Card style={{ minHeight: '20vh', textAlign: 'center' }}>
+                                    : <div style={{ minHeight: '20vh', textAlign: 'center' }}>
                                         <center style={{ marginTop: '80px' }}>
-                                            Retrieving data...<br />
-                                            <Spinner size='xl' animation='border' />
+                                            <Spinner size='xl' animation='grow' /><br/><br/>
+                                            Retrieving data...
                                         </center>
-                                    </Card>
+                                    </div>
                                 }
                             </>
                             :

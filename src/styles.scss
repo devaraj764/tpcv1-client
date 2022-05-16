@@ -174,7 +174,7 @@ body {
       .Skills {
         margin-top: 50px;
         .softSkill {
-          border: 1px solid #DFDFDF;
+          border: 1px solid #dfdfdf;
           padding: 5px;
           display: flex;
           p {
@@ -283,6 +283,27 @@ body {
     }
     .Achievements {
       margin-top: 50px;
+    }
+  }
+
+  // view profile
+  .view-profile {
+    background-color: $secondary-color;
+    min-height: 100vh;
+    padding: 50px;
+  }
+
+  //page no found
+  .page-not-found {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    p {
+      font-weight: bold;
+      font-size: 30px;
+      font-family: 'Nunito Sans', sans-serif;
     }
   }
 }

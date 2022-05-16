@@ -6,6 +6,7 @@ import Profile from '../components/Profile';
 import Home from '../components/Home';
 import Notifications from '../components/Notifications';
 import Footer from '../components/Footer';
+import PageNotFound from '../pages/PageNotFound'
 
 const Dashboard = (props) => {
     useEffect(() => {
@@ -22,8 +23,9 @@ const Dashboard = (props) => {
                 <Container>
                     <Switch>
                         <Route exact path='/dashboard' render={() => <Home api={props.api} />}></Route>
-                        <Route exact path='/dashboard/notifications' render={() => <Notifications history={props.history} />}></Route>
-                        <Route path='/dashboard/profile' render={() => <Profile history={props.history} api={props.api} />}></Route>
+                        <Route exact path='/dashboard/notifications' render={() => <Notifications api={props.api} history={props.history} />}></Route>
+                        <Route exact path='/dashboard/profile' render={() => <Profile history={props.history} api={props.api} />}></Route>
+                        <Route path="*" render={() => <PageNotFound />} />
                     </Switch>
                 </Container>
             </div>
