@@ -6,7 +6,7 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, upda
     const [profileUrl, setprofileUrl] = useState('');
 
     useEffect(() => {
-        setprofileUrl(profileData?.profilePicture || profileData?.profilePicture !== '' ? profileData?.profilePicture : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80')
+        setprofileUrl(profileData?.profilePicture ? profileData?.profilePicture : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80')
     }, [profileData]);
 
     function getBase64(file) {
@@ -19,7 +19,7 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, upda
     }
 
     async function handleProfile(uploader) {
-        console.log(uploader.target.files[0]);
+        console.log(uploader.target.files[0].size);
         if (uploader.target.files[0].size > 2000000) {
             alert('Profile Image size should be less than 2mb');
             return;
@@ -30,7 +30,6 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, upda
         })
         setprofileUrl(url);
         setupdatedProfile({ ...updatedProfile, profilePicture: url })
-        console.log(updatedProfile);
     }
 
 

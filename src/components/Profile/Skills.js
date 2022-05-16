@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Card, Accordion, Form, Col, Button } from 'react-bootstrap';
+import { MdDelete } from 'react-icons/md'
 
-const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
+const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
     const [addNew, setaddNew] = useState(false);
     const [hardSkills, sethardSkills] = useState([]);
     const [softSkills, setsoftSkills] = useState([]);
@@ -39,7 +40,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
                 ]
             }
             sethardSkills(newhardSkills);
-            setupdatedProfie({ ...updatedProfile, hardSkills: newhardSkills });
+            setupdatedProfile({ ...updatedProfile, hardSkills: newhardSkills });
             setaddNew(false)
         }
         if (title === 'Technologies') {
@@ -52,7 +53,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
                 ]
             }
             sethardSkills(newhardSkills);
-            setupdatedProfie({ ...updatedProfile, hardSkills: newhardSkills });
+            setupdatedProfile({ ...updatedProfile, hardSkills: newhardSkills });
             setaddNew(false)
         }
         if (title === 'Subjects') {
@@ -65,7 +66,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
                 ]
             }
             sethardSkills(newhardSkills);
-            setupdatedProfie({ ...updatedProfile, hardSkills: newhardSkills });
+            setupdatedProfile({ ...updatedProfile, hardSkills: newhardSkills });
             setaddNew(false)
         }
     }
@@ -79,7 +80,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
                 "level": level
             }
             sethardSkills(newhardSkills);
-            setupdatedProfie({ ...updatedProfile, hardSkills: newhardSkills });
+            setupdatedProfile({ ...updatedProfile, hardSkills: newhardSkills });
         }
         if (title === 'Technologies') {
             let newhardSkills = hardSkills;
@@ -89,7 +90,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
                 "level": level
             }
             sethardSkills(newhardSkills);
-            setupdatedProfie({ ...updatedProfile, hardSkills: newhardSkills });
+            setupdatedProfile({ ...updatedProfile, hardSkills: newhardSkills });
         }
     }
 
@@ -101,7 +102,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
             "tools": tools
         }
         sethardSkills(newhardSkills);
-        setupdatedProfie({ ...updatedProfile, hardSkills: newhardSkills });
+        setupdatedProfile({ ...updatedProfile, hardSkills: newhardSkills });
     }
 
     const changeDescription = (description, name) => {
@@ -112,7 +113,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
             "description": description
         }
         sethardSkills(newhardSkills);
-        setupdatedProfie({ ...updatedProfile, hardSkills: newhardSkills });
+        setupdatedProfile({ ...updatedProfile, hardSkills: newhardSkills });
     }
 
     const addSoftSkill = (title) => {
@@ -127,7 +128,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
             }
             setsoftSkills(newsoftSkills);
             console.log(newsoftSkills);
-            setupdatedProfie({ ...updatedProfile, softSkills: newsoftSkills });
+            setupdatedProfile({ ...updatedProfile, softSkills: newsoftSkills });
             setaddNew(false)
         }
     }
@@ -140,7 +141,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
             "level": level
         }
         setsoftSkills(newsoftSkills);
-        setupdatedProfie({ ...updatedProfile, softSkills: newsoftSkills });
+        setupdatedProfile({ ...updatedProfile, softSkills: newsoftSkills });
     }
 
     const changeSoftSkill = (level, title) => {
@@ -151,7 +152,48 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
             "level": level
         }
         setsoftSkills(newsoftSkills);
-        setupdatedProfie({ ...updatedProfile, softSkills: newsoftSkills });
+        setupdatedProfile({ ...updatedProfile, softSkills: newsoftSkills });
+    }
+
+    const deleteHardSkill = (title, index) => {
+        if (title === 'Programming Languages') {
+            let newhardSkills = hardSkills;
+            newhardSkills[0] = {
+                "title": "Programming Languages",
+                "data": newhardSkills[0].data.filter((_, i) => i !== index)
+            }
+            sethardSkills(newhardSkills);
+            setupdatedProfile({ ...updatedProfile, hardSkills: newhardSkills })
+        }
+        if (title === 'Technologies') {
+            let newhardSkills = hardSkills;
+            newhardSkills[1] = {
+                "title": "Technologies",
+                "data": newhardSkills[1].data.filter((_, i) => i !== index)
+            }
+            sethardSkills(newhardSkills);
+            setupdatedProfile({ ...updatedProfile, hardSkills: newhardSkills })
+        }
+        if (title === 'Subjects') {
+            let newhardSkills = hardSkills;
+            newhardSkills[2] = {
+                "title": "Subjects",
+                "data": newhardSkills[2].data.filter((_, i) => i !== index)
+            }
+            sethardSkills(newhardSkills);
+            setupdatedProfile({ ...updatedProfile, hardSkills: newhardSkills })
+        }
+    }
+
+    const deleteSoftSkill = (index) => {
+        let newsoftSkills = softSkills;
+        newsoftSkills[0] = {
+            ...newsoftSkills[0],
+            "data": newsoftSkills[0].data.filter((_, i) => i !== index)
+        }
+        setsoftSkills(newsoftSkills);
+        console.log({ ...updatedProfile, softSkills: newsoftSkills })
+        setupdatedProfile({ ...updatedProfile, softSkills: newsoftSkills })
     }
 
 
@@ -170,10 +212,17 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
                                 <Accordion.Header>{skill.title}</Accordion.Header>
                                 <Accordion.Body>
                                     {skill?.data?.map((item, index) => {
-                                        return (<>
-                                            <div key={index}>
+                                        return (<div key={index}>
+                                            <div>
                                                 <div className="skill">
-                                                    <p>{item.name}</p>
+                                                    <p>
+                                                        {
+                                                            edit ?
+                                                                <span onClick={() => deleteHardSkill(skill.title, index)} style={{ marginRight: '10px', color: 'tomato', cursor: 'pointer' }}><MdDelete size={24} /></span>
+                                                                : null
+                                                        }
+                                                        {item.name}
+                                                    </p>
                                                     <div>
                                                         {item.description !== undefined ? <Form.Control defaultValue={item.description} placeholder="Describe topics you know" onChange={(e) => changeDescription(e.target.value, item.name)} type='text' className='skillVal' style={{ maxWidth: '300px' }} size='sm' aria-label="Default select example" disabled={!edit} /> :
                                                             <Form.Select onChange={(e) => changeSkillLevel(e.target.value, item.name, skill.title)} className="skillVal" size='sm' value={item.level} aria-label="Default select example" disabled={!edit}>
@@ -193,8 +242,8 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
                                                     disabled={!edit}
                                                 /> : null}
                                             </div>
-                                        </>)
-                                    })}
+                                        </div>)
+                                    })}<br />
                                     {edit ? addNew ? <Button variant="light" onClick={() => setaddNew(false)} style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px', marginBottom: '20px' }} size='sm'>cancel</Button> : <Button style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px', marginBottom: '20px' }} size='sm' onClick={() => setaddNew(true)}>+ Add</Button> : null}
                                     {addNew ? <Col lg={12}>
                                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
@@ -236,7 +285,14 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfie }) => {
                                 <Accordion.Body>
                                     {skill?.data?.map((item, index) => {
                                         return <div className="skill" key={index}>
-                                            <p>{item.name}</p>
+                                            <p>
+                                                {
+                                                    edit ?
+                                                        <span onClick={() => deleteSoftSkill(index)} style={{ marginRight: '10px', color: 'tomato', cursor: 'pointer' }}><MdDelete size={24} /></span>
+                                                        : null
+                                                }
+                                                {item.name}
+                                            </p>
                                             <Form.Select className="skillVal" size='sm' onChange={(e) => changeLanguageLevel(e.target.value, item.name)} value={item.level} aria-label="Default select example" disabled={!edit}>
                                                 <option value="Beginner">Beginner</option>
                                                 <option value="Medium">Moderate</option>
