@@ -158,42 +158,61 @@ const Internships = (props) => {
                                                                     />
                                                                 </Col>
                                                                 <Col md={6} sm={12}>
-                                                                    <Row>
-                                                                        <Col>
-                                                                            <Form.Label htmlFor="status">Status</Form.Label>
-                                                                            <Form.Select defaultValue={internship.status} id={internship.role} size='sm' style={{ marginBottom: "10px" }} onChange={(e) => { updateInternship(index, 'status', e.target.value); }}>
-                                                                                <option value="working">working</option>
-                                                                                <option value="completed">completed</option>
-                                                                            </Form.Select>
-                                                                        </Col>
-                                                                        {
-                                                                            document.getElementById(internship.role)?.value === 'completed' ?
-                                                                                internship.status === 'completed' ?
-                                                                                    <Col>
-                                                                                        <Form.Label htmlFor="end-date">End date</Form.Label>
-                                                                                        <Form.Control
-                                                                                            defaultValue={internship.endDate}
-                                                                                            onChange={(e) => updateInternship(index, 'endDate', e.target.value)}
-                                                                                            type="date"
-                                                                                            id="end-date"
-                                                                                            size='sm'
-                                                                                            placeholder="end date"
-                                                                                            style={{ marginBottom: "10px" }}
-                                                                                        />
-                                                                                    </Col> : null : null
-                                                                        }
-                                                                    </Row>
+                                                                    <Form.Label htmlFor="status">Status</Form.Label>
+                                                                    <Form.Select defaultValue={internship.status} id={internship.role} size='sm' style={{ marginBottom: "10px" }} onChange={(e) => { updateInternship(index, 'status', e.target.value); }}>
+                                                                        <option value="working">working</option>
+                                                                        <option value="completed">completed</option>
+                                                                    </Form.Select>
                                                                 </Col>
+                                                                {
+                                                                    document.getElementById(internship.role)?.value === 'completed' ?
+                                                                        internship.status === 'completed' ?
+                                                                            <>
+                                                                                <Col md={6} sm={12}>
+                                                                                    <Form.Label htmlFor="end-date">End date</Form.Label>
+                                                                                    <Form.Control
+                                                                                        defaultValue={internship.endDate}
+                                                                                        onChange={(e) => updateInternship(index, 'endDate', e.target.value)}
+                                                                                        type="date"
+                                                                                        id="end-date"
+                                                                                        size='sm'
+                                                                                        placeholder="end date"
+                                                                                        style={{ marginBottom: "10px" }}
+                                                                                    />
+                                                                                </Col>
+                                                                                <Col md={6} sm={12}>
+                                                                                    <Form.Label htmlFor="certificate">Certificate Link</Form.Label>
+                                                                                    <Form.Control
+                                                                                        defaultValue={newInternship.certificate}
+                                                                                        onChange={(e) => setnewInternship({ ...newInternship, certificate: e.target.value })}
+                                                                                        type="text"
+                                                                                        id="certificate"
+                                                                                        size='sm'
+                                                                                        placeholder="paste your link here..."
+                                                                                        style={{ marginBottom: "10px" }}
+                                                                                    />
+                                                                                </Col>
+                                                                            </>
+                                                                            : null : null
+                                                                }
                                                             </Row>
                                                     }
-                                                    <Form.Control
-                                                        type="text"
-                                                        size='sm'
-                                                        onChange={(e) => updateInternship(index, 'organization', e.target.value)}
-                                                        defaultValue={internship.organization}
-                                                        placeholder="Organization name"
-                                                        disabled={!props.edit}
-                                                    />
+                                                    <Col>
+                                                        <Form.Control
+                                                            type="text"
+                                                            size='sm'
+                                                            onChange={(e) => updateInternship(index, 'organization', e.target.value)}
+                                                            defaultValue={internship.organization}
+                                                            placeholder="Organization name"
+                                                            disabled={!props.edit}
+                                                        />
+                                                    </Col>
+                                                    <br />
+                                                    {
+                                                        internship.certificate ?
+                                                            <a href={internship.certificate} style={{ textAligin: 'center' }} rel="noreferrer" target="_blank">View cerificate</a>
+                                                            : null
+                                                    }
                                                 </Accordion.Body>
                                             </Accordion.Item>
                                         </div>
