@@ -12,6 +12,9 @@ const Internships = (props) => {
         'startDate': '',
         'endDate': '',
         'status': 'working',
+        'certificate': '',
+        'payment': '',
+        'duration': ''
     });
 
     useEffect(() => {
@@ -184,7 +187,7 @@ const Internships = (props) => {
                                                                                     <Form.Label htmlFor="certificate">Certificate Link</Form.Label>
                                                                                     <Form.Control
                                                                                         defaultValue={newInternship.certificate}
-                                                                                        onChange={(e) => setnewInternship({ ...newInternship, certificate: e.target.value })}
+                                                                                        onChange={(e) => updateInternship(index, 'certificate', e.target.value)}
                                                                                         type="text"
                                                                                         id="certificate"
                                                                                         size='sm'

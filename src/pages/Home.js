@@ -15,7 +15,7 @@ function Home(props) {
 
     const [path, setPath] = useState(props.location.pathname);
     const [loader, setLoader] = useState(false);
-    
+
     useEffect(() => {
         setPath(props.location.pathname)
         let token = localStorage.getItem('auth-token');
@@ -179,7 +179,7 @@ function Register(props) {
             registerUser();
         }
     }
-    
+
     function registerUser() {
         props.setLoader(true);
         const url = props.api + 'register'
@@ -196,6 +196,21 @@ function Register(props) {
             "password": password,
             "hardSkills": hardSkills,
             "softSkills": softSkills,
+            "graduation": {
+                "name": "",
+                "loc": "",
+                "cgpa": "",
+                "allcgpa": {
+                    0: 0,
+                    1: 0,
+                    2: 0,
+                    3: 0,
+                    4: 0,
+                    5: 0,
+                    6: 0,
+                    7: 0,
+                }
+            }
         }).then(res => {
             props.callBack(res)
             props.setLoader(false);
@@ -359,7 +374,7 @@ function Register(props) {
             </Row>
             <br />
             {error === '' ? null : <p style={{ color: 'red', fontSize: '14px' }}>{error}</p>}
-            <Button type="submit" style={{ maxWidth: '400px', width: '100%', backgroundColor: '#071a84' }} size="md" onClick={(e) => submit(e)}>{props.loader ? <Spinner animation="border" size='sm'/> : "Proceed"}</Button>
+            <Button type="submit" style={{ maxWidth: '400px', width: '100%', backgroundColor: '#071a84' }} size="md" onClick={(e) => submit(e)}>{props.loader ? <Spinner animation="border" size='sm' /> : "Proceed"}</Button>
             <br />
             <p>Already had account? <Link style={{ color: '#071a84', cursor: 'pointer', fontSize: '16px', fontWeight: '600' }} to="/login">SignIn</Link></p>
         </>
