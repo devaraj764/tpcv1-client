@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Col, Card, Form, Accordion, Row, Button } from 'react-bootstrap';
 import { MdDelete } from 'react-icons/md';
 
+
 const Internships = (props) => {
     const [addNew, setaddNew] = React.useState(false)
     const [internships, setinternships] = useState([]);
@@ -52,6 +53,7 @@ const Internships = (props) => {
                                 defaultValue={newInternship.role}
                                 onChange={(e) => setnewInternship({ ...newInternship, role: e.target.value })}
                                 as='input'
+                                size="sm"
                                 type='text'
                                 id='role'
                                 placeholder="Enter your role the Internship.."
@@ -62,6 +64,7 @@ const Internships = (props) => {
                                 defaultValue={newInternship.organization}
                                 onChange={(e) => setnewInternship({ ...newInternship, organization: e.target.value })}
                                 as='input'
+                                size="sm"
                                 type='text'
                                 id='organization'
                                 placeholder="Enter organization name you worked for.."
@@ -81,31 +84,44 @@ const Internships = (props) => {
                                     />
                                 </Col>
                                 <Col md={6} sm={12}>
-                                    <Row>
-                                        <Col>
-                                            <Form.Label htmlFor="status">Status</Form.Label>
-                                            <Form.Select id="status" size='sm' style={{ marginBottom: "10px" }} defaultValue={newInternship.status} onChange={(e) => { setnewInternship({ ...newInternship, status: e.target.value }); }}>
-                                                <option value="working">working</option>
-                                                <option value="completed">completed</option>
-                                            </Form.Select>
-                                        </Col>
-                                        {
-                                            newInternship.status === 'completed' ?
-                                                <Col>
-                                                    <Form.Label htmlFor="end-date">End date</Form.Label>
-                                                    <Form.Control
-                                                        defaultValue={newInternship.endDate}
-                                                        onChange={(e) => setnewInternship({ ...newInternship, endDate: e.target.value })}
-                                                        type="date"
-                                                        id="end-date"
-                                                        size='sm'
-                                                        placeholder="end date"
-                                                        style={{ marginBottom: "10px" }}
-                                                    />
-                                                </Col> : null
-                                        }
-                                    </Row>
+                                    <Form.Label htmlFor="status">Status</Form.Label>
+                                    <Form.Select id="status" size='sm' style={{ marginBottom: "10px" }} defaultValue={newInternship.status} onChange={(e) => { setnewInternship({ ...newInternship, status: e.target.value }); }}>
+                                        <option value="working">working</option>
+                                        <option value="completed">completed</option>
+                                    </Form.Select>
                                 </Col>
+                            </Row>
+                            <br />
+                            <Row>
+                                {
+                                    newInternship.status === 'completed' ?
+                                        <>
+                                            <Col md={6} sm={12}>
+                                                <Form.Label htmlFor="end-date">End date</Form.Label>
+                                                <Form.Control
+                                                    defaultValue={newInternship.endDate}
+                                                    onChange={(e) => setnewInternship({ ...newInternship, endDate: e.target.value })}
+                                                    type="date"
+                                                    id="end-date"
+                                                    size='sm'
+                                                    placeholder="end date"
+                                                    style={{ marginBottom: "10px" }}
+                                                />
+                                            </Col>
+                                            <Col md={6} sm={12}>
+                                                <Form.Label htmlFor="certificate">Certificate Link</Form.Label>
+                                                <Form.Control
+                                                    defaultValue={newInternship.certificate}
+                                                    onChange={(e) => setnewInternship({ ...newInternship, certificate: e.target.value })}
+                                                    type="text"
+                                                    id="certificate"
+                                                    size='sm'
+                                                    placeholder="paste your link here..."
+                                                    style={{ marginBottom: "10px" }}
+                                                />
+                                            </Col>
+                                        </> : null
+                                }
                             </Row>
                         </>
                         :

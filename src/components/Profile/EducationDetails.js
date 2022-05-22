@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Row, Col, Card, Form, InputGroup, FormControl } from 'react-bootstrap';
+import { Row, Col, Card, Form, InputGroup, FormControl, Accordion } from 'react-bootstrap';
 
 const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
     // Schooling Details
@@ -68,7 +68,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                     <Col md={6} sm={12}>
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1">Passed Out</InputGroup.Text>
-                            <Form.Select value={passout || passout !== ''? passout : 'Year'} id="passout" aria-label="Default select example" disabled={!edit} onChange={(e) => setpassout(e.target.value)}>
+                            <Form.Select value={passout || passout !== '' ? passout : 'Year'} id="passout" aria-label="Default select example" disabled={!edit} onChange={(e) => setpassout(e.target.value)}>
                                 <option disabled>Year</option>
                                 <option value="2016">2016</option>
                                 <option value="2017">2017</option>
@@ -111,7 +111,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
             </Card>
 
             {/* collage details  */}
-            <Card body style={{ padding: '10px', marginTop:'5px' }}>
+            <Card body style={{ padding: '10px', marginTop: '5px' }}>
                 <p className="sub-heading">Pre University</p>
                 <Row>
                     <Col sm={12}>
@@ -130,7 +130,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                     <Col md={6} sm={12}>
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1">Passed Out</InputGroup.Text>
-                            <Form.Select aria-label="Default select example" disabled={!edit} value={clgPassout || clgPassout !== ''? clgPassout : 'Year'} onChange={(e) => setclgPassout(e.target.value)}>
+                            <Form.Select aria-label="Default select example" disabled={!edit} value={clgPassout || clgPassout !== '' ? clgPassout : 'Year'} onChange={(e) => setclgPassout(e.target.value)}>
                                 <option disabled>Year</option>
                                 <option value="2016">2016</option>
                                 <option value="2017">2017</option>
@@ -153,6 +153,180 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                                 disabled={!edit}
                             />
                         </InputGroup>
+                    </Col>
+                    <Col sm={12}>
+                        <InputGroup className="mb-3">
+                            <FormControl
+                                as='textarea'
+                                value={clgLoc}
+                                onChange={(e) => setclgLoc(e.target.value)}
+                                placeholder="Address of University"
+                                aria-label="address"
+                                aria-describedby="basic-addon1"
+                                disabled={!edit}
+                            />
+                        </InputGroup>
+                    </Col>
+                </Row>
+            </Card>
+
+            {/* Grauation details */}
+            <Card body style={{ padding: '10px', marginTop: '5px' }}>
+                <p className="sub-heading">Graduation</p>
+                <Row>
+                    <Col sm={12}>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Text id="basic-addon1">at</InputGroup.Text>
+                            <FormControl
+                                value={clgName}
+                                onChange={(e) => setclgName(e.target.value)}
+                                placeholder="University Name"
+                                aria-label="University name"
+                                aria-describedby="basic-addon1"
+                                disabled={!edit}
+                            />
+                        </InputGroup>
+                    </Col>
+                    {/* <Col md={6} sm={12}>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Text id="basic-addon1">Passed Out</InputGroup.Text>
+                            <Form.Select aria-label="Default select example" disabled={!edit} value={clgPassout || clgPassout !== ''? clgPassout : 'Year'} onChange={(e) => setclgPassout(e.target.value)}>
+                                <option disabled>Year</option>
+                                <option value="2016">2016</option>
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                            </Form.Select>
+                        </InputGroup>
+                    </Col> */}
+                    <Col sm={12}>
+                        {/* <InputGroup className="mb-3">
+                            <InputGroup.Text id="basic-addon1">CGPA</InputGroup.Text>
+                            <FormControl
+                                value={clgCpga}
+                                onChange={(e) => setclgCpga(e.target.value)}
+                                placeholder="Overall CGPA"
+                                aria-label="SchoolName"
+                                aria-describedby="basic-addon1"
+                                disabled={!edit}
+                            />
+                        </InputGroup> */}
+                        <Accordion defaultActiveKey="0">
+                            <Accordion.Item eventKey="0">
+                                <Accordion.Header>CGPA</Accordion.Header>
+                                <Accordion.Body>
+                                    <Row>
+                                        <Col md={6} sm={12}>
+                                            <InputGroup className="mb-3">
+                                                <InputGroup.Text id="basic-addon1">E1/SEM1</InputGroup.Text>
+                                                <FormControl
+                                                    value={clgCpga}
+                                                    onChange={(e) => setclgCpga(e.target.value)}
+                                                    placeholder="CGPA"
+                                                    aria-label="SchoolName"
+                                                    aria-describedby="basic-addon1"
+                                                    disabled={!edit}
+                                                />
+                                            </InputGroup>
+                                        </Col>
+                                        <Col md={6} sm={12}>
+                                            <InputGroup className="mb-3">
+                                                <InputGroup.Text id="basic-addon1">E1/SEM2</InputGroup.Text>
+                                                <FormControl
+                                                    value={clgCpga}
+                                                    onChange={(e) => setclgCpga(e.target.value)}
+                                                    placeholder="CGPA"
+                                                    aria-label="SchoolName"
+                                                    aria-describedby="basic-addon1"
+                                                    disabled={!edit}
+                                                />
+                                            </InputGroup>
+                                        </Col>
+                                        <Col md={6} sm={12}>
+                                            <InputGroup className="mb-3">
+                                                <InputGroup.Text id="basic-addon1">E2/SEM1</InputGroup.Text>
+                                                <FormControl
+                                                    value={clgCpga}
+                                                    onChange={(e) => setclgCpga(e.target.value)}
+                                                    placeholder="CGPA"
+                                                    aria-label="SchoolName"
+                                                    aria-describedby="basic-addon1"
+                                                    disabled={!edit}
+                                                />
+                                            </InputGroup>
+                                        </Col>
+                                        <Col md={6} sm={12}>
+                                            <InputGroup className="mb-3">
+                                                <InputGroup.Text id="basic-addon1">E2/SEM2</InputGroup.Text>
+                                                <FormControl
+                                                    value={clgCpga}
+                                                    onChange={(e) => setclgCpga(e.target.value)}
+                                                    placeholder="CGPA"
+                                                    aria-label="SchoolName"
+                                                    aria-describedby="basic-addon1"
+                                                    disabled={!edit}
+                                                />
+                                            </InputGroup>
+                                        </Col>
+                                        <Col md={6} sm={12}>
+                                            <InputGroup className="mb-3">
+                                                <InputGroup.Text id="basic-addon1">E3/SEM1</InputGroup.Text>
+                                                <FormControl
+                                                    value={clgCpga}
+                                                    onChange={(e) => setclgCpga(e.target.value)}
+                                                    placeholder="CGPA"
+                                                    aria-label="SchoolName"
+                                                    aria-describedby="basic-addon1"
+                                                    disabled={!edit}
+                                                />
+                                            </InputGroup>
+                                        </Col>
+                                        <Col md={6} sm={12}>
+                                            <InputGroup className="mb-3">
+                                                <InputGroup.Text id="basic-addon1">E3/SEM2</InputGroup.Text>
+                                                <FormControl
+                                                    value={clgCpga}
+                                                    onChange={(e) => setclgCpga(e.target.value)}
+                                                    placeholder="CGPA"
+                                                    aria-label="SchoolName"
+                                                    aria-describedby="basic-addon1"
+                                                    disabled={!edit}
+                                                />
+                                            </InputGroup>
+                                        </Col>
+                                        <Col md={6} sm={12}>
+                                            <InputGroup className="mb-3">
+                                                <InputGroup.Text id="basic-addon1">E4/SEM1</InputGroup.Text>
+                                                <FormControl
+                                                    value={clgCpga}
+                                                    onChange={(e) => setclgCpga(e.target.value)}
+                                                    placeholder="CGPA"
+                                                    aria-label="SchoolName"
+                                                    aria-describedby="basic-addon1"
+                                                    disabled={!edit}
+                                                />
+                                            </InputGroup>
+                                        </Col>
+                                        <Col md={6} sm={12}>
+                                            <InputGroup className="mb-3">
+                                                <InputGroup.Text id="basic-addon1">E4/SEM2</InputGroup.Text>
+                                                <FormControl
+                                                    value={clgCpga}
+                                                    onChange={(e) => setclgCpga(e.target.value)}
+                                                    placeholder="CGPA"
+                                                    aria-label="SchoolName"
+                                                    aria-describedby="basic-addon1"
+                                                    disabled={!edit}
+                                                />
+                                            </InputGroup>
+                                        </Col>
+                                    </Row>
+                                </Accordion.Body>
+                            </Accordion.Item>
+                        </Accordion>
+                        <br />
                     </Col>
                     <Col sm={12}>
                         <InputGroup className="mb-3">
