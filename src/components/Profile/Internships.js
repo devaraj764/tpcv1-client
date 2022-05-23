@@ -13,7 +13,7 @@ const Internships = (props) => {
         'endDate': '',
         'status': 'working',
         'certificate': '',
-        'payment': '',
+        'paid': 'yes',
         'duration': ''
     });
 
@@ -22,6 +22,16 @@ const Internships = (props) => {
     }, [props.profileData]);
 
     const addInternship = () => {
+        setnewInternship({
+            'role': '',
+            'organization': '',
+            'startDate': '',
+            'endDate': '',
+            'status': 'working',
+            'certificate': '',
+            'paid': 'yes',
+            'duration': ''
+        })
         setinternships([...internships, newInternship]);
         props.setupdatedProfile({ ...props.updatedProfile, internships: [...internships, newInternship] });
         setaddNew(false);
@@ -80,13 +90,13 @@ const Internships = (props) => {
                                 </Col>
                                 <Col md={6} sm={12}>
                                     <Form.Label htmlFor="paid">Paid</Form.Label>
-                                    <Form.Select id="paid" size='sm' style={{ marginBottom: "10px" }} defaultValue={newInternship.paid} onChange={(e) => { setnewInternship({ ...newInternship, paid: e.target.value }); }}>
+                                    <Form.Select id="paid" size='sm' style={{ marginBottom: "10px" }} defaultValue={newInternship.paid} onChange={(e) => setnewInternship({ ...newInternship, paid: e.target.value })}>
                                         <option value="Yes">Yes</option>
                                         <option value="no">no</option>
                                     </Form.Select>
                                 </Col>
                                 <Col md={6} sm={12}>
-                                    <Form.Label htmlFor="duration">Duration (in Days):</Form.Label>
+                                    <Form.Label htmlFor="duration">Duration (in Months):</Form.Label>
                                     <Form.Control
                                         defaultValue={newInternship.duration}
                                         onChange={(e) => setnewInternship({ ...newInternship, duration: e.target.value })}
@@ -112,7 +122,7 @@ const Internships = (props) => {
                                 </Col>
                                 <Col md={6} sm={12}>
                                     <Form.Label htmlFor="status">Status</Form.Label>
-                                    <Form.Select id="status" size='sm' style={{ marginBottom: "10px" }} defaultValue={newInternship.status} onChange={(e) => { setnewInternship({ ...newInternship, status: e.target.value }); }}>
+                                    <Form.Select id="status" size='sm' style={{ marginBottom: "10px" }} defaultValue={newInternship.status} onChange={(e) => setnewInternship({ ...newInternship, status: e.target.value })}>
                                         <option value="working">working</option>
                                         <option value="completed">completed</option>
                                     </Form.Select>
@@ -160,7 +170,6 @@ const Internships = (props) => {
                                             }
                                             <Accordion.Item style={{ width: '100%' }} eventKey={index}>
                                                 <Accordion.Header>
-
                                                     {internship.role}
                                                 </Accordion.Header>
                                                 <Accordion.Body>
@@ -181,7 +190,7 @@ const Internships = (props) => {
                                                         </Col>
                                                         <Col md={6} sm={12}>
                                                             <Form.Label htmlFor="paid">Paid</Form.Label>
-                                                            <Form.Select id="paid" size='sm' disabled={!props.edit} style={{ marginBottom: "10px" }} defaultValue={newInternship.paid} onChange={(e) => { setnewInternship({ ...newInternship, paid: e.target.value }); }}>
+                                                            <Form.Select id="paid" size='sm' disabled={!props.edit} style={{ marginBottom: "10px" }} defaultValue={internship.paid} onChange={(e) => updateInternship(index, 'paid', e.target.value)}>
                                                                 <option value="Yes">Yes</option>
                                                                 <option value="no">no</option>
                                                             </Form.Select>
@@ -200,7 +209,7 @@ const Internships = (props) => {
                                                             />
                                                         </Col>
                                                         <Col md={6} sm={12}>
-                                                            <Form.Label htmlFor="duration">Duration (in Days):</Form.Label>
+                                                            <Form.Label htmlFor="duration">Duration (in Months):</Form.Label>
                                                             <Form.Control
                                                                 defaultValue={internship.duration}
                                                                 onChange={(e) => updateInternship(index, 'duration', e.target.value)}
@@ -250,7 +259,7 @@ const Internships = (props) => {
                                                                     <Form.Label htmlFor="certificate">Certificate Link</Form.Label>
                                                                     <Form.Control
                                                                         defaultValue={internship.certificate}
-                                                                        onChange={(e) => setnewInternship({ ...newInternship, certificate: e.target.value })}
+                                                                        onChange={(e) => updateInternship(index, 'certificate', e.target.value)}
                                                                         type="text"
                                                                         id="certificate"
                                                                         size='sm'
