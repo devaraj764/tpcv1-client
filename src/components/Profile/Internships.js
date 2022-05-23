@@ -12,6 +12,9 @@ const Internships = (props) => {
         'startDate': '',
         'endDate': '',
         'status': 'working',
+        'certificate': '',
+        'payment': '',
+        'duration': ''
     });
 
     useEffect(() => {

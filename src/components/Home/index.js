@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col, Card, ListGroup, Button, Form } from 'react-bootstrap';
 
-const Home = () => {
+const Home = (props) => {
   return (
     <div className="Home">
       <Row className="justify-content-md-center">
@@ -9,7 +9,7 @@ const Home = () => {
           <div className="header">
             <div>
               <p className="title">Hello!</p>
-              <p className="name">Deva Raju Maddu</p>
+              <p className="name">{props.username}</p>
             </div>
           </div>
           <Card body>
