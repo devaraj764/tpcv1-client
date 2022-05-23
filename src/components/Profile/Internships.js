@@ -51,19 +51,8 @@ const Internships = (props) => {
                 {
                     addNew ?
                         <>
-                            <Form.Label htmlFor="role">Role:</Form.Label>
-                            <Form.Control
-                                defaultValue={newInternship.role}
-                                onChange={(e) => setnewInternship({ ...newInternship, role: e.target.value })}
-                                as='input'
-                                size="sm"
-                                type='text'
-                                id='role'
-                                placeholder="Enter your role the Internship.."
-                            />
-                            <br />
                             <Row>
-                                <Col>
+                                <Col md={6} sm={12}>
                                     <Form.Label htmlFor="organization">Organization name:</Form.Label>
                                     <Form.Control
                                         defaultValue={newInternship.organization}
@@ -73,18 +62,42 @@ const Internships = (props) => {
                                         type='text'
                                         id='organization'
                                         placeholder="Enter organization name you worked for.."
+                                        style={{ marginBottom: "10px" }}
                                     />
                                 </Col>
-                                <Col>
+                                <Col md={6} sm={12}>
+                                    <Form.Label htmlFor="role">Role:</Form.Label>
+                                    <Form.Control
+                                        defaultValue={newInternship.role}
+                                        onChange={(e) => setnewInternship({ ...newInternship, role: e.target.value })}
+                                        as='input'
+                                        size="sm"
+                                        type='text'
+                                        id='role'
+                                        placeholder="Enter your role the Internship.."
+                                        style={{ marginBottom: "10px" }}
+                                    />
+                                </Col>
+                                <Col md={6} sm={12}>
                                     <Form.Label htmlFor="paid">Paid</Form.Label>
                                     <Form.Select id="paid" size='sm' style={{ marginBottom: "10px" }} defaultValue={newInternship.paid} onChange={(e) => { setnewInternship({ ...newInternship, paid: e.target.value }); }}>
                                         <option value="Yes">Yes</option>
                                         <option value="no">no</option>
                                     </Form.Select>
                                 </Col>
-                            </Row>
-                            <br />
-                            <Row>
+                                <Col md={6} sm={12}>
+                                    <Form.Label htmlFor="duration">Duration (in Days):</Form.Label>
+                                    <Form.Control
+                                        defaultValue={newInternship.duration}
+                                        onChange={(e) => setnewInternship({ ...newInternship, duration: e.target.value })}
+                                        as='input'
+                                        size="sm"
+                                        type='number'
+                                        id='duration'
+                                        placeholder="Duration of the internship"
+                                        style={{ marginBottom: "10px" }}
+                                    />
+                                </Col>
                                 <Col md={6} sm={12}>
                                     <Form.Label htmlFor="start-date">Starting date:</Form.Label>
                                     <Form.Control
@@ -104,9 +117,6 @@ const Internships = (props) => {
                                         <option value="completed">completed</option>
                                     </Form.Select>
                                 </Col>
-                            </Row>
-                            <br />
-                            <Row>
                                 {
                                     newInternship.status === 'completed' ?
                                         <>
@@ -157,6 +167,26 @@ const Internships = (props) => {
 
                                                     <Row>
                                                         <Col md={6} sm={12}>
+                                                            <Form.Label htmlFor="organization">Organization name</Form.Label>
+                                                            <Form.Control
+                                                                type="text"
+                                                                id="organization"
+                                                                size='sm'
+                                                                onChange={(e) => updateInternship(index, 'organization', e.target.value)}
+                                                                defaultValue={internship.organization}
+                                                                placeholder="Organization name"
+                                                                disabled={!props.edit}
+                                                                style={{ marginBottom: "10px" }}
+                                                            />
+                                                        </Col>
+                                                        <Col md={6} sm={12}>
+                                                            <Form.Label htmlFor="paid">Paid</Form.Label>
+                                                            <Form.Select id="paid" size='sm' disabled={!props.edit} style={{ marginBottom: "10px" }} defaultValue={newInternship.paid} onChange={(e) => { setnewInternship({ ...newInternship, paid: e.target.value }); }}>
+                                                                <option value="Yes">Yes</option>
+                                                                <option value="no">no</option>
+                                                            </Form.Select>
+                                                        </Col>
+                                                        <Col md={6} sm={12}>
                                                             <Form.Label htmlFor="start-date">Starting date</Form.Label>
                                                             <Form.Control
                                                                 defaultValue={internship.startDate}
@@ -170,11 +200,18 @@ const Internships = (props) => {
                                                             />
                                                         </Col>
                                                         <Col md={6} sm={12}>
-                                                            <Form.Label htmlFor="paid">Paid</Form.Label>
-                                                            <Form.Select id="paid" size='sm' disabled={!props.edit} style={{ marginBottom: "10px" }} defaultValue={newInternship.paid} onChange={(e) => { setnewInternship({ ...newInternship, paid: e.target.value }); }}>
-                                                                <option value="Yes">Yes</option>
-                                                                <option value="no">no</option>
-                                                            </Form.Select>
+                                                            <Form.Label htmlFor="duration">Duration (in Days):</Form.Label>
+                                                            <Form.Control
+                                                                defaultValue={internship.duration}
+                                                                onChange={(e) => updateInternship(index, 'duration', e.target.value)}
+                                                                as='input'
+                                                                size="sm"
+                                                                type='number'
+                                                                id='duration'
+                                                                disabled={!props.edit}
+                                                                placeholder="Duration of the internship"
+                                                                style={{ marginBottom: "10px" }}
+                                                            />
                                                         </Col>
                                                         <Col sm={12}>
                                                             <Row>
@@ -207,21 +244,9 @@ const Internships = (props) => {
                                                                 }
                                                             </Row>
                                                         </Col>
-                                                        <Col sm={12}>
-                                                            <Form.Label htmlFor="organization">Organization name</Form.Label>
-                                                            <Form.Control
-                                                                type="text"
-                                                                id="organization"
-                                                                size='sm'
-                                                                onChange={(e) => updateInternship(index, 'organization', e.target.value)}
-                                                                defaultValue={internship.organization}
-                                                                placeholder="Organization name"
-                                                                disabled={!props.edit}
-                                                            />
-                                                        </Col>
                                                         {
                                                             internship.status === 'completed' && props.edit ?
-                                                                <Col sm={12} style={{ marginTop: '10px' }}>
+                                                                <Col sm={12}>
                                                                     <Form.Label htmlFor="certificate">Certificate Link</Form.Label>
                                                                     <Form.Control
                                                                         defaultValue={internship.certificate}
@@ -234,7 +259,7 @@ const Internships = (props) => {
                                                                     />
                                                                 </Col> :
                                                                 internship.certificate ?
-                                                                    <a href={internship.certificate} style={{ textAligin: 'center', marginTop: '10px' }} rel="noreferrer" target="_blank">View cerificate</a>
+                                                                    <a href={internship.certificate} style={{ textAligin: 'center' }} rel="noreferrer" target="_blank">View cerificate</a>
                                                                     : null
                                                         }
                                                     </Row>
