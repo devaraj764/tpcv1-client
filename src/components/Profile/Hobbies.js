@@ -40,19 +40,19 @@ const Hobbies = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
             </div>
             <Card body style={{ padding: '8px' }}>
                 <Row style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-                    {addNew ? null : newHobbies?.length === 0 ?
+                    {addNew ? null : newHobbies ? newHobbies.length === 0 ?
                         <p style={{ textAlign: 'center', width: '100%', color: 'gray' }}> No Hobbies Available!<br /> Try to add new Hobbies...</p>
                         :
                         newHobbies.map((hobbie, index) => {
                             return (
-                                <Col key={index} sm={4} style={{marginBottom:'10px'}}>
+                                <Col key={index} sm={4} style={{ marginBottom: '10px' }}>
                                     <Badge style={{ padding: '15px', fontSize: '14px', color: 'black' }} bg="light" pill>
                                         {hobbie}&nbsp;
                                         {edit ? <MdOutlineCancel size={16} style={{ color: 'tomato', float: 'right', cursor: 'pointer' }} onClick={() => removeHobbie(hobbie)} /> : null}
                                     </Badge>
                                 </Col>
                             );
-                        })
+                        }) : null
                     }
                     {addNew ?
                         <Col lg={12}>

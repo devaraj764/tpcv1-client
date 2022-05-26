@@ -11,8 +11,9 @@ const Achievements = (props) => {
     });
 
     useEffect(() => {
-        setAchievements(props.profileData?.achievements ? props.profileData?.achievements : [])
-    }, [props.profileData]);
+        setAchievements(props.profileData.achievements
+            ? props.profileData.achievements : [])
+    }, [props.profileData.achievements]);
 
     const addAchievement = () => {
         setAchievements([...achievements, newAchievement]);

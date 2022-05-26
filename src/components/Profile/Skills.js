@@ -207,11 +207,11 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
                 <p className="sub-heading">Hard Skills</p>
                 <Row>
                     <Accordion>
-                        {hardSkills?.map((skill, index) => {
+                        {hardSkills? hardSkills.map((skill, index) => {
                             return <Accordion.Item eventKey={index} key={index}>
                                 <Accordion.Header>{skill.title}</Accordion.Header>
                                 <Accordion.Body>
-                                    {skill?.data?.map((item, index) => {
+                                    {skill ? skill.data.map((item, index) => {
                                         return (<div key={index}>
                                             <div>
                                                 <div className="skill">
@@ -224,7 +224,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
                                                         {item.name}
                                                     </p>
                                                     <div>
-                                                        {item.description !== undefined ? <Form.Control defaultValue={item.description} placeholder="Describe topics you know" onChange={(e) => changeDescription(e.target.value, item.name)} type='text' className='skillVal' style={{ flexWrap:'wrap', maxWidth:'400px' }} size='sm' aria-label="Default select example" disabled={!edit} /> :
+                                                        {item.description !== undefined ? <Form.Control defaultValue={item.description} placeholder="Describe topics you know" onChange={(e) => changeDescription(e.target.value, item.name)} type='text' className='skillVal' style={{ flexWrap: 'wrap', maxWidth: '400px' }} size='sm' aria-label="Default select example" disabled={!edit} /> :
                                                             <Form.Select onChange={(e) => changeSkillLevel(e.target.value, item.name, skill.title)} className="skillVal" size='sm' value={item.level} aria-label="Default select example" disabled={!edit}>
                                                                 <option value="Basic">Beginner</option>
                                                                 <option value="Moderate">Moderate</option>
@@ -243,7 +243,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
                                                 /> : null}
                                             </div>
                                         </div>)
-                                    })}<br />
+                                    }) : null}<br />
                                     {edit ? addNew ? <Button variant="light" onClick={() => setaddNew(false)} style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px', marginBottom: '20px' }} size='sm'>cancel</Button> : <Button style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px', marginBottom: '20px' }} size='sm' onClick={() => setaddNew(true)}>+ Add</Button> : null}
                                     {addNew ? <Col lg={12}>
                                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
@@ -270,7 +270,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
                                     </Col> : null}
                                 </Accordion.Body>
                             </Accordion.Item>
-                        })}
+                        }) : null}
                     </Accordion>
                 </Row>
             </Card>
@@ -280,11 +280,11 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
                 <p className="sub-heading">Soft Skills</p>
                 <Row>
                     <Accordion>
-                        {softSkills?.map((skill, index) => {
+                        {softSkills? softSkills.map((skill, index) => {
                             return skill.title === 'Language Proficiency' ? <Accordion.Item eventKey={index} key={index}>
                                 <Accordion.Header>{skill.title}</Accordion.Header>
                                 <Accordion.Body>
-                                    {skill?.data?.map((item, index) => {
+                                    {skill.data.map((item, index) => {
                                         return <div className="skill" key={index}>
                                             <p>
                                                 {
@@ -320,7 +320,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
                                     </Col> : null}
                                 </Accordion.Body>
                             </Accordion.Item> : <div className='softSkill' key={index}>
-                            <p style={{fontSize:'14px'}}>{skill.title}</p>
+                                <p style={{ fontSize: '14px' }}>{skill.title}</p>
                                 <center>
                                     <Form.Select className="skillVal" size='sm' onChange={(e) => changeSoftSkill(e.target.value, skill.title)} value={skill.level} style={{ maxWidth: '120px', height: '35px', alignItems: 'center', marginTop: '10px' }} aria-label="Default select example" disabled={!edit}>
                                         <option value="Beginner">Beginner</option>
@@ -329,7 +329,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
                                     </Form.Select>
                                 </center>
                             </div>
-                        })}
+                        }): null}
                     </Accordion>
                 </Row>
             </Card>

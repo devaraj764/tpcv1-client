@@ -174,9 +174,9 @@ body {
       .Skills {
         margin-top: 50px;
         .softSkill {
+          display: flex;
           border: 1px solid #dfdfdf;
           padding: 5px;
-          display: flex;
           p {
             width: 85%;
             font-size: 1rem;
@@ -218,6 +218,7 @@ body {
         min-height: 80px;
         border-radius: 10px;
         margin: 20px 0;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
         .notifier-typo {
           display: flex;
           align-items: center;
@@ -230,7 +231,7 @@ body {
         .notifier-body {
           display: flex;
           flex-direction: column;
-          align-items: start;
+          align-items: flex-start;
           justify-content: center;
           margin: 0 20px;
           .title {
@@ -303,7 +304,7 @@ body {
     p {
       font-weight: bold;
       font-size: 30px;
-      font-family: 'Nunito Sans', sans-serif;
+      font-family: "Nunito Sans", sans-serif;
     }
   }
 }

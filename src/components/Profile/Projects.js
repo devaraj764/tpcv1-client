@@ -14,7 +14,7 @@ const Projects = (props) => {
     });
 
     useEffect(() => {
-        setprojects(props.profileData?.projects ? props.profileData?.projects : []);
+        setprojects(props.profileData.projects ? props.profileData.projects : []);
     }, [props.profileData]);
 
     const addProject = () => {
@@ -105,7 +105,7 @@ const Projects = (props) => {
                                             <Accordion.Body>
                                                 {
                                                     !props.edit ?
-                                                        project.link !== '' ? <a href={project.link} rel="noreferrer" target="_blank" style={{ float: 'right', marginBottom: "10px", textDecoration: 'none' }}><FiLink size={14} />&nbsp;know more</a> : null
+                                                        project.link !== '' ? <a href={project.link} target="_blank" rel="noopener noreferrer" style={{ float: 'right', marginBottom: "10px", textDecoration: 'none' }}><FiLink size={14} />&nbsp;know more</a> : null
                                                         :
                                                         <Form.Control
                                                             type="text"

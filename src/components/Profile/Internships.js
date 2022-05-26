@@ -18,7 +18,7 @@ const Internships = (props) => {
     });
 
     useEffect(() => {
-        setinternships(props.profileData?.internships ? props.profileData?.internships : []);
+        setinternships(props.profileData.internships ? props.profileData.internships : []);
     }, [props.profileData]);
 
     const addInternship = () => {
@@ -268,7 +268,7 @@ const Internships = (props) => {
                                                                     />
                                                                 </Col> :
                                                                 internship.certificate ?
-                                                                    <a href={internship.certificate} style={{ textAligin: 'center' }} rel="noreferrer" target="_blank">View cerificate</a>
+                                                                    <a href={internship.certificate} style={{ textAligin: 'center' }} rel="noopener noreferrer" target="_blank">View cerificate</a>
                                                                     : null
                                                         }
                                                     </Row>

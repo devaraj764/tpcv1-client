@@ -17,7 +17,7 @@ const Certifications = (props) => {
     });
 
     useEffect(() => {
-        setcertifications(props.profileData?.certifications ? props.profileData?.certifications : []);
+        setcertifications(props.profileData.certifications ? props.profileData.certifications : []);
     }, [props.profileData]);
 
     const addCertification = () => {
@@ -123,7 +123,7 @@ const Certifications = (props) => {
                         </>
                         :
                         <Accordion>
-                            {certifications?.map((certification, index) => {
+                            {certifications? certifications.map((certification, index) => {
                                 return (
                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} key={index}>
                                         {
@@ -138,7 +138,7 @@ const Certifications = (props) => {
                                                         <Row style={{ margin: '0 10px', textAlign: 'center' }}>
                                                             <Col style={{ float: 'left', marginBottom: "10px", color: '#071a84' }}>{certification.startDate}</Col>
                                                             <Col style={{ float: 'right', marginBottom: "10px", color: '#071a84' }}>{certification.endDate}</Col>
-                                                            {certification.link !== '' ? <Col style={{ float: 'right', marginBottom: "10px", color: '#071a84' }}><a href={certification.link} rel="noreferrer" target="_blank" style={{ textDecoration: 'none' }}><FiLink size={14} />&nbsp;Certifiicate</a></Col> : null}
+                                                            {certification.link !== '' ? <Col style={{ float: 'right', marginBottom: "10px", color: '#071a84' }}><a href={certification.link} rel="noopener noreferrer" target="_blank" style={{ textDecoration: 'none' }}><FiLink size={14} />&nbsp;Certifiicate</a></Col> : null}
                                                         </Row>
                                                         :
                                                         <Row>
@@ -162,7 +162,7 @@ const Certifications = (props) => {
                                                                 </Form.Select>
                                                             </Col>
                                                             {
-                                                                document.getElementById(certification.title)?.value === 'completed' ?
+                                                                document.getElementById(certification.title).value === 'completed' ?
                                                                     <>
                                                                         <Col md={6} sm={12} style={{ marginTop: '10px' }}>
                                                                             <Form.Label htmlFor="end-date">End date</Form.Label>
@@ -204,7 +204,7 @@ const Certifications = (props) => {
                                         </Accordion.Item>
                                     </div>
                                 )
-                            })}
+                            }) : null}
                         </Accordion>
                 }
                 {
