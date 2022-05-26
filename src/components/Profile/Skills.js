@@ -224,7 +224,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
                                                         {item.name}
                                                     </p>
                                                     <div>
-                                                        {item.description !== undefined ? <Form.Control defaultValue={item.description} placeholder="Describe topics you know" onChange={(e) => changeDescription(e.target.value, item.name)} type='text' className='skillVal' style={{ maxWidth: '300px' }} size='sm' aria-label="Default select example" disabled={!edit} /> :
+                                                        {item.description !== undefined ? <Form.Control defaultValue={item.description} placeholder="Describe topics you know" onChange={(e) => changeDescription(e.target.value, item.name)} type='text' className='skillVal' style={{ flexWrap:'wrap', maxWidth:'400px' }} size='sm' aria-label="Default select example" disabled={!edit} /> :
                                                             <Form.Select onChange={(e) => changeSkillLevel(e.target.value, item.name, skill.title)} className="skillVal" size='sm' value={item.level} aria-label="Default select example" disabled={!edit}>
                                                                 <option value="Basic">Beginner</option>
                                                                 <option value="Moderate">Moderate</option>
@@ -319,7 +319,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
                                     </Col> : null}
                                 </Accordion.Body>
                             </Accordion.Item> : <div className='softSkill' key={index}>
-                                <p>{skill.title}</p>
+                            <p style={{fontSize:'14px'}}>{skill.title}</p>
                                 <center>
                                     <Form.Select className="skillVal" size='sm' onChange={(e) => changeSoftSkill(e.target.value, skill.title)} value={skill.level} style={{ maxWidth: '120px', height: '35px', alignItems: 'center', marginTop: '10px' }} aria-label="Default select example" disabled={!edit}>
                                         <option value="Beginner">Beginner</option>
