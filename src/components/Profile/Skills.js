@@ -259,11 +259,12 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
                                                 type="text"
                                                 placeholder='specialization'
                                             /> : null}
-                                            {skill.title === 'Subjects' ? <Form.Control value={newSubject.description} type='text' placeholder='Describe topics you know' onChange={(e) => setnewSubject({ ...newSubject, description: e.target.value })} /> : <Form.Select value={newskill.level} onChange={(e) => setnewskill({ ...newskill, level: e.target.value })} aria-label="Default select example">
-                                                <option value="Beginner">Beginner</option>
-                                                <option value="Moderate">Moderate</option>
-                                                <option value="Advanced">Advanced</option>
-                                            </Form.Select>}
+                                            {skill.title === 'Subjects' ? <Form.Control value={newSubject.description} type='text' placeholder='Describe topics you know' onChange={(e) => setnewSubject({ ...newSubject, description: e.target.value })} />
+                                                : <Form.Select value={newskill.level} onChange={(e) => setnewskill({ ...newskill, level: e.target.value })} aria-label="Default select example">
+                                                    <option value="Beginner">Beginner</option>
+                                                    <option value="Moderate">Moderate</option>
+                                                    <option value="Advanced">Advanced</option>
+                                                </Form.Select>}
                                             <Button style={{ backgroundColor: '#071a84', fontSize: '14px !important', minWidth: '100px' }} onClick={() => addHardSkill(skill.title)}>Add</Button>
                                         </div>
                                     </Col> : null}

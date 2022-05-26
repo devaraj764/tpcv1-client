@@ -17,6 +17,7 @@ const Profile = (props) => {
     const [edit, setEdit] = useState(false);
     const [profileData, setprofileData] = useState(null);
     const [updatedProfile, setupdatedProfile] = useState({});
+    const [loader, setloader] = useState(false);
 
     useEffect(() => {
         const token = localStorage.getItem('auth-token');
@@ -41,15 +42,19 @@ const Profile = (props) => {
     }, [props.api]);
 
 
-    const handleChanges = () => {
+    const handleChanges = async () => {
+        setloader(true);
         const url = props.api + 'students/'
-        axios.patch(url, updatedProfile, {
+        await axios.patch(url, updatedProfile, {
             headers: {
                 "auth-token": localStorage.getItem('auth-token')
             }
         }).then((res) => {
-            console.log(res)
-        }).catch((err) => console.log(err))
+            setloader(false);
+        }).catch((err) => {
+            console.log(err);
+            setloader(false);
+        })
         setEdit(false);
     }
 
@@ -64,7 +69,7 @@ const Profile = (props) => {
         <div className="profile">
             <Row className="justify-content-md-center">
                 <Col xs={12} lg="8">
-                    <ProfileBanner handleChanges={handleChanges} edit={edit} setEdit={setEdit} logout={Logout} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
+                    <ProfileBanner handleChanges={handleChanges} loader={loader} edit={edit} setEdit={setEdit} logout={Logout} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
                     <hr />
                     <Nav fill variant="pills" defaultActiveKey={tab}>
                         <Nav.Item>
@@ -93,7 +98,7 @@ const Profile = (props) => {
                                     </>
                                     : <div style={{ minHeight: '20vh', textAlign: 'center' }}>
                                         <center style={{ marginTop: '80px' }}>
-                                            <Spinner size='xl' animation='grow' /><br/><br/>
+                                            <Spinner size='xl' animation='grow' /><br /><br />
                                             Retrieving data...
                                         </center>
                                     </div>
@@ -114,8 +119,8 @@ const Profile = (props) => {
                                         <>
                                             <Projects edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
                                             <Internships edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
-                                            <Certifications edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile}/>
-                                            <Achievements edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile}/>
+                                            <Certifications edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
+                                            <Achievements edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
                                         </> : null
 
                     }

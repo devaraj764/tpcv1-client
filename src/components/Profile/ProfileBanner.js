@@ -1,8 +1,8 @@
-import { Image, Button, Form } from 'react-bootstrap';
+import { Image, Button, Form, Spinner } from 'react-bootstrap';
 import { AiOutlineCamera } from 'react-icons/ai'
 import React, { useState, useEffect } from 'react';
 
-const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, updatedProfile, setupdatedProfile }) => {
+const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, updatedProfile, setupdatedProfile, loader }) => {
     const [profileUrl, setprofileUrl] = useState('');
 
     useEffect(() => {
@@ -19,7 +19,6 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, upda
     }
 
     async function handleProfile(uploader) {
-        console.log(uploader.target.files[0].size);
         if (uploader.target.files[0].size > 2000000) {
             alert('Profile Image size should be less than 2mb');
             return;
@@ -49,7 +48,7 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, upda
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     {edit ?
                         <>
-                            <Button variant="primary" onClick={() => handleChanges()} size='sm'>Save changes</Button>
+                            <Button variant="primary" onClick={() => handleChanges()} size='sm'>{loader ? <Spinner animation="border" size='sm' /> : 'Save changes'}</Button>
                             <Button variant="light" onClick={() => setEdit(false)} size='sm'>Cancel</Button>
                         </>
                         :
