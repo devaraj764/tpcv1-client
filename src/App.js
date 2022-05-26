@@ -15,7 +15,7 @@ import PageNotFound from './pages/PageNotFound'
 function App() {
   // const api = 'https://tpcapi.herokuapp.com/';
   // const api = 'http://localhost:3000/'
-  const api = 'https://4027-2409-4070-2cc4-c7cd-75bb-b8a7-c88a-2ceb.in.ngrok.io/'
+  const api = 'https://tpc-api.loca.lt/'
 
   useEffect(() => {
     if (window.location.pathname === '/') {

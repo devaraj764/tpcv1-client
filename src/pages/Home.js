@@ -96,6 +96,7 @@ function Login(props) {
                 setsuccess(res.data.message)
             }).catch(err => {
                 console.log(err)
+                seterror(err.data.message)
             });
         }
     }
