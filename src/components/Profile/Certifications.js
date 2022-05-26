@@ -137,7 +137,7 @@ const Certifications = (props) => {
                                                     !props.edit ?
                                                         <Row style={{ margin: '0 10px', textAlign: 'center' }}>
                                                             <Col style={{ float: 'left', marginBottom: "10px", color: '#071a84' }}>{certification.startDate}</Col>
-                                                            <Col style={{ float: 'right', marginBottom: "10px", color: '#071a84' }}>{certification.status}</Col>
+                                                            <Col style={{ float: 'right', marginBottom: "10px", color: '#071a84' }}>{certification.endDate}</Col>
                                                             {certification.link !== '' ? <Col style={{ float: 'right', marginBottom: "10px", color: '#071a84' }}><a href={certification.link} rel="noreferrer" target="_blank" style={{ textDecoration: 'none' }}><FiLink size={14} />&nbsp;Certifiicate</a></Col> : null}
                                                         </Row>
                                                         :
