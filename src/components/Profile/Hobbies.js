@@ -41,7 +41,7 @@ const Hobbies = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
             <Card body style={{ padding: '8px' }}>
                 <Row style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
                     {addNew ? null : newHobbies?.length === 0 ?
-                        <p style={{ textAlign: 'center', width: '100%', color: 'gray' }}> No Links Available!<br /> Try to add new links...</p>
+                        <p style={{ textAlign: 'center', width: '100%', color: 'gray' }}> No Hobbies Available!<br /> Try to add new Hobbies...</p>
                         :
                         newHobbies.map((hobbie, index) => {
                             return (
