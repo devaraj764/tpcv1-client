@@ -37,7 +37,6 @@ const Profile = (props) => {
             setprofileData(res.data)
         }).catch((err) => {
             if (!err.request.data) Logout();
-            console.log(err.request.data)
         });
     }, [props.api]);
 
@@ -52,7 +51,6 @@ const Profile = (props) => {
         }).then((res) => {
             setloader(false);
         }).catch((err) => {
-            console.log(err);
             setloader(false);
         })
         setEdit(false);

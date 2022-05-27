@@ -127,7 +127,6 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
                 ]
             }
             setsoftSkills(newsoftSkills);
-            console.log(newsoftSkills);
             setupdatedProfile({ ...updatedProfile, softSkills: newsoftSkills });
             setaddNew(false)
         }
@@ -192,7 +191,6 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
             "data": newsoftSkills[0].data.filter((_, i) => i !== index)
         }
         setsoftSkills(newsoftSkills);
-        console.log({ ...updatedProfile, softSkills: newsoftSkills })
         setupdatedProfile({ ...updatedProfile, softSkills: newsoftSkills })
     }
 

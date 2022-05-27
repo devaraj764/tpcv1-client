@@ -46,10 +46,8 @@ const Notifications = (props) => {
       }
     }).then((res) => {
       setNotifications(res.data.message);
-      console.log(res.data.message);
     }).catch((err) => {
       setNotifications('error')
-      console.log(err);
     });
   }, [props.api]);
 
