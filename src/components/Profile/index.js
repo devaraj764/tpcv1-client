@@ -28,7 +28,7 @@ const Profile = (props) => {
     }, [Token, props.history]);
 
     useEffect(() => {
-        const url = props.api + 'students/mydata'
+        const url = props.api + '/students/mydata'
         axios.get(url, {
             headers: {
                 "auth-token": localStorage.getItem('auth-token')
@@ -44,7 +44,7 @@ const Profile = (props) => {
 
     const handleChanges = async () => {
         setloader(true);
-        const url = props.api + 'students/'
+        const url = props.api + '/students/'
         await axios.patch(url, updatedProfile, {
             headers: {
                 "auth-token": localStorage.getItem('auth-token')
@@ -69,7 +69,7 @@ const Profile = (props) => {
         <div className="profile">
             <Row className="justify-content-md-center">
                 <Col xs={12} lg="8">
-                    <ProfileBanner handleChanges={handleChanges} loader={loader} edit={edit} setEdit={setEdit} logout={Logout} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
+                    <ProfileBanner handleChanges={handleChanges} loader={loader} edit={edit} setEdit={setEdit} logout={Logout} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} api={props.api} />
                     <hr />
                     <Nav fill variant="pills" defaultActiveKey={tab}>
                         <Nav.Item>

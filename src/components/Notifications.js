@@ -39,7 +39,7 @@ const Notifications = (props) => {
   }, [props.history]);
 
   useEffect(() => {
-    const url = props.api + 'students/notifications'
+    const url = props.api + '/students/notifications'
     axios.get(url, {
       headers: {
         "auth-token": localStorage.getItem('auth-token')
@@ -86,8 +86,8 @@ const Notifications = (props) => {
 
                 </div>
                 <div className="notifier-body">
-                  <span className="title">{notifier.type.toUpperCase()}</span>
-                  <span className="description">We have successfully created</span>
+                  <span className="title">{notifier.title.toUpperCase()}</span>
+                  <span className="description">{notifier.description}</span>
                 </div>
               </div>
             )) : 

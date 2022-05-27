@@ -20,7 +20,7 @@ const Dashboard = (props) => {
     }, [props.history]);
 
     useEffect(() => {
-        const url = props.api + 'students/mydata'
+        const url = props.api + '/students/mydata'
         axios.get(url, {
             headers: {
                 "auth-token": localStorage.getItem('auth-token')

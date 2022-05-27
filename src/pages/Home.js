@@ -69,7 +69,7 @@ function Login(props) {
     function loginUser() {
         props.setLoader(true);
         setsuccess('')
-        const url = props.api + 'login'
+        const url = props.api + '/login'
         axios.post(url, {
             "idNo": idNo,
             "password": password,
@@ -88,15 +88,15 @@ function Login(props) {
         if (idNo === '') {
             seterror('Enter your idNo')
         } else {
-            axios.post(props.api + 'forgot-password', {
+            axios.post(props.api + '/forgot-password', {
                 "idNo": idNo,
             }).then(res => {
                 console.log(res.data.message)
                 seterror('')
                 setsuccess(res.data.message)
             }).catch(err => {
-                console.log(err)
-                seterror(err.data.message)
+                // console.log(err)
+                seterror(err.response.data.message)
             });
         }
     }
@@ -183,7 +183,7 @@ function Register(props) {
 
     function registerUser() {
         props.setLoader(true);
-        const url = props.api + 'register'
+        const url = props.api + '/register'
         axios.post(url, {
             "name": name,
             "idNo": id,
@@ -195,6 +195,7 @@ function Register(props) {
             "address": address,
             "contactNumber": contactNum,
             "password": password,
+            "imageUrl": null,
             "hardSkills": hardSkills,
             "softSkills": softSkills,
             "graduation": {

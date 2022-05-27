@@ -2,17 +2,12 @@ import { Image, Button, Form, Spinner } from 'react-bootstrap';
 import { AiOutlineCamera } from 'react-icons/ai'
 import React, { useState, useEffect } from 'react';
 
-const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, updatedProfile, setupdatedProfile, loader }) => {
-    const [profileUrl, setprofileUrl] = useState('');
+const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, updatedProfile, setupdatedProfile, loader, api }) => {
+
+    const [profileUrl, setprofileUrl] = useState(null);
 
     useEffect(() => {
-        setprofileUrl(profileData ?
-            profileData.profilePicture ?
-                profileData ?
-                    profileData.profilePicture
-                    : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80'
-                : null
-            : null)
+        setprofileUrl(profileData ? profileData.imageUrl ? `${api}${profileData.imageUrl}` : null : null);
     }, [profileData]);
 
     function getBase64(file) {
@@ -34,7 +29,7 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, upda
             url = res
         })
         setprofileUrl(url);
-        setupdatedProfile({ ...updatedProfile, profilePicture: url })
+        setupdatedProfile({ ...updatedProfile, imageUrl: uploader.target.files[0] })
     }
 
 
@@ -42,7 +37,7 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, upda
         <div className='profile-banner'>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div className='imageUpload'>
-                    <Image fluid src={profileUrl}
+                    <Image fluid src={profileUrl ? profileUrl : 'https://www.visiondefenceacademy.in/Uploads/student/137899048ab0cc455154006fdb9676964b3.jpg'}
                         alt="profile image" className="profileImage" style={{ position: 'relative', opacity: edit ? '0.7' : '1' }} />
                     {edit ?
                         <div style={{ position: 'absolute', background: 'transparent', opacity: '0.5', zIndex: '2', marginTop: '-60px', marginLeft: '45px' }}>
