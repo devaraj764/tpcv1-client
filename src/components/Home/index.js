@@ -17,9 +17,11 @@ const Home = (props) => {
               <span className="message">Actions that you need to do immediately</span></p>
             <ListGroup as="ol" variant="flush" numbered>
               <ListGroup.Item as="li"><a href="/dashboard/profile">Complete your profile by clicking on profile nav button (on top-right corner)</a></ListGroup.Item>
-              <ListGroup.Item as="li"><a href="/dashboard/profile">Upload your profile image and educational details</a></ListGroup.Item>
-              <ListGroup.Item as="li"> <a href="/dashboard/profile">Rate your skills in the skills section</a></ListGroup.Item>
-              <ListGroup.Item as="li"><a href="/dashboard/profile">Create your LinkedIn profiles to add in social media section</a></ListGroup.Item>
+              <ListGroup.Item as="li"><a href="/dashboard/profile">Upload your profile image and describe yourself in bio</a></ListGroup.Item>
+              <ListGroup.Item as="li"> <a href="/dashboard/profile">Add your hobbies and social links (Github, LinkedIn, hackerrank, leetcode ...)</a></ListGroup.Item>
+              <ListGroup.Item as="li"><a href="/dashboard/profile">Add your skills and rate them in skill section</a></ListGroup.Item>
+              <ListGroup.Item as="li"><a href="/dashboard/profile">Add education details in education section</a></ListGroup.Item>
+              <ListGroup.Item as="li"><a href="/dashboard/profile">Add your projects, internships, certifications and achievements in feats section</a></ListGroup.Item>
             </ListGroup>
           </Card>
           <br />

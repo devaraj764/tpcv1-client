@@ -6,13 +6,7 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, upda
     const [profileUrl, setprofileUrl] = useState('');
 
     useEffect(() => {
-        setprofileUrl(profileData ?
-            profileData.profilePicture ?
-                profileData ?
-                    profileData.profilePicture
-                    : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80'
-                : null
-            : null)
+        setprofileUrl(profileData ? profileData.profilePicture !== '' ? profileData.profilePicture : 'https://www.edgroom.com/uploads/profile/default_user.jpg' : 'https://www.edgroom.com/uploads/profile/default_user.jpg')
     }, [profileData]);
 
     function getBase64(file) {
