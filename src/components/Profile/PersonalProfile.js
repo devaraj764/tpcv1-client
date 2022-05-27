@@ -5,7 +5,7 @@ import { BiRename } from 'react-icons/bi'
 import { FaBirthdayCake, FaBook } from 'react-icons/fa';
 import { SiGoogleclassroom } from 'react-icons/si';
 
-const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
+const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile, setDirty }) => {
     return (
         <div className="personal-details">
             <p className="heading">Personal Details<br />
@@ -18,7 +18,7 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile 
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1"><BiRename /></InputGroup.Text>
                             <FormControl
-                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, name: e.target.value }) }}
+                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, name: e.target.value }); setDirty() }}
                                 type='text'
                                 defaultValue={profileData.name}
                                 placeholder="Full Name"
@@ -62,7 +62,7 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile 
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1"><SiGoogleclassroom /></InputGroup.Text>
                             <Form.Select
-                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, section: e.target.value }) }}
+                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, section: e.target.value }); setDirty() }}
                                 type='text'
                                 defaultValue={profileData.section ? profileData.section : '-- select --'}
                                 placeholder="section code"
@@ -85,7 +85,7 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile 
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1"><FaBirthdayCake /></InputGroup.Text>
                             <FormControl
-                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, dob: e.target.value }) }}
+                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, dob: e.target.value }); setDirty() }}
                                 type='date'
                                 defaultValue={profileData.dob}
                                 placeholder="Enter your date of birth"
@@ -100,7 +100,7 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile 
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1"><MdBatchPrediction /></InputGroup.Text>
                             <Form.Select
-                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, batch: e.target.value }) }}
+                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, batch: e.target.value }); setDirty() }}
                                 type='text'
                                 defaultValue={profileData.batch ? profileData.batch : '-- select --'}
                                 placeholder="Enter your bacth"
@@ -123,7 +123,7 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile 
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1"><FaBook /></InputGroup.Text>
                             <Form.Select
-                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, yearofStudy: e.target.value }) }}
+                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, yearofStudy: e.target.value }); setDirty() }}
                                 type='text'
                                 defaultValue={profileData.yearofStudy ? profileData.yearofStudy : '-- select --'}
                                 placeholder="Enter your year of study"
@@ -142,7 +142,7 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile 
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1"><MdPhone /></InputGroup.Text>
                             <FormControl
-                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, contactNumber: e.target.value }) }}
+                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, contactNumber: e.target.value }); setDirty() }}
                                 type='text'
                                 defaultValue={profileData.contactNumber}
                                 placeholder="Enter your contact number"
@@ -156,7 +156,7 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile 
                         <Form.Label htmlFor="contactNumber" className="label">Address</Form.Label>
                         <InputGroup className="mb-3">
                             <FormControl
-                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, address: e.target.value }) }}
+                                onChange={(e) => { setupdatedProfile({ ...updatedProfile, address: e.target.value }); setDirty() }}
                                 as='textarea'
                                 type='text'
                                 defaultValue={profileData.address}
@@ -173,7 +173,7 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile 
                 <Form.Label htmlFor="bio" className="label">Bio</Form.Label>
                 <FormControl
                     defaultValue={profileData.bio}
-                    onChange={(e) => { setupdatedProfile({ ...updatedProfile, bio: e.target.value }) }}
+                    onChange={(e) => { setupdatedProfile({ ...updatedProfile, bio: e.target.value }); setDirty() }}
                     as='textarea'
                     rows='5'
                     id="bio"

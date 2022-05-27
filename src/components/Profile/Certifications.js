@@ -5,7 +5,7 @@ import { MdDelete } from 'react-icons/md'
 
 
 const Certifications = (props) => {
-    const [addNew, setaddNew] = React.useState(false);
+    const [addNew, setaddNew] = useState(false);
     const [certifications, setcertifications] = useState([]);
     const [newCertification, setnewCertification] = useState({
         'title': '',
@@ -21,12 +21,22 @@ const Certifications = (props) => {
     }, [props.profileData]);
 
     const addCertification = () => {
+        setnewCertification({
+            'title': '',
+            'organization': '',
+            'startDate': '',
+            'endDate': '',
+            'status': '',
+            'link': ''
+        })
+        props.setDirty();
         setcertifications([...certifications, newCertification]);
         props.setupdatedProfile({ ...props.updatedProfile, certifications: [...certifications, newCertification] });
         setaddNew(false);
     }
 
     const updateCertification = (index, key, value) => {
+        props.setDirty();
         const newCertifications = [...certifications];
         newCertifications[index] = {
             ...newCertifications[index],
@@ -37,6 +47,7 @@ const Certifications = (props) => {
     }
 
     const deleteCertification = (index) => {
+        props.setDirty();
         setcertifications(certifications.filter((_, i) => i !== index));
         props.setupdatedProfile({ ...props.updatedProfile, certifications: certifications.filter((_, i) => i !== index) });
     }
@@ -53,7 +64,7 @@ const Certifications = (props) => {
                             <Form.Label htmlFor="title">Title</Form.Label>
                             <Form.Control
                                 defaultValue={newCertification.title}
-                                onChange={(e) => setnewCertification({ ...newCertification, title: e.target.value })}
+                                onChange={(e) => { setnewCertification({ ...newCertification, title: e.target.value }); props.setDirty() }}
                                 as='input'
                                 type='text'
                                 id='title'
@@ -63,7 +74,7 @@ const Certifications = (props) => {
                             <Form.Label htmlFor="organization">Organization name:</Form.Label>
                             <Form.Control
                                 defaultValue={newCertification.organization}
-                                onChange={(e) => setnewCertification({ ...newCertification, organization: e.target.value })}
+                                onChange={(e) => { setnewCertification({ ...newCertification, organization: e.target.value }); props.setDirty() }}
                                 as='input'
                                 type='text'
                                 id='organization'
@@ -75,7 +86,7 @@ const Certifications = (props) => {
                                     <Form.Label htmlFor="start-date">Starting date</Form.Label>
                                     <Form.Control
                                         defaultValue={newCertification.startDate}
-                                        onChange={(e) => setnewCertification({ ...newCertification, startDate: e.target.value })}
+                                        onChange={(e) => { setnewCertification({ ...newCertification, startDate: e.target.value }); props.setDirty() }}
                                         type="date"
                                         id="start-date"
                                         size='sm'
@@ -85,7 +96,7 @@ const Certifications = (props) => {
                                 </Col>
                                 <Col md={6} sm={12} style={{ marginTop: '10px' }}>
                                     <Form.Label htmlFor="status">Status</Form.Label>
-                                    <Form.Select id="status" size='sm' style={{ marginBottom: "10px" }} defaultValue={newCertification.status} onChange={(e) => setnewCertification({ ...newCertification, status: e.target.value })}>
+                                    <Form.Select id="status" size='sm' style={{ marginBottom: "10px" }} defaultValue={newCertification.status} onChange={(e) => { setnewCertification({ ...newCertification, status: e.target.value }); props.setDirty() }}>
                                         <option value="working">working</option>
                                         <option value="completed">completed</option>
                                     </Form.Select>
@@ -97,7 +108,7 @@ const Certifications = (props) => {
                                                 <Form.Label htmlFor="end-date">End date</Form.Label>
                                                 <Form.Control
                                                     defaultValue={newCertification.endDate}
-                                                    onChange={(e) => setnewCertification({ ...newCertification, endDate: e.target.value })}
+                                                    onChange={(e) => { setnewCertification({ ...newCertification, endDate: e.target.value }); props.setDirty() }}
                                                     type="date"
                                                     id="end-date"
                                                     size='sm'
@@ -109,7 +120,7 @@ const Certifications = (props) => {
                                                 <Form.Label htmlFor="link">Certificate Link</Form.Label>
                                                 <Form.Control
                                                     defaultValue={newCertification.link}
-                                                    onChange={(e) => setnewCertification({ ...newCertification, link: e.target.value })}
+                                                    onChange={(e) => { setnewCertification({ ...newCertification, link: e.target.value }); props.setDirty() }}
                                                     as='input'
                                                     type='text'
                                                     id='link'
@@ -123,7 +134,7 @@ const Certifications = (props) => {
                         </>
                         :
                         <Accordion>
-                            {certifications? certifications.map((certification, index) => {
+                            {certifications ? certifications.map((certification, index) => {
                                 return (
                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} key={index}>
                                         {
@@ -156,39 +167,40 @@ const Certifications = (props) => {
                                                             </Col>
                                                             <Col md={6} sm={12}>
                                                                 <Form.Label htmlFor="status">Status</Form.Label>
-                                                                <Form.Select defaultValue={certification.status} id={certification.title} size='sm' style={{ marginBottom: "10px" }} onChange={(e) => updateCertification(index, 'status', e.target.value)}>
+                                                                <Form.Select defaultValue={certification.status} size='sm' style={{ marginBottom: "10px" }} onChange={(e) => updateCertification(index, 'status', e.target.value)}>
                                                                     <option value="working">working</option>
                                                                     <option value="completed">completed</option>
                                                                 </Form.Select>
                                                             </Col>
                                                             {
-                                                                document.getElementById(certification.title).value === 'completed' ?
-                                                                    <>
-                                                                        <Col md={6} sm={12} style={{ marginTop: '10px' }}>
-                                                                            <Form.Label htmlFor="end-date">End date</Form.Label>
-                                                                            <Form.Control
-                                                                                defaultValue={certification.endDate}
-                                                                                onChange={(e) => updateCertification(index, 'endDate', e.target.value)}
-                                                                                type="date"
-                                                                                id="end-date"
-                                                                                size='sm'
-                                                                                placeholder="end date"
-                                                                                style={{ marginBottom: "10px" }}
-                                                                            />
-                                                                        </Col>
-                                                                        <Col md={6} sm={12} style={{ marginTop: '10px' }}>
-                                                                            <Form.Label htmlFor="link">Certificate Link</Form.Label>
-                                                                            <Form.Control
-                                                                                defaultValue={certification.link}
-                                                                                onChange={(e) => updateCertification(index, 'link', e.target.value)}
-                                                                                as='input'
-                                                                                type='text'
-                                                                                id='link'
-                                                                                placeholder="Enter your link of the certificate"
-                                                                            />
-                                                                        </Col>
-                                                                    </>
-                                                                    : null
+                                                                certification.status === 'completed' ?
+                                                                    certification.status === 'completed' ?
+                                                                        <>
+                                                                            <Col md={6} sm={12} style={{ marginTop: '10px' }}>
+                                                                                <Form.Label htmlFor="end-date">End date</Form.Label>
+                                                                                <Form.Control
+                                                                                    defaultValue={certification.endDate}
+                                                                                    onChange={(e) => updateCertification(index, 'endDate', e.target.value)}
+                                                                                    type="date"
+                                                                                    id="end-date"
+                                                                                    size='sm'
+                                                                                    placeholder="end date"
+                                                                                    style={{ marginBottom: "10px" }}
+                                                                                />
+                                                                            </Col>
+                                                                            <Col md={6} sm={12} style={{ marginTop: '10px' }}>
+                                                                                <Form.Label htmlFor="link">Certificate Link</Form.Label>
+                                                                                <Form.Control
+                                                                                    defaultValue={certification.link}
+                                                                                    onChange={(e) => updateCertification(index, 'link', e.target.value)}
+                                                                                    as='input'
+                                                                                    type='text'
+                                                                                    id='link'
+                                                                                    placeholder="Enter your link of the certificate"
+                                                                                />
+                                                                            </Col>
+                                                                        </>
+                                                                        : null : null
                                                             }
                                                         </Row>
                                                 }<br />
@@ -212,7 +224,7 @@ const Certifications = (props) => {
                         addNew ?
                             <div style={{ marginTop: '20px' }}>
                                 <Button size="sm" style={{ float: 'right', width: '100px', borderRadius: '25px' }} onClick={addCertification}>push</Button>
-                                <Button variant="light" size="sm" style={{ float: 'right', width: '100px', borderRadius: '25px', marginRight: '10px' }} onClick={() => { setaddNew(false) }}>cancel</Button>
+                                <Button variant="light" size="sm" style={{ float: 'right', width: '100px', borderRadius: '25px', marginRight: '10px' }} onClick={() => { setaddNew(false); props.setPristine(); }}>cancel</Button>
                             </div>
                             :
                             <Button size="sm" style={{ float: 'right', width: '100px', borderRadius: '25px', marginTop: '20px' }} onClick={() => setaddNew(true)}>+ Add</Button>

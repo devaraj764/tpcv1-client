@@ -22,6 +22,7 @@ const Internships = (props) => {
     }, [props.profileData]);
 
     const addInternship = () => {
+        props.setDirty();
         setnewInternship({
             'role': '',
             'organization': '',
@@ -38,6 +39,7 @@ const Internships = (props) => {
     }
 
     const updateInternship = (index, key, value) => {
+        props.setDirty();
         const newInternships = [...internships];
         newInternships[index] = {
             ...newInternships[index],
@@ -48,6 +50,7 @@ const Internships = (props) => {
     }
 
     const deleteInternship = (index) => {
+        props.setDirty();
         setinternships(internships.filter((_blank, i) => i !== index));
         props.setupdatedProfile({ ...props.updatedProfile, internships: internships.filter((_, i) => i !== index) });
     }
@@ -66,7 +69,7 @@ const Internships = (props) => {
                                     <Form.Label htmlFor="organization">Organization name:</Form.Label>
                                     <Form.Control
                                         defaultValue={newInternship.organization}
-                                        onChange={(e) => setnewInternship({ ...newInternship, organization: e.target.value })}
+                                        onChange={(e) => { setnewInternship({ ...newInternship, organization: e.target.value }); props.setDirty(); }}
                                         as='input'
                                         size="sm"
                                         type='text'
@@ -79,7 +82,7 @@ const Internships = (props) => {
                                     <Form.Label htmlFor="role">Role:</Form.Label>
                                     <Form.Control
                                         defaultValue={newInternship.role}
-                                        onChange={(e) => setnewInternship({ ...newInternship, role: e.target.value })}
+                                        onChange={(e) => { setnewInternship({ ...newInternship, role: e.target.value }); props.setDirty(); }}
                                         as='input'
                                         size="sm"
                                         type='text'
@@ -90,7 +93,7 @@ const Internships = (props) => {
                                 </Col>
                                 <Col md={6} sm={12}>
                                     <Form.Label htmlFor="paid">Paid</Form.Label>
-                                    <Form.Select id="paid" size='sm' style={{ marginBottom: "10px" }} defaultValue={newInternship.paid} onChange={(e) => setnewInternship({ ...newInternship, paid: e.target.value })}>
+                                    <Form.Select id="paid" size='sm' style={{ marginBottom: "10px" }} defaultValue={newInternship.paid} onChange={(e) => { setnewInternship({ ...newInternship, paid: e.target.value }); props.setDirty() }}>
                                         <option value="Yes">Yes</option>
                                         <option value="no">no</option>
                                     </Form.Select>
@@ -99,7 +102,7 @@ const Internships = (props) => {
                                     <Form.Label htmlFor="duration">Duration (in Months):</Form.Label>
                                     <Form.Control
                                         defaultValue={newInternship.duration}
-                                        onChange={(e) => setnewInternship({ ...newInternship, duration: e.target.value })}
+                                        onChange={(e) => { setnewInternship({ ...newInternship, duration: e.target.value }); props.setDirty(); }}
                                         as='input'
                                         size="sm"
                                         type='number'
@@ -112,7 +115,7 @@ const Internships = (props) => {
                                     <Form.Label htmlFor="start-date">Starting date:</Form.Label>
                                     <Form.Control
                                         defaultValue={newInternship.startDate}
-                                        onChange={(e) => setnewInternship({ ...newInternship, startDate: e.target.value })}
+                                        onChange={(e) => { setnewInternship({ ...newInternship, startDate: e.target.value }); props.setDirty(); }}
                                         type="date"
                                         id="start-date"
                                         size='sm'
@@ -122,7 +125,7 @@ const Internships = (props) => {
                                 </Col>
                                 <Col md={6} sm={12}>
                                     <Form.Label htmlFor="status">Status</Form.Label>
-                                    <Form.Select id="status" size='sm' style={{ marginBottom: "10px" }} defaultValue={newInternship.status} onChange={(e) => setnewInternship({ ...newInternship, status: e.target.value })}>
+                                    <Form.Select id="status" size='sm' style={{ marginBottom: "10px" }} defaultValue={newInternship.status} onChange={(e) => { setnewInternship({ ...newInternship, status: e.target.value }); props.setDirty() }}>
                                         <option value="working">working</option>
                                         <option value="completed">completed</option>
                                     </Form.Select>
@@ -134,7 +137,7 @@ const Internships = (props) => {
                                                 <Form.Label htmlFor="end-date">End date</Form.Label>
                                                 <Form.Control
                                                     defaultValue={newInternship.endDate}
-                                                    onChange={(e) => setnewInternship({ ...newInternship, endDate: e.target.value })}
+                                                    onChange={(e) => { setnewInternship({ ...newInternship, endDate: e.target.value }); props.setDirty(); }}
                                                     type="date"
                                                     id="end-date"
                                                     size='sm'
@@ -146,7 +149,7 @@ const Internships = (props) => {
                                                 <Form.Label htmlFor="certificate">Certificate Link</Form.Label>
                                                 <Form.Control
                                                     defaultValue={newInternship.certificate}
-                                                    onChange={(e) => setnewInternship({ ...newInternship, certificate: e.target.value })}
+                                                    onChange={(e) => { setnewInternship({ ...newInternship, certificate: e.target.value }); props.setDirty(); }}
                                                     type="text"
                                                     id="certificate"
                                                     size='sm'
@@ -285,7 +288,7 @@ const Internships = (props) => {
                         addNew ?
                             <div style={{ marginTop: '20px' }}>
                                 <Button size="sm" style={{ float: 'right', width: '100px', borderRadius: '25px' }} onClick={addInternship}>push</Button>
-                                <Button variant="light" size="sm" style={{ float: 'right', width: '100px', borderRadius: '25px', marginRight: '10px' }} onClick={() => { setaddNew(false) }}>cancel</Button>
+                                <Button variant="light" size="sm" style={{ float: 'right', width: '100px', borderRadius: '25px', marginRight: '10px' }} onClick={() => { setaddNew(false); props.setPristine() }}>cancel</Button>
                             </div>
                             :
                             <Button size="sm" style={{ float: 'right', width: '100px', borderRadius: '25px', marginTop: '20px' }} onClick={() => setaddNew(true)}>+ Add</Button>

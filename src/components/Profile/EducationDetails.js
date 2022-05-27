@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Row, Col, Card, Form, InputGroup, FormControl, Accordion } from 'react-bootstrap';
 
-const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
+const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile, Prompt, setDirty }) => {
     // Schooling Details
     const [schoolDetails, setSchoolDetails] = useState(null);
     const [name, setname] = useState('');
@@ -64,6 +64,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
     }, [universityName, universityLoc, universityCgpa, allCgpa, setupdatedProfile, updatedProfile, graduationDetails, setgraduationDetails]);
 
     const calculateAverageCgpa = (key, value) => {
+        setDirty();
         setallCgpa({ ...allCgpa, [key]: value });
 
         let sum = parseFloat("0.0");
@@ -87,7 +88,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1">at</InputGroup.Text>
                             <FormControl
-                                onChange={(e) => setname(e.target.value)}
+                                onChange={(e) => { setname(e.target.value); setDirty() }}
                                 value={name}
                                 placeholder="School Name"
                                 aria-label="SchoolName"
@@ -100,7 +101,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                     <Col md={6} sm={12}>
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1">Passed Out</InputGroup.Text>
-                            <Form.Select value={passout || passout !== '' ? passout : 'Year'} id="passout" aria-label="Default select example" disabled={!edit} onChange={(e) => setpassout(e.target.value)}>
+                            <Form.Select value={passout || passout !== '' ? passout : 'Year'} id="passout" aria-label="Default select example" disabled={!edit} onChange={(e) => { setpassout(e.target.value); setDirty() }}>
                                 <option disabled>Year</option>
                                 <option value="2016">2016</option>
                                 <option value="2017">2017</option>
@@ -117,7 +118,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                             <FormControl
                                 id="cgpa"
                                 value={cgpa}
-                                onChange={(e) => setcgpa(e.target.value)}
+                                onChange={(e) => { setcgpa(e.target.value); setDirty() }}
                                 placeholder="Your 10th CGPA"
                                 aria-label="SchoolName"
                                 aria-describedby="basic-addon1"
@@ -129,7 +130,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                         <InputGroup className="mb-3">
                             <FormControl
                                 id="location"
-                                onChange={(e) => setloc(e.target.value)}
+                                onChange={(e) => { setloc(e.target.value); setDirty() }}
                                 as='textarea'
                                 value={loc}
                                 placeholder="Your school address"
@@ -151,7 +152,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                             <InputGroup.Text id="basic-addon1">at</InputGroup.Text>
                             <FormControl
                                 value={clgName}
-                                onChange={(e) => setclgName(e.target.value)}
+                                onChange={(e) => { setclgName(e.target.value); setDirty() }}
                                 placeholder="University Name"
                                 aria-label="University name"
                                 aria-describedby="basic-addon1"
@@ -162,7 +163,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                     <Col md={6} sm={12}>
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1">Passed Out</InputGroup.Text>
-                            <Form.Select aria-label="Default select example" disabled={!edit} value={clgPassout || clgPassout !== '' ? clgPassout : 'Year'} onChange={(e) => setclgPassout(e.target.value)}>
+                            <Form.Select aria-label="Default select example" disabled={!edit} value={clgPassout || clgPassout !== '' ? clgPassout : 'Year'} onChange={(e) => { setclgPassout(e.target.value); setDirty() }}>
                                 <option disabled>Year</option>
                                 <option value="2016">2016</option>
                                 <option value="2017">2017</option>
@@ -178,7 +179,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                             <InputGroup.Text id="basic-addon1">CGPA</InputGroup.Text>
                             <FormControl
                                 value={clgCpga}
-                                onChange={(e) => setclgCpga(e.target.value)}
+                                onChange={(e) => { setclgCpga(e.target.value); setDirty() }}
                                 placeholder="Overall CGPA"
                                 aria-label="SchoolName"
                                 aria-describedby="basic-addon1"
@@ -191,7 +192,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                             <FormControl
                                 as='textarea'
                                 value={clgLoc}
-                                onChange={(e) => setclgLoc(e.target.value)}
+                                onChange={(e) => { setclgLoc(e.target.value); setDirty(); }}
                                 placeholder="Address of University"
                                 aria-label="address"
                                 aria-describedby="basic-addon1"
@@ -211,7 +212,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                             <InputGroup.Text id="basic-addon1">at</InputGroup.Text>
                             <FormControl
                                 value={universityName}
-                                onChange={(e) => setuniversityName(e.target.value)}
+                                onChange={(e) => { setuniversityName(e.target.value); setDirty() }}
                                 placeholder="University Name"
                                 aria-label="University name"
                                 aria-describedby="basic-addon1"
@@ -340,7 +341,6 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                             <InputGroup.Text id="basic-addon1">CGPA</InputGroup.Text>
                             <FormControl
                                 value={universityCgpa}
-                                onChange={(e) => setuniversityCgpa(e.target.value)}
                                 placeholder="Overall CGPA"
                                 aria-label="SchoolName"
                                 aria-describedby="basic-addon1"
@@ -352,7 +352,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                             <FormControl
                                 as='textarea'
                                 value={universityLoc}
-                                onChange={(e) => setuniversityLoc(e.target.value)}
+                                onChange={(e) => { setuniversityLoc(e.target.value); setDirty() }}
                                 placeholder="Address of University"
                                 aria-label="address"
                                 aria-describedby="basic-addon1"

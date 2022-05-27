@@ -18,12 +18,20 @@ const Projects = (props) => {
     }, [props.profileData]);
 
     const addProject = () => {
+        props.setDirty()
+        setnewProject({
+            title: '',
+            description: '',
+            technologies: '',
+            link: '',
+        })
         setprojects([...projects, newProject]);
         props.setupdatedProfile({ ...props.updatedProfile, projects: [...projects, newProject] });
         setaddNew(false);
     }
 
     const updateProject = (title, key, value) => {
+        props.setDirty()
         const index = projects.findIndex(project => project.title === title);
         const newProjects = [...projects];
         newProjects[index] = {
@@ -35,6 +43,7 @@ const Projects = (props) => {
     }
 
     const deleteProject = (x) => {
+        props.setDirty()
         setprojects(projects.filter(project => project.title !== x));
         props.setupdatedProfile({ ...props.updatedProfile, projects: projects.filter(project => project.title !== x) });
     }
@@ -51,7 +60,7 @@ const Projects = (props) => {
                             <Form.Label htmlFor="title">Project Title :</Form.Label>
                             <Form.Control
                                 value={newProject.title}
-                                onChange={(e) => setnewProject({ ...newProject, title: e.target.value })}
+                                onChange={(e) => { setnewProject({ ...newProject, title: e.target.value }); props.setDirty() }}
                                 as='input'
                                 type='text'
                                 id='title'
@@ -61,7 +70,7 @@ const Projects = (props) => {
                             <Form.Label htmlFor="description">Describe your project :</Form.Label>
                             <Form.Control
                                 value={newProject.description}
-                                onChange={(e) => setnewProject({ ...newProject, description: e.target.value })}
+                                onChange={(e) => { setnewProject({ ...newProject, description: e.target.value }); props.setDirty() }}
                                 as='textarea'
                                 roes={3}
                                 id='description'
@@ -71,7 +80,7 @@ const Projects = (props) => {
                             <Form.Label htmlFor="links">Technologies used :</Form.Label>
                             <Form.Control
                                 value={newProject.technologies}
-                                onChange={(e) => setnewProject({ ...newProject, technologies: e.target.value })}
+                                onChange={(e) => { setnewProject({ ...newProject, technologies: e.target.value }); props.setDirty() }}
                                 as='input'
                                 type='text'
                                 id='links'
@@ -81,7 +90,7 @@ const Projects = (props) => {
                             <Form.Label htmlFor="links">External link :</Form.Label>
                             <Form.Control
                                 value={newProject.link}
-                                onChange={(e) => setnewProject({ ...newProject, link: e.target.value })}
+                                onChange={(e) => { setnewProject({ ...newProject, link: e.target.value }); props.setDirty() }}
                                 as='input'
                                 type='text'
                                 id='links'
@@ -146,7 +155,7 @@ const Projects = (props) => {
                         addNew ?
                             <div style={{ marginTop: '20px' }}>
                                 <Button size="sm" style={{ float: 'right', width: '100px', borderRadius: '25px' }} onClick={addProject}>push</Button>
-                                <Button variant="light" size="sm" style={{ float: 'right', width: '100px', borderRadius: '25px', marginRight: '10px' }} onClick={() => setaddNew(false)}>cancel</Button>
+                                <Button variant="light" size="sm" style={{ float: 'right', width: '100px', borderRadius: '25px', marginRight: '10px' }} onClick={() => { setaddNew(false); props.setPristine() }}>cancel</Button>
                             </div>
                             :
                             <Button size="sm" style={{ float: 'right', width: '100px', borderRadius: '25px', marginTop: '20px' }} onClick={() => setaddNew(true)}>+ Add</Button>
