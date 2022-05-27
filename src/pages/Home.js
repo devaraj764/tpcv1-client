@@ -91,7 +91,6 @@ function Login(props) {
             axios.post(props.api + '/forgot-password', {
                 "idNo": idNo,
             }).then(res => {
-                console.log(res.data.message)
                 seterror('')
                 setsuccess(res.data.message)
             }).catch(err => {

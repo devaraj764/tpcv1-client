@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, Row, Col, Form, Button, Badge } from 'react-bootstrap'
 import { MdOutlineCancel } from 'react-icons/md'
 
-const Hobbies = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
+const Hobbies = ({ edit, profileData, updatedProfile, setupdatedProfile, setDirty }) => {
     const [addNew, setAddNew] = useState(false);
     const [newHobbies, setnewHobbies] = useState([]);
     const [hobbie, sethobbie] = useState('');
@@ -12,6 +12,7 @@ const Hobbies = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
     }, [profileData]);
 
     const addHobbie = () => {
+        setDirty();
         setnewHobbies([...newHobbies, hobbie]);
         setupdatedProfile({ ...updatedProfile, hobbies: [...newHobbies, hobbie] });
         setAddNew(false);
@@ -19,6 +20,7 @@ const Hobbies = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
     }
 
     const removeHobbie = (hobbie) => {
+        setDirty();
         setnewHobbies(newHobbies.filter(h => h !== hobbie))
         setupdatedProfile({ ...updatedProfile, hobbies: newHobbies.filter(h => h !== hobbie) });
     }
@@ -61,7 +63,7 @@ const Hobbies = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
                                     type="text"
                                     placeholder="Write your hobbie..."
                                     value={hobbie}
-                                    onChange={(e) => sethobbie(e.target.value)}
+                                    onChange={(e) => { sethobbie(e.target.value); setDirty() }}
                                 />
 
                                 <Button style={{ backgroundColor: '#071a84', fontSize: '14px !important', minWidth: '100px' }} onClick={addHobbie}>Add</Button>

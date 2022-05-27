@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Row, Card, Accordion, Form, Col, Button } from 'react-bootstrap';
 import { MdDelete } from 'react-icons/md'
 
-const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
+const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile, setDirty, setPristine }) => {
     const [addNew, setaddNew] = useState(false);
     const [hardSkills, sethardSkills] = useState([]);
     const [softSkills, setsoftSkills] = useState([]);
@@ -30,6 +30,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
     }, [profileData]);
 
     const addHardSkill = (title) => {
+        setDirty()
         if (title === 'Programming Languages') {
             let newhardSkills = hardSkills;
             newhardSkills[0] = {
@@ -72,6 +73,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
     }
 
     const changeSkillLevel = (level, name, title) => {
+        setDirty()
         if (title === 'Programming Languages') {
             let newhardSkills = hardSkills;
             const index = newhardSkills[0].data.findIndex(x => x.name === name);
@@ -95,6 +97,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
     }
 
     const changeTools = (tools, name) => {
+        setDirty()
         let newhardSkills = hardSkills;
         const index = newhardSkills[1].data.findIndex(x => x.name === name);
         newhardSkills[1].data[index] = {
@@ -106,6 +109,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
     }
 
     const changeDescription = (description, name) => {
+        setDirty()
         let newhardSkills = hardSkills;
         const index = newhardSkills[2].data.findIndex(x => x.name === name);
         newhardSkills[2].data[index] = {
@@ -117,6 +121,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
     }
 
     const addSoftSkill = (title) => {
+        setDirty()
         if (title === 'Language Proficiency') {
             let newsoftSkills = softSkills;
             newsoftSkills[0] = {
@@ -127,13 +132,13 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
                 ]
             }
             setsoftSkills(newsoftSkills);
-            console.log(newsoftSkills);
             setupdatedProfile({ ...updatedProfile, softSkills: newsoftSkills });
             setaddNew(false)
         }
     }
 
     const changeLanguageLevel = (level, name) => {
+        setDirty()
         let newsoftSkills = softSkills;
         const index = newsoftSkills[0].data.findIndex(x => x.name === name);
         newsoftSkills[0].data[index] = {
@@ -145,6 +150,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
     }
 
     const changeSoftSkill = (level, title) => {
+        setDirty()
         let newsoftSkills = softSkills;
         const index = newsoftSkills.findIndex(x => x.title === title);
         newsoftSkills[index] = {
@@ -156,6 +162,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
     }
 
     const deleteHardSkill = (title, index) => {
+        setDirty()
         if (title === 'Programming Languages') {
             let newhardSkills = hardSkills;
             newhardSkills[0] = {
@@ -186,13 +193,13 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
     }
 
     const deleteSoftSkill = (index) => {
+        setDirty()
         let newsoftSkills = softSkills;
         newsoftSkills[0] = {
             ...newsoftSkills[0],
             "data": newsoftSkills[0].data.filter((_, i) => i !== index)
         }
         setsoftSkills(newsoftSkills);
-        console.log({ ...updatedProfile, softSkills: newsoftSkills })
         setupdatedProfile({ ...updatedProfile, softSkills: newsoftSkills })
     }
 
@@ -207,7 +214,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
                 <p className="sub-heading">Hard Skills</p>
                 <Row>
                     <Accordion>
-                        {hardSkills? hardSkills.map((skill, index) => {
+                        {hardSkills ? hardSkills.map((skill, index) => {
                             return <Accordion.Item eventKey={index} key={index}>
                                 <Accordion.Header>{skill.title}</Accordion.Header>
                                 <Accordion.Body>
@@ -244,23 +251,23 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
                                             </div>
                                         </div>)
                                     }) : null}<br />
-                                    {edit ? addNew ? <Button variant="light" onClick={() => setaddNew(false)} style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px', marginBottom: '20px' }} size='sm'>cancel</Button> : <Button style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px', marginBottom: '20px' }} size='sm' onClick={() => setaddNew(true)}>+ Add</Button> : null}
+                                    {edit ? addNew ? <Button variant="light" onClick={() => { setaddNew(false); setPristine() }} style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px', marginBottom: '20px' }} size='sm'>cancel</Button> : <Button style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px', marginBottom: '20px' }} size='sm' onClick={() => setaddNew(true)}>+ Add</Button> : null}
                                     {addNew ? <Col lg={12}>
                                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
                                             <Form.Control
-                                                onChange={(e) => skill.title === 'Programming Languages' ? setnewskill({ ...newskill, name: e.target.value }) : skill.title === 'Subjects' ? setnewSubject({ ...newSubject, name: e.target.value }) : setnewTech({ ...newTech, name: e.target.value })}
+                                                onChange={(e) => { setDirty(); skill.title === 'Programming Languages' ? setnewskill({ ...newskill, name: e.target.value }) : skill.title === 'Subjects' ? setnewSubject({ ...newSubject, name: e.target.value }) : setnewTech({ ...newTech, name: e.target.value }) }}
                                                 value={skill.title === 'Programming Languages' ? newskill.name : skill.title === 'Subjects' ? newSubject.name : newTech.name}
                                                 type="text"
                                                 placeholder={skill.title === 'Programming Languages' ? 'Language' : skill.title === 'Subjects' ? 'Subject' : 'technology'}
                                             />
                                             {skill.title === 'Technologies' ? <Form.Control
-                                                onChange={(e) => setnewTech({ ...newTech, tools: e.target.value })}
+                                                onChange={(e) => { setnewTech({ ...newTech, tools: e.target.value }); setDirty() }}
                                                 value={newTech.tools}
                                                 type="text"
                                                 placeholder='specialization'
                                             /> : null}
-                                            {skill.title === 'Subjects' ? <Form.Control value={newSubject.description} type='text' placeholder='Describe topics you know' onChange={(e) => setnewSubject({ ...newSubject, description: e.target.value })} />
-                                                : <Form.Select value={newskill.level} onChange={(e) => setnewskill({ ...newskill, level: e.target.value })} aria-label="Default select example">
+                                            {skill.title === 'Subjects' ? <Form.Control value={newSubject.description} type='text' placeholder='Describe topics you know' onChange={(e) => { setnewSubject({ ...newSubject, description: e.target.value }); setDirty(); }} />
+                                                : <Form.Select value={newskill.level} onChange={(e) => { setnewskill({ ...newskill, level: e.target.value }); setDirty() }} aria-label="Default select example">
                                                     <option value="Beginner">Beginner</option>
                                                     <option value="Moderate">Moderate</option>
                                                     <option value="Advanced">Advanced</option>
@@ -280,7 +287,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
                 <p className="sub-heading">Soft Skills</p>
                 <Row>
                     <Accordion>
-                        {softSkills? softSkills.map((skill, index) => {
+                        {softSkills ? softSkills.map((skill, index) => {
                             return skill.title === 'Language Proficiency' ? <Accordion.Item eventKey={index} key={index}>
                                 <Accordion.Header>{skill.title}</Accordion.Header>
                                 <Accordion.Body>
@@ -301,16 +308,16 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
                                             </Form.Select>
                                         </div>
                                     })}
-                                    {edit ? addNew ? <Button variant="light" onClick={() => setaddNew(false)} style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px', marginBottom: '20px' }} size='sm'>cancel</Button> : <Button variant="primary" size='sm' style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px', marginBottom: '20px' }} onClick={() => setaddNew(true)}>+ Add</Button> : null}
+                                    {edit ? addNew ? <Button variant="light" onClick={() => { setaddNew(false); setPristine() }} style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px', marginBottom: '20px' }} size='sm'>cancel</Button> : <Button variant="primary" size='sm' style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px', marginBottom: '20px' }} onClick={() => setaddNew(true)}>+ Add</Button> : null}
                                     {addNew ? <Col lg={12}>
                                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
                                             <Form.Control
-                                                onChange={(e) => setnewLanguage({ ...newLanguage, name: e.target.value })}
+                                                onChange={(e) => { setnewLanguage({ ...newLanguage, name: e.target.value }); setDirty() }}
                                                 value={newLanguage.name}
                                                 type="text"
                                                 placeholder='Language'
                                             />
-                                            <Form.Select defaultValue={newskill.level} onChange={(e) => setnewLanguage({ ...newLanguage, level: e.target.value })} aria-label="Default select example">
+                                            <Form.Select defaultValue={newskill.level} onChange={(e) => { setnewLanguage({ ...newLanguage, level: e.target.value }); setDirty() }} aria-label="Default select example">
                                                 <option value="Beginner">Beginner</option>
                                                 <option value="Moderate">Moderate</option>
                                                 <option value="Advanced">Advanced</option>
@@ -329,7 +336,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
                                     </Form.Select>
                                 </center>
                             </div>
-                        }): null}
+                        }) : null}
                     </Accordion>
                 </Row>
             </Card>

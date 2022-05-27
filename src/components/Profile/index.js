@@ -11,6 +11,7 @@ import Projects from './Projects.js';
 import Internships from './Internships.js';
 import Certifications from './Certifications.js';
 import Achievements from './Achievements.js';
+import useUnsavedChangesWarning from '../useUnsavedChangesWarning.js';
 
 const Profile = (props) => {
     const [Token, setToken] = useState(null);
@@ -37,12 +38,12 @@ const Profile = (props) => {
             setprofileData(res.data)
         }).catch((err) => {
             if (!err.request.data) Logout();
-            console.log(err.request.data)
         });
     }, [props.api]);
 
 
     const handleChanges = async () => {
+        setPristine();
         setloader(true);
         const url = props.api + '/students/'
         await axios.patch(url, updatedProfile, {
@@ -52,7 +53,6 @@ const Profile = (props) => {
         }).then((res) => {
             setloader(false);
         }).catch((err) => {
-            console.log(err);
             setloader(false);
         })
         setEdit(false);
@@ -63,13 +63,15 @@ const Profile = (props) => {
         localStorage.removeItem('auth-token')
     }
 
+    const [Prompt, setDirty, setPristine] = useUnsavedChangesWarning();
+
     // Tabs code
     const [tab, setTab] = useState(0);
     return (
         <div className="profile">
             <Row className="justify-content-md-center">
                 <Col xs={12} lg="8">
-                    <ProfileBanner handleChanges={handleChanges} loader={loader} edit={edit} setEdit={setEdit} logout={Logout} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} api={props.api} />
+                    <ProfileBanner setDirty={setDirty} handleChanges={handleChanges} loader={loader} edit={edit} setEdit={setEdit} logout={Logout} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
                     <hr />
                     <Nav fill variant="pills" defaultActiveKey={tab}>
                         <Nav.Item>
@@ -92,9 +94,9 @@ const Profile = (props) => {
                             <>
                                 {profileData ?
                                     <>
-                                        <PersonalProfile edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
-                                        <Hobbies edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
-                                        <SocialMedia edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
+                                        <PersonalProfile setDirty={setDirty} edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
+                                        <Hobbies setDirty={setDirty} edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
+                                        <SocialMedia setDirty={setDirty} edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
                                     </>
                                     : <div style={{ minHeight: '20vh', textAlign: 'center' }}>
                                         <center style={{ marginTop: '80px' }}>
@@ -107,25 +109,26 @@ const Profile = (props) => {
                             :
                             tab === 1 ?
                                 <>
-                                    <Skills edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
+                                    <Skills setPristine={setPristine} setDirty={setDirty} edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
                                 </>
                                 :
                                 tab === 2 ?
                                     <>
-                                        <EducationDetails edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
+                                        <EducationDetails setDirty={setDirty} edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
                                     </>
                                     :
                                     tab === 3 ?
                                         <>
-                                            <Projects edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
-                                            <Internships edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
-                                            <Certifications edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
-                                            <Achievements edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
+                                            <Projects setPristine={setPristine} setDirty={setDirty} edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
+                                            <Internships setPristine={setPristine} setDirty={setDirty} edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
+                                            <Certifications setPristine={setPristine} setDirty={setDirty} edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
+                                            <Achievements setPristine={setPristine} setDirty={setDirty} edit={edit} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
                                         </> : null
 
                     }
                 </Col>
             </Row>
+            {Prompt}
         </div>
     )
 }

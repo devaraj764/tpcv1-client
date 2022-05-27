@@ -5,7 +5,7 @@ import { BsLink } from 'react-icons/bs';
 import { MdOutlineCancel } from 'react-icons/md';
 import { FaGithub, FaLinkedin, FaHackerrank, FaYoutube } from 'react-icons/fa';
 
-const SocialMedia = ({ edit, profileData, updatedProfile, setupdatedProfile }) => {
+const SocialMedia = ({ edit, profileData, updatedProfile, setupdatedProfile, setDirty }) => {
     const [addNew, setAddNew] = useState(false)
     const [newLinks, setnewLinks] = useState([]);
     const [link, setlink] = useState('');
@@ -15,6 +15,7 @@ const SocialMedia = ({ edit, profileData, updatedProfile, setupdatedProfile }) =
     }, [profileData]);
 
     const addLink = () => {
+        setDirty()
         setnewLinks([...newLinks, link]);
         setupdatedProfile({ ...updatedProfile, links: [...newLinks, link] });
         setAddNew(false);
@@ -22,6 +23,7 @@ const SocialMedia = ({ edit, profileData, updatedProfile, setupdatedProfile }) =
     }
 
     const removeLink = (link) => {
+        setDirty()
         setnewLinks(newLinks.filter(l => l !== link))
         setupdatedProfile({ ...updatedProfile, links: newLinks.filter(l => l !== link) });
     }
@@ -61,7 +63,7 @@ const SocialMedia = ({ edit, profileData, updatedProfile, setupdatedProfile }) =
                         <Col lg={12}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
                                 <Form.Control
-                                    onChange={(e) => setlink(e.target.value)}
+                                    onChange={(e) => { setlink(e.target.value); setDirty() }}
                                     value={link}
                                     type="text"
                                     placeholder="Place your link here.."

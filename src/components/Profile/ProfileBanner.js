@@ -2,12 +2,20 @@ import { Image, Button, Form, Spinner } from 'react-bootstrap';
 import { AiOutlineCamera } from 'react-icons/ai'
 import React, { useState, useEffect } from 'react';
 
+<<<<<<< HEAD
 const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, updatedProfile, setupdatedProfile, loader, api }) => {
 
     const [profileUrl, setprofileUrl] = useState(null);
 
     useEffect(() => {
         setprofileUrl(profileData ? profileData.imageUrl ? `${api}${profileData.imageUrl}` : null : null);
+=======
+const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, updatedProfile, setupdatedProfile, loader, setDirty }) => {
+    const [profileUrl, setprofileUrl] = useState('');
+
+    useEffect(() => {
+        setprofileUrl(profileData ? profileData.profilePicture !== '' ? profileData.profilePicture : 'https://www.edgroom.com/uploads/profile/default_user.jpg' : 'https://www.edgroom.com/uploads/profile/default_user.jpg')
+>>>>>>> c250357e4900f2338d9318f4199b8ec3c39f5300
     }, [profileData]);
 
     function getBase64(file) {
@@ -20,6 +28,7 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, upda
     }
 
     async function handleProfile(uploader) {
+        setDirty();
         if (uploader.target.files[0].size > 2000000) {
             alert('Profile Image size should be less than 2mb');
             return;
@@ -50,7 +59,7 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, upda
                     {edit ?
                         <>
                             <Button variant="primary" onClick={() => handleChanges()} size='sm'>{loader ? <Spinner animation="border" size='sm' /> : 'Save changes'}</Button>
-                            <Button variant="light" onClick={() => setEdit(false)} size='sm'>Cancel</Button>
+                            <Button variant="light" onClick={() => { setEdit(false); window.location.reload(true) }} size='sm'>Cancel</Button>
                         </>
                         :
                         <>
