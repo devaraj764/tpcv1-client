@@ -12,6 +12,9 @@ import Internships from './Internships.js';
 import Certifications from './Certifications.js';
 import Achievements from './Achievements.js';
 import useUnsavedChangesWarning from '../useUnsavedChangesWarning.js';
+import Toast from '../Toast.js';
+import {BsPatchCheckFill} from 'react-icons/bs'
+
 
 const Profile = (props) => {
     const [Token, setToken] = useState(null);
@@ -19,6 +22,9 @@ const Profile = (props) => {
     const [profileData, setprofileData] = useState(null);
     const [updatedProfile, setupdatedProfile] = useState({});
     const [loader, setloader] = useState(false);
+
+    const [toast, setToast] = useState(false);
+
 
     useEffect(() => {
         const token = localStorage.getItem('auth-token');
@@ -56,6 +62,7 @@ const Profile = (props) => {
             }
         }).then((res) => {
             setloader(false);
+            setToast(true);
             console.log(res)
         }).catch((err) => {
             setloader(false);
@@ -135,6 +142,9 @@ const Profile = (props) => {
                 </Col>
             </Row>
             {Prompt}
+            <Toast value={toast} callback={setToast}>
+                <BsPatchCheckFill size={18} style={{color:'#32CD32'}} /> &nbsp; Changes Saved
+            </Toast>
         </div>
     )
 }

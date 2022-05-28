@@ -52,7 +52,7 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, upda
                     {edit ?
                         <>
                             <Button variant="primary" onClick={() => handleChanges()} size='sm'>{loader ? <Spinner animation="border" size='sm' /> : 'Save changes'}</Button>
-                            <Button variant="light" onClick={() => { setEdit(false); window.location.reload(true) }} size='sm'>Cancel</Button>
+                            <Button variant="light" onClick={() => { setEdit(false) }} size='sm'>Cancel</Button>
                         </>
                         :
                         <>
