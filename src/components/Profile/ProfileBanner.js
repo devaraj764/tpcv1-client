@@ -2,7 +2,7 @@ import { Image, Button, Form, Spinner } from 'react-bootstrap';
 import { AiOutlineCamera } from 'react-icons/ai'
 import React, { useState, useEffect } from 'react';
 
-const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, updatedProfile, setupdatedProfile, loader, api }) => {
+const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, updatedProfile, setupdatedProfile, loader, api, setDirty }) => {
 
     const [profileUrl, setprofileUrl] = useState(null);
 
@@ -20,7 +20,7 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, upda
     }
 
     async function handleProfile(uploader) {
-        // setDirty();
+        setDirty();
         if (uploader.target.files[0].size > 2000000) {
             alert('Profile Image size should be less than 2mb');
             return;
