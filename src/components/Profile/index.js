@@ -52,8 +52,10 @@ const Profile = (props) => {
             }
         }).then((res) => {
             setloader(false);
+            console.log(res)
         }).catch((err) => {
             setloader(false);
+            console.log(err)
         })
         setEdit(false);
     }
@@ -71,7 +73,7 @@ const Profile = (props) => {
         <div className="profile">
             <Row className="justify-content-md-center">
                 <Col xs={12} lg="8">
-                    <ProfileBanner setDirty={setDirty} handleChanges={handleChanges} loader={loader} edit={edit} setEdit={setEdit} logout={Logout} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
+                    <ProfileBanner api={props.api} setDirty={setDirty} handleChanges={handleChanges} loader={loader} edit={edit} setEdit={setEdit} logout={Logout} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
                     <hr />
                     <Nav fill variant="pills" defaultActiveKey={tab}>
                         <Nav.Item>
