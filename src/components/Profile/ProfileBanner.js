@@ -2,13 +2,13 @@ import { Image, Button, Form, Spinner } from 'react-bootstrap';
 import { AiOutlineCamera } from 'react-icons/ai'
 import React, { useState, useEffect } from 'react';
 
-const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, updatedProfile, setupdatedProfile, loader, api }) => {
+const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, updatedProfile, setupdatedProfile, loader, api, setDirty }) => {
 
     const [profileUrl, setprofileUrl] = useState(null);
 
     useEffect(() => {
         setprofileUrl(profileData ? profileData.imageUrl ? `${api}${profileData.imageUrl}` : null : null);
-    }, [profileData]);
+    }, [profileData, api]);
 
     function getBase64(file) {
         return new Promise((resolve, reject) => {
