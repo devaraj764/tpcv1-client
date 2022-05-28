@@ -45,8 +45,12 @@ const Profile = (props) => {
     const handleChanges = async () => {
         setPristine();
         setloader(true);
+        const data = new FormData();
+        for (var key in updatedProfile) {
+            data.append(key, updatedProfile[key]);
+        }
         const url = props.api + '/students/'
-        await axios.patch(url, updatedProfile, {
+        await axios.patch(url, data, {
             headers: {
                 "auth-token": localStorage.getItem('auth-token')
             }

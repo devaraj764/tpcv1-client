@@ -31,7 +31,7 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, upda
         })
         setprofileUrl(url);
         console.log(uploader.target.files[0])
-        setupdatedProfile({ ...updatedProfile, image: uploader.target.files[0] })
+        setupdatedProfile({ ...updatedProfile, imageUrl: uploader.target.files[0] })
     }
 
 
