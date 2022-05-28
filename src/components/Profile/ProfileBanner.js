@@ -7,8 +7,8 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, upda
     const [profileUrl, setprofileUrl] = useState(null);
 
     useEffect(() => {
-        setprofileUrl(profileData ? profileData.imageUrl ? `${api}${profileData.imageUrl}` : null : null);
-    }, [profileData, api]);
+        setprofileUrl(profileData ? profileData.imageUrl || profileData.imageUrl === '' ? `${api}${profileData.imageUrl}` : null : null);
+    }, [profileData]);
 
     function getBase64(file) {
         return new Promise((resolve, reject) => {
@@ -30,7 +30,8 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, upda
             url = res
         })
         setprofileUrl(url);
-        setupdatedProfile({ ...updatedProfile, imageUrl: uploader.target.files[0] })
+        console.log(uploader.target.files[0])
+        setupdatedProfile({ ...updatedProfile, image: uploader.target.files[0] })
     }
 
 
@@ -38,14 +39,14 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, upda
         <div className='profile-banner'>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div className='imageUpload'>
-                    <Image fluid src={profileUrl ? profileUrl : 'https://www.visiondefenceacademy.in/Uploads/student/137899048ab0cc455154006fdb9676964b3.jpg'}
+                    <Image fluid src={profileUrl ? profileUrl : `${api}/uploads/default.png`}
                         alt="profile image" className="profileImage" style={{ position: 'relative', opacity: edit ? '0.7' : '1' }} />
                     {edit ?
                         <div style={{ position: 'absolute', background: 'transparent', opacity: '0.5', zIndex: '2', marginTop: '-60px', marginLeft: '45px' }}>
                             <AiOutlineCamera size={25} />
                         </div>
                         : null}
-                    {edit ? <Form.Control type='file' onChange={(e) => handleProfile(e)} style={{ position: 'absolute', opacity: '0', marginTop: '-100px', height: "100px", width: '100px' }} /> : null}
+                    {edit ? <Form.Control type='file' accept="image/*" onChange={(e) => handleProfile(e)} style={{ position: 'absolute', opacity: '0', marginTop: '-100px', height: "100px", width: '100px' }} /> : null}
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     {edit ?
