@@ -13,7 +13,7 @@ import Certifications from './Certifications.js';
 import Achievements from './Achievements.js';
 import useUnsavedChangesWarning from '../useUnsavedChangesWarning.js';
 import Toast from '../Toast.js';
-import {BsPatchCheckFill} from 'react-icons/bs'
+import { BsPatchCheckFill } from 'react-icons/bs'
 
 
 const Profile = (props) => {
@@ -63,7 +63,6 @@ const Profile = (props) => {
         }).then((res) => {
             setloader(false);
             setToast(true);
-            console.log(res)
         }).catch((err) => {
             setloader(false);
             console.log(err)
@@ -76,7 +75,7 @@ const Profile = (props) => {
         localStorage.removeItem('auth-token')
     }
 
-    const [Prompt, setDirty, setPristine] = useUnsavedChangesWarning();
+    const [Prompt, setDirty, setPristine, isDirty] = useUnsavedChangesWarning();
 
     // Tabs code
     const [tab, setTab] = useState(0);
@@ -84,7 +83,7 @@ const Profile = (props) => {
         <div className="profile">
             <Row className="justify-content-md-center">
                 <Col xs={12} lg="8">
-                    <ProfileBanner api={props.api} setDirty={setDirty} handleChanges={handleChanges} loader={loader} edit={edit} setEdit={setEdit} logout={Logout} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
+                    <ProfileBanner api={props.api} isDirty={isDirty} setPristine={setPristine} setDirty={setDirty} handleChanges={handleChanges} loader={loader} edit={edit} setEdit={setEdit} logout={Logout} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
                     <hr />
                     <Nav fill variant="pills" defaultActiveKey={tab}>
                         <Nav.Item>
@@ -143,7 +142,7 @@ const Profile = (props) => {
             </Row>
             {Prompt}
             <Toast value={toast} callback={setToast}>
-                <BsPatchCheckFill size={18} style={{color:'#32CD32'}} /> &nbsp; Changes Saved
+                <BsPatchCheckFill size={18} style={{ color: '#32CD32' }} /> &nbsp; Changes Saved
             </Toast>
         </div>
     )

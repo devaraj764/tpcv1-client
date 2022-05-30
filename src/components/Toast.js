@@ -11,13 +11,14 @@ const Toast = ({ value, callback, children }) => {
             callback(false);
         }
     }, [value])
+    
     return (
         <>
             <Modal show={show} onHide={() => setShow(false)}>
-                <div style={{padding:'10px'}}>
+                <div style={{ padding: '10px' }}>
                     {children}
                 </div>
-                </Modal>
+            </Modal>
         </>
     );
 }

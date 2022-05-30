@@ -1,14 +1,16 @@
 import { Image, Button, Form, Spinner } from 'react-bootstrap';
 import { AiOutlineCamera } from 'react-icons/ai'
 import React, { useState, useEffect } from 'react';
+import AlertModal from '../alertModal';
 
-const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, updatedProfile, setupdatedProfile, loader, api, setDirty }) => {
+const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, updatedProfile, setupdatedProfile, loader, api, setDirty, isDirty, setPristine }) => {
 
     const [profileUrl, setprofileUrl] = useState(null);
+    const [modal, setmodal] = useState(false);
 
     useEffect(() => {
         setprofileUrl(profileData ? profileData.imageUrl || profileData.imageUrl === '' ? `${api}${profileData.imageUrl}` : null : null);
-    }, [profileData]);
+    }, [profileData, api]);
 
     function getBase64(file) {
         return new Promise((resolve, reject) => {
@@ -33,6 +35,13 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, upda
         setupdatedProfile({ ...updatedProfile, imageUrl: uploader.target.files[0] })
     }
 
+    const cancelChanges = () => {
+        if (isDirty) {
+            setmodal(true);
+        } else {
+            setEdit(false)
+        }
+    }
 
     return (
         <div className='profile-banner'>
@@ -51,7 +60,7 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, upda
                     {edit ?
                         <>
                             <Button variant="primary" onClick={() => handleChanges()} size='sm'>{loader ? <Spinner animation="border" size='sm' /> : 'Save changes'}</Button>
-                            <Button variant="light" onClick={() => { setEdit(false) }} size='sm'>Cancel</Button>
+                            <Button variant="light" onClick={cancelChanges} size='sm'>Cancel</Button>
                         </>
                         :
                         <>
@@ -61,6 +70,7 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, upda
                     }
                 </div>
             </div>
+            <AlertModal value={modal} callback={setmodal} setPristine={setPristine}/>
         </div>
     )
 }

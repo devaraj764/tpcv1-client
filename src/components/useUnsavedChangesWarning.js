@@ -13,7 +13,7 @@ const useUnsavedChangesWarning = (message = "Are you sure want to discard change
     }, [isDirty, message]);
 
     const routerPrompt = <Prompt when={false} message={message}/>
-    return [routerPrompt, () => setisDirty(true), () => setisDirty(false)];
+    return [routerPrompt, () => setisDirty(true), () => setisDirty(false), isDirty];
 };
 
 export default useUnsavedChangesWarning;
