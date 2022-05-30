@@ -291,7 +291,37 @@ body {
   .view-profile {
     background-color: $secondary-color;
     min-height: 100vh;
-    padding: 50px;
+    .left-side {
+      background-color: $primary-color;
+      min-height: 100vh;
+      color: #fff;
+      padding: 40px;
+      .links {
+        margin-top: 30px;
+        p {
+          margin: 0;
+          // font-weight: bold;
+        }
+        a {
+          color: #cdc9c9;
+          text-decoration: none;
+          font-size: 12px;
+          margin: 0;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellips;
+        }
+      }
+    }
+    .right-side {
+      padding: 40px;
+      .title {
+        font-family: "Bebas Neue", cursive;
+        font-size: 32px;
+        color: $primary-color;
+        margin:0;
+      }
+    }
   }
 
   //page no found
@@ -309,4 +339,4 @@ body {
   }
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins&display=swap");

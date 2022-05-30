@@ -30,7 +30,6 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, upda
             url = res
         })
         setprofileUrl(url);
-        console.log(uploader.target.files[0])
         setupdatedProfile({ ...updatedProfile, imageUrl: uploader.target.files[0] })
     }
 

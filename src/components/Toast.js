@@ -5,7 +5,6 @@ const Toast = ({ value, callback, children }) => {
     const [show, setShow] = useState(false);
 
     useEffect(() => {
-        console.log(value)
         if (value === true) {
             setShow(true);
             setTimeout(() => setShow(false), 1000);
