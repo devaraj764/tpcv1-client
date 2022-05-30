@@ -8,7 +8,7 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, upda
 
     useEffect(() => {
         setprofileUrl(profileData ? profileData.imageUrl || profileData.imageUrl === '' ? `${api}${profileData.imageUrl}` : null : null);
-    }, [profileData]);
+    }, [profileData, api]);
 
     function getBase64(file) {
         return new Promise((resolve, reject) => {
