@@ -8,7 +8,7 @@ const ViewProfile = () => {
             <Row>
                 <Col md={4} className="left-side">
                     <center>
-                        <Image src={`http://localhost/uploads/default.png`} roundedCircle height="150px" width="150px" />
+                        <Image src={`https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80`} roundedCircle height="150px" width="150px" />
                     </center>
                     <div style={{ margin: '40px 0' }}>
                         <h6 style={{ textTransform: 'uppercase', fontWeight: 'bold' }}>About Me</h6>
