@@ -291,6 +291,13 @@ body {
   .view-profile {
     background-color: $secondary-color;
     min-height: 100vh;
+    .title {
+      font-family: "Bebas Neue", cursive;
+      margin:0;
+    }
+    .description{
+      color:gray;
+    }
     .left-side {
       background-color: #414141;
       min-height: 100vh;
@@ -315,16 +322,12 @@ body {
     }
     .right-side {
       padding: 40px;
-      .title {
-        font-family: "Bebas Neue", cursive;
-        font-size: 32px;
-        color: #414141;
-        margin:0;
-      }
+      color: #414141;
+
     }
   }
 
-  //page no found
+  //page not found
   .page-not-found {
     margin-top: 100px;
     display: flex;
