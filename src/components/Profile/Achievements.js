@@ -70,7 +70,7 @@ const Achievements = (props) => {
                         </>
                         :
                         <Accordion>
-                            {achievements.map((achievement, index) => {
+                            {achievements.length === 0 ? <p style={{ textAlign: 'center', width: '100%', color: 'gray' }}> No Achievements Available!<br /> Try to add new Achievements...</p> : achievements.map((achievement, index) => {
                                 return <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} key={index}>
                                     {
                                         props.edit ?
@@ -85,7 +85,7 @@ const Achievements = (props) => {
                                                 as='textarea'
                                                 rows={3}
                                                 defaultValue={achievement.description}
-                                                onChange={(e) => {updateAchivement(index, e.target.value); props.setDirty()}}
+                                                onChange={(e) => { updateAchivement(index, e.target.value); props.setDirty() }}
                                                 placeholder="Describe about your achievement...."
                                                 style={{ fontSize: '14px', marginBottom: '10px' }}
                                                 disabled={!props.edit}
@@ -101,7 +101,7 @@ const Achievements = (props) => {
                         addNew ?
                             <div style={{ marginTop: '20px' }}>
                                 <Button size="sm" style={{ float: 'right', width: '100px', borderRadius: '25px' }} onClick={addAchievement}>push</Button>
-                                <Button variant="light" size="sm" style={{ float: 'right', width: '100px', borderRadius: '25px', marginRight: '10px' }} onClick={() => {setaddNew(false); props.setPristine()}}>cancel</Button>
+                                <Button variant="light" size="sm" style={{ float: 'right', width: '100px', borderRadius: '25px', marginRight: '10px' }} onClick={() => { setaddNew(false); props.setPristine() }}>cancel</Button>
                             </div>
                             :
                             <Button size="sm" style={{ float: 'right', width: '100px', borderRadius: '25px', marginTop: '20px' }} onClick={() => setaddNew(true)}>+ Add</Button>

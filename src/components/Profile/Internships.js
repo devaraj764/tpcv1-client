@@ -163,8 +163,8 @@ const Internships = (props) => {
                         </>
                         :
                         <Accordion>
-                            {
-                                internships.map((internship, index) => {
+                            {internships.length === 0 ? <p style={{ textAlign: 'center', width: '100%', color: 'gray' }}> No Internships Available!<br /> Try to add new Internships...</p>
+                                : internships.map((internship, index) => {
                                     return (
                                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} key={index}>
                                             {

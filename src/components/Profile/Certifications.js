@@ -134,89 +134,90 @@ const Certifications = (props) => {
                         </>
                         :
                         <Accordion>
-                            {certifications ? certifications.map((certification, index) => {
-                                return (
-                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} key={index}>
-                                        {
-                                            props.edit ?
-                                                <span onClick={() => deleteCertification(index)} style={{ marginRight: '10px', color: 'tomato', cursor: 'pointer' }}><MdDelete size={24} /></span> : null
-                                        }
-                                        <Accordion.Item style={{ width: '100%' }} eventKey={index}>
-                                            <Accordion.Header>{certification.title}</Accordion.Header>
-                                            <Accordion.Body>
-                                                {
-                                                    !props.edit ?
-                                                        <Row style={{ margin: '0 10px', textAlign: 'center' }}>
-                                                            <Col style={{ float: 'left', marginBottom: "10px", color: '#071a84' }}>{certification.startDate}</Col>
-                                                            <Col style={{ float: 'right', marginBottom: "10px", color: '#071a84' }}>{certification.endDate}</Col>
-                                                            {certification.link !== '' ? <Col style={{ float: 'right', marginBottom: "10px", color: '#071a84' }}><a href={certification.link} rel="noopener noreferrer" target="_blank" style={{ textDecoration: 'none' }}><FiLink size={14} />&nbsp;Certifiicate</a></Col> : null}
-                                                        </Row>
-                                                        :
-                                                        <Row>
-                                                            <Col md={6} sm={12}>
-                                                                <Form.Label htmlFor="start-date">Starting date</Form.Label>
-                                                                <Form.Control
-                                                                    defaultValue={certification.startDate}
-                                                                    onChange={(e) => updateCertification(index, 'startDate', e.target.value)}
-                                                                    type="date"
-                                                                    id="start-date"
-                                                                    size='sm'
-                                                                    placeholder="start date"
-                                                                    style={{ marginBottom: "10px" }}
-                                                                />
-                                                            </Col>
-                                                            <Col md={6} sm={12}>
-                                                                <Form.Label htmlFor="status">Status</Form.Label>
-                                                                <Form.Select defaultValue={certification.status} size='sm' style={{ marginBottom: "10px" }} onChange={(e) => updateCertification(index, 'status', e.target.value)}>
-                                                                    <option value="working">working</option>
-                                                                    <option value="completed">completed</option>
-                                                                </Form.Select>
-                                                            </Col>
-                                                            {
-                                                                certification.status === 'completed' ?
+                            {certifications.length === 0 ? <p style={{ textAlign: 'center', width: '100%', color: 'gray' }}> No Certifications Available!<br /> Try to add new Certifications...</p> :
+                                certifications.map((certification, index) => {
+                                    return (
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} key={index}>
+                                            {
+                                                props.edit ?
+                                                    <span onClick={() => deleteCertification(index)} style={{ marginRight: '10px', color: 'tomato', cursor: 'pointer' }}><MdDelete size={24} /></span> : null
+                                            }
+                                            <Accordion.Item style={{ width: '100%' }} eventKey={index}>
+                                                <Accordion.Header>{certification.title}</Accordion.Header>
+                                                <Accordion.Body>
+                                                    {
+                                                        !props.edit ?
+                                                            <Row style={{ margin: '0 10px', textAlign: 'center' }}>
+                                                                <Col style={{ float: 'left', marginBottom: "10px", color: '#071a84' }}>{certification.startDate}</Col>
+                                                                <Col style={{ float: 'right', marginBottom: "10px", color: '#071a84' }}>{certification.endDate}</Col>
+                                                                {certification.link !== '' ? <Col style={{ float: 'right', marginBottom: "10px", color: '#071a84' }}><a href={certification.link} rel="noopener noreferrer" target="_blank" style={{ textDecoration: 'none' }}><FiLink size={14} />&nbsp;Certifiicate</a></Col> : null}
+                                                            </Row>
+                                                            :
+                                                            <Row>
+                                                                <Col md={6} sm={12}>
+                                                                    <Form.Label htmlFor="start-date">Starting date</Form.Label>
+                                                                    <Form.Control
+                                                                        defaultValue={certification.startDate}
+                                                                        onChange={(e) => updateCertification(index, 'startDate', e.target.value)}
+                                                                        type="date"
+                                                                        id="start-date"
+                                                                        size='sm'
+                                                                        placeholder="start date"
+                                                                        style={{ marginBottom: "10px" }}
+                                                                    />
+                                                                </Col>
+                                                                <Col md={6} sm={12}>
+                                                                    <Form.Label htmlFor="status">Status</Form.Label>
+                                                                    <Form.Select defaultValue={certification.status} size='sm' style={{ marginBottom: "10px" }} onChange={(e) => updateCertification(index, 'status', e.target.value)}>
+                                                                        <option value="working">working</option>
+                                                                        <option value="completed">completed</option>
+                                                                    </Form.Select>
+                                                                </Col>
+                                                                {
                                                                     certification.status === 'completed' ?
-                                                                        <>
-                                                                            <Col md={6} sm={12} style={{ marginTop: '10px' }}>
-                                                                                <Form.Label htmlFor="end-date">End date</Form.Label>
-                                                                                <Form.Control
-                                                                                    defaultValue={certification.endDate}
-                                                                                    onChange={(e) => updateCertification(index, 'endDate', e.target.value)}
-                                                                                    type="date"
-                                                                                    id="end-date"
-                                                                                    size='sm'
-                                                                                    placeholder="end date"
-                                                                                    style={{ marginBottom: "10px" }}
-                                                                                />
-                                                                            </Col>
-                                                                            <Col md={6} sm={12} style={{ marginTop: '10px' }}>
-                                                                                <Form.Label htmlFor="link">Certificate Link</Form.Label>
-                                                                                <Form.Control
-                                                                                    defaultValue={certification.link}
-                                                                                    onChange={(e) => updateCertification(index, 'link', e.target.value)}
-                                                                                    as='input'
-                                                                                    type='text'
-                                                                                    id='link'
-                                                                                    placeholder="Enter your link of the certificate"
-                                                                                />
-                                                                            </Col>
-                                                                        </>
-                                                                        : null : null
-                                                            }
-                                                        </Row>
-                                                }<br />
-                                                <Form.Control
-                                                    defaultValue={certification.organization}
-                                                    onChange={(e) => updateCertification(index, 'organization', e.target.value)}
-                                                    type="text"
-                                                    size='sm'
-                                                    placeholder="Organization name"
-                                                    disabled={!props.edit}
-                                                />
-                                            </Accordion.Body>
-                                        </Accordion.Item>
-                                    </div>
-                                )
-                            }) : null}
+                                                                        certification.status === 'completed' ?
+                                                                            <>
+                                                                                <Col md={6} sm={12} style={{ marginTop: '10px' }}>
+                                                                                    <Form.Label htmlFor="end-date">End date</Form.Label>
+                                                                                    <Form.Control
+                                                                                        defaultValue={certification.endDate}
+                                                                                        onChange={(e) => updateCertification(index, 'endDate', e.target.value)}
+                                                                                        type="date"
+                                                                                        id="end-date"
+                                                                                        size='sm'
+                                                                                        placeholder="end date"
+                                                                                        style={{ marginBottom: "10px" }}
+                                                                                    />
+                                                                                </Col>
+                                                                                <Col md={6} sm={12} style={{ marginTop: '10px' }}>
+                                                                                    <Form.Label htmlFor="link">Certificate Link</Form.Label>
+                                                                                    <Form.Control
+                                                                                        defaultValue={certification.link}
+                                                                                        onChange={(e) => updateCertification(index, 'link', e.target.value)}
+                                                                                        as='input'
+                                                                                        type='text'
+                                                                                        id='link'
+                                                                                        placeholder="Enter your link of the certificate"
+                                                                                    />
+                                                                                </Col>
+                                                                            </>
+                                                                            : null : null
+                                                                }
+                                                            </Row>
+                                                    }<br />
+                                                    <Form.Control
+                                                        defaultValue={certification.organization}
+                                                        onChange={(e) => updateCertification(index, 'organization', e.target.value)}
+                                                        type="text"
+                                                        size='sm'
+                                                        placeholder="Organization name"
+                                                        disabled={!props.edit}
+                                                    />
+                                                </Accordion.Body>
+                                            </Accordion.Item>
+                                        </div>
+                                    )
+                                })}
                         </Accordion>
                 }
                 {
