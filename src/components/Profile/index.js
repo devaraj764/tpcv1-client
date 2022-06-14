@@ -49,20 +49,22 @@ const Profile = (props) => {
 
 
     const handleChanges = async () => {
-        setPristine();
-        setloader(true);
-        const url = props.api + '/students/'
-        await axios.patch(url, updatedProfile, {
-            headers: {
-                "auth-token": localStorage.getItem('auth-token')
-            }
-        }).then((res) => {
-            setloader(false);
-            setToast(true);
-        }).catch((err) => {
-            setloader(false);
-            console.log(err)
-        })
+        if (isDirty) {
+            setPristine();
+            setloader(true);
+            const url = props.api + '/students/'
+            await axios.patch(url, updatedProfile, {
+                headers: {
+                    "auth-token": localStorage.getItem('auth-token')
+                }
+            }).then((res) => {
+                setloader(false);
+                setToast(true);
+            }).catch((err) => {
+                setloader(false);
+                console.log(err)
+            })
+        }
         setEdit(false);
     }
 

@@ -10,7 +10,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.scss';
 import ViewProfile from './components/view-profile';
 import PageNotFound from './pages/PageNotFound'
-import Admin from './pages/Admin/index.js';
+import Adminlogin from './pages/Admin/login.js';
+import Admindashboard from './pages/Admin';
 
 
 function App() {
@@ -28,7 +29,8 @@ function App() {
       <Route exact path='/view-profile/:id' render={() => <ViewProfile />}></Route>
       <Route exact path='/Login' render={() => <Home api={api} />}></Route>
       <Route exact path='/register' render={() => <Home api={api} />}></Route>
-      <Route exact path="/admin" render={() => <Admin/>}></Route>
+      <Route exact path="/admin/login" render={() => <Adminlogin api={api} />}></Route>
+      <Route exact path="/admin/dashboard" render={() => <Admindashboard api={api}/>} />
       <Route path='/dashboard' render={() => <Dashboard api={api} />}></Route>
       <Route path="*" render={() => <PageNotFound />} />
     </Switch>
