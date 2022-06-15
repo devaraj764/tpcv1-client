@@ -59,8 +59,8 @@ const Notifications = (props) => {
             <p style={{ textAlign: 'center' }}>Error loading data</p>
             :
             notifications.map((notifier, index) => (
-              <div className="notifier" key={index}>
-                <div className="notifier-typo" style={
+              <Row className="notifier" key={index}>
+                <Col className="notifier-typo" md="1" sm="2" style={
                   notifier.type === 'warning' ?
                     warning :
                     notifier.type === 'info' ?
@@ -82,12 +82,12 @@ const Notifications = (props) => {
 
                   }
 
-                </div>
-                <div className="notifier-body">
-                  <span className="title">{notifier.title.toUpperCase()}</span>
-                  <span className="description">{notifier.description}</span>
-                </div>
-              </div>
+                </Col>
+                <Col md="11" sm="10" className="notifier-body align-self-center">
+                  <p className="title">{notifier.title.toUpperCase()}</p>
+                  <p className="description">{notifier.description}</p>
+                </Col>
+              </Row>
             )) : 
             <div style={{ minHeight: '20vh', textAlign: 'center' }}>
             <center style={{ marginTop: '80px' }}>
