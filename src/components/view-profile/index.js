@@ -12,7 +12,7 @@ const ViewProfile = () => {
                     </center>
                     <div style={{ margin: '40px 0' }}>
                         <h4 style={{ textTransform: 'uppercase'}} className="title">About Me</h4>
-                        <p style={{ color: '#cdc9c9', fontSize: '14px' }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec blandit risus non convallis tempor. Morbi mollis, arcu non aliquet aliquam, augue tellus imperdiet dui, et finibus lacus metus id elit. Etiam vulputate nulla sed dolor consequat, non condimentum arcu mollis. Ut auctor neque sit amet elit tincidunt lacinia. Phasellus commodo sapien urna, vel rhoncus odio rutrum malesuada. Nulla interdum nisi eu bibendum molestie. Phasellus mollis auctor nisi sed ultricies. Sed ac erat auctor, pellentesque orci in, egestas est. Nulla aliquet eros at orci tincidunt gravida. Aenean egestas convallis neque id rhoncus.</p>
+                        <p style={{ color: '#cdc9c9', fontSize: '12px' }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec blandit risus non convallis tempor. Morbi mollis, arcu non aliquet aliquam, augue tellus imperdiet dui, et finibus lacus metus id elit. Etiam vulputate nulla sed dolor consequat, non condimentum arcu mollis. Ut auctor neque sit amet elit tincidunt lacinia. Phasellus commodo sapien urna, vel rhoncus odio rutrum malesuada. Nulla interdum nisi eu bibendum molestie. Phasellus mollis auctor nisi sed ultricies. Sed ac erat auctor, pellentesque orci in, egestas est. Nulla aliquet eros at orci tincidunt gravida. Aenean egestas convallis neque id rhoncus.</p>
                     </div>
                     <hr />
                     <div style={{ margin: '40px 0' }}>
