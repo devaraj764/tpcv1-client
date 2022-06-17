@@ -31,9 +31,10 @@ const SocialMedia = ({ edit, profileData, updatedProfile, setupdatedProfile, set
     return (
         <div className="SocialMedia">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
-                <p className="heading">Externel Links<br />
-                    <span className="message">Add your links here</span>
-                </p>
+                <div>
+                <p className="heading">Externel Links</p>
+                <p className="message">Add your links here</p>
+                </div>
                 {addNew ?
                     <Button variant="light" onClick={() => setAddNew(false)} style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px' }} size='sm'>cancel</Button>
                     :

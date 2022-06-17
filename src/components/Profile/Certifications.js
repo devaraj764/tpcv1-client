@@ -54,9 +54,8 @@ const Certifications = (props) => {
 
     return (
         <div className="Certifications">
-            <p className="heading">Certifications<br />
-                <span className="message">Add your new certifications and status</span>
-            </p>
+            <p className="heading">Certifications</p>
+            <p className="message">Add your new certifications and status</p>
             <Card body style={{ padding: '10px', fontSize: '14px' }}>
                 {
                     addNew ?

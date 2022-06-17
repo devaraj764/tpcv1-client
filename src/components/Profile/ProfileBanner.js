@@ -80,8 +80,8 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, load
                         </>
                         :
                         <>
-                            <Button variant="primary" onClick={() => setEdit(true)} size='sm'>Edit</Button>
-                            <Button variant="danger" size='sm' onClick={logout}>Logout</Button>
+                            <Button variant="primary" size='sm' onClick={() => setEdit(true)} >Edit</Button>
+                            <Button variant="outline-primary" size='sm' onClick={logout}>Logout</Button>
                         </>
                     }
                 </div>

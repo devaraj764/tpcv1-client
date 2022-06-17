@@ -77,9 +77,8 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
 
     return (
         <div className="educational-details">
-            <p className="heading">Educational Details<br />
-                <span className="message">Update your educational details here</span>
-            </p>
+            <p className="heading">Educational Details</p>
+            <p className="message">Update your educational details here</p>
             {/* School Details  */}
             <Card body style={{ padding: '10px' }}>
                 <p className="sub-heading">Schooling</p>

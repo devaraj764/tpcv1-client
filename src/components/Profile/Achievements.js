@@ -41,9 +41,8 @@ const Achievements = (props) => {
 
     return (
         <div className="Achievements">
-            <p className="heading">Achievements<br />
-                <span className="message">Add your school and collage level achievements.</span>
-            </p>
+            <p className="heading">Achievements</p>
+            <p className="message">Add your school and collage level achievements.</p>
             <Card body style={{ padding: '10px', fontSize: '14px' }}>
                 {
                     addNew ?

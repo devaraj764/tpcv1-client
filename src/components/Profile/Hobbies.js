@@ -29,9 +29,10 @@ const Hobbies = ({ edit, profileData, updatedProfile, setupdatedProfile, setDirt
     return (
         <div className="Hobbies">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
-                <p className="heading">Hobbies<br />
-                    <span className="message">Add your hobbies here</span>
-                </p>
+                <div>
+                    <p className="heading">Hobbies</p>
+                    <p className="message">Add your hobbies here</p>
+                </div>
                 {addNew ?
                     <Button variant="light" onClick={() => setAddNew(false)} style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px' }} size='sm'>cancel</Button>
                     :

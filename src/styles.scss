@@ -2,13 +2,13 @@
 // font-family: 'Poppins', sans-serif;
 
 @font-face {
-  font-family: 'Averta Std';
-  src: url('assets/fonts/AvertaStd-Regular.ttf');
+  font-family: "Averta Std";
+  src: url("assets/fonts/AvertaStd-Regular.ttf");
 }
 
-$primary-color: #625BF6;
-$secondary-color: #6B818B;
-$text-color: #3C4852;
+$primary-color: #625bf6;
+$secondary-color: #6b818b;
+$text-color: #3c4852;
 
 /* make the customizations */
 body {
@@ -19,7 +19,7 @@ body {
   input[disabled],
   select[disabled],
   textarea[disabled] {
-    background-color: rgba(231, 238, 247, 0.384) !important;
+    background-color: #e4e3fb50 !important;
   }
   .btn {
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -27,8 +27,25 @@ body {
   .btn-primary {
     background-color: $text-color;
     color: white;
+    border: none;
     &:hover {
-      background-color: #2B3846;
+      background-color: #2b3846;
+    }
+    &:focus {
+      background-color: #2b3846;
+      outline: none;
+    }
+  }
+  .btn-outline-primary {
+    border: 1px solid $text-color;
+    color: $text-color;
+    &:hover {
+      background-color: #2b38466f;
+      border: 1px solid $text-color;
+    }
+    &:focus {
+      background-color: #2b38466f;
+      outline: none;
     }
   }
   .btn-light {
@@ -100,7 +117,8 @@ body {
     }
   }
   footer {
-    padding: 30px 0;
+    padding-top: 50px;
+    padding-bottom: 10px;
     color: $secondary-color;
     text-align: center !important;
     width: 100% !important;
@@ -108,21 +126,22 @@ body {
   .Dashboard {
     min-height: 100vh;
     padding-top: 50px;
-    
+
     .card {
       border-radius: 10px;
-      border: none;
-      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+      border: 1px solid #eee;
+      // box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     }
     .heading {
-      font-size: 30px !important;
+      font-size: 26px !important;
       font-weight: 900;
-      margin:0;
+      margin: 0;
+      margin-left: 10px;
     }
     .message {
       font-size: 12px !important;
-      color: #6B818B;
-
+      color: #6b818b;
+      margin-left: 10px;
     }
     .navbar {
       background-color: #fff;
@@ -149,30 +168,41 @@ body {
     // profile page
     .profile {
       margin-top: 50px;
+      .nav-pills .nav-link {
+        color: $secondary-color;
+      }
+      .nav-pills .nav-link.active {
+        background-color: $text-color;
+        color: white;
+      }
       .sub-heading {
         font-size: 16px;
         font-weight: bold;
-        color: $primary-color;
+        color: $secondary-color;
       }
       .profile-banner {
         margin-bottom: 30px;
+        border: 1px solid #eee;
+        padding: 20px;
+        border-radius: 10px;
         .profileImage {
           width: 100px;
           height: 100px;
-          border-radius: 10px;
+          border-radius: 50%;
           margin: 0 10px;
+          box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
         }
         button {
           min-width: 150px !important;
-          border-radius: 25px;
           margin: 10px;
+          border-radius: 10px;
         }
       }
       .personal-details,
       .Projects {
         margin-top: 50px;
         .label {
-          color: $primary-color;
+          color: $secondary-color;
         }
       }
       .educational-details {
@@ -258,16 +288,16 @@ body {
       a {
         text-decoration: none;
       }
-      .box{
+      .box {
         border: 1px solid #eee;
         border-radius: 10px;
         padding: 10px;
-        margin-top:20px;
-        .list-group-item{
+        margin-top: 20px;
+        .list-group-item {
           margin: 10px;
           border: none;
           color: $secondary-color;
-          a{
+          a {
             text-decoration: none;
             color: $secondary-color;
           }
@@ -281,13 +311,13 @@ body {
         align-items: center;
         border-radius: 10px;
         border: 1px solid #eee;
-        .Title{
-          width:100%;
+        .Title {
+          width: 100%;
           text-align: center;
-          font-size:30px;
+          font-size: 26px;
           margin: 10px 0;
-          span{
-            font-size: 56px;
+          span {
+            font-size: 46px;
             font-weight: 700;
           }
         }
@@ -319,10 +349,10 @@ body {
     min-height: 100vh;
     .title {
       font-family: "Bebas Neue", cursive;
-      margin:0;
+      margin: 0;
     }
-    .description{
-      color:gray;
+    .description {
+      color: gray;
     }
     .left-side {
       background-color: #414141;

@@ -8,9 +8,8 @@ import { SiGoogleclassroom } from 'react-icons/si';
 const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile, setDirty }) => {
     return (
         <div className="personal-details">
-            <p className="heading">Personal Details<br />
-                <span className="message">Update your photo and personal details here</span>
-            </p>
+            <p className="heading">Personal Details</p>
+            <p className="message">Update your photo and personal details here</p>
             <Card body style={{ padding: '10px', fontSize: '14px' }}>
                 <Row>
                     <Col md={6} sm={12}>

@@ -82,7 +82,7 @@ const Profile = (props) => {
             <Row className="justify-content-md-center">
                 <Col xs={12} lg="8">
                     <ProfileBanner api={props.api} isDirty={isDirty} setPristine={setPristine} setDirty={setDirty} handleChanges={handleChanges} loader={loader} edit={edit} setEdit={setEdit} logout={Logout} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
-                    <hr />
+                    <br />
                     <Nav fill variant="pills" defaultActiveKey={tab}>
                         <Nav.Item>
                             <Nav.Link eventKey="0" onClick={() => setTab(0)}>Personal</Nav.Link>

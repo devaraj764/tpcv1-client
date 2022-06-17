@@ -57,9 +57,8 @@ const Internships = (props) => {
 
     return (
         <div className="Internships">
-            <p className="heading">Internships<br />
-                <span className="message">Add your new internships and status</span>
-            </p>
+            <p className="heading">Internships</p>
+            <p className="message">Add your new internships and status</p>
             <Card body style={{ padding: '10px', fontSize: '14px' }}>
                 {
                     addNew ?

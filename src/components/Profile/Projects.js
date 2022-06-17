@@ -50,9 +50,8 @@ const Projects = (props) => {
 
     return (
         <div className="Projects">
-            <p className="heading">Projects<br />
-                <span className="message">Add your Projects and tem members</span>
-            </p>
+            <p className="heading">Projects</p>
+            <p className="message">Add your Projects and tem members</p>
             <Card body style={{ padding: '10px', fontSize: '14px' }}>
                 {
                     addNew ?

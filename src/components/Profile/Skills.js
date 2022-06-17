@@ -206,9 +206,8 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile, setDirty
 
     return (
         <div className="Skills">
-            <p className="heading">Skills<br />
-                <span className="message">Rate your skills according to your capability</span>
-            </p>
+            <p className="heading">Skills</p>
+            <p className="message">Rate your skills according to your capability</p>
             {/* Hard Skills  */}
             <Card body style={{ padding: '10px' }}>
                 <p className="sub-heading">Hard Skills</p>

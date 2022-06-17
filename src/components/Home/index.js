@@ -47,7 +47,7 @@ const Home = (props) => {
           </div>
           <br />
           <br />
-          <p className="heading">Send FeedBack</p>
+          <p className="heading">Send Feedback</p>
           <p className="message">Tell us what you feel</p>
           <Form.Control
             as='textarea'
