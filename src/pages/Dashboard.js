@@ -11,6 +11,7 @@ import axios from 'axios';
 
 const Dashboard = (props) => {
     const [username, setusername] = useState('');
+    const [idNo, setidNo] = useState('');
 
     useEffect(() => {
         const token = localStorage.getItem('auth-token');
@@ -27,6 +28,7 @@ const Dashboard = (props) => {
             }
         }).then((res) => {
             setusername(res.data.name)
+            setidNo(res.data.idNo)
         }).catch((err) => {
             if (!err.request.data) Logout();
         });
@@ -42,7 +44,7 @@ const Dashboard = (props) => {
                 <Navbar />
                 <Container>
                     <Switch>
-                        <Route exact path='/dashboard' render={() => <Home username={username}/>}></Route>
+                        <Route exact path='/dashboard' render={() => <Home username={username} api={props.api} idNo={idNo}/>}></Route>
                         <Route exact path='/dashboard/notifications' render={() => <Notifications api={props.api} history={props.history} />}></Route>
                         <Route exact path='/dashboard/profile' render={() => <Profile history={props.history} api={props.api} />}></Route>
                         <Route path="*" render={() => <PageNotFound />} />

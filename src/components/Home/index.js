@@ -1,7 +1,31 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
 import { Row, Col, Card, ListGroup, Button, Form } from 'react-bootstrap';
+import Toast from '../Toast';
+import { BsPatchCheckFill } from 'react-icons/bs'
 
 const Home = (props) => {
+  const [feedback, setfeedback] = useState('');
+  const [toast, setToast] = useState(false);
+
+  const sendFeedback = () => {
+    const url = props.api + '/students/feedback';
+    console.log(url)
+    axios.post(url, {
+      idNo: props.idNo,
+      message: feedback
+    }, {
+      headers: {
+        "auth-token": localStorage.getItem('auth-token')
+      }
+    })
+      .then((res) => {
+        setToast(true);
+        setfeedback('');
+      })
+      .catch((err) => console.log(err))
+  }
+
   return (
     <div className="Home">
       <Row className="justify-content-md-center">
@@ -31,17 +55,21 @@ const Home = (props) => {
             <Form.Control
               as='textarea'
               rows={5}
+              value={feedback}
+              onChange={(e) => setfeedback(e.target.value)}
               placeholder="Enter your valuable suggestions to improve our site..."
               style={{ fontSize: '14px' }}
             />
-            <Button variant="primary" size="sm" style={{ fontSize: '14px', borderRadius: '25px', padding: '5px 20px', marginTop: '10px', float: 'right' }}>
+            <Button variant="primary" size="sm" onClick={sendFeedback} style={{ fontSize: '14px', borderRadius: '25px', padding: '5px 20px', marginTop: '10px', float: 'right' }}>
               Submit
             </Button>
           </Card>
           <br />
         </Col>
       </Row>
-
+      <Toast value={toast} callback={setToast}>
+        <BsPatchCheckFill size={18} style={{ color: '#32CD32' }} /> &nbsp; FeedBack sent successfully
+      </Toast>
     </div>
   )
 }

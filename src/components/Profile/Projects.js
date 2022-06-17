@@ -100,54 +100,56 @@ const Projects = (props) => {
                         :
                         <Accordion>
                             {/* for every project */}
-                            {projects.map((project, index) => {
-                                return (
-                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} key={index}>
-                                        {
-                                            props.edit ?
-                                                <span onClick={() => deleteProject(project.title)} style={{ marginRight: '10px', color: 'tomato', cursor: 'pointer' }}><MdDelete size={24} /></span> : null
-                                        }
-                                        <Accordion.Item style={{ width: '100%' }} eventKey={index}>
-                                            <Accordion.Header>
-                                                {project.title}
-                                            </Accordion.Header>
-                                            <Accordion.Body>
-                                                {
-                                                    !props.edit ?
-                                                        project.link !== '' ? <a href={project.link} target="_blank" rel="noopener noreferrer" style={{ float: 'right', marginBottom: "10px", textDecoration: 'none' }}><FiLink size={14} />&nbsp;know more</a> : null
-                                                        :
-                                                        <Form.Control
-                                                            type="text"
-                                                            size='sm'
-                                                            onChange={(e) => { updateProject(project.title, 'link', e.target.value) }}
-                                                            defaultValue={project.link}
-                                                            placeholder="paste video or document link here"
-                                                            style={{ marginBottom: "10px" }}
-                                                        />
-                                                }
-                                                <Form.Control
-                                                    as='textarea'
-                                                    rows={3}
-                                                    onChange={(e) => { updateProject(project.title, 'description', e.target.value) }}
-                                                    defaultValue={project.description}
-                                                    placeholder="Enter your project description...."
-                                                    style={{ fontSize: '14px', marginBottom: '10px' }}
-                                                    disabled={!props.edit}
+                            {projects.length === 0 ?
+                                <p style={{ textAlign: 'center', width: '100%', color: 'gray' }}> No Projects Available!<br /> Try to add new Projects...</p>
+                                : projects.map((project, index) => {
+                                    return (
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} key={index}>
+                                            {
+                                                props.edit ?
+                                                    <span onClick={() => deleteProject(project.title)} style={{ marginRight: '10px', color: 'tomato', cursor: 'pointer' }}><MdDelete size={24} /></span> : null
+                                            }
+                                            <Accordion.Item style={{ width: '100%' }} eventKey={index}>
+                                                <Accordion.Header>
+                                                    {project.title}
+                                                </Accordion.Header>
+                                                <Accordion.Body>
+                                                    {
+                                                        !props.edit ?
+                                                            project.link !== '' ? <a href={project.link} target="_blank" rel="noopener noreferrer" style={{ float: 'right', marginBottom: "10px", textDecoration: 'none' }}><FiLink size={14} />&nbsp;know more</a> : null
+                                                            :
+                                                            <Form.Control
+                                                                type="text"
+                                                                size='sm'
+                                                                onChange={(e) => { updateProject(project.title, 'link', e.target.value) }}
+                                                                defaultValue={project.link}
+                                                                placeholder="paste video or document link here"
+                                                                style={{ marginBottom: "10px" }}
+                                                            />
+                                                    }
+                                                    <Form.Control
+                                                        as='textarea'
+                                                        rows={3}
+                                                        onChange={(e) => { updateProject(project.title, 'description', e.target.value) }}
+                                                        defaultValue={project.description}
+                                                        placeholder="Enter your project description...."
+                                                        style={{ fontSize: '14px', marginBottom: '10px' }}
+                                                        disabled={!props.edit}
 
-                                                />
-                                                <Form.Control
-                                                    type="text"
-                                                    size='sm'
-                                                    onChange={(e) => { updateProject(project.title, 'technologies', e.target.value) }}
-                                                    defaultValue={project.technologies}
-                                                    placeholder="Technologies used in this project"
-                                                    disabled={!props.edit}
-                                                />
-                                            </Accordion.Body>
-                                        </Accordion.Item>
-                                    </div>
-                                );
-                            })}
+                                                    />
+                                                    <Form.Control
+                                                        type="text"
+                                                        size='sm'
+                                                        onChange={(e) => { updateProject(project.title, 'technologies', e.target.value) }}
+                                                        defaultValue={project.technologies}
+                                                        placeholder="Technologies used in this project"
+                                                        disabled={!props.edit}
+                                                    />
+                                                </Accordion.Body>
+                                            </Accordion.Item>
+                                        </div>
+                                    );
+                                })}
                         </Accordion>
                 }
                 {

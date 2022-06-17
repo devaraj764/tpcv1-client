@@ -2,11 +2,16 @@ import { Image, Button, Form, Spinner } from 'react-bootstrap';
 import { AiOutlineCamera } from 'react-icons/ai'
 import React, { useState, useEffect } from 'react';
 import AlertModal from '../alertModal';
+import ProfileModal from './profileModal';
 
-const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, updatedProfile, setupdatedProfile, loader, api, setDirty, isDirty, setPristine }) => {
+const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, loader, api, isDirty, setPristine }) => {
 
     const [profileUrl, setprofileUrl] = useState(null);
     const [modal, setmodal] = useState(false);
+
+    const [profileModal, setprofileModal] = useState(false);
+    const [profileImage, setprofileImage] = useState(null);
+    const [isUpload, setisUpload] = useState(false);
 
     useEffect(() => {
         setprofileUrl(profileData ? profileData.imageUrl || profileData.imageUrl === '' ? `${api}${profileData.imageUrl}` : null : null);
@@ -21,18 +26,29 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, upda
         });
     }
 
+    const updateProfile = async (isUpload) => {
+        if (isUpload) {
+            let url = '';
+            await getBase64(profileImage).then(res => {
+                url = res
+            })
+            setprofileUrl(url);
+            setEdit(false)
+            setisUpload(false)
+        }
+    }
+
+    useEffect(() => {
+        updateProfile(isUpload)
+    }, [isUpload]);
+
     async function handleProfile(uploader) {
-        setDirty();
         if (uploader.target.files[0].size > 2000000) {
             alert('Profile Image size should be less than 2mb');
             return;
         }
-        let url = '';
-        await getBase64(uploader.target.files[0]).then(res => {
-            url = res
-        })
-        setprofileUrl(url);
-        setupdatedProfile({ ...updatedProfile, imageUrl: uploader.target.files[0] })
+        setprofileModal(true);
+        setprofileImage(uploader.target.files[0])
     }
 
     const cancelChanges = () => {
@@ -54,7 +70,7 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, upda
                             <AiOutlineCamera size={25} />
                         </div>
                         : null}
-                    {edit ? <Form.Control type='file' accept="image/*" onChange={(e) => handleProfile(e)} style={{ position: 'absolute', opacity: '0', marginTop: '-100px', height: "100px", width: '100px' }} /> : null}
+                    {edit ? <Form.Control type='file' id="imageInput" accept="image/*" onChange={(e) => handleProfile(e)} style={{ position: 'absolute', opacity: '0', marginTop: '-100px', height: "100px", width: '100px' }} /> : null}
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     {edit ?
@@ -70,7 +86,8 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, upda
                     }
                 </div>
             </div>
-            <AlertModal value={modal} callback={setmodal} setPristine={setPristine}/>
+            <AlertModal value={modal} callback={setmodal} setPristine={setPristine} />
+            <ProfileModal api={api} image={profileImage} value={profileModal} callback={setprofileModal} upload={setisUpload} />
         </div>
     )
 }
