@@ -1,14 +1,21 @@
 // font-family: 'Nunito Sans', sans-serif;
 // font-family: 'Poppins', sans-serif;
 
-$primary-color: #071a84;
-$secondary-color: #f8fafe;
+@font-face {
+  font-family: 'Averta Std';
+  src: url('assets/fonts/AvertaStd-Regular.ttf');
+}
+
+$primary-color: #625BF6;
+$secondary-color: #6B818B;
+$text-color: #3C4852;
 
 /* make the customizations */
 body {
   overflow-x: hidden;
-  font-family: "Poppins", sans-serif;
+  font-family: "Averta Std", sans-serif;
   font-size: 14px !important;
+  color: $text-color;
   input[disabled],
   select[disabled],
   textarea[disabled] {
@@ -18,15 +25,15 @@ body {
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   }
   .btn-primary {
-    background-color: $primary-color;
+    background-color: $text-color;
     color: white;
     &:hover {
-      background-color: #0921a9df;
+      background-color: #2B3846;
     }
   }
   .btn-light {
     background-color: #fff;
-    color: #000;
+    color: $text-color;
   }
   .Home {
     .left-side {
@@ -94,35 +101,35 @@ body {
   }
   footer {
     padding: 30px 0;
-    color: $primary-color;
+    color: $secondary-color;
     text-align: center !important;
     width: 100% !important;
-    background-color: $secondary-color;
   }
   .Dashboard {
-    background-color: $secondary-color;
     min-height: 100vh;
     padding-top: 50px;
+    
     .card {
       border-radius: 10px;
       border: none;
       box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     }
     .heading {
-      font-size: 16px !important;
-      font-weight: bold !important;
-      margin-left: 10px !important;
-      .message {
-        font-size: 12px !important;
-        color: rgba(3, 11, 71, 0.47);
-      }
+      font-size: 30px !important;
+      font-weight: 900;
+      margin:0;
+    }
+    .message {
+      font-size: 12px !important;
+      color: #6B818B;
+
     }
     .navbar {
       background-color: #fff;
-      border-bottom: 0.5px solid #d8d8d8;
+      border-bottom: 0.5px solid #eee;
       .title {
         font-size: 22px !important;
-        color: $primary-color !important;
+        color: $text-color !important;
         font-weight: 600;
       }
       .nav-link {
@@ -247,31 +254,49 @@ body {
     }
 
     .Home {
-      padding-top: 50px;
+      padding: 50px 0;
       a {
         text-decoration: none;
       }
+      .box{
+        border: 1px solid #eee;
+        border-radius: 10px;
+        padding: 10px;
+        margin-top:20px;
+        .list-group-item{
+          margin: 10px;
+          border: none;
+          color: $secondary-color;
+          a{
+            text-decoration: none;
+            color: $secondary-color;
+          }
+        }
+      }
       .header {
         padding: 0 10px;
-        margin-bottom: 30px;
+        margin-bottom: 50px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        .title {
-          color: gray;
-          margin: 0;
-        }
-        .name {
-          font-size: 18px;
-          color: $primary-color;
-          margin: 0 auto;
+        border-radius: 10px;
+        border: 1px solid #eee;
+        .Title{
+          width:100%;
+          text-align: center;
+          font-size:30px;
+          margin: 10px 0;
+          span{
+            font-size: 56px;
+            font-weight: 700;
+          }
         }
         button {
           border-radius: 25px;
           font-size: 14px;
           padding: 5px 10px;
           min-width: 130px;
-          background-color: $primary-color;
+          background-color: $text-color;
           font-family: "Nunito Sans", sans-serif;
         }
       }
