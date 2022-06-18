@@ -34,14 +34,14 @@ function Home(props) {
     return (
         <>
             <Row className="Home" style={{ minHeight: '100vh' }}>
-                <Col className="left-side" lg={6} md={6}>
+                {/* <Col className="left-side" lg={6} md={6}>
                     <div style={{ textAlign: 'center', color: 'white' }}>
                         <Image src={CareerImg} fluid={true} style={{ maxHeight: '300px', marginBottom: '50px' }} />
                         <p style={{ fontSize: '20px' }}>“Luck is what happens<br /> when preparation meets opportunity.”</p>
                     </div>
-                </Col>
-                <Col className="right-side" sm={12} lg={6} md={6}>
-                    <Image src={TPCLogo} fluid={true} style={{ maxHeight: '300px', marginBottom: '30px' }} />
+                </Col> */}
+                <Col className="right-side" sm={12}>
+                    {/* <Image src={TPCLogo} fluid={true} style={{ maxHeight: '300px', marginBottom: '30px' }} /> */}
                     {path === '/login' ? <Login loader={loader} setLoader={setLoader} callBack={routeToDashBoard} api={props.api} /> : <Register loader={loader} setLoader={setLoader} callBack={routeToDashBoard} api={props.api} />}
 
                 </Col>
@@ -103,7 +103,7 @@ function Login(props) {
     return (
         <>
 
-            <p style={{ fontSize: '24px', fontWeight: 'bold' }}>Hello Again!</p>
+            <p style={{ fontSize: '40px', fontWeight: 'bold' }}>Hello Again!</p>
             <p style={{ color: 'grey', textAlign: 'center', fontSize: '14px' }}>Hey, Enter your credentials to get login to your account..</p>
             <br />
             <InputGroup className="mb-3 inputField">
@@ -130,14 +130,14 @@ function Login(props) {
             </div>
             {error === '' ? null : <p style={{ color: 'red', fontSize: '14px', marginBottom: '10px' }}>{error}</p>}
             {success === '' ? null : <p style={{ color: 'green', fontSize: '14px' }}>{success}</p>}
-            <Button style={{ maxWidth: '400px', width: '100%', backgroundColor: '#071a84' }} size="md" onClick={(e) => submit(e)}>
+            <Button variant='primary' style={{ maxWidth: '400px', width: '100%' }} size="lg" onClick={(e) => submit(e)}>
                 {
                     props.loader ?
                         <Spinner animation="border" size='sm' /> : "Login"
                 }
             </Button>
             <br />
-            <p>Don't have account? <Link style={{ color: '#071a84', cursor: 'pointer', fontSize: '16px', fontWeight: '600' }} to="/register">SignUp</Link></p>
+            <p>Don't have account? <Link style={{ Color:'#625bf6', cursor: 'pointer', fontSize: '16px', fontWeight: '600' }} to="/register">SignUp</Link></p>
         </>
     );
 }
@@ -225,7 +225,7 @@ function Register(props) {
 
     return (
         <>
-            <p style={{ fontSize: '24px', fontWeight: 'bold' }}>Student Registration Form</p>
+            <p style={{ fontSize: '40px', fontWeight: 'bold' }}>Student Registration Form</p>
             <br />
             <Row style={{ maxWidth: '756px' }}>
                 <Col md={6} sm={12}>
@@ -325,7 +325,7 @@ function Register(props) {
                     </InputGroup>
                 </Col>
                 <Col md={6} sm={12}>
-                    <InputGroup className="mb-3">
+                    <InputGroup className="mb-3" >
                         <InputGroup.Text id="basic-addon3"><MdPhone /></InputGroup.Text>
                         <FormControl
                             onChange={(e) => setcontactNum(e.target.value)}
@@ -375,9 +375,9 @@ function Register(props) {
             </Row>
             <br />
             {error === '' ? null : <p style={{ color: 'red', fontSize: '14px' }}>{error}</p>}
-            <Button type="submit" style={{ maxWidth: '400px', width: '100%', backgroundColor: '#071a84' }} size="md" onClick={(e) => submit(e)}>{props.loader ? <Spinner animation="border" size='sm' /> : "Proceed"}</Button>
+            <Button type="submit" variant="primary" style={{ maxWidth: '400px', width: '100%' }} size="lg" onClick={(e) => submit(e)}>{props.loader ? <Spinner animation="border" size='sm' /> : "Proceed"}</Button>
             <br />
-            <p>Already had account? <Link style={{ color: '#071a84', cursor: 'pointer', fontSize: '16px', fontWeight: '600' }} to="/login">SignIn</Link></p>
+            <p>Already had account? <Link style={{ color: '#625bf6', cursor: 'pointer', fontSize: '16px', fontWeight: '600' }} to="/login">SignIn</Link></p>
         </>
     );
 }

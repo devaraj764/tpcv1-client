@@ -19,7 +19,7 @@ body {
   input[disabled],
   select[disabled],
   textarea[disabled] {
-    background-color: #e4e3fb50 !important;
+    background-color: #3c485207 !important;
   }
   .btn {
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -40,7 +40,8 @@ body {
     border: 1px solid $text-color;
     color: $text-color;
     &:hover {
-      background-color: #2b38466f;
+      background-color: #2b384615;
+      color:$text-color;
       border: 1px solid $text-color;
     }
     &:focus {
@@ -53,6 +54,7 @@ body {
     color: $text-color;
   }
   .Home {
+    background-image: url('https://img.freepik.com/free-vector/white-abstract-background_23-2148810113.jpg?w=2000');
     .left-side {
       display: flex;
       justify-content: center;
@@ -80,6 +82,7 @@ body {
       button {
         min-width: 200px;
         margin: 0 10px;
+        border-radius: 10px;
       }
     }
 
@@ -103,6 +106,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+
     .card {
       min-height: 50vh;
       max-width: 756px;
