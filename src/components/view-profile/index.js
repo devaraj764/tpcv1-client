@@ -1,56 +1,143 @@
-import React from 'react'
-import { Container, Row, Col, Image } from 'react-bootstrap';
-import { BsFillTelephoneFill, BsEnvelopeFill } from 'react-icons/bs'
+import React, { useEffect, useState } from 'react'
+import { Row, Col, Image, Spinner } from 'react-bootstrap';
+import axios from 'axios';
+import { withRouter } from 'react-router-dom'
+// import { BsFillTelephoneFill, BsEnvelopeFill } from 'react-icons/bs'
 
-const ViewProfile = () => {
+const ViewProfile = (props) => {
+    const [profile, setProfile] = useState(null);
+    const [err, setErr] = useState(false);
+    useEffect(() => {
+        const url = props.api + '/students/view-profile/' + props.match.params.id
+        axios.get(url, {
+            headers: {
+                "auth-token": localStorage.getItem('auth-token')
+            }
+        }).then((res) => {
+            setProfile(res.data)
+            console.log(res.data)
+
+        }).catch((err) => {
+            console.log(err)
+            setErr(err.message)
+        });
+    }, []);
+
+
     return (
-        <Container className="view-profile">
-            <Row>
-                <Col md={4} className="left-side">
-                    <center>
-                        <Image src={`https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80`} roundedCircle height="150px" width="150px" />
-                    </center>
-                    <div style={{ margin: '40px 0' }}>
-                        <h4 style={{ textTransform: 'uppercase'}} className="title">About Me</h4>
-                        <p style={{ color: '#cdc9c9', fontSize: '12px' }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec blandit risus non convallis tempor. Morbi mollis, arcu non aliquet aliquam, augue tellus imperdiet dui, et finibus lacus metus id elit. Etiam vulputate nulla sed dolor consequat, non condimentum arcu mollis. Ut auctor neque sit amet elit tincidunt lacinia. Phasellus commodo sapien urna, vel rhoncus odio rutrum malesuada. Nulla interdum nisi eu bibendum molestie. Phasellus mollis auctor nisi sed ultricies. Sed ac erat auctor, pellentesque orci in, egestas est. Nulla aliquet eros at orci tincidunt gravida. Aenean egestas convallis neque id rhoncus.</p>
-                    </div>
-                    <hr />
-                    <div style={{ margin: '40px 0' }}>
-                        <h4 style={{ textTransform: 'uppercase'}} className="title">Websites & Social<br /> Lnks</h4>
-                        <div className="links">
-                            <p >Github :</p>
-                            <a href="https://github.com/devarajedgroom" rel="noopener noreferrer" target="_blank">https://github.com/devarajedgroom</a>
-                        </div>
-                        <div className="links">
-                            <p >LinkedIn :</p>
-                            <a href="https://www.linkedin.com/in/deva-raju-maddu-a66055218/" rel="noopener noreferrer" target="_blank">https://www.linkedin.com/in/deva-raju-maddu-a66055218/</a>
-                        </div>
-                    </div>
-                </Col>
-                <Col md={8} className="right-side">
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <div>
-                            <p style={{ color: '#cdc9c9', margin: '0' }}>MYSELF</p>
-                            <h3 className="title">MADDU DEVARAJU</h3>
-                        </div>
-                        <div style={{ marginLeft: '20px', maxWidth: '300px' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', fontSize: '12px', marginBottom: '10px' }}>
-                                <BsEnvelopeFill /> &nbsp; s170725@rguktsklm.ac.in
+        !err ?
+            !profile ?
+                <div style={{ marginTop: '20px', textAlign: 'center', fontSize: '16px', fontWeight: 'bold' }}><Spinner animation="border" size='sm' /> &nbsp; Loading Data...</div>
+                :
+                <Row className="view-profile justify-content-md-center">
+                    <Col md={7}>
+                        <div className="header">
+                            <div className="header-left">
+                                <Image src={profile.imageUrl ? `${props.api}${profile.imageUrl}` : `${props.api}/uploads/default.svg`} alt="profile-image" height="100px" style={{ borderRadius: '10px' }} />
                             </div>
-                            <div style={{ display: 'flex', alignItems: 'center', fontSize: '12px' }}>
-                                <BsFillTelephoneFill /> &nbsp; +91 7013240218
+                            <div className="header-right">
+                                <p className="user-name">{profile.name}</p>
+                                <p>{profile.email}</p>
+                                <p>+91 {profile.contactNumber}</p>
                             </div>
                         </div>
-                    </div>
-                    <hr />
-                    <div>
-                        <h5 className="title">Educational Details</h5>
-                        <p className="description">I have done my schooling in </p>
-                    </div>
-                </Col>
-            </Row>
-        </Container>
+                        <hr />
+                        <main>
+                            {/* About Me */}
+                            <Row className="section">
+                                <Col md={4} sm={12}>
+                                    <p className="heading">About Me</p>
+                                </Col>
+                                <Col md={8} sm={12}>
+                                    <div className="description">
+                                        {profile.bio ? <p>`${profile.bio}`</p> : <p>No bio is described...</p>}
+                                        <p className="sub-heading" style={{ marginTop: '20px' }}>Hobbies</p>
+                                        {profile.hobbies.length === 0 ? <p>Not Updated</p> :
+                                            <p>{profile.hobbies.forEach((hobbie) => (`${hobbie}, `))}</p>
+                                        }
+                                    </div>
+                                </Col>
+                            </Row>
+                            {/* Education */}
+                            <Row className="section">
+                                <Col md={4} sm={12}>
+                                    <p className="heading">EDUCATION</p>
+                                </Col>
+                                <Col md={8} sm={12}>
+                                    <div className="description">
+                                        <p className="sub-heading">B.Tech, Computer Science & Engineering</p>
+                                        {profile.graduation.name ?
+                                            <>
+                                                <p>{profile.graduation.name}</p>
+                                                <p>2019 - 2023</p>
+                                                <p>CGPA : 8.2</p>
+                                            </>
+                                            : <p>Not Updated</p>
+                                        }
+                                        <p className="sub-heading" style={{ marginTop: '20px' }}>Pre - University</p>
+                                        {
+                                            profile.graduation.name ?
+                                                <>
+                                                    <p>Rajiv Gandhi University Of Knowledge And Technology , Srikakulam</p>
+                                                    <p>2017 - 2029</p>
+                                                    <p>CGPA : 8.9</p>
+                                                </>
+                                                : <p>Not Updated</p>
+                                        }
+                                        <p className="sub-heading" style={{ marginTop: '20px' }}>Schooling</p>
+                                        {
+                                            profile.graduation.name ?
+                                                <>
+                                                    <p>Rajiv Gandhi University Of Knowledge And Technology , Srikakulam</p>
+                                                    <p>CGPA : 10.0</p>
+                                                </>
+                                                : <p>Not Updated</p>
+                                        }
+                                    </div>
+                                </Col>
+                            </Row>
+                            {/* Skills */}
+                            <Row className="section">
+                                <Col md={4} sm={12}>
+                                    <p className="heading">Skills</p>
+                                </Col>
+                                <Col md={8} sm={12}>
+                                    <div className="description">
+                                        <p className="sub-heading">Hard skills</p>
+
+                                    </div>
+                                </Col>
+                            </Row>
+                            {/* External Links */}
+                            <Row className="section">
+                                <Col md={4} sm={12}>
+                                    <p className="heading">External Links & <br /> Work Samples</p>
+                                </Col>
+                                <Col md={8} sm={12}>
+                                    <div className="description">
+                                        {profile.links.length === 0 ? <p>Not Updated</p> :
+                                            profile.links.map((link) => (
+
+                                                <div key={link} style={{ marginBottom: '20px' }}>
+                                                    <p className="sub-heading">
+                                                        {link.includes('github') ?
+                                                            'Github' :
+                                                            link.includes('linkedin') ?
+                                                                'LinkedIn' :
+                                                                link.includes('hackerrank') ? 'HackerRank' : link.includes('leetcode') ? 'LeetCode' : link.includes('youtube') ? 'YouTube' : 'Link'}</p>
+                                                    <a href={link}>{link}</a>
+                                                </div>
+                                            ))
+                                        }
+                                    </div>
+                                </Col>
+                            </Row>
+                        </main>
+                    </Col>
+                </Row>
+            :
+            <div style={{ marginTop: '16px', textAlign: 'center', fontSize: '16px', fontWeight: 'bold' }}>Error Loading data...</div>
     )
 }
 
-export default ViewProfile
+export default withRouter(ViewProfile)

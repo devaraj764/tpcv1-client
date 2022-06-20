@@ -41,7 +41,7 @@ body {
     color: $text-color;
     &:hover {
       background-color: #2b384615;
-      color:$text-color;
+      color: $text-color;
       border: 1px solid $text-color;
     }
     &:focus {
@@ -244,8 +244,8 @@ body {
             display: flex;
             align-items: center;
             justify-content: space-between;
-          } 
-          a{
+          }
+          a {
             color: $secondary-color;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -264,7 +264,7 @@ body {
       .notifier {
         min-height: 80px;
         border-radius: 10px;
-        border : 1px solid #eee;
+        border: 1px solid #eee;
         margin: 20px 0;
         // box-shadow: #959da533 0px 8px 24px;
         .notifier-typo {
@@ -359,44 +359,57 @@ body {
 
   // view profile
   .view-profile {
-    background-color: $secondary-color;
     min-height: 100vh;
-    .title {
-      font-family: "Bebas Neue", cursive;
-      margin: 0;
-    }
-    .description {
-      color: gray;
-    }
-    .left-side {
-      background-color: #414141;
-      min-height: 100vh;
-      color: #fff;
-      padding: 40px;
-      .links {
-        margin-top: 30px;
-        p {
-          margin: 0;
-          // font-weight: bold;
+    padding: 30px 10px;
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      .header-left {
+        img{
+          width: 100px;
+          height: 100px;
+          border-radius: 10%;
+          box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
         }
-        a {
-          color: #cdc9c9;
-          text-decoration: none;
-          font-size: 12px;
-          margin: 0;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellips;
+      }
+      .header-right {
+        .user-name {
+          font-size: 28px;
+          font-weight: 600;
+          color: $text-color;
+          text-decoration: underline;
+          text-decoration-color: $primary-color;
+          text-decoration-thickness: 5px;
+        }
+        p {
+          margin: 5px 0;
+          text-align: right;
         }
       }
     }
-    .right-side {
-      padding: 40px;
-      .title {
-        font-family: "Bebas Neue", cursive;
-        font-size: 32px;
-        color: #414141;
-        margin: 0;
+    main {
+      margin-top: 30px;
+      .section {
+        margin-bottom: 30px;
+        .heading {
+          font-size: 16px;
+          font-weight: 600;
+          color: $text-color;
+          text-transform: uppercase;
+        }
+        .description {
+          color: $secondary-color;
+          .sub-heading {
+            font-size: 14px;
+            font-weight: 600;
+            color: $text-color;
+          }
+        }
+      }
+      p {
+        margin: 5px 0;
       }
     }
   }
@@ -415,11 +428,11 @@ body {
     }
   }
 
-  .Toast{
-    .modal-content{
+  .Toast {
+    .modal-content {
       // background-color: #fff;
       color: $text-color;
-      border-radius:10px;
+      border-radius: 10px;
       border: none;
     }
   }

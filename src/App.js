@@ -23,7 +23,7 @@ function App() {
 
   return (
     <Switch>
-      <Route exact path='/view-profile/:id' render={() => <ViewProfile />}></Route>
+      <Route exact path='/view-profile/:id' render={() => <ViewProfile api={api} />}></Route>
       <Route exact path='/login' render={() => <Home api={api} />}></Route>
       <Route exact path='/register' render={() => <Home api={api} />}></Route>
       <Route exact path="/admin/login" render={() => <Adminlogin api={api} />}></Route>

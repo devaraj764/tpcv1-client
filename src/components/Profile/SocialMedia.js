@@ -32,14 +32,14 @@ const SocialMedia = ({ edit, profileData, updatedProfile, setupdatedProfile, set
         <div className="SocialMedia">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
                 <div>
-                <p className="heading">Externel Links</p>
-                <p className="message">Add your links here</p>
+                    <p className="heading">Externel Links</p>
+                    <p className="message">Add your links here</p>
                 </div>
                 {addNew ?
-                    <Button variant="light" onClick={() => setAddNew(false)} style={{  minWidth: '100px', borderRadius: '10px' }} size='sm'>cancel</Button>
+                    <Button variant="light" onClick={() => setAddNew(false)} style={{ minWidth: '100px', borderRadius: '10px' }} size='sm'>cancel</Button>
                     :
                     edit ?
-                        <Button onClick={() => setAddNew(true)} style={{  minWidth: '100px', borderRadius: '10px' }} size='sm'>+ Link</Button>
+                        <Button onClick={() => setAddNew(true)} style={{ minWidth: '100px', borderRadius: '10px' }} size='sm'>+ Link</Button>
                         : null
                 }
             </div>
@@ -52,9 +52,11 @@ const SocialMedia = ({ edit, profileData, updatedProfile, setupdatedProfile, set
                             return (
                                 <Col key={index} md={6} sm={12}>
                                     <Card body className='linkField'>
-                                        <i> {link.includes('github') ? <FaGithub size={20} /> : link.includes('linkedin') ? <FaLinkedin size={20} /> : link.includes('hackerrank') ? <FaHackerrank size={20} /> : link.includes('leetcode') ? <SiLeetcode size={20} /> : link.includes('youtube') ? <FaYoutube size={20} /> : <BsLink size={20} />}</i>
-                                        <a href={link} rel="noopener noreferrer" target="_blank">{link}</a>
-                                        {edit ? <i><MdOutlineCancel size={16} style={{ color: '#3c4852', marginLeft:'5px', cursor: 'pointer' }} onClick={() => removeLink(link)} /></i> : null}
+                                        <span style={{display: 'flex'}}>
+                                            <i> {link.includes('github') ? <FaGithub size={20} /> : link.includes('linkedin') ? <FaLinkedin size={20} /> : link.includes('hackerrank') ? <FaHackerrank size={20} /> : link.includes('leetcode') ? <SiLeetcode size={20} /> : link.includes('youtube') ? <FaYoutube size={20} /> : <BsLink size={20} />}</i>
+                                            <a href={link} rel="noopener noreferrer" target="_blank">{link}</a>
+                                        </span>
+                                        {edit ? <i><MdOutlineCancel size={16} style={{ color: '#3c4852', marginLeft: '5px', cursor: 'pointer' }} onClick={() => removeLink(link)} /></i> : null}
                                     </Card>
                                 </Col>
                             );
@@ -63,7 +65,7 @@ const SocialMedia = ({ edit, profileData, updatedProfile, setupdatedProfile, set
                     {addNew ?
                         <Col lg={12}>
                             <InputGroup className="mb-3">
-                            <Form.Control
+                                <Form.Control
                                     onChange={(e) => { setlink(e.target.value); setDirty() }}
                                     value={link}
                                     type="text"
