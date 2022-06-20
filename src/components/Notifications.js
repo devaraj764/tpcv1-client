@@ -6,27 +6,6 @@ import { IoMdCheckmarkCircleOutline } from 'react-icons/io'
 import { HiOutlineClipboardList } from 'react-icons/hi';
 import axios from 'axios';
 
-
-const warning = {
-  backgroundColor: '#F9FAB1',
-  color: '#bebb04'
-}
-
-const info = {
-  backgroundColor: '#D9F5FF',
-  color: '#064075'
-}
-
-const success = {
-  backgroundColor: '#DFFFD9',
-  color: '#207A0C'
-}
-
-const test = {
-  backgroundColor: '#ffebfe',
-  color: '#FF00FF',
-}
-
 const Notifications = (props) => {
 
   const [notifications, setNotifications] = useState(null);
@@ -60,16 +39,7 @@ const Notifications = (props) => {
             :
             notifications.map((notifier, index) => (
               <Row className="notifier" key={index}>
-                <Col className="notifier-typo" md="1" sm="2" style={
-                  notifier.type === 'warning' ?
-                    warning :
-                    notifier.type === 'info' ?
-                      info :
-                      notifier.type === 'success' ?
-                        success
-                        : notifier.type === 'test' ?
-                          test : null
-                }>
+                <Col className="notifier-typo" md="1" sm="2">
                   {
                     notifier.type === 'warning' ?
                       <TiWarningOutline size={24} /> :

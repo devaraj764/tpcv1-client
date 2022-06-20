@@ -1,9 +1,10 @@
 import {
   Switch,
   Route,
-  withRouter
+  withRouter,
+  Redirect
 } from 'react-router-dom';
-import React, { useEffect } from 'react'
+import React from 'react'
 import Home from './pages/Home.js'
 import Dashboard from './pages/Dashboard';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -19,18 +20,17 @@ function App() {
   // const api = 'https://tpc-api.loca.lt'
   const api = 'http://localhost:80'
 
-  useEffect(() => {
-    if (window.location.pathname === '/') {
-      window.location.replace('/login')
-    }
-  }, []);
+
   return (
     <Switch>
       <Route exact path='/view-profile/:id' render={() => <ViewProfile />}></Route>
-      <Route exact path='/Login' render={() => <Home api={api} />}></Route>
+      <Route exact path='/login' render={() => <Home api={api} />}></Route>
       <Route exact path='/register' render={() => <Home api={api} />}></Route>
       <Route exact path="/admin/login" render={() => <Adminlogin api={api} />}></Route>
-      <Route exact path="/admin/dashboard" render={() => <Admindashboard api={api}/>} />
+      <Route exact path="/admin/dashboard" render={() => <Admindashboard api={api} />} />
+      <Route exact path="/">
+        <Redirect to="/login" />
+      </Route>
       <Route path='/dashboard' render={() => <Dashboard api={api} />}></Route>
       <Route path="*" render={() => <PageNotFound />} />
     </Switch>

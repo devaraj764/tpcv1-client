@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Col, Row, Image, InputGroup, FormControl, Spinner, Button, Form } from 'react-bootstrap';
-import CareerImg from '../assets/career.svg';
-import TPCLogo from '../assets/tpc-logo.svg';
+import { Col, Row, InputGroup, FormControl, Spinner, Button, Form } from 'react-bootstrap';
+// import TPCLogo from '../assets/tpc-logo.svg';
 import { MdPermIdentity, MdEmail, MdPassword, MdBatchPrediction, MdPhone } from 'react-icons/md';
 import { BiRename } from 'react-icons/bi'
 import { FaBirthdayCake, FaBook } from 'react-icons/fa';
@@ -33,13 +32,7 @@ function Home(props) {
 
     return (
         <>
-            <Row className="Home" style={{ minHeight: '100vh' }}>
-                {/* <Col className="left-side" lg={6} md={6}>
-                    <div style={{ textAlign: 'center', color: 'white' }}>
-                        <Image src={CareerImg} fluid={true} style={{ maxHeight: '300px', marginBottom: '50px' }} />
-                        <p style={{ fontSize: '20px' }}>“Luck is what happens<br /> when preparation meets opportunity.”</p>
-                    </div>
-                </Col> */}
+            <Row className="Home" style={{ minHeight: '100vh', backgroundImage: "url('https://img.freepik.com/free-vector/white-abstract-background_23-2148810113.jpg?w=2000')" }}>
                 <Col className="right-side" sm={12}>
                     {/* <Image src={TPCLogo} fluid={true} style={{ maxHeight: '300px', marginBottom: '30px' }} /> */}
                     {path === '/login' ? <Login loader={loader} setLoader={setLoader} callBack={routeToDashBoard} api={props.api} /> : <Register loader={loader} setLoader={setLoader} callBack={routeToDashBoard} api={props.api} />}

@@ -14,10 +14,10 @@ const Toast = ({ value, callback, children }) => {
     
     return (
         <>
-            <Modal show={show} onHide={() => setShow(false)}>
-                <div style={{ padding: '10px' }}>
-                    {children}
-                </div>
+            <Modal show={show} onHide={() => setShow(false)} className="Toast">
+                <Modal.Body>
+                    {children}  
+                </Modal.Body>
             </Modal>
         </>
     );

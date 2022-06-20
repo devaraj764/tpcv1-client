@@ -11,13 +11,13 @@ const AlertModal = ({ value, callback, setPristine }) => {
     }, [value]);
 
     const reloadPage = () => {
-        setPristine();
+        // setPristine();
         setshow(false);
         callback(false);
-        setTimeout(() => window.location.reload(true), 200)
+        window.location.replace('/dashboard/profile');
     }
-
     return (
+
         <div>
             <Modal show={show} onHide={() => setshow(false)}>
                 <div style={{ padding: '20px' }}>

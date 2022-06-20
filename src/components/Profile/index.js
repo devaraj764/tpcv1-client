@@ -13,7 +13,8 @@ import Certifications from './Certifications.js';
 import Achievements from './Achievements.js';
 import useUnsavedChangesWarning from '../useUnsavedChangesWarning.js';
 import Toast from '../Toast.js';
-import { BsPatchCheckFill } from 'react-icons/bs'
+import { BsPatchCheckFill } from 'react-icons/bs';
+import { withRouter } from 'react-router-dom';
 
 
 const Profile = (props) => {
@@ -25,6 +26,13 @@ const Profile = (props) => {
 
     const [toast, setToast] = useState(false);
 
+    useEffect(() => {
+        if (props.location.search === '?edit=true') {
+            setEdit(true);
+        }else{
+            setEdit(false); 
+        }
+    }, [props.location])
 
     useEffect(() => {
         const token = localStorage.getItem('auth-token');
@@ -65,7 +73,7 @@ const Profile = (props) => {
                 console.log(err)
             })
         }
-        setEdit(false);
+        props.history.push('/dashboard/profile');
     }
 
     const Logout = () => {
@@ -146,4 +154,4 @@ const Profile = (props) => {
     )
 }
 
-export default Profile
+export default withRouter(Profile)

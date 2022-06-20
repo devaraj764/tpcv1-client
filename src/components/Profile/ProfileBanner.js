@@ -3,8 +3,10 @@ import { AiOutlineCamera } from 'react-icons/ai'
 import React, { useState, useEffect } from 'react';
 import AlertModal from '../alertModal';
 import ProfileModal from './profileModal';
+import { withRouter } from 'react-router-dom';
 
-const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, loader, api, isDirty, setPristine }) => {
+const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, loader, api, isDirty, setPristine, history }) => {
+
 
     const [profileUrl, setprofileUrl] = useState(null);
     const [modal, setmodal] = useState(false);
@@ -55,7 +57,7 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, load
         if (isDirty) {
             setmodal(true);
         } else {
-            setEdit(false)
+            history.push('/dashboard/profile');
         }
     }
 
@@ -63,7 +65,7 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, load
         <div className='profile-banner'>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div className='imageUpload'>
-                    <Image fluid src={profileUrl ? profileUrl : `${api}/uploads/default.png`}
+                    <Image fluid src={profileUrl ? profileUrl : `${api}/uploads/default.svg`}
                         alt="profile image" className="profileImage" style={{ position: 'relative', opacity: edit ? '0.7' : '1' }} />
                     {edit ?
                         <div style={{ position: 'absolute', background: 'transparent', opacity: '0.5', zIndex: '2', marginTop: '-60px', marginLeft: '45px' }}>
@@ -80,7 +82,7 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, load
                         </>
                         :
                         <>
-                            <Button variant="primary" size='sm' onClick={() => setEdit(true)} >Edit</Button>
+                            <Button variant="primary" size='sm' onClick={() => history.push('/dashboard/profile?edit=true') } >Edit</Button>
                             <Button variant="outline-primary" size='sm' onClick={logout}>Logout</Button>
                         </>
                     }
@@ -92,4 +94,4 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, load
     )
 }
 
-export default ProfileBanner
+export default withRouter(ProfileBanner)

@@ -54,7 +54,6 @@ body {
     color: $text-color;
   }
   .Home {
-    background-image: url('https://img.freepik.com/free-vector/white-abstract-background_23-2148810113.jpg?w=2000');
     .left-side {
       display: flex;
       justify-content: center;
@@ -241,6 +240,17 @@ body {
         margin-top: 50px;
         .linkField {
           margin: 10px 0;
+          .card-body {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          } 
+          a{
+            color: $secondary-color;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
           i {
             margin-right: 10px;
           }
@@ -252,11 +262,11 @@ body {
     .Notifications {
       padding-top: 50px;
       .notifier {
-        background-color: #fff;
         min-height: 80px;
         border-radius: 10px;
+        border : 1px solid #eee;
         margin: 20px 0;
-        box-shadow: #959da533 0px 8px 24px;
+        // box-shadow: #959da533 0px 8px 24px;
         .notifier-typo {
           display: flex;
           align-items: center;
@@ -402,6 +412,15 @@ body {
       font-weight: bold;
       font-size: 30px;
       font-family: "Nunito", sans-serif;
+    }
+  }
+
+  .Toast{
+    .modal-content{
+      // background-color: #fff;
+      color: $text-color;
+      border-radius:10px;
+      border: none;
     }
   }
 }

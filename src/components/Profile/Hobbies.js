@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Row, Col, Form, Button, Badge } from 'react-bootstrap'
+import { Card, Row, Col, FormControl, InputGroup, Button, Badge } from 'react-bootstrap'
 import { MdOutlineCancel } from 'react-icons/md'
 
 const Hobbies = ({ edit, profileData, updatedProfile, setupdatedProfile, setDirty }) => {
@@ -34,10 +34,10 @@ const Hobbies = ({ edit, profileData, updatedProfile, setupdatedProfile, setDirt
                     <p className="message">Add your hobbies here</p>
                 </div>
                 {addNew ?
-                    <Button variant="light" onClick={() => setAddNew(false)} style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px' }} size='sm'>cancel</Button>
+                    <Button variant="light" onClick={() => setAddNew(false)} style={{ minWidth: '100px' }} size='sm'>cancel</Button>
                     :
                     edit ?
-                        <Button onClick={() => setAddNew(true)} style={{ backgroundColor: '#071a84', fontSize: '14px !important', minWidth: '100px', borderRadius: '25px' }} size='sm'>+ Hobbie</Button>
+                        <Button onClick={() => setAddNew(true)} style={{ minWidth: '100px', borderRadius: '10px' }} size='sm'>+ Hobbie</Button>
                         : null
                 }
             </div>
@@ -49,9 +49,9 @@ const Hobbies = ({ edit, profileData, updatedProfile, setupdatedProfile, setDirt
                         newHobbies.map((hobbie, index) => {
                             return (
                                 <Col key={index} sm={4} style={{ marginBottom: '10px' }}>
-                                    <Badge style={{ padding: '15px', fontSize: '14px', color: 'black' }} bg="light" pill>
+                                    <Badge style={{ padding: '10px 20px', fontSize: '14px', color: '#3c4852' }} bg="light" pill>
                                         {hobbie}&nbsp;
-                                        {edit ? <MdOutlineCancel size={16} style={{ color: 'tomato', float: 'right', cursor: 'pointer' }} onClick={() => removeHobbie(hobbie)} /> : null}
+                                        {edit ? <MdOutlineCancel size={15} style={{ color: '#6b818b', float: 'right', marginLeft: '5px', cursor: 'pointer' }} onClick={() => removeHobbie(hobbie)} /> : null}
                                     </Badge>
                                 </Col>
                             );
@@ -59,16 +59,15 @@ const Hobbies = ({ edit, profileData, updatedProfile, setupdatedProfile, setDirt
                     }
                     {addNew ?
                         <Col lg={12}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
-                                <Form.Control
+                            <InputGroup className="mb-3">
+                                <FormControl
                                     type="text"
                                     placeholder="Write your hobbie..."
                                     value={hobbie}
                                     onChange={(e) => { sethobbie(e.target.value); setDirty() }}
                                 />
-
-                                <Button style={{ backgroundColor: '#071a84', fontSize: '14px !important', minWidth: '100px' }} onClick={addHobbie}>Add</Button>
-                            </div>
+                                <Button variant="outline-secondary" style={{ minWidth: '100px' }} onClick={addHobbie}>Add</Button>
+                            </InputGroup>
                         </Col>
                         : null}
                 </Row>
