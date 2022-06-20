@@ -18,7 +18,7 @@ const Achievements = (props) => {
     const addAchievement = () => {
         props.setDirty();
         setAchievements([...achievements, newAchievement]);
-        props.setupdatedProfile({ ...props.profileData, achievements: [...achievements, newAchievement] });
+        props.setupdatedProfile({ ...props.updatedProfile, achievements: [...achievements, newAchievement] });
         setaddNew(false);
     }
 
@@ -30,13 +30,13 @@ const Achievements = (props) => {
             description: value
         }
         setAchievements(newAchievements);
-        props.setupdatedProfile({ ...props.profileData, achievements: newAchievements });
+        props.setupdatedProfile({ ...props.updatedProfile, achievements: newAchievements });
     }
 
     const deleteAchivement = (index) => {
         props.setDirty();
         setAchievements(achievements.filter((_, i) => i !== index));
-        props.setupdatedProfile({ ...props.profileData, achievements: achievements.filter((_, i) => i !== index) });
+        props.setupdatedProfile({ ...props.updatedProfile, achievements: achievements.filter((_, i) => i !== index) });
     }
 
     return (
@@ -45,7 +45,7 @@ const Achievements = (props) => {
             <p className="message">Add your school and collage level achievements.</p>
             <Card body style={{ padding: '10px', fontSize: '14px' }}>
                 {
-                    addNew ?
+                    props.edit && addNew ?
                         <>
                             <Form.Label htmlFor="name">Achievement name :</Form.Label>
                             <Form.Control

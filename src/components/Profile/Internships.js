@@ -61,7 +61,7 @@ const Internships = (props) => {
             <p className="message">Add your new internships and status</p>
             <Card body style={{ padding: '10px', fontSize: '14px' }}>
                 {
-                    addNew ?
+                    props.edit && addNew ?
                         <>
                             <Row>
                                 <Col md={6} sm={12}>

@@ -42,6 +42,7 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, load
 
     useEffect(() => {
         updateProfile(isUpload)
+        //eslint-disable-next-line
     }, [isUpload]);
 
     async function handleProfile(uploader) {
