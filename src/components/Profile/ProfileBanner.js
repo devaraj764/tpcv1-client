@@ -7,51 +7,23 @@ import { withRouter } from 'react-router-dom';
 
 const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, loader, api, isDirty, setPristine, history }) => {
 
-
     const [profileUrl, setprofileUrl] = useState(null);
     const [modal, setmodal] = useState(false);
 
     const [profileModal, setprofileModal] = useState(false);
-    const [profileImage, setprofileImage] = useState(null);
-    const [isUpload, setisUpload] = useState(false);
+    const [imageSrc, setimageSrc] = useState(null);
 
     useEffect(() => {
         setprofileUrl(profileData ? profileData.imageUrl || profileData.imageUrl === '' ? `${api}${profileData.imageUrl}` : null : null);
     }, [profileData, api]);
-
-    function getBase64(file) {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = error => reject(error);
-        });
-    }
-
-    const updateProfile = async (isUpload) => {
-        if (isUpload) {
-            let url = '';
-            await getBase64(profileImage).then(res => {
-                url = res
-            })
-            setprofileUrl(url);
-            setEdit(false)
-            setisUpload(false)
-        }
-    }
-
-    useEffect(() => {
-        updateProfile(isUpload)
-        //eslint-disable-next-line
-    }, [isUpload]);
 
     async function handleProfile(uploader) {
         if (uploader.target.files[0].size > 2000000) {
             alert('Profile Image size should be less than 2mb');
             return;
         }
-        setprofileModal(true);
-        setprofileImage(uploader.target.files[0])
+        setimageSrc(URL.createObjectURL(uploader.target.files[0]))
+        setprofileModal(true)
     }
 
     const cancelChanges = () => {
@@ -90,7 +62,7 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, load
                 </div>
             </div>
             <AlertModal value={modal} callback={setmodal} setPristine={setPristine} />
-            <ProfileModal api={api} image={profileImage} value={profileModal} callback={setprofileModal} upload={setisUpload} />
+            <ProfileModal api={api} src={imageSrc} value={profileModal} callback={setprofileModal} setcropimg={setprofileUrl} setEdit={setEdit} history={history}/>
         </div>
     )
 }

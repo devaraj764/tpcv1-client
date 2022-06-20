@@ -1,18 +1,56 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Button } from 'react-bootstrap'
+import { Modal, Button, Image } from 'react-bootstrap';
+import ReactCrop from 'react-image-crop';
+import 'react-image-crop/dist/ReactCrop.css';
 import axios from 'axios';
 
-const ProfileModal = ({ image, api, value, callback, upload }) => {
+const ProfileModal = ({ src, api, value, callback, setcropimg, setEdit, history }) => {
     const [show, setshow] = useState(false);
+
+    const [crop, setCrop] = useState({ aspect: 1 / 1 });
+    const [image, setimage] = useState(null);
+    const [croppedImg, setcroppedImg] = useState(null);
+    const [blob, setblob] = useState(null);
 
     useEffect(() => {
         setshow(value)
     }, [value]);
 
+    function getCroppedImg() {
+        const canvas = document.createElement('canvas');
+        const scaleX = image.naturalWidth / image.width;
+        const scaleY = image.naturalHeight / image.height;
+        canvas.width = crop.width;
+        canvas.height = crop.height;
+        const ctx = canvas.getContext('2d');
+
+        ctx.drawImage(
+            image,
+            crop.x * scaleX,
+            crop.y * scaleY,
+            crop.width * scaleX,
+            crop.height * scaleY,
+            0,
+            0,
+            crop.width,
+            crop.height,
+        );
+
+        if (canvas.width !== 0 || canvas.height !== 0) {
+            // As dataURL
+            const base64Image = canvas.toDataURL('image/jpeg');
+            setcroppedImg(base64Image);
+            // As Blob Image
+            canvas.toBlob(blob => {
+                setblob(blob)
+            }, "image/jpeg");
+        } else { window.alert('Please crop the image correctly ... 😇 ') }
+    }
+
     const uploadProfilePicture = async () => {
         const url = api + '/students/'
         const data = new FormData();
-        data.append('imageUrl', image)
+        data.append('imageUrl', blob)
         await axios.patch(url, data, {
             headers: {
                 "auth-token": localStorage.getItem('auth-token')
@@ -21,7 +59,10 @@ const ProfileModal = ({ image, api, value, callback, upload }) => {
             .then((res) => {
                 callback(false);
                 setshow(false);
-                upload(true);
+                setEdit(false)
+                setcropimg(croppedImg);
+                setcroppedImg(null)
+                history.push('/dashboard/profile');
             })
             .catch((err) => console.log(err))
     }
@@ -35,8 +76,24 @@ const ProfileModal = ({ image, api, value, callback, upload }) => {
     return (
         <div>
             <Modal show={show} onHide={() => setshow(false)}>
-                <div style={{ padding: '20px' }}>
-                    <h6>Do you want to make this as your profile picture?</h6>
+                <div style={{ padding: '20px', marginTop:'10px' }}>
+                    <h6>Do you want to make this as your profile picture?</h6><br/>
+                    {
+                    croppedImg ?
+                        <>
+                            <center>
+                                <Image src={croppedImg} fluid alt="Result" style={{ width: '100%' }} />
+                                <br />
+                                <Button variant='primary' style={{ width: '200px', marginTop: '20px' }} onClick={() => setcroppedImg(null)}>Recrop</Button>
+                            </center>
+                        </>
+                        : 
+                            <center>
+                                <ReactCrop src={src} onImageLoaded={setimage} crop={crop} onChange={newCrop => setCrop(newCrop)} />
+                                <br />
+                                <Button variant='danger' style={{ width: '200px', marginTop: '20px' }} onClick={getCroppedImg}>Crop</Button>
+                            </center> 
+                }
                     <div style={{ float: 'right', marginTop: '20px' }}>
                         <Button variant="secondary" onClick={cancelUpload} style={{ marginRight: '20px' }}>No</Button>
                         <Button variant='danger' onClick={uploadProfilePicture}>Yes</Button>
