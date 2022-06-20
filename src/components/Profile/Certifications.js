@@ -58,7 +58,7 @@ const Certifications = (props) => {
             <p className="message">Add your new certifications and status</p>
             <Card body style={{ padding: '10px', fontSize: '14px' }}>
                 {
-                    addNew ?
+                    props.edit && addNew ?
                         <>
                             <Form.Label htmlFor="title">Title</Form.Label>
                             <Form.Control

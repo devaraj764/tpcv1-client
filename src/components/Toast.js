@@ -10,7 +10,7 @@ const Toast = ({ value, callback, children }) => {
             setTimeout(() => setShow(false), 1000);
             callback(false);
         }
-    }, [value])
+    }, [value, callback])
     
     return (
         <>
