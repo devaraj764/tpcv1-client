@@ -1,47 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Row, Col, Card, Form, InputGroup, FormControl, Accordion } from 'react-bootstrap';
 
 const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile, Prompt, setDirty }) => {
-
-    useEffect(() => {
-        setschooling(profileData.schooling)
-        setpreGraduation(profileData.preGraduation)
-        setgraduation(profileData.graduation)
-        setallCgpa(profileData.graduation ? profileData.graduation.allcgpa : null);
-    }, [profileData]);
-
-    // Schooling Details
-    const [schooling, setschooling] = useState({
-        name: '',
-        loc: '',
-        cgpa: '',
-        passout: '',
-    });
-
-    // preGraduation Details
-    const [preGraduation, setpreGraduation] = useState({
-        name: '',
-        loc: '',
-        cgpa: '',
-        passout: '',
-    });
-
-    // Graduation details
-    const [graduation, setgraduation] = useState({
-        name: '',
-        loc: '',
-        cgpa: '',
-        allcgpa: {
-            0: '',
-            1: '',
-            2: '',
-            3: '',
-            4: '',
-            5: '',
-            6: '',
-            7: '',
-        }
-    });
+    const [schooling, setschooling] = useState(profileData.schooling);
+    const [preGraduation, setpreGraduation] = useState(profileData.preGraduation);
+    const [graduation, setgraduation] = useState(profileData.graduation);
 
     const updateSchoolingDetails = (key, value) => {
         setDirty();
@@ -55,27 +18,22 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
         setupdatedProfile({ ...updatedProfile, preGraduation: { ...preGraduation, [key]: value } });
     }
 
-    const updategraduation = (key, value) => {
+    const updateGraduation = (key, value) => {
         setDirty();
         setgraduation({ ...graduation, [key]: value });
         setupdatedProfile({ ...updatedProfile, graduation: { ...graduation, [key]: value } });
     }
 
-
-    const [allCgpa, setallCgpa] = useState(null);
-
     const calculateAverageCgpa = (key, value) => {
         setDirty();
-        setallCgpa({ ...allCgpa, [key]: value });
-        setgraduation({ ...graduation, allcgpa: { ...graduation.allcgpa, [key]: value } });
+        let newallCgpa = { ...graduation.allcgpa, [key]: value };
         let sum = parseFloat("0.0");
-        for (let key in allCgpa) {
-            sum += parseFloat(allCgpa[key]);
+        for (let key in newallCgpa) {
+            sum += parseFloat(newallCgpa[key]);
         }
-        let newcgpa = sum / 8;
-        setgraduation({ ...graduation, cgpa: Number((newcgpa).toFixed(1)) });
-        setupdatedProfile({ ...updatedProfile, graduation: { ...graduation, allcgpa: { ...graduation.allcgpa, [key]: value } } });
-        setupdatedProfile({ ...updatedProfile, graduation: { ...graduation, cgpa: Number((newcgpa).toFixed(1)) } });
+        let total = sum / 8;
+        setgraduation({ ...graduation, allcgpa: { ...graduation.allcgpa, [key]: value }, cgpa: Number((total).toFixed(1)) });
+        setupdatedProfile({ ...updatedProfile, graduation: { ...graduation, allcgpa: { ...graduation.allcgpa, [key]: value }, cgpa: Number((total).toFixed(1)) } })
     }
 
 
@@ -215,7 +173,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                             <InputGroup.Text id="basic-addon1">at</InputGroup.Text>
                             <FormControl
                                 value={graduation.name}
-                                onChange={(e) => updategraduation('name', e.target.value)}
+                                onChange={(e) => updateGraduation('name', e.target.value)}
                                 placeholder="University Name"
                                 aria-label="University name"
                                 aria-describedby="basic-addon1"
@@ -234,7 +192,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                                                 <InputGroup className="mb-3">
                                                     <InputGroup.Text id="basic-addon1">E1/SEM1</InputGroup.Text>
                                                     <FormControl
-                                                        value={allCgpa ? allCgpa['0'] : ''}
+                                                        defaultValue={graduation.allcgpa ? graduation.allcgpa['0'] : ''}
                                                         onChange={(e) => calculateAverageCgpa('0', e.target.value)}
                                                         placeholder="CGPA"
                                                         aria-label="SchoolName"
@@ -247,7 +205,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                                                 <InputGroup className="mb-3">
                                                     <InputGroup.Text id="basic-addon1">E1/SEM2</InputGroup.Text>
                                                     <FormControl
-                                                        value={allCgpa ? allCgpa['1'] : ''}
+                                                        defaultValue={graduation.allcgpa ? graduation.allcgpa['1'] : ''}
                                                         onChange={(e) => calculateAverageCgpa('1', e.target.value)}
                                                         placeholder="CGPA"
                                                         aria-label="SchoolName"
@@ -260,7 +218,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                                                 <InputGroup className="mb-3">
                                                     <InputGroup.Text id="basic-addon1">E2/SEM1</InputGroup.Text>
                                                     <FormControl
-                                                        value={allCgpa ? allCgpa['2'] : ''}
+                                                        defaultValue={graduation.allcgpa ? graduation.allcgpa['2'] : ''}
                                                         onChange={(e) => calculateAverageCgpa('2', e.target.value)}
                                                         placeholder="CGPA"
                                                         aria-label="SchoolName"
@@ -273,7 +231,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                                                 <InputGroup className="mb-3">
                                                     <InputGroup.Text id="basic-addon1">E2/SEM2</InputGroup.Text>
                                                     <FormControl
-                                                        value={allCgpa ? allCgpa['3'] : ''}
+                                                        defaultValue={graduation.allcgpa ? graduation.allcgpa['3'] : ''}
                                                         onChange={(e) => calculateAverageCgpa('3', e.target.value)}
                                                         placeholder="CGPA"
                                                         aria-label="SchoolName"
@@ -286,7 +244,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                                                 <InputGroup className="mb-3">
                                                     <InputGroup.Text id="basic-addon1">E3/SEM1</InputGroup.Text>
                                                     <FormControl
-                                                        value={allCgpa ? allCgpa['4'] : ''}
+                                                        defaultValue={graduation.allcgpa ? graduation.allcgpa['4'] : ''}
                                                         onChange={(e) => calculateAverageCgpa('4', e.target.value)}
                                                         placeholder="CGPA"
                                                         aria-label="SchoolName"
@@ -299,7 +257,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                                                 <InputGroup className="mb-3">
                                                     <InputGroup.Text id="basic-addon1">E3/SEM2</InputGroup.Text>
                                                     <FormControl
-                                                        value={allCgpa ? allCgpa['5'] : ''}
+                                                        defaultValue={graduation.allcgpa ? graduation.allcgpa['5'] : ''}
                                                         onChange={(e) => calculateAverageCgpa('5', e.target.value)}
                                                         placeholder="CGPA"
                                                         aria-label="SchoolName"
@@ -312,7 +270,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                                                 <InputGroup className="mb-3">
                                                     <InputGroup.Text id="basic-addon1">E4/SEM1</InputGroup.Text>
                                                     <FormControl
-                                                        value={allCgpa ? allCgpa['6'] : ''}
+                                                        defaultValue={graduation.allcgpa ? graduation.allcgpa['6'] : ''}
                                                         onChange={(e) => calculateAverageCgpa('6', e.target.value)}
                                                         placeholder="CGPA"
                                                         aria-label="SchoolName"
@@ -325,7 +283,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                                                 <InputGroup className="mb-3">
                                                     <InputGroup.Text id="basic-addon1">E4/SEM2</InputGroup.Text>
                                                     <FormControl
-                                                        value={allCgpa ? allCgpa['7'] : ''}
+                                                        defaultValue={graduation.allcgpa ? graduation.allcgpa['7'] : ''}
                                                         onChange={(e) => calculateAverageCgpa('7', e.target.value)}
                                                         placeholder="CGPA"
                                                         aria-label="SchoolName"
@@ -355,7 +313,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                             <FormControl
                                 as='textarea'
                                 value={graduation.loc}
-                                onChange={(e) => updategraduation('loc', e.target.value)}
+                                onChange={(e) => updateGraduation('loc', e.target.value)}
                                 placeholder="Address of University"
                                 aria-label="address"
                                 aria-describedby="basic-addon1"

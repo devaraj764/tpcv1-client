@@ -50,10 +50,10 @@ const ViewProfile = (props) => {
                                 </Col>
                                 <Col md={8} sm={12}>
                                     <div className="description">
-                                        {profile.bio ? <p>`${profile.bio}`</p> : <p>No bio is described...</p>}
+                                        {profile.bio ? <p>{profile.bio}</p> : <p>No bio is described...</p>}
                                         <p className="sub-heading" style={{ marginTop: '20px' }}>Hobbies</p>
                                         {profile.hobbies.length === 0 ? <p>Not Updated</p> :
-                                            <p>{profile.hobbies.forEach((hobbie) => (`${hobbie}, `))}</p>
+                                            <p>{profile.hobbies.map((hobbie, id) => (<span key={id}>{hobbie}, </span>))}</p>
                                         }
                                     </div>
                                 </Col>
