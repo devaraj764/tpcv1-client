@@ -282,6 +282,10 @@ body {
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            max-width: 300px;
+            @media (max-width: 768px) {
+              max-width: 200px;
+            }
           }
           i {
             margin-right: 10px;

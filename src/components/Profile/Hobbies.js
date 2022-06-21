@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Row, Col, FormControl, InputGroup, Button, Badge } from 'react-bootstrap'
+import { Card,  Col, FormControl, InputGroup, Button, Badge } from 'react-bootstrap'
 import { MdOutlineCancel } from 'react-icons/md'
 
 const Hobbies = ({ edit, profileData, updatedProfile, setupdatedProfile, setDirty }) => {
@@ -49,7 +49,7 @@ const Hobbies = ({ edit, profileData, updatedProfile, setupdatedProfile, setDirt
                         newHobbies.map((hobbie, index) => {
                             return (
                                 <div key={index} sm={4} style={{ margin: '5px 10px' }}>
-                                    <Badge style={{ padding: '10px 20px', fontSize: '14px', color: '#3c4852', width: 'fit-content' }} bg="light" pill>
+                                    <Badge style={{ padding: '10px 20px', fontSize: '14px', color: '#3c4852', display: 'flex' ,width: 'fit-content' }} bg="light" pill>
                                         {hobbie}&nbsp;
                                         {edit ? <MdOutlineCancel size={15} style={{ color: '#6b818b', float: 'right', marginLeft: '5px', cursor: 'pointer' }} onClick={() => removeHobbie(hobbie)} /> : null}
                                     </Badge>
