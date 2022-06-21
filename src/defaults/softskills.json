@@ -4,28 +4,28 @@
         "data": [
             {
                 "name": "English",
-                "level": "beginner"
+                "level": "Beginner"
             },
             {
                 "name": "Hindi",
-                "level": "beginner"
+                "level": "Beginner"
             },
             {
                 "name": "Telugu",
-                "level": "beginner"
+                "level": "Beginner"
             }
         ]
     },
     {
         "title": "Problem Solving Skills",
-        "level": "beginner"
+        "level": "Beginner"
     },
     {
         "title": "Decision Making Skills",
-        "level": "beginner"
+        "level": "Beginner"
     },
     {
         "title": "Leadership Skills",
-        "level": "beginner"
+        "level": "Beginner"
     }
 ]
