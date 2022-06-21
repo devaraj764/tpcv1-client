@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Button, Image } from 'react-bootstrap';
+import { Modal, Button, Image, Row, Col } from 'react-bootstrap';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import axios from 'axios';
@@ -76,28 +76,32 @@ const ProfileModal = ({ src, api, value, callback, setcropimg, setEdit, history 
     return (
         <div>
             <Modal show={show} onHide={() => setshow(false)}>
-                <div style={{ padding: '20px', marginTop:'10px' }}>
-                    <h6>Do you want to make this as your profile picture?</h6><br/>
+                <div style={{ padding: '20px', marginTop: '10px' }}>
+                    <h6>Do you want to make this as your profile picture?</h6><br />
                     {
-                    croppedImg ?
-                        <>
-                            <center>
-                                <Image src={croppedImg} fluid alt="Result" style={{ width: '100%' }} />
-                                <br />
-                                <Button variant='primary' style={{ width: '200px', marginTop: '20px' }} onClick={() => setcroppedImg(null)}>Recrop</Button>
-                            </center>
-                        </>
-                        : 
+                        croppedImg ?
+                            <>
+                                <center>
+                                    <Image src={croppedImg} fluid alt="Result" style={{ width: '100%' }} />
+                                    <br />
+                                    <Button variant='primary' style={{ width: '200px', marginTop: '20px' }} onClick={() => setcroppedImg(null)}>Recrop</Button>
+                                </center>
+                            </>
+                            :
                             <center>
                                 <ReactCrop src={src} onImageLoaded={setimage} crop={crop} onChange={newCrop => setCrop(newCrop)} />
                                 <br />
-                                <Button variant='danger' style={{ width: '200px', marginTop: '20px' }} onClick={getCroppedImg}>Crop</Button>
-                            </center> 
-                }
-                    <div style={{ float: 'right', marginTop: '20px' }}>
-                        <Button variant="secondary" onClick={cancelUpload} style={{ marginRight: '20px' }}>No</Button>
-                        <Button variant='danger' onClick={uploadProfilePicture}>Yes</Button>
-                    </div>
+                                <Button variant='outline-primary' style={{ width: '200px', marginTop: '20px' }} onClick={getCroppedImg}>Crop</Button>
+                            </center>
+                    }
+                    <Row style={{ marginTop: '50px' }}>
+                        <Col>
+                            <Button variant="-primary" style={{ width: '100%' }} onClick={cancelUpload}>No</Button>
+                        </Col>
+                        <Col>
+                            <Button variant='primary' style={{ width: '100%' }} onClick={uploadProfilePicture}>Yes</Button>
+                        </Col>
+                    </Row>
                 </div>
             </Modal>
         </div>

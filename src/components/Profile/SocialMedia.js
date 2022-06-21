@@ -52,10 +52,10 @@ const SocialMedia = ({ edit, profileData, updatedProfile, setupdatedProfile, set
                             return (
                                 <Col key={index} md={6} sm={12}>
                                     <Card body className='linkField'>
-                                        <span style={{display: 'flex'}}>
+                                        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                                             <i> {link.includes('github') ? <FaGithub size={20} /> : link.includes('linkedin') ? <FaLinkedin size={20} /> : link.includes('hackerrank') ? <FaHackerrank size={20} /> : link.includes('leetcode') ? <SiLeetcode size={20} /> : link.includes('youtube') ? <FaYoutube size={20} /> : <BsLink size={20} />}</i>
-                                            <a href={link} rel="noopener noreferrer" target="_blank">{link}</a>
-                                        </span>
+                                            <a href={link} rel="noopener noreferrer" target="_blank" style={{overflow: 'hidden', whiteSpace: 'nowrap', textOverflow:'ellipsis'}}>{link}</a>
+                                        </div>
                                         {edit ? <i><MdOutlineCancel size={16} style={{ color: '#3c4852', marginLeft: '5px', cursor: 'pointer' }} onClick={() => removeLink(link)} /></i> : null}
                                     </Card>
                                 </Col>
@@ -71,7 +71,7 @@ const SocialMedia = ({ edit, profileData, updatedProfile, setupdatedProfile, set
                                     type="text"
                                     placeholder="Place your link here.."
                                 />
-                                <Button variant="outline-secondary" style={{ minWidth: '100px' }} onClick={addLink}>Add</Button>
+                                <Button variant="secondary" style={{ minWidth: '100px' }} onClick={addLink}>Add</Button>
                             </InputGroup>
                         </Col>
                         : null

@@ -49,14 +49,16 @@ const Home = (props) => {
           <br />
           <p className="heading">Send Feedback</p>
           <p className="message">Tell us what you feel</p>
-          <Form.Control
-            as='textarea'
-            rows={5}
-            value={feedback}
-            onChange={(e) => setfeedback(e.target.value)}
-            placeholder="Enter your valuable suggestions to improve our site..."
-            style={{ fontSize: '14px', borderRadius: '10px' }}
-          />
+          <div style={{borderRadius: '10px', border: '1px solid #eee'}}>
+            <Form.Control
+              as='textarea'
+              rows={5}
+              value={feedback}
+              onChange={(e) => setfeedback(e.target.value)}
+              placeholder="Enter your valuable suggestions to improve our site..."
+              style={{ fontSize: '14px' }}
+            />
+          </div>
           <Button variant="primary" size='lg' onClick={sendFeedback} style={{ marginTop: '20px', width: '100%', borderRadius: '10px' }}>
             Submit
           </Button>

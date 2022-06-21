@@ -16,7 +16,7 @@ const AlertModal = ({ value, callback, setPristine }) => {
         callback(false);
         setTimeout(() => {
             window.location.replace('/dashboard/profile');
-        }, 2000)
+        }, 500)
     }
     return (
 
@@ -25,8 +25,8 @@ const AlertModal = ({ value, callback, setPristine }) => {
                 <div style={{ padding: '20px' }}>
                     <h6>You have unsaved changes, Are you sure want to cancel?</h6>
                     <div style={{ float: 'right', marginTop: '20px' }}>
-                        <Button variant="secondary" onClick={() => { setshow(false); callback(false) }} style={{ marginRight: '20px' }}>No</Button>
-                        <Button variant='danger' onClick={reloadPage}>Yes</Button>
+                        <Button variant="outline-primary" onClick={() => { setshow(false); callback(false) }} style={{ marginRight: '20px' }}>No</Button>
+                        <Button variant='primary' onClick={reloadPage}>Yes</Button>
                     </div>
                 </div>
             </Modal>

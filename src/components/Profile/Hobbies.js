@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Row, Col, FormControl, InputGroup, Button, Badge } from 'react-bootstrap'
+import { Card,  Col, FormControl, InputGroup, Button, Badge } from 'react-bootstrap'
 import { MdOutlineCancel } from 'react-icons/md'
 
 const Hobbies = ({ edit, profileData, updatedProfile, setupdatedProfile, setDirty }) => {
@@ -42,18 +42,18 @@ const Hobbies = ({ edit, profileData, updatedProfile, setupdatedProfile, setDirt
                 }
             </div>
             <Card body style={{ padding: '8px' }}>
-                <Row style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+                <div style={{display:'flex'}}>
                     {addNew ? null : newHobbies ? newHobbies.length === 0 ?
                         <p style={{ textAlign: 'center', width: '100%', color: 'gray' }}> No Hobbies Available!<br /> Try to add new Hobbies...</p>
                         :
                         newHobbies.map((hobbie, index) => {
                             return (
-                                <Col key={index} sm={4} style={{ marginBottom: '10px' }}>
-                                    <Badge style={{ padding: '10px 20px', fontSize: '14px', color: '#3c4852' }} bg="light" pill>
+                                <div key={index} sm={4} style={{ margin: '5px 10px' }}>
+                                    <Badge style={{ padding: '10px 20px', fontSize: '14px', color: '#3c4852', display: 'flex' ,width: 'fit-content' }} bg="light" pill>
                                         {hobbie}&nbsp;
                                         {edit ? <MdOutlineCancel size={15} style={{ color: '#6b818b', float: 'right', marginLeft: '5px', cursor: 'pointer' }} onClick={() => removeHobbie(hobbie)} /> : null}
                                     </Badge>
-                                </Col>
+                                </div>
                             );
                         }) : null
                     }
@@ -66,11 +66,11 @@ const Hobbies = ({ edit, profileData, updatedProfile, setupdatedProfile, setDirt
                                     value={hobbie}
                                     onChange={(e) => { sethobbie(e.target.value); setDirty() }}
                                 />
-                                <Button variant="outline-secondary" style={{ minWidth: '100px' }} onClick={addHobbie}>Add</Button>
+                                <Button variant="secondary" style={{ minWidth: '100px' }} onClick={addHobbie}>Add</Button>
                             </InputGroup>
                         </Col>
                         : null}
-                </Row>
+                </div>
 
             </Card>
         </div>
