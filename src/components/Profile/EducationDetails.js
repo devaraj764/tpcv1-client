@@ -2,78 +2,82 @@ import React, { useState, useEffect } from 'react'
 import { Row, Col, Card, Form, InputGroup, FormControl, Accordion } from 'react-bootstrap';
 
 const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile, Prompt, setDirty }) => {
-    // Schooling Details
-    const [schoolDetails, setSchoolDetails] = useState(null);
-    const [name, setname] = useState('');
-    const [loc, setloc] = useState('');
-    const [cgpa, setcgpa] = useState('');
-    const [passout, setpassout] = useState('');
-
-    // preGraduation Details
-    const [preGraduationDetails, setpreGraduationDetails] = useState(null);
-    const [clgName, setclgName] = useState('');
-    const [clgLoc, setclgLoc] = useState('');
-    const [clgCpga, setclgCpga] = useState('');
-    const [clgPassout, setclgPassout] = useState('');
-
-    // Graduation details
-    const [graduationDetails, setgraduationDetails] = useState(null);
-    const [universityName, setuniversityName] = useState('');
-    const [universityLoc, setuniversityLoc] = useState('');
-    const [universityCgpa, setuniversityCgpa] = useState('');
-    const [allCgpa, setallCgpa] = useState(null);
 
     useEffect(() => {
-        setname(profileData.schooling ? profileData.schooling.name : '');
-        setloc(profileData.schooling ? profileData.schooling.loc : '');
-        setcgpa(profileData.schooling ? profileData.schooling.cgpa : '');
-        setpassout(profileData.schooling ? profileData.schooling.passout : '');
-        setclgName(profileData.preGraduation ? profileData.preGraduation.name : '');
-        setclgLoc(profileData.preGraduation ? profileData.preGraduation.loc : '');
-        setclgCpga(profileData.preGraduation ? profileData.preGraduation.cgpa : '');
-        setclgPassout(profileData.preGraduation ? profileData.preGraduation.passout : '');
-        setuniversityName(profileData.graduation ? profileData.graduation.name : '');
-        setuniversityLoc(profileData.graduation ? profileData.graduation.loc : '');
-        setuniversityCgpa(profileData.graduation ? profileData.graduation.cgpa : '');
+        setschooling(profileData.schooling)
+        setpreGraduation(profileData.preGraduation)
+        setgraduation(profileData.graduation)
         setallCgpa(profileData.graduation ? profileData.graduation.allcgpa : null);
     }, [profileData]);
 
-    useEffect(() => {
-        setSchoolDetails({ name, cgpa, loc, passout });
-        setupdatedProfile({ ...updatedProfile, schooling: schoolDetails });
-    }, [name, loc, cgpa, passout, schoolDetails, setupdatedProfile, updatedProfile, setSchoolDetails]);
+    // Schooling Details
+    const [schooling, setschooling] = useState({
+        name: '',
+        loc: '',
+        cgpa: '',
+        passout: '',
+    });
 
-    useEffect(() => {
-        setpreGraduationDetails({
-            name: clgName,
-            cgpa: clgCpga,
-            loc: clgLoc,
-            passout: clgPassout
-        });
-        setupdatedProfile({ ...updatedProfile, preGraduation: preGraduationDetails });
-    }, [clgName, clgLoc, clgCpga, clgPassout, setupdatedProfile, updatedProfile, preGraduationDetails, setpreGraduationDetails]);
+    // preGraduation Details
+    const [preGraduation, setpreGraduation] = useState({
+        name: '',
+        loc: '',
+        cgpa: '',
+        passout: '',
+    });
 
-    useEffect(() => {
-        setgraduationDetails({
-            name: universityName,
-            cgpa: universityCgpa,
-            loc: universityLoc,
-            allcgpa: allCgpa
-        });
-        setupdatedProfile({ ...updatedProfile, graduation: graduationDetails });
-    }, [universityName, universityLoc, universityCgpa, allCgpa, setupdatedProfile, updatedProfile, graduationDetails, setgraduationDetails]);
+    // Graduation details
+    const [graduation, setgraduation] = useState({
+        name: '',
+        loc: '',
+        cgpa: '',
+        allcgpa: {
+            0: '',
+            1: '',
+            2: '',
+            3: '',
+            4: '',
+            5: '',
+            6: '',
+            7: '',
+        }
+    });
+
+    const updateSchoolingDetails = (key, value) => {
+        setDirty();
+        setschooling({ ...schooling, [key]: value });
+        setupdatedProfile({ ...updatedProfile, schooling: { ...schooling, [key]: value } });
+    }
+
+    const updatepreGraduation = (key, value) => {
+        setDirty();
+        setpreGraduation({ ...preGraduation, [key]: value });
+        setupdatedProfile({ ...updatedProfile, preGraduation: { ...preGraduation, [key]: value } });
+    }
+
+    const updategraduation = (key, value) => {
+        setDirty();
+        setgraduation({ ...graduation, [key]: value });
+        setupdatedProfile({ ...updatedProfile, graduation: { ...graduation, [key]: value } });
+    }
+
+
+    const [allCgpa, setallCgpa] = useState(null);
 
     const calculateAverageCgpa = (key, value) => {
         setDirty();
         setallCgpa({ ...allCgpa, [key]: value });
-
+        setgraduation({ ...graduation, allcgpa: { ...graduation.allcgpa, [key]: value } });
         let sum = parseFloat("0.0");
         for (let key in allCgpa) {
             sum += parseFloat(allCgpa[key]);
         }
         let newcgpa = sum / 8;
-        setuniversityCgpa(Number((newcgpa).toFixed(1)));
+        setgraduation({ ...graduation, cgpa: Number((newcgpa).toFixed(1)) });
+        setupdatedProfile({ ...updatedProfile, graduation: { ...graduation, allcgpa: { ...graduation.allcgpa, [key]: value } } });
+        setupdatedProfile({ ...updatedProfile, graduation: { ...graduation, cgpa: Number((newcgpa).toFixed(1)) } });
     }
+
 
     return (
         <div className="educational-details">
@@ -87,8 +91,8 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1">at</InputGroup.Text>
                             <FormControl
-                                onChange={(e) => { setname(e.target.value); setDirty() }}
-                                value={name}
+                                onChange={(e) => updateSchoolingDetails('name', e.target.value)}
+                                value={schooling.name}
                                 placeholder="School Name"
                                 aria-label="SchoolName"
                                 aria-describedby="basic-addon1"
@@ -100,7 +104,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                     <Col md={6} sm={12}>
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1">Passed Out</InputGroup.Text>
-                            <Form.Select value={passout || passout !== '' ? passout : 'Year'} id="passout" aria-label="Default select example" disabled={!edit} onChange={(e) => { setpassout(e.target.value); setDirty() }}>
+                            <Form.Select value={schooling.passout || schooling.passout !== '' ? schooling.passout : 'Year'} id="passout" aria-label="Default select example" disabled={!edit} onChange={(e) => updateSchoolingDetails('passout', e.target.value)}>
                                 <option disabled>Year</option>
                                 <option value="2016">2016</option>
                                 <option value="2017">2017</option>
@@ -116,8 +120,8 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                             <InputGroup.Text id="basic-addon1">CGPA</InputGroup.Text>
                             <FormControl
                                 id="cgpa"
-                                value={cgpa}
-                                onChange={(e) => { setcgpa(e.target.value); setDirty() }}
+                                value={schooling.cgpa}
+                                onChange={(e) => updateSchoolingDetails('cgpa', e.target.value)}
                                 placeholder="Your 10th CGPA"
                                 aria-label="SchoolName"
                                 aria-describedby="basic-addon1"
@@ -129,9 +133,9 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                         <InputGroup className="mb-3">
                             <FormControl
                                 id="location"
-                                onChange={(e) => { setloc(e.target.value); setDirty() }}
+                                onChange={(e) => updateSchoolingDetails('loc', e.target.value)}
                                 as='textarea'
-                                value={loc}
+                                value={schooling.loc}
                                 placeholder="Your school address"
                                 aria-label="address"
                                 aria-describedby="basic-addon1"
@@ -150,8 +154,8 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1">at</InputGroup.Text>
                             <FormControl
-                                value={clgName}
-                                onChange={(e) => { setclgName(e.target.value); setDirty() }}
+                                value={preGraduation.name}
+                                onChange={(e) => updatepreGraduation('name', e.target.value)}
                                 placeholder="University Name"
                                 aria-label="University name"
                                 aria-describedby="basic-addon1"
@@ -162,7 +166,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                     <Col md={6} sm={12}>
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1">Passed Out</InputGroup.Text>
-                            <Form.Select aria-label="Default select example" disabled={!edit} value={clgPassout || clgPassout !== '' ? clgPassout : 'Year'} onChange={(e) => { setclgPassout(e.target.value); setDirty() }}>
+                            <Form.Select aria-label="Default select example" disabled={!edit} value={preGraduation.passout || preGraduation.passout !== '' ? preGraduation.passout : 'Year'} onChange={(e) => updatepreGraduation('passout', e.target.value)}>
                                 <option disabled>Year</option>
                                 <option value="2016">2016</option>
                                 <option value="2017">2017</option>
@@ -177,8 +181,8 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1">CGPA</InputGroup.Text>
                             <FormControl
-                                value={clgCpga}
-                                onChange={(e) => { setclgCpga(e.target.value); setDirty() }}
+                                value={preGraduation.cgpa}
+                                onChange={(e) => updatepreGraduation('cgpa', e.target.value)}
                                 placeholder="Overall CGPA"
                                 aria-label="SchoolName"
                                 aria-describedby="basic-addon1"
@@ -190,8 +194,8 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                         <InputGroup className="mb-3">
                             <FormControl
                                 as='textarea'
-                                value={clgLoc}
-                                onChange={(e) => { setclgLoc(e.target.value); setDirty(); }}
+                                value={preGraduation.loc}
+                                onChange={(e) => updatepreGraduation('loc', e.target.value)}
                                 placeholder="Address of University"
                                 aria-label="address"
                                 aria-describedby="basic-addon1"
@@ -210,8 +214,8 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1">at</InputGroup.Text>
                             <FormControl
-                                value={universityName}
-                                onChange={(e) => { setuniversityName(e.target.value); setDirty() }}
+                                value={graduation.name}
+                                onChange={(e) => updategraduation('name', e.target.value)}
                                 placeholder="University Name"
                                 aria-label="University name"
                                 aria-describedby="basic-addon1"
@@ -339,7 +343,7 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                         <InputGroup className="mb-3">
                             <InputGroup.Text id="basic-addon1">CGPA</InputGroup.Text>
                             <FormControl
-                                value={universityCgpa}
+                                value={graduation.cgpa}
                                 placeholder="Overall CGPA"
                                 aria-label="SchoolName"
                                 aria-describedby="basic-addon1"
@@ -350,8 +354,8 @@ const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile
                         <InputGroup className="mb-3">
                             <FormControl
                                 as='textarea'
-                                value={universityLoc}
-                                onChange={(e) => { setuniversityLoc(e.target.value); setDirty() }}
+                                value={graduation.loc}
+                                onChange={(e) => updategraduation('loc', e.target.value)}
                                 placeholder="Address of University"
                                 aria-label="address"
                                 aria-describedby="basic-addon1"
