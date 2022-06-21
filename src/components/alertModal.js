@@ -11,10 +11,12 @@ const AlertModal = ({ value, callback, setPristine }) => {
     }, [value]);
 
     const reloadPage = () => {
-        // setPristine();
+        setPristine();
         setshow(false);
         callback(false);
-        window.location.replace('/dashboard/profile');
+        setTimeout(() => {
+            window.location.replace('/dashboard/profile');
+        }, 2000)
     }
     return (
 
