@@ -4,19 +4,19 @@
         "data": [
             {
                 "name": "Java",
-                "level": "beginner"
+                "level": "Beginner"
             },
             {
                 "name": "Python",
-                "level": "beginner"
+                "level": "Beginner"
             },
             {
                 "name": "C++",
-                "level": "beginner"
+                "level": "Beginner"
             },
             {
                 "name": "C",
-                "level": "beginner"
+                "level": "Beginner"
             }
         ]
     },
@@ -26,17 +26,17 @@
             {
                 "name": "Web Development",
                 "tools": "",
-                "level": "beginner"
+                "level": "Beginner"
             },
             {
                 "name": "Mobile App Development",
                 "tools": "",
-                "level": "beginner"
+                "level": "Beginner"
             },
             {
                 "name": "Data Science",
                 "tools": "",
-                "level": "beginner"
+                "level": "Beginner"
             }
         ]
     },

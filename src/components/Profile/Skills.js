@@ -232,7 +232,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile, setDirty
                                                     <div>
                                                         {item.description !== undefined ? <Form.Control defaultValue={item.description} placeholder="Describe topics you know" onChange={(e) => changeDescription(e.target.value, item.name)} type='text' className='skillVal' style={{ flexWrap: 'wrap', maxWidth: '400px' }} size='sm' aria-label="Default select example" disabled={!edit} /> :
                                                             <Form.Select onChange={(e) => changeSkillLevel(e.target.value, item.name, skill.title)} className="skillVal" size='sm' value={item.level} aria-label="Default select example" disabled={!edit}>
-                                                                <option value="Basic">Beginner</option>
+                                                                <option value="Beginner">Beginner</option>
                                                                 <option value="Moderate">Moderate</option>
                                                                 <option value="Advanced">Advanced</option>
                                                             </Form.Select>}
