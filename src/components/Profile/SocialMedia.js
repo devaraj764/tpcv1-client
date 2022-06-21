@@ -71,7 +71,7 @@ const SocialMedia = ({ edit, profileData, updatedProfile, setupdatedProfile, set
                                     type="text"
                                     placeholder="Place your link here.."
                                 />
-                                <Button variant="outline-secondary" style={{ minWidth: '100px' }} onClick={addLink}>Add</Button>
+                                <Button variant="secondary" style={{ minWidth: '100px' }} onClick={addLink}>Add</Button>
                             </InputGroup>
                         </Col>
                         : null
