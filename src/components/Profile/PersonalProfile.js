@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Row, Col, Card, Form, InputGroup, FormControl } from 'react-bootstrap';
 import { MdPermIdentity, MdEmail, MdBatchPrediction, MdPhone } from 'react-icons/md';
 import { BiRename, BiShowAlt, BiHide } from 'react-icons/bi'
@@ -7,7 +7,12 @@ import { SiGoogleclassroom } from 'react-icons/si';
 
 const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile, setDirty }) => {
 
-    const [Private, setPrivate] = React.useState(true);
+    const [privacy, setPrivacy] = React.useState(profileData.privacy);
+
+    useEffect(() => {
+        setDirty();
+        setupdatedProfile({ ...updatedProfile, privacy: privacy })
+    }, [privacy]);
 
     return (
         <div className="personal-details">
@@ -17,9 +22,9 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile,
                     <p className="message">Update your photo and personal details here</p>
                 </div>
                 {edit ?
-                    Private ?
-                        <p onClick={() => setPrivate(false)} style={{ minWidth: '100px', borderRadius: '10px', boxShadow: 'none', display: 'flex', alignItems: 'center', fontWeight: 'bold', fontSize: '16px', cursor:'pointer', color:'gray' }} size='sm'><BiHide size={18} /> &nbsp;  Private</p>
-                        : <p onClick={() => setPrivate(true)} style={{ minWidth: '100px', borderRadius: '10px', boxShadow: 'none', display: 'flex', alignItems: 'center', fontWeight: 'bold', fontSize: '16px', cursor:'pointer' }} size='sm'><BiShowAlt size={18} /> &nbsp; Public</p>
+                    privacy ?
+                        <p onClick={() => setPrivacy(false)} style={{ minWidth: '100px', borderRadius: '10px', boxShadow: 'none', display: 'flex', alignItems: 'center', fontWeight: 'bold', fontSize: '16px', cursor: 'pointer', color: 'gray' }} size='sm'><BiHide size={18} /> &nbsp;  Private</p>
+                        : <p onClick={() => setPrivacy(true)} style={{ minWidth: '100px', borderRadius: '10px', boxShadow: 'none', display: 'flex', alignItems: 'center', fontWeight: 'bold', fontSize: '16px', cursor: 'pointer' }} size='sm'><BiShowAlt size={18} /> &nbsp; Public</p>
                     : null
                 }
             </div>
