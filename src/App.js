@@ -18,8 +18,8 @@ import { useMediaQuery } from 'react-responsive'
 
 function App() {
   // const api = 'https://tpcapi.herokuapp.com/';
-  // const api = 'https://tpc-api.loca.lt'
-  const api = 'http://localhost:80'
+  const api = 'https://tpc-api.loca.lt'
+  // const api = 'http://localhost:80'
 
   const isMobile = useMediaQuery({ query: '(max-width: 576px)' })
 
