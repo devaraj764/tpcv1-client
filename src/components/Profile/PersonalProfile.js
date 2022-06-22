@@ -1,15 +1,28 @@
 import React from 'react'
-import { Row, Col, Card, Form, InputGroup, FormControl } from 'react-bootstrap';
+import { Row, Col, Card, Form, InputGroup, FormControl, Button } from 'react-bootstrap';
 import { MdPermIdentity, MdEmail, MdBatchPrediction, MdPhone } from 'react-icons/md';
-import { BiRename } from 'react-icons/bi'
+import { BiRename, BiShowAlt, BiHide } from 'react-icons/bi'
 import { FaBirthdayCake, FaBook } from 'react-icons/fa';
 import { SiGoogleclassroom } from 'react-icons/si';
 
 const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile, setDirty }) => {
+
+    const [Private, setPrivate] = React.useState(true);
+
     return (
         <div className="personal-details">
-            <p className="heading">Personal Details</p>
-            <p className="message">Update your photo and personal details here</p>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: 'fit-content' }}>
+                <div style={{ margin: '0px' }}>
+                    <p className="heading">Personal Details</p>
+                    <p className="message">Update your photo and personal details here</p>
+                </div>
+                {edit ?
+                    Private ?
+                        <p onClick={() => setPrivate(false)} style={{ minWidth: '100px', borderRadius: '10px', boxShadow: 'none', display: 'flex', alignItems: 'center', fontWeight: 'bold', fontSize: '16px', cursor:'pointer', color:'gray' }} size='sm'><BiHide size={18} /> &nbsp;  Private</p>
+                        : <p onClick={() => setPrivate(true)} style={{ minWidth: '100px', borderRadius: '10px', boxShadow: 'none', display: 'flex', alignItems: 'center', fontWeight: 'bold', fontSize: '16px', cursor:'pointer' }} size='sm'><BiShowAlt size={18} /> &nbsp; Public</p>
+                    : null
+                }
+            </div>
             <Card body style={{ padding: '10px', fontSize: '14px' }}>
                 <Row>
                     <Col md={6} sm={12}>

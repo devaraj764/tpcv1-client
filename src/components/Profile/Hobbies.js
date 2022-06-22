@@ -28,8 +28,8 @@ const Hobbies = ({ edit, profileData, updatedProfile, setupdatedProfile, setDirt
 
     return (
         <div className="Hobbies">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
-                <div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height:'fit-content' }}>
+                <div style={{margin:'0px'}}>
                     <p className="heading">Hobbies</p>
                     <p className="message">Add your hobbies here</p>
                 </div>
