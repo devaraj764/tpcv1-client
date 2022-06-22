@@ -302,6 +302,7 @@ body {
         border-radius: 10px;
         border: 1px solid #eee;
         margin: 20px 0;
+        // flex-wrap: nowrap;
         // box-shadow: #959da533 0px 8px 24px;
         .notifier-typo {
           display: flex;
@@ -309,8 +310,8 @@ body {
           justify-content: center;
           min-height: 80px;
           height: 100%;
-          border-top-left-radius: 10px;
-          border-bottom-left-radius: 10px;
+          // border-top-left-radius: 10px;
+          // border-bottom-left-radius: 10px;
         }
         .notifier-body {
           height: auto;
@@ -353,9 +354,23 @@ body {
           }
         }
       }
+      .view-profile-banner{
+        background-color: #f8f8ff;
+        padding:10px;
+        margin: 20px auto;
+        margin-bottom:40px;
+        border-radius: 10px;
+        a{
+          margin:0;
+          text-align: center;
+          color: $primary-color;
+          font-size:15px;
+          font-weight: 600;
+        }
+      }
       .header {
         padding: 0 10px;
-        margin-bottom: 50px;
+        margin-bottom: 30px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -394,13 +409,6 @@ body {
   }
 
   // view profile
-  .preview-unavailable {
-    display: none;
-    margin-top: 20px;
-    @media (max-width: 576px) {
-      display: block;
-    }
-  }
   .download-resume{
     @media (max-width: 576px) {
       display: none;
@@ -410,9 +418,9 @@ body {
     min-height: 100vh;
     padding: 30px;
     padding-bottom: 0px;
-    @media (max-width: 576px) {
-      display: none;
-    }
+    // @media (max-width: 576px) {
+    //   display: none;
+    // }
     .header {
       display: flex;
       justify-content: space-between;
@@ -450,6 +458,9 @@ body {
         @media (max-width: 992px) {
           grid-template-columns: 300px 1fr auto;
         }
+        // @media (max-width: 576px) {
+        //   grid-template-columns: auto;
+        // }
         .section-title {
           max-width: 450px;
           margin-right: 20px;
@@ -499,6 +510,11 @@ body {
       border-radius: 10px;
       border: none;
     }
+  }
+  .preview-unavailable {
+    margin-top: 20px;
+    text-align: center;
+    width:100%;
   }
 }
 

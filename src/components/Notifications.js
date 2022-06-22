@@ -39,32 +39,32 @@ const Notifications = (props) => {
             :
             notifications.map((notifier, index) => (
               <Row className="notifier" key={index}>
-                <Col className="notifier-typo" md="1" sm="2">
+                <Col md={1} xs={2} className="notifier-typo">
                   {
-                    notifier.type === 'warning' ?
-                      <TiWarningOutline size={24} /> :
-                      notifier.type === 'info' ?
-                        <VscInfo size={24} /> :
-                        notifier.type === 'success' ?
-                          <IoMdCheckmarkCircleOutline size={24} />
-                          : notifier.type === 'test' ?
-                            <HiOutlineClipboardList size={24} /> : null
+                      notifier.type === 'warning' ?
+                        <TiWarningOutline size={24} /> :
+                        notifier.type === 'info' ?
+                          <VscInfo size={24} /> :
+                          notifier.type === 'success' ?
+                            <IoMdCheckmarkCircleOutline size={24} />
+                            : notifier.type === 'test' ?
+                              <HiOutlineClipboardList size={24} /> : null
 
-                  }
+                    }
 
                 </Col>
-                <Col md="11" sm="10" className="notifier-body align-self-center">
+                <Col xs={10} md={11} className="notifier-body align-self-center">
                   <p className="title">{notifier.title.toUpperCase()}</p>
                   <p className="description">{notifier.description}</p>
                 </Col>
               </Row>
-            )) : 
+            )) :
             <div style={{ minHeight: '20vh', textAlign: 'center' }}>
-            <center style={{ marginTop: '80px' }}>
-              <Spinner size='xl' animation='grow' /><br /><br />
-              Retrieving data...
-            </center>
-          </div>
+              <center style={{ marginTop: '80px' }}>
+                <Spinner size='xl' animation='grow' /><br /><br />
+                Retrieving data...
+              </center>
+            </div>
           }
         </Col>
       </Row>

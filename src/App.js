@@ -13,6 +13,7 @@ import ViewProfile from './components/view-profile';
 import PageNotFound from './pages/PageNotFound'
 import Adminlogin from './pages/Admin/login.js';
 import Admindashboard from './pages/Admin';
+import { useMediaQuery } from 'react-responsive'
 
 
 function App() {
@@ -20,10 +21,13 @@ function App() {
   // const api = 'https://tpc-api.loca.lt'
   const api = 'http://localhost:80'
 
+  const isMobile = useMediaQuery({ query: '(max-width: 576px)' })
 
   return (
     <Switch>
-      <Route exact path='/view-profile/:id' render={() => <ViewProfile api={api} />}></Route>
+      {isMobile ? <Route exact path="/view-profile/:id" render={() => (
+        <p className="preview-unavailable" style={{ textAlign: 'center', width: '100%', color: '#3c4852' }}>Sorry! No Preview available for this screen <br /> <span style={{ color: '#6b818b' }}>Change the screen to "Desktop site"</span></p>
+      )}></Route> : <Route exact path='/view-profile/:id' render={() => <ViewProfile api={api} />}></Route>}
       <Route exact path='/login' render={() => <Home api={api} />}></Route>
       <Route exact path='/register' render={() => <Home api={api} />}></Route>
       <Route exact path="/admin/login" render={() => <Adminlogin api={api} />}></Route>

@@ -2,7 +2,8 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { Row, Col, ListGroup, Button, Form } from 'react-bootstrap';
 import Toast from '../Toast';
-import { BsPatchCheckFill } from 'react-icons/bs'
+import { BsPatchCheckFill } from 'react-icons/bs';
+import {BiLinkExternal} from 'react-icons/bi'
 
 const Home = (props) => {
   const [feedback, setfeedback] = useState('');
@@ -33,6 +34,9 @@ const Home = (props) => {
           <div className="header">
             <p className="Title">Hello! <br /><span>{props.username}</span></p>
           </div>
+          <Row className="view-profile-banner">
+              <a href={`/view-profile/${props.id}`} target="_blank" rel="noopener noreferrer">View and share your profile <BiLinkExternal/></a>
+          </Row>
           <p className="heading">To Do's</p>
           <p className="message">Things you need to complete</p>
           <div className="box">

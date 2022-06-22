@@ -70,7 +70,7 @@ const ViewProfile = (props) => {
                                     </div> : null
                                 }
                                 {/* Education */}
-                                {profile.graduation.name !== '' || profile.preGraduation.name || profile.schooling.name !== '' ?
+                                {profile.graduation.name !== '' || profile.preGraduation.name !== '' || profile.schooling.name !== '' ?
 
                                     <div className="section">
                                         <div className="section-title" >
@@ -284,7 +284,6 @@ const ViewProfile = (props) => {
                             </main>
                         </Col>
                     </Row >
-                    <p className="preview-unavailable" style={{ textAlign: 'center', width: '100%', color: '#3c4852' }}>Sorry! No Preview available for this screen <br/> <span style={{color:'#6b818b'}}>Change the screen to "Desktop site"</span></p>
                     <Row className="download-resume justify-content-md-center">
                         <hr />
                         <p style={{ textAlign: 'center', width: '100%', color: '#3c4852', fontSize: '16px', fontWeight: '600', cursor: 'pointer' }} onClick={handlePrint}>Download Resume</p>
