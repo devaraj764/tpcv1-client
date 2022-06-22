@@ -10,7 +10,6 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile,
     const [privacy, setPrivacy] = React.useState(profileData.privacy);
 
     useEffect(() => {
-        setDirty();
         setupdatedProfile({ ...updatedProfile, privacy: privacy });
     }, [privacy])
 
@@ -23,8 +22,8 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile,
                 </div>
                 {edit ?
                     privacy ?
-                        <p onClick={() => setPrivacy(false)} style={{ minWidth: '100px', borderRadius: '10px', boxShadow: 'none', display: 'flex', alignItems: 'center', fontWeight: 'bold', fontSize: '16px', cursor: 'pointer', color: 'gray' }} size='sm'><BiHide size={18} /> &nbsp;  Private</p>
-                        : <p onClick={() => setPrivacy(true)} style={{ minWidth: '100px', borderRadius: '10px', boxShadow: 'none', display: 'flex', alignItems: 'center', fontWeight: 'bold', fontSize: '16px', cursor: 'pointer' }} size='sm'><BiShowAlt size={18} /> &nbsp; Public</p>
+                        <p onClick={() => { setPrivacy(false); setDirty(); }} style={{ minWidth: '100px', borderRadius: '10px', boxShadow: 'none', display: 'flex', alignItems: 'center', fontWeight: 'bold', fontSize: '16px', cursor: 'pointer', color: 'gray' }} size='sm'><BiHide size={18} /> &nbsp;  Private</p>
+                        : <p onClick={() => { setPrivacy(true); setDirty(); }} style={{ minWidth: '100px', borderRadius: '10px', boxShadow: 'none', display: 'flex', alignItems: 'center', fontWeight: 'bold', fontSize: '16px', cursor: 'pointer' }} size='sm'><BiShowAlt size={18} /> &nbsp; Public</p>
                     : null
                 }
             </div>

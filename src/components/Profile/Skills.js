@@ -210,7 +210,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile, setDirty
             <p className="message">Rate your skills according to your capability</p>
             {/* Hard Skills  */}
             <Card body style={{ padding: '10px' }}>
-                <p className="sub-heading">Hard Skills</p>
+                <p className="sub-heading">Technical Skills</p>
                 <Row>
                     <Accordion>
                         {hardSkills ? hardSkills.map((skill, index) => {
@@ -244,7 +244,7 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile, setDirty
                                                     onChange={(e) => changeTools(e.target.value, item.name)}
                                                     defaultValue={item.tools === undefined || item.tools === '' ? '' : item.tools}
                                                     placeholder="Frameworks you are specialized in.."
-                                                    style={{ marginBottom: '30px' }}
+                                                    style={{ marginBottom: '30px', marginTop: '10px', minHeight: '50px' }}
                                                     disabled={!edit}
                                                 /> : null}
                                             </div>
@@ -252,26 +252,28 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile, setDirty
                                     }) : null}<br />
                                     {edit ? addNew ? <Button variant="light" onClick={() => { setaddNew(false); setPristine() }} style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px', marginBottom: '20px' }} size='sm'>cancel</Button> : <Button style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px', marginBottom: '20px' }} size='sm' onClick={() => setaddNew(true)}>+ Add</Button> : null}
                                     {addNew ? <Col lg={12}>
-                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                             <Form.Control
                                                 onChange={(e) => { setDirty(); skill.title === 'Programming Languages' ? setnewskill({ ...newskill, name: e.target.value }) : skill.title === 'Subjects' ? setnewSubject({ ...newSubject, name: e.target.value }) : setnewTech({ ...newTech, name: e.target.value }) }}
                                                 value={skill.title === 'Programming Languages' ? newskill.name : skill.title === 'Subjects' ? newSubject.name : newTech.name}
                                                 type="text"
+                                                style={{ marginRight: '10px' }}
                                                 placeholder={skill.title === 'Programming Languages' ? 'Language' : skill.title === 'Subjects' ? 'Subject' : 'technology'}
                                             />
                                             {skill.title === 'Technologies' ? <Form.Control
+                                                style={{ marginRight: '10px' }}
                                                 onChange={(e) => { setnewTech({ ...newTech, tools: e.target.value }); setDirty() }}
                                                 value={newTech.tools}
                                                 type="text"
                                                 placeholder='specialization'
                                             /> : null}
-                                            {skill.title === 'Subjects' ? <Form.Control value={newSubject.description} type='text' placeholder='Describe topics you know' onChange={(e) => { setnewSubject({ ...newSubject, description: e.target.value }); setDirty(); }} />
-                                                : <Form.Select value={newskill.level} onChange={(e) => { setnewskill({ ...newskill, level: e.target.value }); setDirty() }} aria-label="Default select example">
+                                            {skill.title === 'Subjects' ? <Form.Control style={{ marginRight: '10px' }} value={newSubject.description} type='text' placeholder='Describe topics you know' onChange={(e) => { setnewSubject({ ...newSubject, description: e.target.value }); setDirty(); }} />
+                                                : <Form.Select style={{ marginRight: '10px' }} value={newskill.level} onChange={(e) => { setnewskill({ ...newskill, level: e.target.value }); setDirty() }} aria-label="Default select example">
                                                     <option value="Beginner">Beginner</option>
                                                     <option value="Moderate">Moderate</option>
                                                     <option value="Advanced">Advanced</option>
                                                 </Form.Select>}
-                                            <Button style={{ backgroundColor: '#071a84', fontSize: '14px !important', minWidth: '100px' }} onClick={() => addHardSkill(skill.title)}>Add</Button>
+                                            <Button style={{ fontSize: '14px !important', minWidth: '100px' }} onClick={() => addHardSkill(skill.title)}>Add</Button>
                                         </div>
                                     </Col> : null}
                                 </Accordion.Body>
@@ -307,21 +309,23 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile, setDirty
                                             </Form.Select>
                                         </div>
                                     })}
+                                    <br />
                                     {edit ? addNew ? <Button variant="light" onClick={() => { setaddNew(false); setPristine() }} style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px', marginBottom: '20px' }} size='sm'>cancel</Button> : <Button variant="primary" size='sm' style={{ fontSize: '14px !important', minWidth: '100px', borderRadius: '25px', marginBottom: '20px' }} onClick={() => setaddNew(true)}>+ Add</Button> : null}
                                     {addNew ? <Col lg={12}>
-                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                             <Form.Control
                                                 onChange={(e) => { setnewLanguage({ ...newLanguage, name: e.target.value }); setDirty() }}
                                                 value={newLanguage.name}
                                                 type="text"
                                                 placeholder='Language'
+                                                style={{ marginRight: '10px' }}
                                             />
-                                            <Form.Select defaultValue={newskill.level} onChange={(e) => { setnewLanguage({ ...newLanguage, level: e.target.value }); setDirty() }} aria-label="Default select example">
+                                            <Form.Select style={{ marginRight: '10px' }} defaultValue={newskill.level} onChange={(e) => { setnewLanguage({ ...newLanguage, level: e.target.value }); setDirty() }} aria-label="Default select example">
                                                 <option value="Beginner">Beginner</option>
                                                 <option value="Moderate">Moderate</option>
                                                 <option value="Advanced">Advanced</option>
                                             </Form.Select>
-                                            <Button style={{ backgroundColor: '#071a84', fontSize: '14px !important', minWidth: '100px' }} onClick={() => addSoftSkill(skill.title)}>Add</Button>
+                                            <Button style={{ fontSize: '14px !important', minWidth: '100px' }} onClick={() => addSoftSkill(skill.title)}>Add</Button>
                                         </div>
                                     </Col> : null}
                                 </Accordion.Body>
