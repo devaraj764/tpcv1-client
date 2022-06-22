@@ -82,8 +82,8 @@ const ViewProfile = (props) => {
                                                     <>
                                                         <p className="sub-heading">B.Tech, Computer Science & Engineering</p>
                                                         <p>{profile.graduation.name}</p>
-                                                        <p>2019 - 2023</p>
-                                                        <p>CGPA : 8.2</p>
+                                                        <p>CGPA : {profile.graduation.cgpa}</p>
+                                                        <p>{profile.graduation.loc}</p>
                                                     </>
                                                     : null
                                                 }
@@ -91,9 +91,10 @@ const ViewProfile = (props) => {
                                                     profile.preGraduation.name ?
                                                         <>
                                                             <p className="sub-heading" style={{ marginTop: '20px' }}>Pre - University</p>
-                                                            <p>Rajiv Gandhi University Of Knowledge And Technology , Srikakulam</p>
-                                                            <p>2017 - 2029</p>
-                                                            <p>CGPA : 8.9</p>
+                                                            <p>{profile.preGraduation.name}</p>
+                                                            <p>Passout Year: {profile.preGraduation.passout}</p>
+                                                            <p>CGPA : {profile.preGraduation.cgpa}</p>
+                                                            <p>{profile.preGraduation.loc}</p>
                                                         </>
                                                         : null
                                                 }
@@ -101,8 +102,10 @@ const ViewProfile = (props) => {
                                                     profile.schooling.name ?
                                                         <>
                                                             <p className="sub-heading" style={{ marginTop: '20px' }}>Schooling</p>
-                                                            <p>Rajiv Gandhi University Of Knowledge And Technology , Srikakulam</p>
-                                                            <p>CGPA : 10.0</p>
+                                                            <p>{profile.schooling.name}</p>
+                                                            <p>Passout Year: {profile.schooling.passout}</p>
+                                                            <p>CGPA : {profile.schooling.cgpa}</p>
+                                                            <p>{profile.schooling.loc}</p>
                                                         </>
                                                         : null
                                                 }
