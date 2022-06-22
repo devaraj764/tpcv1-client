@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React  from 'react'
 import { Row, Col, Card, Form, InputGroup, FormControl } from 'react-bootstrap';
 import { MdPermIdentity, MdEmail, MdBatchPrediction, MdPhone } from 'react-icons/md';
 import { BiRename, BiShowAlt, BiHide } from 'react-icons/bi'
@@ -9,10 +9,12 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile,
 
     const [privacy, setPrivacy] = React.useState(profileData.privacy);
 
-    useEffect(() => {
+    const handlePrivacyChange = () => {
+        setPrivacy(!privacy)
+        console.log(privacy)
         setDirty();
         setupdatedProfile({ ...updatedProfile, privacy: privacy })
-    }, [privacy]);
+    }
 
     return (
         <div className="personal-details">
@@ -23,8 +25,8 @@ const PersonalProfile = ({ edit, profileData, updatedProfile, setupdatedProfile,
                 </div>
                 {edit ?
                     privacy ?
-                        <p onClick={() => setPrivacy(false)} style={{ minWidth: '100px', borderRadius: '10px', boxShadow: 'none', display: 'flex', alignItems: 'center', fontWeight: 'bold', fontSize: '16px', cursor: 'pointer', color: 'gray' }} size='sm'><BiHide size={18} /> &nbsp;  Private</p>
-                        : <p onClick={() => setPrivacy(true)} style={{ minWidth: '100px', borderRadius: '10px', boxShadow: 'none', display: 'flex', alignItems: 'center', fontWeight: 'bold', fontSize: '16px', cursor: 'pointer' }} size='sm'><BiShowAlt size={18} /> &nbsp; Public</p>
+                        <p onClick={handlePrivacyChange} style={{ minWidth: '100px', borderRadius: '10px', boxShadow: 'none', display: 'flex', alignItems: 'center', fontWeight: 'bold', fontSize: '16px', cursor: 'pointer', color: 'gray' }} size='sm'><BiHide size={18} /> &nbsp;  Private</p>
+                        : <p onClick={handlePrivacyChange} style={{ minWidth: '100px', borderRadius: '10px', boxShadow: 'none', display: 'flex', alignItems: 'center', fontWeight: 'bold', fontSize: '16px', cursor: 'pointer' }} size='sm'><BiShowAlt size={18} /> &nbsp; Public</p>
                     : null
                 }
             </div>

@@ -41,7 +41,6 @@ const ViewProfile = (props) => {
                                 <div className="header-left">
                                     <p className="user-name">{profile.name}</p>
                                     <p>{profile.email}</p>
-                                    <p>+91 {profile.contactNumber}</p>
                                 </div>
                                 <div className="header-right">
                                     <Image src={profile.imageUrl ? `${props.api}${profile.imageUrl}` : `${props.api}/uploads/default.svg`} alt="profile-image" height="100px" style={{ borderRadius: '10px' }} />
@@ -50,7 +49,7 @@ const ViewProfile = (props) => {
                             <hr />
                             <main>
                                 {/* About Me */}
-                                {profile.bio ?
+                                {profile.bio || profile.hobbies.length > 0 || !profile.privacy ?
                                     <div className="section">
                                         <div className="section-title" >
                                             <p className="heading">About Me</p>
@@ -58,6 +57,14 @@ const ViewProfile = (props) => {
                                         <div className="section-content" >
                                             <div className="description">
                                                 {profile.bio ? <p>{profile.bio}</p> : null}
+                                                {
+                                                    profile.privacy ? null :
+                                                        <div style={{marginBottom:'15px'}}>
+                                                            {profile.contactNumber ? <p className="sub-heading">Contact Number: <i style={{ fontSize: '14px', fontWeight: '500', divor: '#6b818b' }}>+91 {profile.contactNumber}</i></p> : null}
+                                                            {profile.dob ? <p className="sub-heading">Date of Birth: <i style={{ fontSize: '14px', fontWeight: '500', divor: '#6b818b' }}>{profile.dob}</i></p> : null}
+                                                            {profile.address ? <p className="sub-heading">Address: <i style={{ fontSize: '14px', fontWeight: '500', divor: '#6b818b' }}>{profile.address}</i></p> : null}
+                                                        </div>
+                                                }
                                                 {profile.hobbies.length > 0 ?
                                                     <>
                                                         <p className="sub-heading">My Hobbies</p>
