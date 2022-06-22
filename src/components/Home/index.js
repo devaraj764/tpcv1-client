@@ -41,12 +41,12 @@ const Home = (props) => {
           <p className="message">Things you need to complete</p>
           <div className="box">
             <ListGroup numbered>
-              <ListGroup.Item as="li" className="list-group-item"><a href="/dashboard/profile">Complete your profile by clicking on profile nav button (on top-right corner)</a></ListGroup.Item>
-              <ListGroup.Item as="li" className="list-group-item"><a href="/dashboard/profile">Upload your profile image and describe yourself in bio</a></ListGroup.Item>
-              <ListGroup.Item as="li" className="list-group-item"> <a href="/dashboard/profile">Add your hobbies and social links (Github, LinkedIn, hackerrank, leetcode ...)</a></ListGroup.Item>
-              <ListGroup.Item as="li" className="list-group-item"><a href="/dashboard/profile">Add your skills and rate them in skill section</a></ListGroup.Item>
-              <ListGroup.Item as="li" className="list-group-item"><a href="/dashboard/profile">Add education details in education section</a></ListGroup.Item>
-              <ListGroup.Item as="li" className="list-group-item"><a href="/dashboard/profile">Add your projects, internships, certifications and achievements in feats section</a></ListGroup.Item>
+              <ListGroup.Item as="li" className="list-group-item">Complete your profile by clicking on profile nav button (on top-right corner)<a href='/dashboard/profile'><BiLinkExternal className='externalicon' size={16} /></a></ListGroup.Item>
+              <ListGroup.Item as="li" className="list-group-item">Upload your profile image and describe yourself in bio<a href='/dashboard/profile'><BiLinkExternal className='externalicon' size={16} /></a></ListGroup.Item>
+              <ListGroup.Item as="li" className="list-group-item">Add your hobbies and social links (Github, LinkedIn, hackerrank, leetcode ...)<a href='/dashboard/profile'><BiLinkExternal className='externalicon' size={16} /></a></ListGroup.Item>
+              <ListGroup.Item as="li" className="list-group-item">Add your skills and rate them in skill section<a href='/dashboard/profile'><BiLinkExternal className='externalicon' size={16} /></a></ListGroup.Item>
+              <ListGroup.Item as="li" className="list-group-item">Add education details in education section<a href='/dashboard/profile'><BiLinkExternal className='externalicon' size={16} /></a></ListGroup.Item>
+              <ListGroup.Item as="li" className="list-group-item">Add your projects, internships, certifications and achievements in feats section<a href='/dashboard/profile'><BiLinkExternal className='externalicon' size={16} /></a></ListGroup.Item>
             </ListGroup>
           </div>
           <br />
