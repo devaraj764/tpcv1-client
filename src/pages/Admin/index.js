@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Nav, Row, Col, Form, Button, Table } from 'react-bootstrap'
 import { BsPatchCheckFill } from 'react-icons/bs';
 import Toast from '../../components/helpers/Toast';
-import axios from 'axios';
+import axios from '../../axios';
 import { withRouter } from 'react-router-dom';
 
 const Admin = (props) => {
@@ -25,7 +25,7 @@ const Admin = (props) => {
 
     useEffect(() => {
         // fetch students
-        const url = props.api + '/admin/getStudents';
+        const url = '/admin/getStudents';
         axios.get(url, {
             headers: {
                 "auth-token": localStorage.getItem('admin-token')
@@ -35,7 +35,7 @@ const Admin = (props) => {
         })
             .catch((err) => console.log(err))
         // fetch feedbacks 
-        const url2 = props.api + '/admin/feedbacks';
+        const url2 = '/admin/feedbacks';
         axios.get(url2, {
             headers: {
                 "auth-token": localStorage.getItem('admin-token')
@@ -47,7 +47,7 @@ const Admin = (props) => {
     }, []);
 
     const sendNotification = async () => {
-        const url = props.api + '/admin/notifications'
+        const url = '/admin/notifications'
         axios.post(url, {
             "title": title,
             "description": description,

@@ -25,8 +25,8 @@ const Skills = ({ edit, profileData, updatedProfile, setupdatedProfile, setDirty
     });
 
     useEffect(() => {
-        sethardSkills(profileData.hardSkills ? profileData.hardSkills : []);
-        setsoftSkills(profileData.softSkills ? profileData.softSkills : []);
+        sethardSkills(profileData ? profileData.hardSkills ? profileData.hardSkills : [] : []);
+        setsoftSkills(profileData ? profileData.softSkills ? profileData.softSkills : [] : []);
     }, [profileData]);
 
     const addHardSkill = (title) => {

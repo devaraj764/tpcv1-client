@@ -14,7 +14,7 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, load
     const [imageSrc, setimageSrc] = useState(null);
 
     useEffect(() => {
-        setprofileUrl(profileData ? profileData.imageUrl || profileData.imageUrl === '' ? `${api}${profileData.imageUrl}` : null : null);
+        setprofileUrl(profileData ? profileData.imageUrl || profileData.imageUrl === '' ? `https://tpc-api.loca.lt${profileData.imageUrl}` : null : null);
     }, [profileData, api]);
 
     async function handleProfile(uploader) {
@@ -38,7 +38,7 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, load
         <div className='profile-banner'>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div className='imageUpload'>
-                    <Image fluid src={profileUrl ? profileUrl : `${api}/uploads/default.svg`}
+                    <Image fluid src={profileUrl ? profileUrl : `https://tpc-api.loca.lt/uploads/default.svg`}
                         alt="profile image" className="profileImage" style={{ position: 'relative', opacity: edit ? '0.7' : '1' }} />
                     {edit ?
                         <div style={{ position: 'absolute', background: 'transparent', opacity: '0.5', zIndex: '2', marginTop: '-60px', marginLeft: '45px' }}>
@@ -62,7 +62,7 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, load
                 </div>
             </div>
             <AlertModal value={modal} callback={setmodal} setPristine={setPristine} />
-            <ProfileModal api={api} src={imageSrc} value={profileModal} callback={setprofileModal} setcropimg={setprofileUrl} setEdit={setEdit} history={history}/>
+            <ProfileModal src={imageSrc} value={profileModal} callback={setprofileModal} setcropimg={setprofileUrl} setEdit={setEdit} history={history}/>
         </div>
     )
 }
