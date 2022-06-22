@@ -37,6 +37,7 @@ const Notifications = (props) => {
           {notifications ? notifications === 'error' ?
             <p style={{ textAlign: 'center' }}>Error loading data</p>
             :
+            notifications.length === 0 ? <p style={{ textAlign: 'center' }}>No current notifications</p> :
             notifications.map((notifier, index) => (
               <Row className="notifier" key={index}>
                 <Col md={1} xs={2} className="notifier-typo">
