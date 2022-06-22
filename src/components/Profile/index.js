@@ -11,8 +11,8 @@ import Projects from './Projects.js';
 import Internships from './Internships.js';
 import Certifications from './Certifications.js';
 import Achievements from './Achievements.js';
-import useUnsavedChangesWarning from '../useUnsavedChangesWarning.js';
-import Toast from '../Toast.js';
+import useUnsavedChangesWarning from '../helpers/useUnsavedChangesWarning.js';
+import Toast from '../helpers/Toast.js';
 import { BsPatchCheckFill } from 'react-icons/bs';
 import { withRouter } from 'react-router-dom';
 

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Col, Row, InputGroup, FormControl, Spinner, Button, Form } from 'react-bootstrap';
-// import TPCLogo from '../assets/tpc-logo.svg';
 import { MdPermIdentity, MdEmail, MdPassword, MdBatchPrediction, MdPhone } from 'react-icons/md';
 import { BiRename } from 'react-icons/bi'
 import { FaBirthdayCake, FaBook } from 'react-icons/fa';

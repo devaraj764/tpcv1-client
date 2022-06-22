@@ -57,7 +57,7 @@ const ViewProfile = (props) => {
                                         </div>
                                         <div className="section-content" >
                                             <div className="description">
-                                                {profile.bio ? <p>`${profile.bio}`</p> : null}
+                                                {profile.bio ? <p>{profile.bio}</p> : null}
                                                 {profile.hobbies.length > 0 ?
                                                     <>
                                                         <p className="sub-heading">My Hobbies</p>

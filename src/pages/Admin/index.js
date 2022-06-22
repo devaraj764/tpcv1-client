@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Nav, Row, Col, Form, Button, Table } from 'react-bootstrap'
 import { BsPatchCheckFill } from 'react-icons/bs';
-import Toast from '../../components/Toast';
+import Toast from '../../components/helpers/Toast';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 

@@ -1,7 +1,7 @@
 import { Image, Button, Form, Spinner } from 'react-bootstrap';
 import { AiOutlineCamera } from 'react-icons/ai'
 import React, { useState, useEffect } from 'react';
-import AlertModal from '../alertModal';
+import AlertModal from '../helpers/alertModal';
 import ProfileModal from './profileModal';
 import { withRouter } from 'react-router-dom';
 
