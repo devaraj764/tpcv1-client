@@ -345,6 +345,10 @@ body {
         padding: 10px;
         margin-top: 20px;
         .list-group-item {
+          .externalicon {
+            color: $primary-color;
+            margin-left: 10px;
+          }
           margin: 10px;
           border: none;
           color: $secondary-color;
@@ -354,17 +358,17 @@ body {
           }
         }
       }
-      .view-profile-banner{
+      .view-profile-banner {
         background-color: #f8f8ff;
-        padding:10px;
+        padding: 10px;
         margin: 20px auto;
-        margin-bottom:40px;
+        margin-bottom: 40px;
         border-radius: 10px;
-        a{
-          margin:0;
+        a {
+          margin: 0;
           text-align: center;
           color: $primary-color;
-          font-size:15px;
+          font-size: 15px;
           font-weight: 600;
         }
       }
@@ -409,7 +413,7 @@ body {
   }
 
   // view profile
-  .download-resume{
+  .download-resume {
     @media (max-width: 576px) {
       display: none;
     }
@@ -514,7 +518,7 @@ body {
   .preview-unavailable {
     margin-top: 20px;
     text-align: center;
-    width:100%;
+    width: 100%;
   }
 }
 
