@@ -17,20 +17,20 @@ body {
   font-size: 14px !important;
   color: $text-color;
   input,
-    select,
-    textarea {
-      min-height: 50px;
-      background-color: #fff !important;
-      border: none !important;
-      color: $secondary-color !important;
-      &[disabled] {
-        background-color: #f3f5fabb !important;
-      }
-      &:focus {
-        outline: none !important;
-        box-shadow: none !important;
-      }
+  select,
+  textarea {
+    min-height: 50px;
+    background-color: #fff !important;
+    border: none !important;
+    color: $secondary-color !important;
+    &[disabled] {
+      background-color: #f3f5fabb !important;
     }
+    &:focus {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+  }
   .input-group {
     box-shadow: rgba(149, 157, 165, 0.2) 0px 4px 12px;
     border-radius: 10px;
@@ -394,9 +394,25 @@ body {
   }
 
   // view profile
+  .preview-unavailable {
+    display: none;
+    margin-top: 20px;
+    @media (max-width: 576px) {
+      display: block;
+    }
+  }
+  .download-resume{
+    @media (max-width: 576px) {
+      display: none;
+    }
+  }
   .view-profile {
     min-height: 100vh;
-    padding: 30px 10px;
+    padding: 30px;
+    padding-bottom: 0px;
+    @media (max-width: 576px) {
+      display: none;
+    }
     .header {
       display: flex;
       justify-content: space-between;
@@ -428,14 +444,23 @@ body {
     main {
       margin-top: 30px;
       .section {
-        margin-bottom: 50px;
-        .heading {
-          font-size: 16px;
-          font-weight: 600;
-          color: $text-color;
-          text-transform: uppercase;
-          @media (max-width: 768px) {
-            text-decoration: underline;
+        margin-bottom: 30px;
+        display: grid;
+        grid-template-columns: 450px 1fr auto;
+        @media (max-width: 992px) {
+          grid-template-columns: 300px 1fr auto;
+        }
+        .section-title {
+          max-width: 450px;
+          margin-right: 20px;
+          width: 100%;
+          @media screen {
+          }
+          .heading {
+            font-size: 16px;
+            font-weight: 600;
+            color: $text-color;
+            text-transform: uppercase;
           }
         }
         .description {
