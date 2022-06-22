@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { withRouter, Switch, Route } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/helpers/Navbar';
 import Profile from '../components/Profile';
 import Home from '../components/Home';
 import Notifications from '../components/Notifications';
-import Footer from '../components/Footer';
+import Footer from '../components/helpers/Footer';
 import PageNotFound from '../pages/PageNotFound';
 import axios from 'axios';
 
