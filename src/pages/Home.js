@@ -287,7 +287,7 @@ function Register(props) {
                             type='date'
                             name="date"
                             placeholder="Date of Birth"
-                            aria-label="ddob"
+                            aria-label="dob"
                             aria-describedby="basic-addon1"
                         />
                     </InputGroup>

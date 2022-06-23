@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Row, Col, Spinner } from 'react-bootstrap';
+import { Row, Col, Spinner, Modal } from 'react-bootstrap';
 import { TiWarningOutline } from 'react-icons/ti';
 import { VscInfo } from 'react-icons/vsc';
 import { IoMdCheckmarkCircleOutline } from 'react-icons/io'
@@ -10,6 +10,8 @@ import { Helmet } from 'react-helmet'
 const Notifications = (props) => {
 
   const [notifications, setNotifications] = useState(null);
+  const [show, setShow] = useState(false);
+  const [data, setData] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('auth-token');
@@ -30,6 +32,11 @@ const Notifications = (props) => {
       setNotifications('error')
     });
   }, [props.api]);
+
+  const onClickNotification = (x) => {
+    setData(x);
+    setShow(true);
+  }
 
   return (
     <>
@@ -59,7 +66,7 @@ const Notifications = (props) => {
                       }
 
                     </Col>
-                    <Col xs={10} md={11} className="notifier-body align-self-center">
+                    <Col xs={10} md={11} className="notifier-body align-self-center" onClick={() => onClickNotification(notifier)}>
                       <p className="title">{notifier.title.toUpperCase()}</p>
                       <p className="description">{notifier.description}</p>
                     </Col>
@@ -74,7 +81,19 @@ const Notifications = (props) => {
             }
           </Col>
         </Row>
-      </div>
+        <Modal show={show} onHide={() => setShow(false)}
+          size="lg"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+
+          <Modal.Body>
+            <p style={{ fontWeight: 'bold' }}>{data ? data.title.toUpperCase() : 'loading...'}</p>
+            <hr />
+            {data ? data.description : 'loading...'}
+          </Modal.Body>
+        </Modal>
+      </div >
     </>
   )
 }
