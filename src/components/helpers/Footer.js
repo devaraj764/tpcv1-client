@@ -3,7 +3,7 @@ import React from 'react';
 const Footer = () => {
     return (
         <footer>
-            <p style={{ fontSize: '14px' }}>&copy; All rights 2022 reserved by TPC Technical Team</p>
+            <p style={{ fontSize: '14px' }}>&copy; {new Date(Date.now()).getFullYear()} reserved by Computer Science Dept | TPC Technical Team</p>
         </footer>
     )
 }

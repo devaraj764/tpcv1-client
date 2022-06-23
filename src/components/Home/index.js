@@ -31,7 +31,7 @@ const Home = (props) => {
       <Row className="justify-content-md-center">
         <Col sm={12} lg={8}>
           <div className="header">
-            <p className="Title">Hello! <br /><span>{props.username}</span></p>
+            <p className="Title">Hello! <br /><span>{props.username ? props.username : <span style={{fontSize: '16px'}}>loading...</span>}</span></p>
           </div>
           <Row className="view-profile-banner">
             <a href={`/view-profile/${props.id}`} target="_blank" rel="noopener noreferrer">View and share your profile <BiLinkExternal /></a>

@@ -3,6 +3,7 @@ import { Row, Col, Image, Spinner } from 'react-bootstrap';
 import axios from '../../axios';
 import { withRouter } from 'react-router-dom';
 import { useReactToPrint } from 'react-to-print';
+import { Helmet } from 'react-helmet'
 
 const ViewProfile = (props) => {
     const [profile, setProfile] = useState(null);
@@ -30,11 +31,15 @@ const ViewProfile = (props) => {
     });
 
     return (
+
         !err ?
             !profile ?
                 <div style={{ marginTop: '20px', textAlign: 'center', fontSize: '16px', fontWeight: 'bold' }}><Spinner animation="border" size='sm' /> &nbsp; Loading Data...</div>
                 :
                 <>
+                    <Helmet>
+                        <title>{profile.name} | View Profile</title>
+                    </Helmet>
                     <Row className="view-profile justify-content-md-center" ref={componentRef}>
                         <Col md={8}>
                             <div className="header">
@@ -43,7 +48,7 @@ const ViewProfile = (props) => {
                                     <p>{profile.email}</p>
                                 </div>
                                 <div className="header-right">
-                                    <Image src={profile.imageUrl ? `${props.api}${profile.imageUrl}` : `${props.api}/uploads/default.svg`} alt="profile-image" height="100px" style={{ borderRadius: '10px' }} />
+                                    <Image src={profile.imageUrl ? profile.imageUrl : ''} alt="profile-image" height="100px" style={{ borderRadius: '10px' }} />
                                 </div>
                             </div>
                             <hr />
@@ -59,7 +64,7 @@ const ViewProfile = (props) => {
                                                 {profile.bio ? <p>{profile.bio}</p> : null}
                                                 {
                                                     profile.privacy ? null :
-                                                        <div style={{marginBottom:'15px'}}>
+                                                        <div style={{ marginBottom: '15px' }}>
                                                             {profile.contactNumber ? <p className="sub-heading">Contact Number: <i style={{ fontSize: '14px', fontWeight: '500', divor: '#6b818b' }}>+91 {profile.contactNumber}</i></p> : null}
                                                             {profile.dob ? <p className="sub-heading">Date of Birth: <i style={{ fontSize: '14px', fontWeight: '500', divor: '#6b818b' }}>{profile.dob}</i></p> : null}
                                                             {profile.address ? <p className="sub-heading">Address: <i style={{ fontSize: '14px', fontWeight: '500', divor: '#6b818b' }}>{profile.address}</i></p> : null}
