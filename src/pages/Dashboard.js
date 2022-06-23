@@ -7,7 +7,7 @@ import Home from '../components/Home';
 import Notifications from '../components/Notifications';
 import Footer from '../components/helpers/Footer';
 import PageNotFound from '../pages/PageNotFound';
-import axios from 'axios';
+import axios from '../axios';
 
 const Dashboard = (props) => {
     const [username, setusername] = useState('');
@@ -22,7 +22,7 @@ const Dashboard = (props) => {
     }, [props.history]);
 
     useEffect(() => {
-        const url = props.api + '/students/mydata'
+        const url = '/students/mydata'
         axios.get(url, {
             headers: {
                 "auth-token": localStorage.getItem('auth-token'),
@@ -47,8 +47,8 @@ const Dashboard = (props) => {
                 <Navbar />
                 <Container>
                     <Switch>
-                        <Route exact path='/dashboard' render={() => <Home username={username} id={id} api={props.api} idNo={idNo}/>}></Route>
-                        <Route exact path='/dashboard/notifications' render={() => <Notifications api={props.api} history={props.history} />}></Route>
+                        <Route exact path='/dashboard' render={() => <Home username={username} id={id} idNo={idNo} />}></Route>
+                        <Route exact path='/dashboard/notifications' render={() => <Notifications history={props.history} />}></Route>
                         <Route exact path='/dashboard/profile' render={() => <Profile history={props.history} api={props.api} />}></Route>
                         <Route path="*" render={() => <PageNotFound />} />
                     </Switch>

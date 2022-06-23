@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Row, Col, Image, Spinner } from 'react-bootstrap';
-import axios from 'axios';
+import axios from '../../axios';
 import { withRouter } from 'react-router-dom';
 import { useReactToPrint } from 'react-to-print';
 
@@ -9,7 +9,7 @@ const ViewProfile = (props) => {
     const [err, setErr] = useState(false);
 
     useEffect(() => {
-        const url = props.api + '/students/view-profile/' + props.match.params.id
+        const url = '/students/view-profile/' + props.match.params.id
         axios.get(url, {
             headers: {
                 "auth-token": localStorage.getItem('auth-token')

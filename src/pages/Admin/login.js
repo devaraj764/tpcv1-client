@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Col } from 'react-bootstrap'
-import axios from 'axios';
+import axios from '../../axios';
 import { withRouter } from 'react-router-dom';
 
 const Adminlogin = (props) => {
@@ -14,7 +14,7 @@ const Adminlogin = (props) => {
     }, []);
 
     const login = () => {
-        const url = props.api + '/admin/login'
+        const url = '/admin/login'
         axios.post(url, {
             "username": username,
             "password": password

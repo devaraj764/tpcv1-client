@@ -5,7 +5,7 @@ import { BiRename } from 'react-icons/bi'
 import { FaBirthdayCake, FaBook } from 'react-icons/fa';
 import { SiGoogleclassroom } from 'react-icons/si';
 import { Link, withRouter } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../axios';
 import hardSkills from '../defaults/hardskills.json';
 import softSkills from '../defaults/softskills.json';
 
@@ -61,7 +61,7 @@ function Login(props) {
     function loginUser() {
         props.setLoader(true);
         setsuccess('')
-        const url = props.api + '/login'
+        const url = '/login'
         axios.post(url, {
             "idNo": idNo,
             "password": password,
@@ -80,7 +80,7 @@ function Login(props) {
         if (idNo === '') {
             seterror('Enter your idNo')
         } else {
-            axios.post(props.api + '/forgot-password', {
+            axios.post('/forgot-password', {
                 "idNo": idNo,
             }).then(res => {
                 seterror('')
@@ -174,7 +174,7 @@ function Register(props) {
 
     function registerUser() {
         props.setLoader(true);
-        const url = props.api + '/register'
+        const url = '/register'
         axios.post(url, {
             "name": name,
             "idNo": id,

@@ -4,7 +4,7 @@ import { TiWarningOutline } from 'react-icons/ti';
 import { VscInfo } from 'react-icons/vsc';
 import { IoMdCheckmarkCircleOutline } from 'react-icons/io'
 import { HiOutlineClipboardList } from 'react-icons/hi';
-import axios from 'axios';
+import axios from '../axios';
 
 const Notifications = (props) => {
 
@@ -18,7 +18,7 @@ const Notifications = (props) => {
   }, [props.history]);
 
   useEffect(() => {
-    const url = props.api + '/students/notifications'
+    const url = '/students/notifications'
     axios.get(url, {
       headers: {
         "auth-token": localStorage.getItem('auth-token')

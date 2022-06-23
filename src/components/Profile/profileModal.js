@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Modal, Button, Image, Row, Col } from 'react-bootstrap';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
-import axios from 'axios';
+import axios from '../../axios';
 
-const ProfileModal = ({ src, api, value, callback, setcropimg, setEdit, history }) => {
+const ProfileModal = ({ src, value, callback, setcropimg, setEdit, history }) => {
     const [show, setshow] = useState(false);
 
     const [crop, setCrop] = useState({ aspect: 1 / 1 });
@@ -48,7 +48,7 @@ const ProfileModal = ({ src, api, value, callback, setcropimg, setEdit, history 
     }
 
     const uploadProfilePicture = async () => {
-        const url = api + '/students/'
+        const url = '/students/'
         const data = new FormData();
         data.append('imageUrl', blob)
         await axios.patch(url, data, {

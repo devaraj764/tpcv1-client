@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { Row, Col, Card, Form, InputGroup, FormControl, Accordion } from 'react-bootstrap';
 
-const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile, Prompt, setDirty }) => {
-    const [schooling, setschooling] = useState(profileData.schooling);
-    const [preGraduation, setpreGraduation] = useState(profileData.preGraduation);
-    const [graduation, setgraduation] = useState(profileData.graduation);
+const EducationDetails = ({ edit, profileData, updatedProfile, setupdatedProfile, setDirty }) => {
+    const [schooling, setschooling] = useState(profileData ? profileData.schooling : null);
+    const [preGraduation, setpreGraduation] = useState(profileData ? profileData.preGraduation : null);
+    const [graduation, setgraduation] = useState(profileData ? profileData.graduation : null);
 
     const updateSchoolingDetails = (key, value) => {
         setDirty();

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Nav, Spinner } from 'react-bootstrap';
-import axios from 'axios';
+import axios from '../../axios';
 import ProfileBanner from './ProfileBanner.js';
 import PersonalProfile from './PersonalProfile.js';
 import EducationDetails from './EducationDetails.js';
@@ -43,7 +43,7 @@ const Profile = (props) => {
     }, [Token, props.history]);
 
     useEffect(() => {
-        const url = props.api + '/students/mydata'
+        const url = '/students/mydata'
         axios.get(url, {
             headers: {
                 "auth-token": localStorage.getItem('auth-token')
@@ -60,7 +60,7 @@ const Profile = (props) => {
         if (isDirty) {
             setPristine();
             setloader(true);
-            const url = props.api + '/students/'
+            const url = '/students/'
             await axios.patch(url, updatedProfile, {
                 headers: {
                     "auth-token": localStorage.getItem('auth-token')

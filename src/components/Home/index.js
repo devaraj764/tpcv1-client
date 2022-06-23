@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../../axios';
 import React, { useState } from 'react';
 import { Row, Col, ListGroup, Button, Form } from 'react-bootstrap';
 import Toast from '../helpers/Toast';
@@ -10,8 +10,7 @@ const Home = (props) => {
   const [toast, setToast] = useState(false);
 
   const sendFeedback = () => {
-    const url = props.api + '/students/feedback';
-    console.log(url)
+    const url = '/students/feedback';
     axios.post(url, {
       idNo: props.idNo,
       message: feedback
