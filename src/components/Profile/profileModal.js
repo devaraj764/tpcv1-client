@@ -75,7 +75,7 @@ const ProfileModal = ({ src, value, callback, setcropimg, setEdit, history }) =>
 
     return (
         <div>
-            <Modal show={show} onHide={() => setshow(false)} backdrop="static">
+            <Modal show={show}>
                 <div style={{ padding: '20px', marginTop: '10px' }}>
                     <h6>Do you want to make this as your profile picture?</h6><br />
                     {

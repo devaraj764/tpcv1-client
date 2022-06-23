@@ -14,7 +14,7 @@ const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, load
     const [imageSrc, setimageSrc] = useState(null);
 
     useEffect(() => {
-        setprofileUrl(profileData ? profileData.imageUrl !== '' ? profileData.imageUrl : 'https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg' : 'https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg');
+        setprofileUrl(profileData ? profileData.imageUrl ? profileData.imageUrl : 'https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg' : 'https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg');
     }, [profileData]);
 
     async function handleProfile(uploader) {
