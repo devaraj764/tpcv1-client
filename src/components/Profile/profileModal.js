@@ -10,7 +10,7 @@ const ProfileModal = ({ src, value, callback, setcropimg, setEdit, history }) =>
     const [crop, setCrop] = useState({ aspect: 1 / 1 });
     const [image, setimage] = useState(null);
     const [croppedImg, setcroppedImg] = useState(null);
-    const [blob, setblob] = useState(null);
+    const [cropped, setcropped] = useState(false);
 
     useEffect(() => {
         setshow(value)
@@ -38,44 +38,44 @@ const ProfileModal = ({ src, value, callback, setcropimg, setEdit, history }) =>
 
         if (canvas.width !== 0 || canvas.height !== 0) {
             // As dataURL
-            const base64Image = canvas.toDataURL('image/jpeg');
-            setcroppedImg(base64Image);
-            // As Blob Image
-            canvas.toBlob(blob => {
-                setblob(blob)
-            }, "image/jpeg");
+            let src = canvas.toDataURL('image/jpeg');
+            setcroppedImg(src);
+            setcropped(true);
         } else { window.alert('Please crop the image correctly ... 😇 ') }
     }
 
     const uploadProfilePicture = async () => {
-        const url = '/students/'
-        const data = new FormData();
-        data.append('imageUrl', blob)
-        await axios.patch(url, data, {
-            headers: {
-                "auth-token": localStorage.getItem('auth-token')
-            }
-        })
-            .then((res) => {
-                callback(false);
-                setshow(false);
-                setEdit(false)
-                setcropimg(croppedImg);
-                setcroppedImg(null)
-                history.push('/dashboard/profile');
+        if (cropped) {
+            const url = '/students/'
+            const data = new FormData();
+            data.append('imageUrl', croppedImg)
+            await axios.patch(url, data, {
+                headers: {
+                    "auth-token": localStorage.getItem('auth-token')
+                }
             })
-            .catch((err) => console.log(err))
+                .then((res) => {
+                    callback(false);
+                    setshow(false);
+                    setEdit(false)
+                    setcropimg(croppedImg);
+                    setcroppedImg(null)
+                    history.push('/dashboard/profile');
+                })
+                .catch((err) => console.log(err))
+        } else { window.alert('Please crop the image correctly ... 😇 ') }
     }
 
     const cancelUpload = () => {
         setshow(false);
         callback(false);
+        setcroppedImg(null)
         document.getElementById('imageInput').value = ''
     }
 
     return (
         <div>
-            <Modal show={show} onHide={() => setshow(false)}>
+            <Modal show={show} onHide={() => setshow(false)} backdrop="static">
                 <div style={{ padding: '20px', marginTop: '10px' }}>
                     <h6>Do you want to make this as your profile picture?</h6><br />
                     {

@@ -26,7 +26,6 @@ const Dashboard = (props) => {
         axios.get(url, {
             headers: {
                 "auth-token": localStorage.getItem('auth-token'),
-                "Bypass-Tunnel-Reminder": "true"
             }
         }).then((res) => {
             setusername(res.data.name)
