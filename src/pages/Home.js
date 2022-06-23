@@ -129,7 +129,7 @@ function Login(props) {
                 }
             </Button>
             <br />
-            <p>Don't have account? <Link style={{ Color:'#625bf6', cursor: 'pointer', fontSize: '16px', fontWeight: '600' }} to="/register">SignUp</Link></p>
+            <p>Don't have account? <Link style={{ Color: '#625bf6', cursor: 'pointer', fontSize: '16px', fontWeight: '600' }} to="/register">SignUp</Link></p>
         </>
     );
 }
