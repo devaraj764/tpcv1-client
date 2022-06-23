@@ -48,7 +48,7 @@ const ViewProfile = (props) => {
                                     <p>{profile.email}</p>
                                 </div>
                                 <div className="header-right">
-                                    <Image src={profile.imageUrl ? profile.imageUrl : ''} alt="profile-image" height="100px" style={{ borderRadius: '10px' }} />
+                                    <Image src={profile.imageUrl ? profile.imageUrl : 'https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg'} alt="profile-image" height="100px" style={{ borderRadius: '10px' }} />
                                 </div>
                             </div>
                             <hr />
