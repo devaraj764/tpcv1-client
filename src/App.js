@@ -1,8 +1,7 @@
 import {
   Switch,
   Route,
-  withRouter,
-  Redirect
+  withRouter
 } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from './axios';
@@ -14,6 +13,7 @@ import ViewProfile from './components/view-profile';
 import PageNotFound from './pages/PageNotFound'
 import Adminlogin from './pages/Admin/login.js';
 import Admindashboard from './pages/Admin';
+import LandingPage from './pages/LandingPage'
 import { useMediaQuery } from 'react-responsive'
 
 
@@ -42,9 +42,7 @@ function App() {
       <Route exact path='/register' render={() => <Home />}></Route>
       <Route exact path="/admin/login" render={() => <Adminlogin />}></Route>
       <Route exact path="/admin/dashboard" render={() => <Admindashboard />} />
-      <Route exact path="/">
-        <Redirect to="/login" />
-      </Route>
+      <Route exact path="/" render={()=><LandingPage />}></Route>
       <Route path='/dashboard' render={() => <Dashboard />}></Route>
       <Route path="*" render={() => <PageNotFound />} />
     </Switch>
