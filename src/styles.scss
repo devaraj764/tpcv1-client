@@ -86,13 +86,6 @@ body {
     color: $text-color;
   }
   .Home {
-    .left-side {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: $primary-color;
-      min-height: 100vh;
-    }
 
     .right-side {
       display: flex;
@@ -100,6 +93,25 @@ body {
       align-items: center;
       flex-direction: column;
       min-height: 100vh;
+      .banner-title{
+        font-size: 50px;
+        font-weight: bold;
+        text-align: center;
+        @media (max-width: 768px) {
+          font-size: 40px;
+        }
+        @media (max-width: 576px) {
+          font-size: 25px;
+        }
+      }
+      .banner-sub{
+        color: grey;
+        font-size: 28px;
+        text-align: center;
+        @media (max-width: 768px) {
+          font-size: 21px;
+        }
+      }
       .title {
         text-transform: uppercase;
         font-size: 30px;
