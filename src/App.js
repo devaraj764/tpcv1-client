@@ -23,14 +23,16 @@ function App() {
   const [id, setid] = useState('');
 
   useEffect(() => {
-    const url = '/students/mydata'
-    axios.get(url, {
-      headers: {
-        "auth-token": localStorage.getItem('auth-token'),
-      }
-    }).then((res) => {
-      setid(res.data._id)
-    })
+    if (localStorage.getItem('auth-token')) {
+      const url = '/students/mydata'
+      axios.get(url, {
+        headers: {
+          "auth-token": localStorage.getItem('auth-token'),
+        }
+      }).then((res) => {
+        setid(res.data._id)
+      })
+    }
   }, []);
 
   return (
@@ -42,7 +44,7 @@ function App() {
       <Route exact path='/register' render={() => <Home />}></Route>
       <Route exact path="/admin/login" render={() => <Adminlogin />}></Route>
       <Route exact path="/admin/dashboard" render={() => <Admindashboard />} />
-      <Route exact path="/" render={()=><LandingPage />}></Route>
+      <Route exact path="/" render={() => <LandingPage />}></Route>
       <Route path='/dashboard' render={() => <Dashboard />}></Route>
       <Route path="*" render={() => <PageNotFound />} />
     </Switch>
