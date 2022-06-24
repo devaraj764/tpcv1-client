@@ -44,6 +44,7 @@ function App() {
       <Route exact path='/register' render={() => <Home />}></Route>
       <Route exact path="/admin/login" render={() => <Adminlogin />}></Route>
       <Route exact path="/admin/dashboard" render={() => <Admindashboard />} />
+      <Route exact path="/admin" render={() => <Adminlogin />} />
       <Route exact path="/" render={() => <LandingPage />}></Route>
       <Route path='/dashboard' render={() => <Dashboard />}></Route>
       <Route path="*" render={() => <PageNotFound />} />

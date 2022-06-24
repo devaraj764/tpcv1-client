@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const uri = 'https://changes-territories-lined-sisters.trycloudflare.com'
+const uri = 'http://locahost:80'
 
 // myAxios.js
 const instance = axios.create({

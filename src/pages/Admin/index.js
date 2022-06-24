@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet'
 
 const Admin = (props) => {
-    const [tab, setTab] = useState(0);
+    const [tab, setTab] = useState(1);
     const [title, settitle] = useState('');
     const [description, setdescription] = useState('');
     const [type, settype] = useState('');
@@ -68,7 +68,7 @@ const Admin = (props) => {
     return (
         <>
             <Helmet>
-                <title>Student Dashboard | TPC</title>
+                <title>Admin Dashboard | TPC</title>
             </Helmet>
             <div className='admin' style={{ marginTop: '100px' }}>
                 <Row className='justify-content-md-center'>
@@ -131,6 +131,7 @@ const Admin = (props) => {
                                                     <th>Batch</th>
                                                     <th>Year of Study</th>
                                                     <th>Section</th>
+                                                    <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -144,6 +145,7 @@ const Admin = (props) => {
                                                         <td>{student.batch}</td>
                                                         <td>{student.yearofStudy}</td>
                                                         <td>{student.section}</td>
+                                                        {/* <td><a style={{cursor:'pointer'}} onClick={() => props.history.push(`/view-profile/${student._id}`)}>View Profile</a></td> */}
                                                     </tr>
                                                 )}
                                             </tbody>
