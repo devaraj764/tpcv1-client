@@ -7,7 +7,8 @@ const instance = axios.create({
     baseURL: uri,
     headers: {
         common: {
-            "Bypass-Tunnel-Reminder": 'true'
+            "Bypass-Tunnel-Reminder": 'true',
+            "auth-token": localStorage.getItem('admin-token')
         }
     }
 });

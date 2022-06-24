@@ -14,9 +14,11 @@ const Admin = (props) => {
     const [externals, setexternals] = useState('');
 
     const [students, setstudents] = useState([]);
+    const [filteredStudents, setfilteredStudents] = useState([]);
     const [feedbacks, setfeedbacks] = useState([]);
 
     const [toast, settoast] = useState(false);
+    const [searchInput, setsearchInput] = useState('');
 
     useEffect(() => {
         if (!localStorage.getItem('admin-token')) {
@@ -27,21 +29,14 @@ const Admin = (props) => {
     useEffect(() => {
         // fetch students
         const url = '/admin/getStudents';
-        axios.get(url, {
-            headers: {
-                "auth-token": localStorage.getItem('admin-token')
-            }
-        }).then((res) => {
+        axios.post(url).then((res) => {
             setstudents(res.data)
+            setfilteredStudents(res.data)
         })
             .catch((err) => console.log(err))
         // fetch feedbacks 
         const url2 = '/admin/feedbacks';
-        axios.get(url2, {
-            headers: {
-                "auth-token": localStorage.getItem('admin-token')
-            }
-        }).then((res) => {
+        axios.get(url2).then((res) => {
             setfeedbacks(res.data)
         })
             .catch((err) => console.log(err))
@@ -54,10 +49,6 @@ const Admin = (props) => {
             "description": description,
             "type": type,
             "externals": externals
-        }, {
-            headers: {
-                "auth-token": localStorage.getItem('admin-token')
-            }
         })
             .then((res) => {
                 settoast(true);
@@ -67,6 +58,11 @@ const Admin = (props) => {
                 setexternals('')
             })
             .catch((err) => console.log(err))
+    }
+
+    const searchStudents = () => {
+        let filteredStudents = students.filter(student => student.idNo.toUpperCase().includes(searchInput.toUpperCase()));
+        setfilteredStudents(filteredStudents);
     }
 
     return (
@@ -123,6 +119,7 @@ const Admin = (props) => {
                                 </div>
                                 : tab === 1 ?
                                     <div>
+                                        <Form.Control type="text" onChange={(e) => setsearchInput(e.target.value)} onKeyUp={searchStudents} placeholder="Search Students By ID"/>
                                         <Table striped bordered hover>
                                             <thead>
                                                 <tr>
