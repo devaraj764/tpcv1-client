@@ -2,10 +2,11 @@ import axios from 'axios';
 
 // myAxios.js
 const instance = axios.create({
-    baseURL: 'https://tpc-api.loca.lt',
+    baseURL: 'http://localhost:80',
     headers: {
         common: {
-            "Bypass-Tunnel-Reminder": 'true'
+            "Bypass-Tunnel-Reminder": 'true',
+            "auth-token": localStorage.getItem('admin-token')
         }
     }
 });

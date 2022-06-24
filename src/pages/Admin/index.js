@@ -13,9 +13,11 @@ const Admin = (props) => {
     const [externals, setexternals] = useState('');
 
     const [students, setstudents] = useState([]);
+    const [filteredStudents, setfilteredStudents] = useState([]);
     const [feedbacks, setfeedbacks] = useState([]);
 
     const [toast, settoast] = useState(false);
+    const [searchInput, setsearchInput] = useState('');
 
     useEffect(() => {
         if (!localStorage.getItem('admin-token')) {
@@ -26,21 +28,14 @@ const Admin = (props) => {
     useEffect(() => {
         // fetch students
         const url = '/admin/getStudents';
-        axios.get(url, {
-            headers: {
-                "auth-token": localStorage.getItem('admin-token')
-            }
-        }).then((res) => {
+        axios.post(url).then((res) => {
             setstudents(res.data)
+            setfilteredStudents(res.data)
         })
             .catch((err) => console.log(err))
         // fetch feedbacks 
         const url2 = '/admin/feedbacks';
-        axios.get(url2, {
-            headers: {
-                "auth-token": localStorage.getItem('admin-token')
-            }
-        }).then((res) => {
+        axios.get(url2).then((res) => {
             setfeedbacks(res.data)
         })
             .catch((err) => console.log(err))
@@ -53,10 +48,6 @@ const Admin = (props) => {
             "description": description,
             "type": type,
             "externals": externals
-        }, {
-            headers: {
-                "auth-token": localStorage.getItem('admin-token')
-            }
         })
             .then((res) => {
                 settoast(true);
@@ -66,6 +57,21 @@ const Admin = (props) => {
                 setexternals('')
             })
             .catch((err) => console.log(err))
+    }
+
+    const searchStudents = () => {
+        let filteredStudents = students.filter(student => student.idNo.toUpperCase().includes(searchInput.toUpperCase()));
+        setfilteredStudents(filteredStudents);
+    }
+
+    const sortStudents = (value) => {
+        let filtered = students.sort((a, b) => {
+            let id = a.idNo.toUpperCase().split('S17')
+            let id2 = b.idNo.toUpperCase().split('S17')
+            return id > id2
+        });
+        setfilteredStudents(filteredStudents);
+        console.log(filtered)
     }
 
     return (
@@ -118,6 +124,17 @@ const Admin = (props) => {
                             </div>
                             : tab === 1 ?
                                 <div>
+                                    <Row>
+                                        <Col xs={12} lg={6}>
+                                            <Form.Control type="text" placeholder='Search students by id' value={searchInput} onKeyUp={searchStudents} onChange={(e) => setsearchInput(e.target.value)} />
+                                        </Col>
+                                        <Col>
+                                            <select className='form-select' onChange={(e) => sortStudents(e.target.value)}>
+                                                <option value="-- select --">-- Sort By --</option>
+                                                <option value="id">Sort By ID</option>
+                                            </select>
+                                        </Col>
+                                    </Row><br />
                                     <Table striped bordered hover>
                                         <thead>
                                             <tr>
@@ -132,7 +149,7 @@ const Admin = (props) => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {students.map((student, i) =>
+                                            {filteredStudents.map((student, i) =>
                                                 <tr key={i}>
                                                     <td>{i + 1}</td>
                                                     <td>{student.idNo}</td>
