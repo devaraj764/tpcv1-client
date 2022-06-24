@@ -17,8 +17,6 @@ const ViewProfile = (props) => {
             }
         }).then((res) => {
             setProfile(res.data)
-            console.log(res.data)
-
         }).catch((err) => {
             console.log(err)
             setErr(err.message)
@@ -299,10 +297,10 @@ const ViewProfile = (props) => {
                             </main>
                         </Col>
                     </Row >
-                    <Row className="download-resume justify-content-md-center">
+                    {props.id === props.match.params.id ? <Row className="download-resume justify-content-md-center">
                         <hr />
                         <p style={{ textAlign: 'center', width: '100%', color: '#3c4852', fontSize: '16px', fontWeight: '600', cursor: 'pointer' }} onClick={handlePrint}>Download Resume</p>
-                    </Row>
+                    </Row> : null}
                 </>
             :
             <div style={{ marginTop: '16px', textAlign: 'center', fontSize: '16px', fontWeight: 'bold' }}>Error Loading data...</div>

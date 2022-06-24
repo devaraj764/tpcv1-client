@@ -134,7 +134,7 @@ const Admin = (props) => {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {students.map((student, i) =>
+                                                {filteredStudents.map((student, i) =>
                                                     <tr key={i}>
                                                         <td>{i + 1}</td>
                                                         <td>{student.idNo}</td>
