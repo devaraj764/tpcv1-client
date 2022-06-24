@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const uri = 'https://matched-perl-cons-operates.trycloudflare.com/'
+const uri = 'https://changes-territories-lined-sisters.trycloudflare.com'
 
 // myAxios.js
 const instance = axios.create({
