@@ -5,7 +5,7 @@ import AlertModal from '../helpers/alertModal';
 import ProfileModal from './profileModal';
 import { withRouter } from 'react-router-dom';
 
-const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, loader, api, isDirty, setPristine, history }) => {
+const ProfileBanner = ({ setEdit, edit, handleChanges, logout, profileData, loader, isDirty, setPristine, history }) => {
 
     const [profileUrl, setprofileUrl] = useState('');
     const [modal, setmodal] = useState(false);

@@ -8,6 +8,7 @@ import { Link, withRouter } from 'react-router-dom';
 import axios from '../axios';
 import hardSkills from '../defaults/hardskills.json';
 import softSkills from '../defaults/softskills.json';
+import { Helmet } from 'react-helmet'
 
 function Home(props) {
 
@@ -94,7 +95,9 @@ function Login(props) {
 
     return (
         <>
-
+            <Helmet>
+                <title>Student Login | TPC</title>
+            </Helmet>
             <p style={{ fontSize: '40px', fontWeight: 'bold' }}>Hello Again!</p>
             <p style={{ color: 'grey', textAlign: 'center', fontSize: '14px' }}>Hey, Enter your credentials to get login to your account..</p>
             <br />
@@ -217,6 +220,9 @@ function Register(props) {
 
     return (
         <>
+            <Helmet>
+                <title>Student Registration | TPC</title>
+            </Helmet>
             <p style={{ fontSize: '40px', fontWeight: 'bold' }}>Student Registration Form</p>
             <br />
             <Row style={{ maxWidth: '756px' }}>
@@ -281,7 +287,7 @@ function Register(props) {
                             type='date'
                             name="date"
                             placeholder="Date of Birth"
-                            aria-label="ddob"
+                            aria-label="dob"
                             aria-describedby="basic-addon1"
                         />
                     </InputGroup>

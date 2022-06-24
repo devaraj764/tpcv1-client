@@ -8,6 +8,7 @@ import Notifications from '../components/Notifications';
 import Footer from '../components/helpers/Footer';
 import PageNotFound from '../pages/PageNotFound';
 import axios from '../axios';
+import { Helmet } from 'react-helmet'
 
 const Dashboard = (props) => {
     const [username, setusername] = useState('');
@@ -42,6 +43,9 @@ const Dashboard = (props) => {
 
     return (
         <>
+            <Helmet>
+                <title>Student Dashboard | TPC</title>
+            </Helmet>
             <div className="Dashboard">
                 <Navbar />
                 <Container>
