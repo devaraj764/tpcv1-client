@@ -34,8 +34,4 @@ const LandingPage = (props) => {
     )
 }
 
-<<<<<<< HEAD
-export default withRouter(LandingPage)
-=======
 export default withRouter(LandingPage);
->>>>>>> cc3292acc3116b98885749e0927a0311498eb7ea
