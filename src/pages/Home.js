@@ -71,8 +71,7 @@ function Login(props) {
             props.setLoader(false);
         }).catch(err => {
             if (err) {
-                console.log(err)
-                // seterror(err.response.data.error);
+                seterror(err.response.data.error);
                 props.setLoader(false);
             }
         })

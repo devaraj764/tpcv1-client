@@ -29,14 +29,22 @@ const Admin = (props) => {
     useEffect(() => {
         // fetch students
         const url = '/admin/getStudents';
-        axios.post(url).then((res) => {
+        axios.post(url, {
+            headers: {
+                "auth-token": localStorage.getItem('admin-token')
+            }
+        }).then((res) => {
             setstudents(res.data)
             setfilteredStudents(res.data)
         })
             .catch((err) => console.log(err))
         // fetch feedbacks 
         const url2 = '/admin/feedbacks';
-        axios.get(url2).then((res) => {
+        axios.get(url2, {
+            headers: {
+                "auth-token": localStorage.getItem('admin-token')
+            }
+        }).then((res) => {
             setfeedbacks(res.data)
         })
             .catch((err) => console.log(err))
@@ -49,6 +57,10 @@ const Admin = (props) => {
             "description": description,
             "type": type,
             "externals": externals
+        }, {
+            headers: {
+                "auth-token": localStorage.getItem('admin-token')
+            }
         })
             .then((res) => {
                 settoast(true);
@@ -119,7 +131,7 @@ const Admin = (props) => {
                                 </div>
                                 : tab === 1 ?
                                     <div>
-                                        <Form.Control type="text" onChange={(e) => setsearchInput(e.target.value)} onKeyUp={searchStudents} placeholder="Search Students By ID"/>
+                                        <Form.Control type="text" onChange={(e) => setsearchInput(e.target.value)} onKeyUp={searchStudents} placeholder="Search Students By ID" />
                                         <Table striped bordered hover>
                                             <thead>
                                                 <tr>
