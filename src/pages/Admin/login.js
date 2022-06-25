@@ -20,6 +20,7 @@ const Adminlogin = (props) => {
             "password": password
         })
             .then((res) => {
+                console.log(res)
                 localStorage.setItem('admin-token', res.data.token)
                 props.history.push('/admin/dashboard')
             })

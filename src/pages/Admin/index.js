@@ -29,22 +29,14 @@ const Admin = (props) => {
     useEffect(() => {
         // fetch students
         const url = '/admin/getStudents';
-        axios.post(url, {
-            headers: {
-                "auth-token": localStorage.getItem('admin-token')
-            }
-        }).then((res) => {
+        axios.post(url).then((res) => {
             setstudents(res.data)
             setfilteredStudents(res.data)
         })
             .catch((err) => console.log(err))
         // fetch feedbacks 
         const url2 = '/admin/feedbacks';
-        axios.get(url2, {
-            headers: {
-                "auth-token": localStorage.getItem('admin-token')
-            }
-        }).then((res) => {
+        axios.get(url2).then((res) => {
             setfeedbacks(res.data)
         })
             .catch((err) => console.log(err))
@@ -57,10 +49,6 @@ const Admin = (props) => {
             "description": description,
             "type": type,
             "externals": externals
-        }, {
-            headers: {
-                "auth-token": localStorage.getItem('admin-token')
-            }
         })
             .then((res) => {
                 settoast(true);
