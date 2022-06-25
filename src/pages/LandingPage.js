@@ -2,8 +2,17 @@ import React from 'react';
 import { Row, Col, Image, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import CareerLogo from '../assets/career.svg';
+import {withRouter} from 'react-router-dom'
 
-const LandingPage = () => {
+const LandingPage = (props) => {
+
+    React.useEffect(() => {
+        let token = localStorage.getItem('auth-token');
+        if (token) {
+            props.history.push('/dashboard');
+        }
+    }, [props.location.pathname, props.history]);
+
     return (
         <Row className="Home justify-content-md-center" style={{ minHeight: '100vh', backgroundImage: "url('https://img.freepik.com/free-vector/white-abstract-background_23-2148810113.jpg?w=2000')" }}>
             <Col className="right-side" sm={12} md={8}>
@@ -25,4 +34,4 @@ const LandingPage = () => {
     )
 }
 
-export default LandingPage
+export default withRouter(LandingPage)

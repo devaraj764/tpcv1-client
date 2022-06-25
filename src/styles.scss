@@ -16,15 +16,16 @@ body {
   font-family: "Averta Std", sans-serif;
   font-size: 14px !important;
   color: $text-color;
+
   input,
   select,
   textarea {
     min-height: 50px;
     background-color: #fff !important;
-    border: none !important;
     color: $secondary-color !important;
+    border: none !important;
     &[disabled] {
-      background-color: #f3f5fabb !important;
+      background-color: rgb(230, 230, 237) !important;
     }
     &:focus {
       outline: none !important;
@@ -32,7 +33,7 @@ body {
     }
   }
   .input-group {
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 4px 12px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 10px;
     .input-group-text {
       background-color: #fff !important;
@@ -54,6 +55,7 @@ body {
 
   .btn {
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border: 1px solid #c8c8c8;
     border-radius: 10px;
   }
   .btn-primary {
@@ -86,14 +88,13 @@ body {
     color: $text-color;
   }
   .Home {
-
     .right-side {
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
       min-height: 100vh;
-      .banner-title{
+      .banner-title {
         font-size: 50px;
         font-weight: bold;
         text-align: center;
@@ -101,15 +102,7 @@ body {
           font-size: 40px;
         }
         @media (max-width: 576px) {
-          font-size: 25px;
-        }
-      }
-      .banner-sub{
-        color: grey;
-        font-size: 28px;
-        text-align: center;
-        @media (max-width: 768px) {
-          font-size: 21px;
+          font-size: 40px;
         }
       }
       .title {
@@ -176,7 +169,7 @@ body {
 
     .card {
       border-radius: 10px;
-      border: 1px solid #eee;
+      border: 1px solid #c8c8c8;
       // box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     }
     .heading {
@@ -192,7 +185,7 @@ body {
     }
     .navbar {
       background-color: #fff;
-      border-bottom: 0.5px solid #eee;
+      border-bottom: 0.5px solid #c8c8c8;
       .title {
         font-size: 22px !important;
         color: $text-color !important;
@@ -229,7 +222,7 @@ body {
       }
       .profile-banner {
         margin-bottom: 30px;
-        border: 1px solid #eee;
+        border: 1px solid #c8c8c8;
         padding: 20px;
         border-radius: 10px;
         .profileImage {
@@ -257,9 +250,11 @@ body {
       }
       .Skills {
         margin-top: 50px;
-        input, select, textarea{
+        input,
+        select,
+        textarea {
           // box-shadow: #959da533 0px 2px 6px;
-          border:1px solid #eee !important;
+          border: 1px solid #c8c8c8 !important;
         }
         .softSkill {
           display: flex;
@@ -316,7 +311,7 @@ body {
       .notifier {
         min-height: 80px;
         border-radius: 10px;
-        border: 1px solid #eee;
+        border: 1px solid #c8c8c8;
         margin: 20px 0;
         // flex-wrap: nowrap;
         // box-shadow: #959da533 0px 8px 24px;
@@ -357,7 +352,7 @@ body {
         text-decoration: none;
       }
       .box {
-        border: 1px solid #eee;
+        border: 1px solid #c8c8c8;
         border-radius: 10px;
         padding: 10px;
         margin-top: 20px;
@@ -376,7 +371,7 @@ body {
         }
       }
       .view-profile-banner {
-        background-color: #f8f8ff;
+        background-color: #e8e7fa;
         padding: 10px;
         margin: 20px auto;
         margin-bottom: 40px;
@@ -396,7 +391,7 @@ body {
         justify-content: space-between;
         align-items: center;
         border-radius: 10px;
-        border: 1px solid #eee;
+        border: 1px solid #c8c8c8;
         .Title {
           width: 100%;
           text-align: center;

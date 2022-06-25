@@ -31,7 +31,7 @@ const Home = (props) => {
       <Row className="justify-content-md-center">
         <Col sm={12} lg={8}>
           <div className="header">
-            <p className="Title">Hello! <br /><span>{props.username ? props.username : <span style={{fontSize: '16px'}}>loading...</span>}</span></p>
+            <p className="Title">Hello! <br /><span>{props.username ? props.username : <span style={{ fontSize: '16px' }}>loading...</span>}</span></p>
           </div>
           <Row className="view-profile-banner">
             <a href={`/view-profile/${props.id}`} target="_blank" rel="noopener noreferrer">View and share your profile <BiLinkExternal /></a>
@@ -52,14 +52,13 @@ const Home = (props) => {
           <br />
           <p className="heading">Send Feedback</p>
           <p className="message">Tell us what you feel</p>
-          <div style={{ borderRadius: '10px', border: '1px solid #eee' }}>
+          <div style={{ borderRadius: '10px', border: '1px solid #c8c8c8', marginTop: '10px'}}>
             <Form.Control
               as='textarea'
               rows={5}
               value={feedback}
               onChange={(e) => setfeedback(e.target.value)}
               placeholder="Enter your valuable suggestions to improve our site..."
-              style={{ fontSize: '14px' }}
             />
           </div>
           <Button variant="primary" size='lg' onClick={sendFeedback} style={{ marginTop: '20px', width: '100%', borderRadius: '10px' }}>
