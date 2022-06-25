@@ -35,7 +35,7 @@ const Dashboard = (props) => {
         }).catch((err) => {
             if (!err.request.data) Logout();
         });
-    }, [props.api]);
+    }, []);
 
     const Logout = () => {
         localStorage.removeItem('auth-token')
