@@ -1,7 +1,8 @@
 import {
   Switch,
   Route,
-  withRouter
+  withRouter,
+  Redirect
 } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from './axios';
@@ -14,7 +15,10 @@ import PageNotFound from './pages/PageNotFound'
 import Adminlogin from './pages/Admin/login.js';
 import Admindashboard from './pages/Admin';
 import LandingPage from './pages/LandingPage'
-import { useMediaQuery } from 'react-responsive'
+import { useMediaQuery } from 'react-responsive';
+import Notifications from './components/Admin/Notifications';
+import StudentList from './components/Admin/StudentList';
+import Feedback from './components/Admin/Feedback';
 
 
 function App() {
@@ -42,10 +46,16 @@ function App() {
       )}></Route> : <Route exact path='/view-profile/:id' render={() => <ViewProfile id={id} />}></Route>}
       <Route exact path='/login' render={() => <Home />}></Route>
       <Route exact path='/register' render={() => <Home />}></Route>
+      <Route path='/dashboard' render={() => <Dashboard />}></Route>
       <Route exact path="/admin/login" render={() => <Adminlogin />}></Route>
       <Route exact path="/admin/dashboard" render={() => <Admindashboard />} />
+      <Route exact path="/admin/dashboard/send-notification" render={() => <Notifications />} />
+      <Route exact path="/admin/dashboard/studentslist" render={() => <StudentList />} />
+      <Route exact path="/admin/dashboard/feedbacks" render={() => <Feedback />} />
+      <Route exact path='/admin'>
+        <Redirect exact to='/admin/login' />
+      </Route>
       <Route exact path="/" render={() => <LandingPage />}></Route>
-      <Route path='/dashboard' render={() => <Dashboard />}></Route>
       <Route path="*" render={() => <PageNotFound />} />
     </Switch>
   );

@@ -102,7 +102,18 @@ body {
           font-size: 40px;
         }
         @media (max-width: 576px) {
-          font-size: 40px;
+          font-size: 35px;
+        }
+      }
+      .banner-sub {
+        font-size: 28px;
+        color: $secondary-color;
+        text-align: center;
+        @media (max-width: 768px) {
+          font-size: 24px;
+        }
+        @media (max-width: 576px) {
+          font-size: 22px;
         }
       }
       .title {
@@ -532,6 +543,42 @@ body {
     text-align: center;
     width: 100%;
   }
+
+  // Admin
+  .Admin {
+    .card {
+      cursor: pointer;
+      transition: 0.3s ease-in-out;
+      max-height: 100px;
+      height: 100%;
+      text-decoration: none;
+      .inernal-row {
+        height: 100%;
+      }
+    }
+    .card:hover {
+      box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
+        rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+        rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    }
+    p {
+      margin: 0;
+    }
+    .heading {
+      font-size: 16px;
+      font-weight: bold;
+      color: $primary-color;
+    }
+    .sub-heading {
+      font-size: 12px;
+      color: $secondary-color;
+    }
+    .form-control, select {
+      border-radius: 10px;
+      background-color :rgb(236, 237, 238) !important;
+      border: 1px solid #c8c8c8 !important;
+    }
+  }
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins&display=swap&&family=Nunito&display=swap ");
+// @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins&display=swap&&family=Nunito&display=swap ");
