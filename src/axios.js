@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const uri = 'https://broke-first-core-push.trycloudflare.com/'
+const uri = 'https://pubmed-demonstrates-isaac-gr.trycloudflare.com'
 // const uri = 'http://localhost'
 
 // myAxios.js
