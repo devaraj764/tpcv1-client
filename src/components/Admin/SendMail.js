@@ -4,8 +4,8 @@ import { BsPatchCheckFill } from 'react-icons/bs';
 import Toast from '../../components/helpers/Toast';
 import axios from '../../axios';
 import EmailImage from '../../assets/email.png';
-import { withRouter } from 'react-router-dom'
-import { Helmet } from 'react-helmet'
+import { withRouter } from 'react-router-dom';
+import {Helmet} from 'react-helmet'
 
 
 const SendMail = (props) => {

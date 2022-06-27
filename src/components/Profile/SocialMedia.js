@@ -32,7 +32,7 @@ const SocialMedia = ({ edit, profileData, updatedProfile, setupdatedProfile, set
         <div className="SocialMedia">
            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height:'fit-content' }}>
                 <div style={{margin:'0px'}}>
-                    <p className="heading">Externel Links</p>
+                    <p className="heading">External Links</p>
                     <p className="message">Add your links here</p>
                 </div>
                 {addNew ?

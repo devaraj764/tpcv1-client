@@ -51,7 +51,7 @@ const Projects = (props) => {
     return (
         <div className="Projects">
             <p className="heading">Projects</p>
-            <p className="message">Add your Projects and tem members</p>
+            <p className="message">Add your Projects and team members</p>
             <Card body style={{ padding: '10px', fontSize: '14px' }}>
                 {
                     props.edit && addNew ?

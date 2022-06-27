@@ -55,7 +55,7 @@ const Certifications = (props) => {
     return (
         <div className="Certifications">
             <p className="heading">Certifications</p>
-            <p className="message">Add your new couse certifications and status</p>
+            <p className="message">Add your new course certifications and status</p>
             <Card body style={{ padding: '10px', fontSize: '14px' }}>
                 {
                     props.edit && addNew ?
