@@ -4,12 +4,10 @@ import { TiWarningOutline } from 'react-icons/ti';
 import { VscInfo } from 'react-icons/vsc';
 import { IoMdCheckmarkCircleOutline } from 'react-icons/io'
 import { HiOutlineClipboardList } from 'react-icons/hi';
-import axios from '../axios';
 import { Helmet } from 'react-helmet'
 
 const Notifications = (props) => {
 
-  const [notifications, setNotifications] = useState(null);
   const [show, setShow] = useState(false);
   const [data, setData] = useState(null);
 
@@ -19,19 +17,6 @@ const Notifications = (props) => {
       props.history.push('/login')
     }
   }, [props.history]);
-
-  useEffect(() => {
-    const url = '/students/notifications'
-    axios.get(url, {
-      headers: {
-        "auth-token": localStorage.getItem('auth-token')
-      }
-    }).then((res) => {
-      setNotifications(res.data.message);
-    }).catch((err) => {
-      setNotifications('error')
-    });
-  }, [props.api]);
 
   const onClickNotification = (x) => {
     setData(x);
@@ -46,11 +31,11 @@ const Notifications = (props) => {
       <div className="Notifications">
         <Row className="justify-content-md-center">
           <Col xs lg="8">
-            {notifications ? notifications === 'error' ?
+            {props.notifications ? props.notifications === 'error' ?
               <p style={{ textAlign: 'center' }}>Error loading data</p>
               :
-              notifications.length === 0 ? <p style={{ textAlign: 'center' }}>No current notifications</p> :
-                notifications.map((notifier, index) => (
+              props.notifications.length === 0 ? <p style={{ textAlign: 'center' }}>No current notifications</p> :
+                props.notifications.map((notifier, index) => (
                   <Row className="notifier" key={index}>
                     <Col md={1} xs={2} className="notifier-typo">
                       {

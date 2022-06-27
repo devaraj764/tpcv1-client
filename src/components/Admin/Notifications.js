@@ -5,7 +5,7 @@ import Toast from '../../components/helpers/Toast';
 import axios from '../../axios';
 import NotificationImage from '../../assets/notification.png';
 import { withRouter } from 'react-router-dom';
-import {Helmet} from 'react-helmet'
+import { Helmet } from 'react-helmet'
 
 const Notifications = (props) => {
     const [title, settitle] = useState('');
@@ -20,7 +20,8 @@ const Notifications = (props) => {
         }
     }, []);
 
-    const sendNotification = async () => {
+    const sendNotification = (e) => {
+        e.preventDefault();
         const url = '/admin/notifications'
         axios.post(url, {
             "title": title,
@@ -86,7 +87,7 @@ const Notifications = (props) => {
                                 </Row>
                                 <Row className="justify-content-md-center" style={{ marginTop: '30px ' }}>
                                     <Col xs={12}>
-                                        <Button size='lg' type='submit' variant='primary' onClick={sendNotification} style={{ width: '100%' }}>Send Notification</Button>
+                                        <Button size='lg' type='submit' variant='primary' onClick={(e) => sendNotification(e)} style={{ width: '100%' }}>Send Notification</Button>
                                     </Col>
                                 </Row>
                             </Form>

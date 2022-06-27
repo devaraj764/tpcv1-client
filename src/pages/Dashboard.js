@@ -15,6 +15,9 @@ const Dashboard = (props) => {
     const [idNo, setidNo] = useState('');
     const [id, setId] = useState(null);
 
+    const [notifications, setNotifications] = useState([]);
+    const [isNew, setisNew] = useState(false);
+
     useEffect(() => {
         const token = localStorage.getItem('auth-token');
         if (!token) {
@@ -37,6 +40,26 @@ const Dashboard = (props) => {
         });
     }, []);
 
+    useEffect(() => {
+        const url = '/students/notifications'
+        axios.get(url, {
+            headers: {
+                "auth-token": localStorage.getItem('auth-token')
+            }
+        }).then((res) => {
+            setNotifications(res.data.message)
+            if (localStorage.getItem('notifications')) {
+                if (localStorage.getItem('notifications') < res.data.message.length) {
+                    setisNew(true)
+                }
+            } else {
+                localStorage.setItem('notifications', res.data.message.length)
+            }
+        }).catch((err) => {
+            setNotifications('error')
+        });
+    }, []);
+
     const Logout = () => {
         localStorage.removeItem('auth-token')
     }
@@ -47,12 +70,12 @@ const Dashboard = (props) => {
                 <title>Student Dashboard | TPC</title>
             </Helmet>
             <div className="Dashboard">
-                <Navbar />
+                <Navbar isNew={isNew} setisNew={setisNew} notificationsLength={notifications.length} />
                 <Container>
                     <Switch>
                         <Route exact path='/dashboard' render={() => <Home username={username} id={id} idNo={idNo} />}></Route>
-                        <Route exact path='/dashboard/notifications' render={() => <Notifications history={props.history} />}></Route>
-                        <Route exact path='/dashboard/profile' render={() => <Profile history={props.history} api={props.api} />}></Route>
+                        <Route exact path='/dashboard/notifications' render={() => <Notifications history={props.history} notifications={notifications} />}></Route>
+                        <Route exact path='/dashboard/profile' render={() => <Profile history={props.history} />}></Route>
                         <Route path="*" render={() => <PageNotFound />} />
                     </Switch>
                 </Container>
