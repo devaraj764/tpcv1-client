@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Row, Col, Container, Image, Card, InputGroup, Badge } from 'react-bootstrap'
+import { Form, Button, Row, Col, Container, Image } from 'react-bootstrap'
 import { BsPatchCheckFill } from 'react-icons/bs';
-import { MdOutlineCancel } from 'react-icons/md'
 import Toast from '../../components/helpers/Toast';
 import axios from '../../axios';
 import EmailImage from '../../assets/email.png';
@@ -12,31 +11,24 @@ import {Helmet} from 'react-helmet'
 const SendMail = (props) => {
     const [subject, setsubject] = useState('');
     const [body, setbody] = useState('');
-    const [mails, setmails] = useState([]);
+    const [mails, setmails] = useState('');
     const [toast, settoast] = useState(false);
-    const [addNew, setAddNew] = useState(false);
-    const [mail, setmail] = useState('');
 
     useEffect(() => {
         if (!localStorage.getItem('admin-token')) {
             props.history.push('/admin/login');
         }
+        if (props.location.state) {
+            let emails = props.history.location.state.emails
+            console.log(emails)
+            setmails(emails)
+        }
     }, []);
-
-    const addMail = () => {
-        setmails([...mails, mail]);
-        setmail('')
-        setAddNew(false)
-    }
-
-    const removeMail = (mail) => {
-        setmails(mails.filter(m => m !== mail));
-    }
 
     const sendMail = (e) => {
         e.preventDefault()
-        if (mails.length === 0) {
-            alert('Please enter mails to send.')
+        if (subject === '' || body === '' || mails === '') {
+            alert('Please fill out all fields');
             return;
         }
         axios.post('/admin/sendmail', {
@@ -52,8 +44,7 @@ const SendMail = (props) => {
                 settoast(true);
                 setsubject('')
                 setbody('')
-                setmail('')
-                setmails([])
+                setmails('')
             })
             .catch((err) => console.log(err))
     }
@@ -61,7 +52,7 @@ const SendMail = (props) => {
     return (
         <>
             <Helmet>
-                <title>Send Mails | Admin</title>
+                <title>Send Mail | Admin</title>
             </Helmet>
             <Container className='Admin' style={{ marginTop: '50px' }}>
                 <Row className='justify-content-md-center'>
@@ -85,45 +76,10 @@ const SendMail = (props) => {
                                     <Form.Label>Body</Form.Label>
                                     <Form.Control type="text" as='textarea' rows='5' placeholder='Enter body of email in html' value={body} onChange={(e) => setbody(e.target.value)} required />
                                 </Form.Group><br /><br />
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: 'fit-content', marginBottom: '10px' }}>
-                                    <div style={{ margin: '0px' }}>
-                                        <p className="message">Student Emails</p>
-                                    </div>
-                                    {addNew ?
-                                        <Button variant="light" onClick={() => setAddNew(false)} style={{ minWidth: '100px' }} size='sm'>cancel</Button>
-                                        :
-                                        <Button onClick={() => setAddNew(true)} style={{ minWidth: '100px', borderRadius: '10px' }} size='sm'>+ Email</Button>
-                                    }
-                                </div>
-                                <Card body>
-                                    <div>
-                                        {addNew ? null : mails.length === 0 ?
-                                            <p style={{ textAlign: 'center', width: '100%', color: 'gray' }}> No Mails Added yet!<br /> Try to add new mais...</p>
-                                            :
-                                            mails.map((mail, index) => {
-                                                return (
-                                                    <Badge key={index} style={{ padding: '10px 20px', fontSize: '14px', color: '#3c4852', width: 'fit-content', border: '1px solid #c8c8c8', margin: '5px' }} bg="light" pill>
-                                                        {mail}&nbsp;
-                                                        {<MdOutlineCancel size={15} style={{ color: '#6b818b', float: 'right', marginLeft: '5px', cursor: 'pointer' }} onClick={() => removeMail(mail)} />}
-                                                    </Badge>
-                                                );
-                                            })
-                                        }
-                                        {addNew ?
-                                            <Col lg={12}>
-                                                <InputGroup className="mb-3">
-                                                    <Form.Control
-                                                        type="text"
-                                                        placeholder="Enter Mail..."
-                                                        value={mail}
-                                                        onChange={(e) => { setmail(e.target.value); }}
-                                                    />
-                                                    <Button variant="secondary" style={{ minWidth: '100px' }} onClick={addMail}>Add</Button>
-                                                </InputGroup>
-                                            </Col>
-                                            : null}
-                                    </div>
-                                </Card>
+                                <Form.Group>
+                                    <Form.Label>Emails</Form.Label>
+                                    <Form.Control type='text' as='textarea' rows='3' placeholder='Add Emails of students, separate the emails with a comma' value={mails} onChange={(e) => setmails(e.target.value.trim())} required />
+                                </Form.Group>
                                 <Row className="justify-content-md-center" style={{ marginTop: '30px ' }}>
                                     <Col xs={12}>
                                         <Button size='lg' type='submit' variant='primary' onClick={(e) => sendMail(e)} style={{ width: '100%' }}>Send Email</Button>
