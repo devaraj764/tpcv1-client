@@ -47,14 +47,14 @@ const HomePage = (props) => {
                                 </Card>
                             </Col>
                             <Col md={6} sm={12} className="p-3">
-                                <Card body>
+                                <Card body as={Link} to='/admin/dashboard/send-mail'>
                                     <Row className="inernal-row">
                                         <Col xs={2} className="align-self-center">
                                             <Image src={EmailImage} alt="notification image" fluid style={{ maxWidth: '40px' }} />
                                         </Col>
                                         <Col xs={10} className="align-self-center">
                                             <p className="heading">Send Email</p>
-                                            <p className="sub-heading">Admin can send emails to the setudents selectively.</p>
+                                            <p className="sub-heading">Admin can send emails to the students selectively.</p>
                                         </Col>
                                     </Row>
                                 </Card>

@@ -19,6 +19,7 @@ import { useMediaQuery } from 'react-responsive';
 import Notifications from './components/Admin/Notifications';
 import StudentList from './components/Admin/StudentList';
 import Feedback from './components/Admin/Feedback';
+import SendMail from './components/Admin/SendMail';
 
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
       <Route exact path="/admin/dashboard/send-notification" render={() => <Notifications />} />
       <Route exact path="/admin/dashboard/studentslist" render={() => <StudentList />} />
       <Route exact path="/admin/dashboard/feedbacks" render={() => <Feedback />} />
+      <Route exact path='/admin/dashboard/send-mail' render={() => <SendMail />} />
       <Route exact path='/admin'>
         <Redirect exact to='/admin/login' />
       </Route>

@@ -57,16 +57,16 @@ const Notifications = (props) => {
                         <Form>
                             <Form.Group>
                                 <Form.Label>Title</Form.Label>
-                                <Form.Control type="text" placeholder='Enter title of notification' value={title} onChange={(e) => settitle(e.target.value)} />
+                                <Form.Control type="text" placeholder='Enter title of notification' value={title} onChange={(e) => settitle(e.target.value)} required/>
                             </Form.Group><br />
                             <Form.Group>
                                 <Form.Label>Description</Form.Label>
-                                <Form.Control type="text" placeholder='Enter description of notification' value={description} onChange={(e) => setdescription(e.target.value)} />
+                                <Form.Control type="text" placeholder='Enter description of notification' value={description} onChange={(e) => setdescription(e.target.value)} required/>
                             </Form.Group><br />
                             <Row>
                                 <Form.Group as={Col} sm={12} lg={6}>
                                     <Form.Label>Type</Form.Label>
-                                    <Form.Select defaultValue="-- select --" placeholder="Notification Type" onChange={(e) => settype(e.target.value)}>
+                                    <Form.Select defaultValue="-- select --" placeholder="Notification Type" onChange={(e) => settype(e.target.value)} required>
                                         <option disabled>-- select --</option>
                                         <option value="info">Info</option>
                                         <option value="warning">Warning</option>
@@ -81,7 +81,7 @@ const Notifications = (props) => {
                             </Row>
                             <Row className="justify-content-md-center" style={{ marginTop: '30px ' }}>
                                 <Col xs={12}>
-                                    <Button size='lg' variant='primary' onClick={sendNotification} style={{ width: '100%' }}>Send Notification</Button>
+                                    <Button size='lg' type='submit' variant='primary' onClick={sendNotification} style={{ width: '100%' }}>Send Notification</Button>
                                 </Col>
                             </Row>
                         </Form>
