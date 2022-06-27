@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Form, Container, Image } from 'react-bootstrap';
+import { Table, Form, Container, Image, Button } from 'react-bootstrap';
 import axios from '../../axios';
 import { Helmet } from 'react-helmet'
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
+import { BiLinkExternal } from 'react-icons/bi'
 import ListStudents from '../../assets/customer.png';
 
 const StudentList = (props) => {
 
     const [students, setstudents] = useState([]);
     const [filteredStudents, setfilteredStudents] = useState([]);
+    const [emails, setemails] = useState([]);
 
     useEffect(() => {
         if (!localStorage.getItem('admin-token')) {
@@ -35,6 +37,14 @@ const StudentList = (props) => {
         setfilteredStudents(filteredStudents);
     }
 
+    const selectMail = (value, email) => {
+        if (value === true) {
+            setemails([...emails, email])
+        } else {
+            setemails(emails.filter(e => e !== email))
+        }
+    }
+
 
     return (
         <>
@@ -58,6 +68,7 @@ const StudentList = (props) => {
                         <thead>
                             <tr>
                                 <th>S.No</th>
+                                <th>Select</th>
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Email</th>
@@ -65,12 +76,14 @@ const StudentList = (props) => {
                                 <th>Batch</th>
                                 <th>Year of Study</th>
                                 <th>Section</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             {filteredStudents.map((student, i) =>
                                 <tr key={i}>
                                     <td>{i + 1}</td>
+                                    <td><input type='checkbox' style={{ width: '20px' }} onChange={(e) => selectMail(e.target.checked, student.email)} /></td>
                                     <td>{student.idNo}</td>
                                     <td>{student.name}</td>
                                     <td>{student.email}</td>
@@ -78,10 +91,12 @@ const StudentList = (props) => {
                                     <td>{student.batch}</td>
                                     <td>{student.yearofStudy}</td>
                                     <td>{student.section}</td>
+                                    <td><a style={{ textDecoration: 'none' }} target='_blank' rel='noreferrer noopener' href={`/view-profile/${student._id}`}>View profile <BiLinkExternal /></a></td>
                                 </tr>
                             )}
                         </tbody>
-                    </Table>
+                    </Table><br />
+                    {emails.length === 0 ? null : <Button style={{ float: 'right' }} onClick={() => props.history.push('/admin/dashboard/send-mail', { emails: emails })}>Send Email</Button>}
                 </div>
             </Container>
         </>
