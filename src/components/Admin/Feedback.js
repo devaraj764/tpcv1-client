@@ -3,7 +3,7 @@ import { Table, Container, Image } from 'react-bootstrap';
 import axios from '../../axios';
 import { Helmet } from 'react-helmet'
 import FeedbackImage from '../../assets/feedback.png';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 
 const SendFeedback = (props) => {
     const [feedbacks, setfeedbacks] = useState([]);

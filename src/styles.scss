@@ -58,6 +58,11 @@ body {
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     border: 1px solid #c8c8c8;
     border-radius: 10px;
+    &:focus {
+      outline: none;
+      box-shadow:none;
+      border: none;
+    }
   }
   .btn-primary {
     background-color: $text-color;
@@ -69,6 +74,8 @@ body {
     &:focus {
       background-color: #2b3846;
       outline: none;
+      box-shadow:none;
+      border: none;
     }
   }
   .btn-outline-primary {

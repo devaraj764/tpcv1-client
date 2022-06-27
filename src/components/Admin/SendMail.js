@@ -5,7 +5,8 @@ import { MdOutlineCancel } from 'react-icons/md'
 import Toast from '../../components/helpers/Toast';
 import axios from '../../axios';
 import EmailImage from '../../assets/email.png';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
+import {Helmet} from 'react-helmet'
 
 
 const SendMail = (props) => {

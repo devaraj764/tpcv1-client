@@ -42,7 +42,7 @@ const Achievements = (props) => {
     return (
         <div className="Achievements">
             <p className="heading">Achievements</p>
-            <p className="message">Add your school and collage level achievements.</p>
+            <p className="message">Add your school and college level achievements.</p>
             <Card body style={{ padding: '10px', fontSize: '14px' }}>
                 {
                     props.edit && addNew ?
@@ -54,7 +54,7 @@ const Achievements = (props) => {
                                 as='input'
                                 type='text'
                                 id='name'
-                                placeholder="Your achivement name"
+                                placeholder="Your achievement name"
                             />
                             <br />
                             <Form.Label htmlFor="description">Describe your achievement :</Form.Label>

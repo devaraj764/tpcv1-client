@@ -86,7 +86,7 @@ const Internships = (props) => {
                                         size="sm"
                                         type='text'
                                         id='role'
-                                        placeholder="Enter your role the Internship.."
+                                        placeholder="Enter your role in the Internship.."
                                         style={{ marginBottom: "10px" }}
                                     />
                                 </Col>
