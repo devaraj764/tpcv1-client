@@ -4,7 +4,7 @@ import { BsPatchCheckFill } from 'react-icons/bs';
 import Toast from '../../components/helpers/Toast';
 import axios from '../../axios';
 import NotificationImage from '../../assets/notification.png';
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 const Notifications = (props) => {
     const [title, settitle] = useState('');
@@ -26,6 +26,10 @@ const Notifications = (props) => {
             "description": description,
             "type": type,
             "externals": externals
+        }, {
+            headers: {
+                "auth-token": localStorage.getItem('admin-token')
+            }
         })
             .then((res) => {
                 settoast(true);

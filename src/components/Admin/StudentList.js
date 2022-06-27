@@ -16,7 +16,11 @@ const StudentList = (props) => {
         } else {
             // fetch students
             const url = '/admin/getStudents';
-            axios.post(url).then((res) => {
+            axios.post(url, {
+                headers: {
+                    "auth-token": localStorage.getItem('admin-token')
+                }
+            }).then((res) => {
                 setstudents(res.data)
                 setfilteredStudents(res.data)
             })
