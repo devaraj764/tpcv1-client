@@ -4,7 +4,9 @@ import { BsPatchCheckFill } from 'react-icons/bs';
 import Toast from '../../components/helpers/Toast';
 import axios from '../../axios';
 import NotificationImage from '../../assets/notification.png';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
+import { Helmet } from 'react-helmet'
+
 
 const Notifications = (props) => {
     const [title, settitle] = useState('');
