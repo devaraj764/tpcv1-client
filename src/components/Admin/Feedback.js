@@ -13,8 +13,12 @@ const SendFeedback = (props) => {
             props.history.push('/admin/login');
         } else {
             // fetch feedbacks 
-            const url2 = '/admin/feedbacks';
-            axios.get(url2).then((res) => {
+            const url = '/admin/feedbacks';
+            axios.get(url, {
+                headers: {
+                    "auth-token": localStorage.getItem('admin-token')
+                }
+            }).then((res) => {
                 setfeedbacks(res.data)
             })
                 .catch((err) => console.log(err))

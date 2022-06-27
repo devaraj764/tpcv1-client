@@ -23,7 +23,6 @@ const Admin = (props) => {
 };
 
 const HomePage = (props) => {
-    console.log(props)
     return (
         <>
             <Helmet>
