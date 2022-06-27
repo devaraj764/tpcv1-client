@@ -36,7 +36,7 @@ const ViewProfile = (props) => {
                 :
                 <>
                     <Helmet>
-                        <title>{profile.name} | View Profile</title>
+                        <title>{profile.name} | Profile</title>
                     </Helmet>
                     <Row className="view-profile justify-content-md-center" ref={componentRef}>
                         <Col md={8}>

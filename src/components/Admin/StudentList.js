@@ -51,35 +51,38 @@ const StudentList = (props) => {
                         <p className="sub-heading">Admin can get the students lists and can apply filters.</p>
                     </div>
                 </div>
-                <Form.Control style={{ maxWidth: '400px', margin: '20px 0' }} type="text" onChange={(e) => setsearchInput(e.target.value)} onKeyUp={searchStudents} placeholder="Search Students By ID" />
-                <Table variant="dark" striped hover>
-                    <thead>
-                        <tr>
-                            <th>S.No</th>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Mobile</th>
-                            <th>Batch</th>
-                            <th>Year of Study</th>
-                            <th>Section</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {filteredStudents.map((student, i) =>
-                            <tr key={i}>
-                                <td>{i + 1}</td>
-                                <td>{student.idNo}</td>
-                                <td>{student.name}</td>
-                                <td>{student.email}</td>
-                                <td>{student.contactNumber}</td>
-                                <td>{student.batch}</td>
-                                <td>{student.yearofStudy}</td>
-                                <td>{student.section}</td>
+                <div className="view-unavailable">Content cannot be viewed in this screen.</div>
+                <div className="StudentList-Table">
+                    <Form.Control style={{ maxWidth: '400px', margin: '20px 0' }} type="text" onChange={(e) => setsearchInput(e.target.value)} onKeyUp={searchStudents} placeholder="Search Students By ID" />
+                    <Table variant="dark" striped hover>
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Mobile</th>
+                                <th>Batch</th>
+                                <th>Year of Study</th>
+                                <th>Section</th>
                             </tr>
-                        )}
-                    </tbody>
-                </Table>
+                        </thead>
+                        <tbody>
+                            {filteredStudents.map((student, i) =>
+                                <tr key={i}>
+                                    <td>{i + 1}</td>
+                                    <td>{student.idNo}</td>
+                                    <td>{student.name}</td>
+                                    <td>{student.email}</td>
+                                    <td>{student.contactNumber}</td>
+                                    <td>{student.batch}</td>
+                                    <td>{student.yearofStudy}</td>
+                                    <td>{student.section}</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </Table>
+                </div>
             </Container>
         </>
     )

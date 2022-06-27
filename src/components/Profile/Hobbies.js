@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card,  Col, FormControl, InputGroup, Button, Badge } from 'react-bootstrap'
+import { Card, Col, FormControl, InputGroup, Button, Badge } from 'react-bootstrap'
 import { MdOutlineCancel } from 'react-icons/md'
 
 const Hobbies = ({ edit, profileData, updatedProfile, setupdatedProfile, setDirty }) => {
@@ -28,8 +28,8 @@ const Hobbies = ({ edit, profileData, updatedProfile, setupdatedProfile, setDirt
 
     return (
         <div className="Hobbies">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height:'fit-content' }}>
-                <div style={{margin:'0px'}}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: 'fit-content' }}>
+                <div style={{ margin: '0px' }}>
                     <p className="heading">Hobbies</p>
                     <p className="message">Add your hobbies here</p>
                 </div>
@@ -41,19 +41,17 @@ const Hobbies = ({ edit, profileData, updatedProfile, setupdatedProfile, setDirt
                         : null
                 }
             </div>
-            <Card body style={{ padding: '8px' }}>
-                <div style={{display:'flex'}}>
+            <Card body >
+                <div>
                     {addNew ? null : newHobbies ? newHobbies.length === 0 ?
                         <p style={{ textAlign: 'center', width: '100%', color: 'gray' }}> No Hobbies Available!<br /> Try to add new Hobbies...</p>
                         :
                         newHobbies.map((hobbie, index) => {
                             return (
-                                <div key={index} sm={4} style={{ margin: '5px 10px' }}>
-                                    <Badge style={{ padding: '10px 20px', fontSize: '14px', color: '#3c4852', display: 'flex' ,width: 'fit-content' }} bg="light" pill>
-                                        {hobbie}&nbsp;
-                                        {edit ? <MdOutlineCancel size={15} style={{ color: '#6b818b', float: 'right', marginLeft: '5px', cursor: 'pointer' }} onClick={() => removeHobbie(hobbie)} /> : null}
-                                    </Badge>
-                                </div>
+                                <Badge key={index} style={{ padding: '10px 20px', fontSize: '14px', color: '#3c4852', width: 'fit-content', border:'1px solid #c8c8c8', margin:'5px' }} bg="light" pill>
+                                    {hobbie}&nbsp;
+                                    {edit ? <MdOutlineCancel size={15} style={{ color: '#6b818b', float: 'right', marginLeft: '5px', cursor: 'pointer' }} onClick={() => removeHobbie(hobbie)} /> : null}
+                                </Badge>
                             );
                         }) : null
                     }
