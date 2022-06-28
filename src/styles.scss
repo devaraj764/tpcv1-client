@@ -60,7 +60,7 @@ body {
     border-radius: 10px;
     &:focus {
       outline: none;
-      box-shadow:none;
+      box-shadow: none;
       border: none;
     }
   }
@@ -74,7 +74,7 @@ body {
     &:focus {
       background-color: #2b3846;
       outline: none;
-      box-shadow:none;
+      box-shadow: none;
       border: none;
     }
   }
@@ -96,32 +96,34 @@ body {
     color: $text-color;
   }
   .Home {
+    min-height: 100vh;
+    height: 100%;  
     .right-side {
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      min-height: 100vh;
+      margin: 0;
       .banner-title {
         font-size: 50px;
         font-weight: bold;
         text-align: center;
         @media (max-width: 768px) {
-          font-size: 40px;
+          font-size: 35px;
         }
         @media (max-width: 576px) {
-          font-size: 35px;
+          font-size: 28px;
         }
       }
       .banner-sub {
-        font-size: 28px;
+        font-size: 26px;
         color: $secondary-color;
         text-align: center;
         @media (max-width: 768px) {
-          font-size: 24px;
+          font-size: 22px;
         }
         @media (max-width: 576px) {
-          font-size: 22px;
+          font-size: 18px;
         }
       }
       .title {
@@ -348,7 +350,6 @@ body {
           .description {
             font-size: 14px;
             color: grey;
-            font-family: "Nunito", sans-serif;
           }
           p {
             margin: 5px 0px;
@@ -548,12 +549,12 @@ body {
 
   // Admin
   .Admin {
-    .StudentList-Table{
-      @media(max-width: 768px){
+    .StudentList-Table {
+      @media (max-width: 768px) {
         display: none;
       }
     }
-    .view-unavailable{
+    .view-unavailable {
       text-align: center;
       color: $secondary-color;
       font-size: 16px;
@@ -589,9 +590,10 @@ body {
       font-size: 12px;
       color: $secondary-color;
     }
-    .form-control, select {
+    .form-control,
+    select {
       border-radius: 10px;
-      background-color :rgb(236, 237, 238) !important;
+      background-color: rgb(236, 237, 238) !important;
       border: 1px solid #c8c8c8 !important;
     }
   }
