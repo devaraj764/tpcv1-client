@@ -11,6 +11,7 @@ const ProfileModal = ({ src, value, callback, setcropimg, setEdit, history }) =>
     const [image, setimage] = useState(null);
     const [croppedImg, setcroppedImg] = useState(null);
     const [cropped, setcropped] = useState(false);
+    const [blob, setblob] = useState(null);
 
     useEffect(() => {
         setshow(value)
@@ -39,6 +40,9 @@ const ProfileModal = ({ src, value, callback, setcropimg, setEdit, history }) =>
         if (canvas.width !== 0 || canvas.height !== 0) {
             // As dataURL
             let src = canvas.toDataURL('image/jpeg');
+            canvas.toBlob(blob => {
+                setblob(blob)
+            }, "image/jpeg");
             setcroppedImg(src);
             setcropped(true);
         } else { window.alert('Please crop the image correctly ... 😇 ') }
@@ -48,7 +52,7 @@ const ProfileModal = ({ src, value, callback, setcropimg, setEdit, history }) =>
         if (cropped) {
             const url = '/students/'
             const data = new FormData();
-            data.append('imageUrl', croppedImg)
+            data.append('imageUrl', blob)
             await axios.patch(url, data, {
                 headers: {
                     "auth-token": localStorage.getItem('auth-token')

@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Row, Col, Image, Spinner } from 'react-bootstrap';
-import axios from '../../axios';
+import axios, { uri } from '../../axios';
 import { withRouter } from 'react-router-dom';
 import { useReactToPrint } from 'react-to-print';
 import { Helmet } from 'react-helmet'
+
 
 const ViewProfile = (props) => {
     const [profile, setProfile] = useState(null);
@@ -46,7 +47,7 @@ const ViewProfile = (props) => {
                                     <p>{profile.email}</p>
                                 </div>
                                 <div className="header-right">
-                                    <Image src={profile.imageUrl ? profile.imageUrl : 'https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg'} alt="profile-image" height="100px" style={{ borderRadius: '10px' }} />
+                                    <Image src={profile.imageUrl ? `${uri}${profile.imageUrl}` : 'https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg'} alt="profile-image" height="100px" style={{ borderRadius: '10px' }} />
                                 </div>
                             </div>
                             <hr />
