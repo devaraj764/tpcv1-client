@@ -99,7 +99,7 @@ const Notifications = (props) => {
                                 </Form.Group><br />
                                 <Form.Group>
                                     <Form.Label>Description</Form.Label>
-                                    <Form.Control type="text" placeholder='Enter description of notification' value={description} onChange={(e) => setdescription(e.target.value)} required />
+                                    <Form.Control as="textarea" rows="3" type="text" placeholder='Enter description of notification' value={description} onChange={(e) => setdescription(e.target.value)} required />
                                 </Form.Group><br />
                                 <Row>
                                     <Form.Group as={Col} sm={12} lg={6}>
