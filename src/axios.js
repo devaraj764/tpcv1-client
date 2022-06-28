@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const uri = 'https://authors-parameter-advancement-fresh.trycloudflare.com'
+export const uri = 'https://hanging-restaurants-assisted-cost.trycloudflare.com'
 // export const uri = 'http://localhost'
 
 // myAxios.js
