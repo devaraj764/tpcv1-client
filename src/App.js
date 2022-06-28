@@ -20,8 +20,8 @@ import Notifications from './components/Admin/Notifications';
 import StudentList from './components/Admin/StudentList';
 import Feedback from './components/Admin/Feedback';
 import SendMail from './components/Admin/SendMail';
-
-
+import TechnicalTeam from './pages/TPC_Team';
+ 
 function App() {
 
   const isMobile = useMediaQuery({ query: '(max-width: 576px)' })
@@ -47,6 +47,7 @@ function App() {
       )}></Route> : <Route exact path='/view-profile/:id' render={() => <ViewProfile id={id} />}></Route>}
       <Route exact path='/login' render={() => <Home />}></Route>
       <Route exact path='/register' render={() => <Home />}></Route>
+      <Route exact path='/tpc-technical-team' render={() => <TechnicalTeam />}></Route>
       <Route path='/dashboard' render={() => <Dashboard />}></Route>
       <Route exact path="/admin/login" render={() => <Adminlogin />}></Route>
       <Route exact path="/admin/dashboard" render={() => <Admindashboard />} />

@@ -23,6 +23,25 @@ const Notifications = (props) => {
     setShow(true);
   }
 
+  const getDate = (x) => {
+
+    const date = new Date(x);
+
+    //Pad given value to the left with "0"
+    function AddZero(num) {
+      return (num >= 0 && num < 10) ? "0" + num : num + "";
+    }
+    
+    var strDateTime = [[AddZero(date.getDate()),
+    AddZero(date.getMonth() + 1),
+    date.getFullYear()].join("/"),
+    [AddZero(date.getHours()),
+    AddZero(date.getMinutes())].join(":"),
+    date.getHours() >= 12 ? "PM" : "AM"].join(" ");
+    
+    return strDateTime
+  }
+
   return (
     <>
       <Helmet>
@@ -36,26 +55,31 @@ const Notifications = (props) => {
               :
               props.notifications.length === 0 ? <p style={{ textAlign: 'center' }}>No current notifications</p> :
                 props.notifications.map((notifier, index) => (
-                  <Row className="notifier" key={index}>
-                    <Col md={1} xs={2} className="notifier-typo">
-                      {
-                        notifier.type === 'warning' ?
-                          <TiWarningOutline size={24} /> :
-                          notifier.type === 'info' ?
-                            <VscInfo size={24} /> :
-                            notifier.type === 'success' ?
-                              <IoMdCheckmarkCircleOutline size={24} />
-                              : notifier.type === 'test' ?
-                                <HiOutlineClipboardList size={24} /> : null
+                  <div key={index} style={{ margin: '30px 0' }}>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                      <p style={{ margin: '0px', fontSize: '10px', color: '#6b818b', fontWeight: 'bold' }}>{getDate(notifier.createdAt)}</p>
+                    </div>
+                    <Row className="notifier">
+                      <Col md={1} xs={2} className="notifier-typo">
+                        {
+                          notifier.type === 'warning' ?
+                            <TiWarningOutline size={24} /> :
+                            notifier.type === 'info' ?
+                              <VscInfo size={24} /> :
+                              notifier.type === 'success' ?
+                                <IoMdCheckmarkCircleOutline size={24} />
+                                : notifier.type === 'test' ?
+                                  <HiOutlineClipboardList size={24} /> : null
 
-                      }
+                        }
 
-                    </Col>
-                    <Col xs={10} md={11} className="notifier-body align-self-center" onClick={() => onClickNotification(notifier)}>
-                      <p className="title">{notifier.title.toUpperCase()}</p>
-                      <p className="description">{notifier.description}</p>
-                    </Col>
-                  </Row>
+                      </Col>
+                      <Col xs={10} md={11} className="notifier-body align-self-center" onClick={() => onClickNotification(notifier)}>
+                        <p className="title">{notifier.title.toUpperCase()}</p>
+                        <p className="description">{notifier.description}</p>
+                      </Col>
+                    </Row>
+                  </div>
                 )) :
               <div style={{ minHeight: '20vh', textAlign: 'center' }}>
                 <center style={{ marginTop: '80px' }}>

@@ -4,6 +4,7 @@ import { IoMdNotifications } from 'react-icons/io';
 import { HiUserCircle } from 'react-icons/hi';
 import { MdHome } from 'react-icons/md';
 import { RiMenu4Line } from 'react-icons/ri'
+import { GoPrimitiveDot } from 'react-icons/go'
 
 const NavbarNav = ({ isNew, setisNew, notificationsLength }) => {
     const [active, setActive] = React.useState('/dashboard');
@@ -34,7 +35,7 @@ const NavbarNav = ({ isNew, setisNew, notificationsLength }) => {
                         <Offcanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3">
                                 <Nav.Link className={active === '/dashboard' ? "active" : null} href="/dashboard" ><MdHome size={18} />&nbsp;&nbsp;Home</Nav.Link>
-                                <Nav.Link className={active === '/dashboard/notifications' ? "active" : null} href="/dashboard/notifications" onClick={isNew ? updateNew : null}><IoMdNotifications size={18} />&nbsp;&nbsp;{isNew ? 'Notifications2' : 'Notifications'}</Nav.Link>
+                                <Nav.Link className={active === '/dashboard/notifications' ? "active" : null} href="/dashboard/notifications" onClick={isNew ? updateNew : null}><IoMdNotifications size={18} />&nbsp;&nbsp;{isNew ? <span style={{ alignItems: 'center' }}>Notifications <GoPrimitiveDot style={{ color: '#625bf6' }} size={18} /></span> : 'Notifications'}</Nav.Link>
                                 <Nav.Link className={active === '/dashboard/profile' ? "active" : null} href="/dashboard/profile" style={{ paddingRight: '0' }}><HiUserCircle size={18} />&nbsp;&nbsp;Profile</Nav.Link>
                             </Nav>
                         </Offcanvas.Body>
