@@ -13,7 +13,7 @@ const TPC_Team = () => {
                 </Helmet>
                 <Row className="justify-content-md-center" style={{ minHeight: '100vh' }}>
                     <Col sm={12} md={8} className="align-self-center">
-                        <p style={{ fontSize: '22px', fontWeight: 'bold', textAlign: 'center' }}>TPC Techincal Team</p>
+                        <p style={{ fontSize: '22px', fontWeight: 'bold', textAlign: 'center', marginTop:'30px' }}>TPC Techincal Team</p>
                         <Card body>
                             <Row>
                                 <Col md={4} sm={12}>
