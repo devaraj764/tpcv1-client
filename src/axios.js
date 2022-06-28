@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const uri = 'https://messaging-uniform-someone-firewire.trycloudflare.com'
+export const uri = 'https://authors-parameter-advancement-fresh.trycloudflare.com'
 // export const uri = 'http://localhost'
 
 // myAxios.js
