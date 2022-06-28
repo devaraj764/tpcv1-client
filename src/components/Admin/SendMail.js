@@ -20,7 +20,6 @@ const SendMail = (props) => {
         }
         if (props.location.state) {
             let emails = props.history.location.state.emails
-            console.log(emails)
             setmails(emails)
         }
     }, []);
