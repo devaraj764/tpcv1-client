@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // const uri = 'https://pubmed-demonstrates-isaac-gr.trycloudflare.com'
-const uri = 'http://localhost'
+export const uri = 'http://localhost'
 
 // myAxios.js
 const instance = axios.create({
