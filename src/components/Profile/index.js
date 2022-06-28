@@ -54,7 +54,7 @@ const Profile = (props) => {
         }).catch((err) => {
             if (!err.request.data) Logout();
         });
-    }, [props.api]);
+    }, []);
 
 
     const handleChanges = async () => {
@@ -94,7 +94,7 @@ const Profile = (props) => {
             <div className="profile">
                 <Row className="justify-content-md-center">
                     <Col xs={12} lg="8">
-                        <ProfileBanner api={props.api} isDirty={isDirty} setPristine={setPristine} setDirty={setDirty} handleChanges={handleChanges} loader={loader} edit={edit} setEdit={setEdit} logout={Logout} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
+                        <ProfileBanner isDirty={isDirty} setPristine={setPristine} setDirty={setDirty} handleChanges={handleChanges} loader={loader} edit={edit} setEdit={setEdit} logout={Logout} profileData={profileData} updatedProfile={updatedProfile} setupdatedProfile={setupdatedProfile} />
                         <br />
                         <Nav fill variant="pills" defaultActiveKey={tab}>
                             <Nav.Item>

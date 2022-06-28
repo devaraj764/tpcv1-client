@@ -5,7 +5,7 @@ import Toast from '../../components/helpers/Toast';
 import axios from '../../axios';
 import NotificationImage from '../../assets/notification.png';
 import { withRouter } from 'react-router-dom';
-import {Helmet} from 'react-helmet'
+import { Helmet } from 'react-helmet'
 
 const Notifications = (props) => {
     const [title, settitle] = useState('');
@@ -13,6 +13,7 @@ const Notifications = (props) => {
     const [type, settype] = useState('');
     const [externals, setexternals] = useState('');
     const [toast, settoast] = useState(false);
+    const [sendMail, setsendMail] = useState(false);
 
     useEffect(() => {
         if (!localStorage.getItem('admin-token')) {
@@ -20,7 +21,8 @@ const Notifications = (props) => {
         }
     }, []);
 
-    const sendNotification = async () => {
+    const sendNotification = (e) => {
+        e.preventDefault();
         const url = '/admin/notifications'
         axios.post(url, {
             "title": title,
@@ -33,6 +35,9 @@ const Notifications = (props) => {
             }
         })
             .then((res) => {
+                if (sendMail) {
+                    sendMails()
+                }
                 settoast(true);
                 settitle('')
                 setdescription('')
@@ -41,6 +46,34 @@ const Notifications = (props) => {
             })
             .catch((err) => console.log(err))
     }
+
+    const sendMails = () => {
+        let emails = [];
+        axios.post('/admin/getStudents', {
+            "reqparams": "email"
+        }, {
+            headers: {
+                "auth-token": localStorage.getItem('admin-token')
+            }
+        })
+            .then((res) => {
+                res.data.map((data) => emails.push(data.email))
+                axios.post('/admin/sendmail', {
+                    subject: title,
+                    html: description,
+                    emails: emails
+                }, {
+                    headers: {
+                        "auth-token": localStorage.getItem("admin-token")
+                    }
+                })
+                    .then((res) => { setsendMail(false) })
+                    .catch((err) => console.log(err))
+            })
+            .catch((err) => console.log(err))
+    }
+
+
     return (
         <>
             <Helmet>
@@ -83,10 +116,14 @@ const Notifications = (props) => {
                                         <Form.Label>External Links</Form.Label>
                                         <Form.Control type="text" placeholder='external links' value={externals} onChange={(e) => setexternals(e.target.value)} />
                                     </Form.Group>
+                                    <Form.Group style={{ marginTop: '20px', display: 'flex' }}>
+                                        <input type='checkbox' style={{ width: '20px', marginRight: '10px' }} value={sendMail} onChange={(e) => setsendMail(e.target.checked)} />
+                                        <Form.Label style={{ marginTop: '14px' }}>Send Mail</Form.Label>
+                                    </Form.Group>
                                 </Row>
                                 <Row className="justify-content-md-center" style={{ marginTop: '30px ' }}>
                                     <Col xs={12}>
-                                        <Button size='lg' type='submit' variant='primary' onClick={sendNotification} style={{ width: '100%' }}>Send Notification</Button>
+                                        <Button size='lg' type='submit' variant='primary' onClick={(e) => sendNotification(e)} style={{ width: '100%' }}>Send Notification</Button>
                                     </Col>
                                 </Row>
                             </Form>

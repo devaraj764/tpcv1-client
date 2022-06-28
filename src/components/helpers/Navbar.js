@@ -5,12 +5,19 @@ import { HiUserCircle } from 'react-icons/hi';
 import { MdHome } from 'react-icons/md';
 import { RiMenu4Line } from 'react-icons/ri'
 
-const NavbarNav = () => {
+const NavbarNav = ({ isNew, setisNew, notificationsLength }) => {
     const [active, setActive] = React.useState('/dashboard');
 
     useEffect(() => {
         setActive(window.location.pathname);
     }, [])
+
+    const updateNew = () => {
+        setisNew(false);
+        localStorage.removeItem('notifications')
+        localStorage.setItem('notifications', notificationsLength)
+    }
+
     return (
         <>
             <Navbar expand='md' className="navbar" variant="light" fixed="top">
@@ -27,7 +34,7 @@ const NavbarNav = () => {
                         <Offcanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3">
                                 <Nav.Link className={active === '/dashboard' ? "active" : null} href="/dashboard" ><MdHome size={18} />&nbsp;&nbsp;Home</Nav.Link>
-                                <Nav.Link className={active === '/dashboard/notifications' ? "active" : null} href="/dashboard/notifications"><IoMdNotifications size={18} />&nbsp;&nbsp;Notifications</Nav.Link>
+                                <Nav.Link className={active === '/dashboard/notifications' ? "active" : null} href="/dashboard/notifications" onClick={isNew ? updateNew : null}><IoMdNotifications size={18} />&nbsp;&nbsp;{isNew ? 'Notifications2' : 'Notifications'}</Nav.Link>
                                 <Nav.Link className={active === '/dashboard/profile' ? "active" : null} href="/dashboard/profile" style={{ paddingRight: '0' }}><HiUserCircle size={18} />&nbsp;&nbsp;Profile</Nav.Link>
                             </Nav>
                         </Offcanvas.Body>
