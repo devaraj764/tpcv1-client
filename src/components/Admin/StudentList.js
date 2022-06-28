@@ -45,6 +45,24 @@ const StudentList = (props) => {
         }
     }
 
+    const selectAll = (value) => {
+        if (value === true) {
+            let emails = []
+            students.map(student => emails.push(student.email))
+            setemails(emails)
+            let checkbox = document.getElementsByName('checkbox')
+            for (let i = 0; i < checkbox.length; i++) {
+                checkbox[i].checked = true
+            }
+        } else {
+            setemails([])
+            let checkbox = document.getElementsByName('checkbox')
+            for (let i = 0; i < checkbox.length; i++) {
+                checkbox[i].checked = false
+            }
+        }
+    }
+
 
     return (
         <>
@@ -67,8 +85,7 @@ const StudentList = (props) => {
                     <Table variant="dark" striped hover>
                         <thead>
                             <tr>
-                                <th>S.No</th>
-                                <th>Select</th>
+                                <th><input type='checkbox' style={{ width: '20px' }} onChange={(e) => selectAll(e.target.checked)} /><br />Select all</th>
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Email</th>
@@ -82,8 +99,7 @@ const StudentList = (props) => {
                         <tbody>
                             {filteredStudents.map((student, i) =>
                                 <tr key={i}>
-                                    <td>{i + 1}</td>
-                                    <td><input type='checkbox' style={{ width: '20px' }} onChange={(e) => selectMail(e.target.checked, student.email)} /></td>
+                                    <td><input type='checkbox' style={{ width: '20px' }} name="checkbox" onChange={(e) => selectMail(e.target.checked, student.email)} /></td>
                                     <td>{student.idNo}</td>
                                     <td>{student.name}</td>
                                     <td>{student.email}</td>
