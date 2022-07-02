@@ -17,7 +17,7 @@ const LandingPage = (props) => {
         <>
             <Row className="Home justify-content-md-center" style={{ backgroundImage: "url('https://img.freepik.com/free-vector/white-abstract-background_23-2148810113.jpg?w=2000')" }}>
                 <Col className="right-side" sm={12} md={8} style={{ padding: '0 10px' }}>
-                    <p className="banner-title">Traning and Placement Cell</p>
+                    <p className="banner-title">Training and Placement Cell</p>
                     <p className="banner-sub">Computer Science & Engineering Dept.</p>
                     <a href="https://rguktsklm.ac.in" target="_blank" rel="noopener noreferrer" style={{ fontSize: '16px', fontWeight: 'bold', color: '#625bf6', textAlign: 'center', textDecoration: 'none' }}>Rajiv Gandhi University of Knowledge Technologies Srikakulam</a>
                     <Image src={CareerLogo} alt="career logo" style={{ maxWidth: '350px', width: '100%', margin: '50px 0', padding: '10px' }} fluid />

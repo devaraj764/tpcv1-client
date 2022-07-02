@@ -97,9 +97,26 @@ body {
   }
 
   .TPC_Team {
+    background-color: #e3e4e4;
     .card {
       box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-      margin: 20px;
+      margin: 30px;
+      border-radius: 0px;
+      p {
+        margin: 5px;
+        color: $secondary-color;
+      }
+      .heading {
+        font-size: 16px;
+        font-weight: bold;
+        font-size: 30px;
+        color: $primary-color;
+      }
+      .sub-heading {
+        font-size: 14px;
+        font-weight: bold;
+        color: $secondary-color;
+      }
     }
   }
 
@@ -191,6 +208,11 @@ body {
     color: $secondary-color;
     text-align: center !important;
     width: 100% !important;
+    p {
+      @media (max-width: 576px) {
+        font-size: 12px;
+      }
+    }
     a {
       text-decoration: none !important;
       color: $primary-color !important;
