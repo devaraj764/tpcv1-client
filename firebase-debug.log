@@ -1,0 +1,13 @@
+[debug] [2022-07-02T06:13:59.684Z] ----------------------------------------------------------------------
+[debug] [2022-07-02T06:13:59.687Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\VEGI.TARUN\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2022-07-02T06:13:59.687Z] CLI Version:   10.6.0
+[debug] [2022-07-02T06:13:59.687Z] Platform:      win32
+[debug] [2022-07-02T06:13:59.687Z] Node Version:  v14.16.1
+[debug] [2022-07-02T06:13:59.688Z] Time:          Sat Jul 02 2022 11:43:59 GMT+0530 (India Standard Time)
+[debug] [2022-07-02T06:13:59.688Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-07-02T06:13:59.739Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-07-02T06:13:59.739Z] > authorizing via signed-in user (cseplacements@rguktsklm.ac.in)
+[debug] [2022-07-02T06:13:59.739Z] [iam] checking project tpc-v1 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-07-02T06:13:59.741Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/tpc-v1:testIamPermissions [none]
+[debug] [2022-07-02T06:13:59.741Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/tpc-v1:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
