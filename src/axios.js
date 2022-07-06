@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const uri = 'https://kirk-mega-king-construction.trycloudflare.com'
+export const uri = 'https://they-recreation-initiative-reduction.trycloudflare.com'
 // export const uri = 'http://localhost'
 
 // myAxios.js
