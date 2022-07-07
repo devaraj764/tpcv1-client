@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const uri = 'https://they-recreation-initiative-reduction.trycloudflare.com'
+export const uri = 'https://dispatched-darkness-mpegs-received.trycloudflare.com'
 // export const uri = 'http://localhost'
 
 // myAxios.js
