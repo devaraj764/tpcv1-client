@@ -14,7 +14,7 @@ const ViewProfile = (props) => {
         const url = '/students/view-profile/' + props.match.params.id
         axios.get(url, {
             headers: {
-                "auth-token": localStorage.getItem('auth-token')
+                "auth-token": localStorage.getItem('admin-token') || localStorage.getItem('auth-token')
             }
         }).then((res) => {
             setProfile(res.data)
