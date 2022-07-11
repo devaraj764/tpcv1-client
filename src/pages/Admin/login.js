@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 const Adminlogin = (props) => {
     const [username, setusername] = useState('');
     const [password, setpassword] = useState('');
+    const [error, seterror] = useState('');
 
     useEffect(() => {
         if (localStorage.getItem('admin-token')) {
@@ -14,6 +15,10 @@ const Adminlogin = (props) => {
     }, []);
 
     const login = () => {
+        if (username === '' || password === '') {
+            seterror('Please fill all the fields');
+            return;
+        }
         const url = '/admin/login'
         axios.post(url, {
             "username": username,
@@ -24,7 +29,11 @@ const Adminlogin = (props) => {
                 localStorage.setItem('admin-token', res.data.token)
                 props.history.push('/admin/dashboard')
             })
-            .catch((err) => console.log(err))
+            .catch((err) => {
+                if (err) {
+                    seterror(err.response.data.message)
+                }
+            })
     }
 
 
@@ -40,7 +49,8 @@ const Adminlogin = (props) => {
                     <Form.Group>
                         <Form.Label style={{ float: 'left' }}>Password</Form.Label>
                         <Form.Control type="password" placeholder='Enter password' value={password} onChange={(e) => setpassword(e.target.value)} />
-                    </Form.Group>
+                    </Form.Group><br />
+                    <p style={{ color: 'tomato' }}>{error}</p>
                     <Button onClick={login} style={{ borderRadius: '20px', padding: '5px 20px', marginTop: '30px' }} variant="success">Login</Button>
                 </Form>
             </center>

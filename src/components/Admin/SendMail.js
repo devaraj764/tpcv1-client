@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Row, Col, Container, Image } from 'react-bootstrap'
+import { Form, Button, Row, Col, Container, Image, Spinner } from 'react-bootstrap'
 import { BsPatchCheckFill } from 'react-icons/bs';
 import Toast from '../../components/helpers/Toast';
 import axios from '../../axios';
 import EmailImage from '../../assets/email.png';
 import { withRouter } from 'react-router-dom';
-import {Helmet} from 'react-helmet'
+import { Helmet } from 'react-helmet'
 
 
 const SendMail = (props) => {
@@ -13,6 +13,7 @@ const SendMail = (props) => {
     const [body, setbody] = useState('');
     const [mails, setmails] = useState('');
     const [toast, settoast] = useState(false);
+    const [loader, setloader] = useState(false);
 
     useEffect(() => {
         if (!localStorage.getItem('admin-token')) {
@@ -30,6 +31,7 @@ const SendMail = (props) => {
             alert('Please fill out all fields');
             return;
         }
+        setloader(true)
         axios.post('/admin/sendmail', {
             subject: subject,
             emails: mails,
@@ -40,12 +42,13 @@ const SendMail = (props) => {
             }
         })
             .then((res) => {
+                setloader(false)
                 settoast(true);
                 setsubject('')
                 setbody('')
                 setmails('')
             })
-            .catch((err) => console.log(err))
+            .catch((err) => { console.log(err); setloader(false) })
     }
 
     return (
@@ -81,7 +84,7 @@ const SendMail = (props) => {
                                 </Form.Group>
                                 <Row className="justify-content-md-center" style={{ marginTop: '30px ' }}>
                                     <Col xs={12}>
-                                        <Button size='lg' type='submit' variant='primary' onClick={(e) => sendMail(e)} style={{ width: '100%' }}>Send Email</Button>
+                                        <Button size='lg' type='submit' variant='primary' onClick={(e) => sendMail(e)} style={{ width: '100%' }}>{loader ? <Spinner animation="border" size='sm' /> : 'Send Email'}</Button>
                                     </Col>
                                 </Row>
                             </Form>

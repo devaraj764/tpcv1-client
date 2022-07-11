@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Row, Col, Container, Image } from 'react-bootstrap'
+import { Form, Button, Row, Col, Container, Image, Spinner } from 'react-bootstrap'
 import { BsPatchCheckFill } from 'react-icons/bs';
 import Toast from '../../components/helpers/Toast';
 import axios from '../../axios';
@@ -14,6 +14,7 @@ const Notifications = (props) => {
     const [externals, setexternals] = useState('');
     const [toast, settoast] = useState(false);
     const [sendMail, setsendMail] = useState(false);
+    const [loader, setloader] = useState(false);
 
     useEffect(() => {
         if (!localStorage.getItem('admin-token')) {
@@ -23,6 +24,11 @@ const Notifications = (props) => {
 
     const sendNotification = (e) => {
         e.preventDefault();
+        if (title === '' || description === '' || type === '') {
+            alert('Please fill out all fields');
+            return;
+        }
+        setloader(true);
         const url = '/admin/notifications'
         axios.post(url, {
             "title": title,
@@ -37,14 +43,16 @@ const Notifications = (props) => {
             .then((res) => {
                 if (sendMail) {
                     sendMails()
+                } else {
+                    settoast(true);
+                    setloader(false);
                 }
-                settoast(true);
                 settitle('')
                 setdescription('')
                 settype('')
                 setexternals('')
             })
-            .catch((err) => console.log(err))
+            .catch((err) => { console.log(err); setloader(false) })
     }
 
     const sendMails = () => {
@@ -67,7 +75,7 @@ const Notifications = (props) => {
                         "auth-token": localStorage.getItem("admin-token")
                     }
                 })
-                    .then((res) => { setsendMail(false) })
+                    .then((res) => { setsendMail(false); settoast(true); setloader(false); })
                     .catch((err) => console.log(err))
             })
             .catch((err) => console.log(err))
@@ -123,7 +131,7 @@ const Notifications = (props) => {
                                 </Row>
                                 <Row className="justify-content-md-center" style={{ marginTop: '30px ' }}>
                                     <Col xs={12}>
-                                        <Button size='lg' type='submit' variant='primary' onClick={(e) => sendNotification(e)} style={{ width: '100%' }}>Send Notification</Button>
+                                        <Button size='lg' type='submit' variant='primary' onClick={(e) => sendNotification(e)} style={{ width: '100%' }}>{loader ? <Spinner animation="border" size='sm' /> : 'Send Notification'}</Button>
                                     </Col>
                                 </Row>
                             </Form>

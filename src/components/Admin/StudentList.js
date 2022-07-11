@@ -81,7 +81,10 @@ const StudentList = (props) => {
                 </div>
                 <div className="view-unavailable">Content cannot be viewed in this screen.</div>
                 <div className="StudentList-Table">
-                    <Form.Control style={{ maxWidth: '400px', margin: '20px 0' }} type="text" onChange={(e) => setsearchInput(e.target.value)} onKeyUp={searchStudents} placeholder="Search Students By ID" />
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <Form.Control style={{ maxWidth: '400px', margin: '20px 0' }} type="text" onChange={(e) => setsearchInput(e.target.value)} onKeyUp={searchStudents} placeholder="Search Students By ID" />
+                        {emails.length === 0 ? null : <Button style={{ float: 'right', height: '50px', marginTop: '20px' }} onClick={() => props.history.push('/admin/dashboard/send-mail', { emails: emails })}>Send Email</Button>}
+                    </div>
                     <Table variant="dark" striped hover>
                         <thead>
                             <tr>
@@ -112,7 +115,6 @@ const StudentList = (props) => {
                             )}
                         </tbody>
                     </Table><br />
-                    {emails.length === 0 ? null : <Button style={{ float: 'right' }} onClick={() => props.history.push('/admin/dashboard/send-mail', { emails: emails })}>Send Email</Button>}
                 </div>
             </Container>
         </>
