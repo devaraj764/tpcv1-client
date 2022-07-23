@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Form, Container, Image, Button } from 'react-bootstrap';
+import { Table, Form, Container, Image, Button, Pagination } from 'react-bootstrap';
 import axios from '../../axios';
 import { Helmet } from 'react-helmet'
 import { withRouter } from 'react-router-dom';
-import { BiLinkExternal } from 'react-icons/bi'
+import { BiLinkExternal } from 'react-icons/bi';
 import ListStudents from '../../assets/customer.png';
 
 const StudentList = (props) => {
@@ -63,6 +63,33 @@ const StudentList = (props) => {
         }
     }
 
+    const [currentPage, setCurrentPage] = useState(1);
+    let items = [];
+    const pages = Math.round(filteredStudents.length / 10);
+    for (let number = 1; number <= pages; number++) {
+        items.push(
+            <Pagination.Item key={number} active={number === currentPage}>
+                {number}
+            </Pagination.Item>,
+        );
+    }
+
+    const getPaginatedData = () => {
+        const startIndex = currentPage * 10 - 10;
+        const endIndex = startIndex + 10;
+        return filteredStudents.slice(startIndex, endIndex);
+    };
+
+    const getPaginationGroup = () => {
+        let start = Math.floor((currentPage - 1) / 5) * 5;
+        return new Array(5).fill().map((_, idx) => start + idx + 1);
+    };
+
+    function changePage(event) {
+        const pageNumber = Number(event.target.textContent);
+        setCurrentPage(pageNumber);
+    }
+
 
     return (
         <>
@@ -88,7 +115,7 @@ const StudentList = (props) => {
                     <Table variant="dark" striped hover>
                         <thead>
                             <tr>
-                                <th><input type='checkbox' style={{ width: '20px' }} onChange={(e) => selectAll(e.target.checked)} /><br />Select all</th>
+                                <th><input type='checkbox' style={{ width: '20px' }} onChange={(e) => selectAll(e.target.checked)} /></th>
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Email</th>
@@ -100,21 +127,30 @@ const StudentList = (props) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {filteredStudents.map((student, i) =>
-                                <tr key={i}>
-                                    <td><input type='checkbox' style={{ width: '20px' }} name="checkbox" onChange={(e) => selectMail(e.target.checked, student.email)} /></td>
-                                    <td>{student.idNo}</td>
-                                    <td>{student.name}</td>
-                                    <td>{student.email}</td>
-                                    <td>{student.contactNumber}</td>
-                                    <td>{student.batch}</td>
-                                    <td>{student.yearofStudy}</td>
-                                    <td>{student.section}</td>
-                                    <td><a style={{ textDecoration: 'none' }} target='_blank' rel='noreferrer noopener' href={`/view-profile/${student._id}`}>View profile <BiLinkExternal /></a></td>
+                            {getPaginatedData().map((d, idx) => (
+                                <tr key={idx}>
+                                    <td><input type='checkbox' style={{ width: '20px' }} name="checkbox" onChange={(e) => selectMail(e.target.checked, d.email)} /></td>
+                                    <td>{d.idNo}</td>
+                                    <td>{d.name}</td>
+                                    <td>{d.email}</td>
+                                    <td>{d.contactNumber}</td>
+                                    <td>{d.batch}</td>
+                                    <td>{d.yearofStudy}</td>
+                                    <td>{d.section}</td>
+                                    <td><a style={{ textDecoration: 'none' }} target='_blank' rel='noreferrer noopener' href={`/view-profile/${d._id}`}>View profile <BiLinkExternal /></a></td>
                                 </tr>
-                            )}
+                            ))}
                         </tbody>
                     </Table><br />
+                    <Pagination>
+                        <Pagination.Prev onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} />
+                        {getPaginationGroup().map((item, index) => (
+                            <Pagination.Item key={index} active={item === currentPage} onClick={changePage}>
+                                {item}
+                            </Pagination.Item>
+                        ))}
+                        <Pagination.Next onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === pages} />
+                    </Pagination>
                 </div>
             </Container>
         </>
