@@ -6,7 +6,7 @@ import axios from '../../axios';
 import EmailImage from '../../assets/email.png';
 import { withRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet'
-
+import Editor from '../helpers/Editor';
 
 const SendMail = (props) => {
     const [subject, setsubject] = useState('');
@@ -74,10 +74,7 @@ const SendMail = (props) => {
                                     <Form.Label>Subject</Form.Label>
                                     <Form.Control type="text" placeholder='Enter subject of email' value={subject} onChange={(e) => setsubject(e.target.value)} required />
                                 </Form.Group><br />
-                                <Form.Group>
-                                    <Form.Label>Body</Form.Label>
-                                    <Form.Control type="text" as='textarea' rows='5' placeholder='Enter body of email in html' value={body} onChange={(e) => setbody(e.target.value)} required />
-                                </Form.Group><br /><br />
+                                <Editor value={body} setValue={setbody} /><br /><br />
                                 <Form.Group>
                                     <Form.Label>Emails</Form.Label>
                                     <Form.Control type='text' as='textarea' rows='3' placeholder='Add Emails of students, separate the emails with a comma' value={mails} onChange={(e) => setmails(e.target.value.trim())} required />
